@@ -9,9 +9,9 @@ namespace WebApplication2.Model
     public class Program
     {
         [Key]
-        public int ProgramID { get; set; }
-        public string ProgramName { get; set; }
-        public string ProgramDescription { get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
         public ICollection<Subject> Subjects { get; set; }
 
     }

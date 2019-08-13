@@ -10,19 +10,19 @@ namespace WebApplication2.Model
     public class Mentor
     {
         [Key]
-        public int MentorID { get; set; }
+        public int ID { get; set; }
         [Required, MaxLength(50)]
-        public string MentorName { get; set; }
+        public string Name { get; set; }
         [Required, MaxLength(50)]
-        public string MentorLastName { get; set; }
+        public string LastName { get; set; }
         [Required, MaxLength(50)]
-        public string MentorEmail { get; set; }
-        public Gender MentorGender { get; set; }
-        public string MentorYearsOfService { get; set; }
-        public string MentorSpecialty { get; set; }
-        public string MentorTelephone { get; set; }
+        public string Email { get; set; }
+        public Gender gender { get; set; }
+        public string YearsOfService { get; set; }
+        public string Specialty { get; set; }
+        public string Telephone { get; set; }
         public ICollection<Grade> Grades { get; set; }
-        public ICollection<Staff> StaffType { get; set; }
+        public ICollection<Staff> Type { get; set; }
     }
     
 }

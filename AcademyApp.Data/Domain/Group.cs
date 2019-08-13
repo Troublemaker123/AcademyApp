@@ -11,7 +11,7 @@ namespace WebApplication2.Model
     public class Group
     {
         [Key]
-        public int GroupID { get; set; }
+        public int ID { get; set; }
         public ICollection<Student> Students { get; set; }
         public ICollection<Mentor> Mentors { get; set; }
         public ICollection<Staff> Staffs { get; set; }

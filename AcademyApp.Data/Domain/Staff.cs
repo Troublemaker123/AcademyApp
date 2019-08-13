@@ -11,7 +11,7 @@ namespace WebApplication2.Model
     public class Staff
     {
         [Key]
-        public int StaffID { get; set; }
-        public string StaffName { get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; }
     }
 }

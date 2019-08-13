@@ -11,11 +11,11 @@ namespace WebApplication2.Model
     public class User
     {
         [Key]
-        public int UserID { get; set; }
+        public int ID { get; set; }
         [Required,MaxLength(50)]
-        public string UserName { get; set; }
+        public string Name { get; set; }
         [Required, MaxLength(50)]
-        public string UserPassword { get; set; }
+        public string Password { get; set; }
 
     }
 }

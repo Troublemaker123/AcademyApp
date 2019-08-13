@@ -9,11 +9,11 @@ namespace WebApplication2.Model
     public class Attendance
     {
         [Key]
-        public int AttendanceID { get; set; }
+        public int ID { get; set; }
         public int Attended { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public string AttendanceDate { get; set; }
+        public string Date { get; set; }
 
 
     }

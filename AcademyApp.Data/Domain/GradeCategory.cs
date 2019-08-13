@@ -11,7 +11,7 @@ namespace WebApplication2.Model
     public class GradeCategory
     {
         [Key]
-        public int GradeCategoryID { get; set; }
+        public int ID { get; set; }
         public ICollection<Grade> Grades { get; set; }
     }
 }

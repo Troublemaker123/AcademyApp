@@ -11,7 +11,7 @@ namespace WebApplication2.Model
     public class Role
     {
         [Key]
-        public int RoleID { get; set; }
+        public int ID { get; set; }
         public ICollection<User> Users { get; set;}
     }
 }

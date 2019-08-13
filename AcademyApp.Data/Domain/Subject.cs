@@ -8,10 +8,10 @@ namespace WebApplication2.Model
     public class Subject
     {
         [Key]
-        public int SubjectID { get; set; }
-        public string SubjectName { get; set; }
-        public string SubjectDescription{ get; set; }
-        public ICollection<Grade> Grades { get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Description{ get; set; }
+        public ICollection<Grade> grades { get; set; }
         public ICollection<Student> Students { get; set; }
     }
 }

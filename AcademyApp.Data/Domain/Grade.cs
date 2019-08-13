@@ -11,8 +11,8 @@ namespace WebApplication2.Model
     public class Grade
     {
         [Key]
-        public int GradeID { get; set; }
-        public string GradeName { get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; }
 
 
     }

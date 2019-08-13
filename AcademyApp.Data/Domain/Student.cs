@@ -29,8 +29,7 @@ namespace AcademyApp.Model
         [DisplayFormat(DataFormatString  = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DateOfEnrollment { get; set; }
         public ICollection<Attendance> Attendances { get; set; }
-        //  public ICollection<Attendance> Attendances { get; set; }
-        // public ICollection<Attendance> Attendances { get; set; }
+
         public enum Gender
         {
             Male,

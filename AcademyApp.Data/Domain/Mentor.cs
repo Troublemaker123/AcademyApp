@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static WebApplication2.Model.Student;
+using static AcademyApp.Model.Student;
 
-namespace WebApplication2.Model
+namespace AcademyApp.Model
 {
     [Table("Mentor")]
     public class Mentor

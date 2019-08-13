@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApplication2.Model
+namespace AcademyApp.Model
 {
     [Table("GradeCategory")]
     public class GradeCategory

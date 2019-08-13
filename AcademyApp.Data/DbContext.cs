@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using WebApplication2.Model;
+using AcademyApp.Model;
 
 namespace AcademyApp.Data
 {

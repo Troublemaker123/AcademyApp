@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 
-namespace WebApplication2.Model
+namespace AcademyApp.Model
 {
     [Table("Attendance")]
     public class Attendance

@@ -1,8 +1,5 @@
-﻿using AcademyApp.Business;
-using AcademyApp.Data;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
+
 
 namespace AcademyApp.Business
 {

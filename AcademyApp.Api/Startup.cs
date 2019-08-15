@@ -1,4 +1,6 @@
 ﻿using AcademyApp.Business;
+using AcademyApp.Business.Implementation;
+using AcademyApp.Business.Interfaces;
 using AcademyApp.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -26,8 +28,10 @@ namespace AcademyApp.Api
             services.AddDbContext<DbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("AcademyAppDB")));
 
-            services.AddTransient<IStudentService, StudentService>();
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+
+            services.AddTransient<IStudentService, StudentService>();
+            services.AddTransient<IAcademyProgramService, AcademyProgramService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

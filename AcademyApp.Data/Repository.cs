@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 
 namespace AcademyApp.Data
 {
@@ -14,34 +13,32 @@ namespace AcademyApp.Data
             _dbContext = dbContext;
         }
 
-        public IQueryable<T> FindAll()
-        {
-            return _dbContext.Set<T>().AsNoTracking();
-        }
-
-        public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
-        {
-            return _dbContext.Set<T>().Where(expression).AsNoTracking();
-        }
-
         public void Create(T entity)
         {
             _dbContext.Set<T>().Add(entity);
-        }
-
-        public void Update(T entity)
-        {
-            _dbContext.Set<T>().Update(entity);
+            _dbContext.SaveChanges();
         }
 
         public void Delete(T entity)
         {
             _dbContext.Set<T>().Remove(entity);
+            _dbContext.SaveChanges();
+        }
+        public IEnumerable<T> GetAll()
+        {
+            return _dbContext.Set<T>().AsEnumerable();
         }
 
-        public void FindAll(T entity)
+
+        public T FindByCondition(object id)
         {
-            _dbContext.Set<T>().Find(entity);
+            return _dbContext.Set<T>().Find(id);
+        }
+
+        public void Update(T entity)
+        {
+            _dbContext.Set<T>().Update(entity);
+            _dbContext.SaveChanges();
         }
     }
 }

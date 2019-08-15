@@ -1,8 +1,6 @@
-﻿using System;
-using Microsoft.Extensions.Configuration;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
 using AcademyApp.Model;
+using AcademyApp.Data.Model;
 
 namespace AcademyApp.Data
 {
@@ -23,6 +21,6 @@ namespace AcademyApp.Data
         public DbSet<GradeCategory> GradeCategories { get; set; }
         public DbSet<Program> Programs { get; set; }
         public DbSet<Role> Roles { get; set; }
-
+        public DbSet<AcademyProgram> AcademyPrograms {get; set;}
     }
 }

@@ -1,4 +1,7 @@
 ﻿
+using System.Collections.Generic;
+using AcademyApp.Data.Model;
+
 namespace AcademyApp.Data
 {
     public interface IRepository<T>
@@ -6,6 +9,8 @@ namespace AcademyApp.Data
         void Create(T entity);
         void Update(T entity);
         void Delete(T entity);
-        void FindAll(T entity);
+        IEnumerable<T> GetAll();
+        T FindByCondition(object id);
+      //  object FindById(AcademyProgram academyProgram);
     }
 }

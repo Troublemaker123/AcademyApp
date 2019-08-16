@@ -1,6 +1,5 @@
-﻿
-using System.Collections.Generic;
-using AcademyApp.Data.Model;
+﻿using System.Collections.Generic;
+
 
 namespace AcademyApp.Data
 {

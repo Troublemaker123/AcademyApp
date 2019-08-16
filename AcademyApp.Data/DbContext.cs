@@ -9,6 +9,10 @@ namespace AcademyApp.Data
         public Context(DbContextOptions<Context> options)
             : base(options)
         { }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<AcademyProgram>().ToTable("AcademyProgram");
+        }
 
         public DbSet<Student> Students { get; set; }
         public DbSet<Mentor> Mentors { get; set; }
@@ -21,6 +25,7 @@ namespace AcademyApp.Data
         public DbSet<GradeCategory> GradeCategories { get; set; }
         public DbSet<Program> Programs { get; set; }
         public DbSet<Role> Roles { get; set; }
-        public DbSet<AcademyProgram> AcademyPrograms {get; set;}
+        public DbSet<AcademyProgram> AcademyPrograms { get; set; }
+             
     }
 }

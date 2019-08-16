@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Data.SqlClient;
 
 namespace AcademyApp.Api
 {
@@ -25,10 +26,11 @@ namespace AcademyApp.Api
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddDbContext<DbContext>(options =>
+            services.AddDbContext<Context>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("AcademyAppDB")));
 
-            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+
+                services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 
             services.AddTransient<IStudentService, StudentService>();
             services.AddTransient<IAcademyProgramService, AcademyProgramService>();

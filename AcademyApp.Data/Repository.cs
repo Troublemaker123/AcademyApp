@@ -6,16 +6,17 @@ namespace AcademyApp.Data
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        protected readonly DbContext _dbContext;
+        protected readonly Context _dbContext;
 
-        public Repository(DbContext dbContext)
+        public Repository(Context dbContext)
         {
             _dbContext = dbContext;
         }
 
         public void Create(T entity)
         {
-            _dbContext.Set<T>().Add(entity);
+            var set = _dbContext.Set<T>();
+            set.Add(entity);
             _dbContext.SaveChanges();
         }
 

@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System;
 
+
 namespace AcademyApp.Data.Model
 {
     [Table("AcademyProgram")]
@@ -19,5 +20,7 @@ namespace AcademyApp.Data.Model
         public DateTime CreatedOn { get; set; }
 
         public string CreatedBy { get; set; }
+ 
     }
+   
 }

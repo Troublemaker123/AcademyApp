@@ -1,15 +1,13 @@
-﻿using AcademyApp.Business.ViewModels;
+﻿
+using System.Collections.Generic;
 
-
-namespace AcademyApp.Business.Interfaces
+namespace AcademyApp.Business
 {
     public interface IAcademyProgramService
     {
         void Create(AcademyProgramViewModel model);
-     
-        /*   void Update(AcademyProgramViewModel model);
-List<AcademyProgramViewModel> FindAll();
-AcademyProgramViewModel FindById(int apId);
-void SetActivity(int apId, bool active);*/
+        void Update(AcademyProgramViewModel model);
+        List<AcademyProgramViewModel> FindAll();
+        AcademyProgramViewModel FindById(int apId);
     }
 }

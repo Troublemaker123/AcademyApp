@@ -1,5 +1,6 @@
 ﻿using AcademyApp.Data.Model;
-using AcademyApp.Business.ViewModels;
+using AcademyApp.Model;
+
 
 namespace AcademyApp.Business.Mapper
 {
@@ -28,6 +29,71 @@ namespace AcademyApp.Business.Mapper
                 StartDate = model.StartDate,
                 EndDate = model.EndDate,
                 IsCurrent = model.IsCurrent
+            };
+           
+        }
+        public static Student ToDomain(this StudentViewModel model)
+        {
+            return new Student
+            {
+                ID = model.ID,
+                Name = model.Name,
+                LastName = model.LastName,
+                PlaceOfBirth = model.PlaceOfBirth,
+                Country = model.Country,
+                Mobile = model.Mobile,
+                EmailAdress = model.EmailAdress,
+                GraduationYear = model.GraduationYear,
+                DateOfBirth = model.DateOfBirth,
+                DateOfEnrollment = model.DateOfEnrollment,
+            };
+        }
+        public static StudentViewModel ToModel(this Student model)
+        {
+            return new StudentViewModel
+            {
+                ID = model.ID,
+                Name = model.Name,
+                LastName = model.LastName,
+                PlaceOfBirth = model.PlaceOfBirth,
+                Country = model.Country,
+                Mobile = model.Mobile,
+                EmailAdress = model.EmailAdress,
+                GraduationYear = model.GraduationYear,
+                DateOfBirth = model.DateOfBirth,
+                DateOfEnrollment = model.DateOfEnrollment,
+               
+            };
+
+        }
+        public static Mentor ToModel(this Mentor model)
+        {
+            return new Mentor
+            {
+                ID = model.ID,
+                Name = model.Name,
+                LastName = model.LastName,
+                Email = model.LastName,
+                YearsOfService = model.YearsOfService,
+                Specialty = model.Specialty,
+                Telephone = model.Telephone,
+                Grades = model.Grades,
+                
+            };
+        }
+        public static MentorViewModel ToDomain(this Mentor model)
+        {
+            return new MentorViewModel
+            {
+                ID = model.ID,
+                Name = model.Name,
+                LastName = model.LastName,
+                Email = model.LastName,
+                YearsOfService = model.YearsOfService,
+                Specialty = model.Specialty,
+                Telephone = model.Telephone,
+                Grades = model.Grades,
+
             };
         }
     }

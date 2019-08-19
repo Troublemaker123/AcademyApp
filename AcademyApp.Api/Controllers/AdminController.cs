@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 
 using AcademyApp.Business.Interfaces;
 using AcademyApp.Business.ViewModels;
+using AcademyApp.Business;
+using AcademyApp.Data.Model;
 
 namespace AcademyApp.Api.Controllers
 {
@@ -43,7 +45,7 @@ namespace AcademyApp.Api.Controllers
         // POST api/admin/ap
         [Route("ap")]
         [HttpPost]
-        public void Create(AcademyProgramViewModel model)
+        public void Create(AcademyProgramViewController model)
         {
             if (model == null)
                 throw new ApplicationException("Object is null");

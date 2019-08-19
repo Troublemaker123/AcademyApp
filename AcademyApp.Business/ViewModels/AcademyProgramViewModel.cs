@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace AcademyApp.Business.ViewModels
+namespace AcademyApp.Business
 {
     public class AcademyProgramViewModel
     {

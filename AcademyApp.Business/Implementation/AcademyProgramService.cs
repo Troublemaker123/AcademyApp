@@ -1,24 +1,23 @@
 ﻿using System;
 
-using AcademyApp.Business.Interfaces;
-using AcademyApp.Business.ViewModels;
+
 using AcademyApp.Business.Mapper;
 using AcademyApp.Data;
 using AcademyApp.Data.Model;
+using System.Collections.Generic;
 
-
-namespace AcademyApp.Business.Implementation
+namespace AcademyApp.Business
 {
     public class AcademyProgramService : IAcademyProgramService
     {
-        private readonly IRepository<AcademyProgram> _apRepository;
+        private readonly IRepository<AcademyProgramService> _apRepository;
 
-        public AcademyProgramService(IRepository<AcademyProgram> apRepository)
+        public AcademyProgramService(IRepository<AcademyProgramService> apRepository)
         {
             _apRepository = apRepository;
         }
 
-        public void Create(AcademyProgramViewModel model)
+        public void Create(AcademyProgram model)
         {
             var domain = model.ToDomain();
             domain.CreatedOn = DateTime.Now;
@@ -26,7 +25,27 @@ namespace AcademyApp.Business.Implementation
 
             _apRepository.Create(domain);
         }
-       
+
+        public void Create(AcademyProgramViewModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<AcademyProgramViewModel> FindAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public AcademyProgramViewModel FindById(int apId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(AcademyProgramViewModel model)
+        {
+            throw new NotImplementedException();
+        }
+
 
         /*  public List<AcademyProgramViewModel> FindAll()
           {

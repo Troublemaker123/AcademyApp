@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace AcademyApp.Business
+namespace AcademyApp.Business.ViewModel
 {
 
     class GroupViewModel

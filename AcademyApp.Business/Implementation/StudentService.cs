@@ -7,17 +7,17 @@ namespace AcademyApp.Business
 {
     public class StudentService : IStudentService
     {
-     //  private readonly IRepository<Student> _studentRepository;
+       private readonly IRepository<Student> _studentRepository;
 
         public void CreateStudent(StudentViewModel student)
         {
             // viewModel => domain model
-            //var stud = new Student
-            //{
-            //    StudentID = student.StudentId
-            //};
+            var stud = new Student
+            {
+                ID = student.ID
+            };
 
-            //_studentRepository.Create(stud);
+            _studentRepository.Create(stud);
 
         }
 

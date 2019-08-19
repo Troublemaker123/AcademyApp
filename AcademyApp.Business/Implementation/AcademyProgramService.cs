@@ -5,6 +5,7 @@ using AcademyApp.Business.Mapper;
 using AcademyApp.Data;
 using AcademyApp.Data.Model;
 using System.Collections.Generic;
+using AcademyApp.Business.ViewModel;
 
 namespace AcademyApp.Business
 {
@@ -17,7 +18,7 @@ namespace AcademyApp.Business
             _apRepository = apRepository;
         }
 
-        public void Create(AcademyProgram model)
+        public void Create(AcademyProgramViewModel model)
         {
             var domain = model.ToDomain();
             domain.CreatedOn = DateTime.Now;
@@ -25,11 +26,9 @@ namespace AcademyApp.Business
 
             _apRepository.Create(domain);
         }
+       
 
-        public void Create(AcademyProgramViewModel model)
-        {
-            throw new NotImplementedException();
-        }
+
 
         public List<AcademyProgramViewModel> FindAll()
         {

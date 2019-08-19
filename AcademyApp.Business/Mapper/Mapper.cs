@@ -1,4 +1,5 @@
-﻿using AcademyApp.Data.Model;
+﻿using AcademyApp.Business.ViewModel;
+using AcademyApp.Data.Model;
 using AcademyApp.Model;
 
 
@@ -66,7 +67,7 @@ namespace AcademyApp.Business.Mapper
             };
 
         }
-        public static Mentor ToModel(this Mentor model)
+        public static Mentor ToDomain(this MentorViewModel model)
         {
             return new Mentor
             {
@@ -81,7 +82,7 @@ namespace AcademyApp.Business.Mapper
                 
             };
         }
-        public static MentorViewModel ToDomain(this Mentor model)
+        public static MentorViewModel ToModel(this Mentor model)
         {
             return new MentorViewModel
             {
@@ -94,6 +95,25 @@ namespace AcademyApp.Business.Mapper
                 Telephone = model.Telephone,
                 Grades = model.Grades,
 
+            };
+           
+            }
+        public static Program ToDomain(this ProgramViewModel model)
+        {
+            return new Program
+            {
+                ID = model.ID,
+                Name = model.Name,
+                Description = model.Description
+            };
+        }
+        public static ProgramViewModel ToModel(this Program model)
+        {
+            return new ProgramViewModel
+            {
+                ID = model.ID,
+                Name = model.Name,
+                Description = model.Description
             };
         }
     }

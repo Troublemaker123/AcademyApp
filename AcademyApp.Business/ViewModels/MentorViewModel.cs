@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using static AcademyApp.Model.Student;
 
-namespace AcademyApp.Business
+namespace AcademyApp.Business.ViewModel
 {
     public class MentorViewModel
     {

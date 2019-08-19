@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace AcademyApp.Business
+namespace AcademyApp.Business.ViewModel
 {
     class UserViewModel
     {

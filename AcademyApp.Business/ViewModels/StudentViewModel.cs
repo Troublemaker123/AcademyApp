@@ -1,10 +1,10 @@
-﻿using AcademyApp.Business.ViewModels;
+﻿using AcademyApp.Business;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 
-namespace AcademyApp.Business
+namespace AcademyApp.Business.ViewModel
 {
     public class StudentViewModel
     {

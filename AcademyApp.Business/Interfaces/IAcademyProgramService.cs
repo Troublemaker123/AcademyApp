@@ -1,7 +1,7 @@
 ﻿
 using System.Collections.Generic;
-
-namespace AcademyApp.Business
+using AcademyApp.Data.Model;
+namespace AcademyApp.Business.ViewModel
 {
     public interface IAcademyProgramService
     {

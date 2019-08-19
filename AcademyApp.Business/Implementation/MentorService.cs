@@ -1,14 +1,24 @@
-﻿using AcademyApp.Business.ViewModels;
-using System;
-using System.Collections.Generic;
+﻿using System;
 
+
+using AcademyApp.Business.Mapper;
+using AcademyApp.Data;
+using AcademyApp.Data.Model;
+using System.Collections.Generic;
+using AcademyApp.Business.ViewModel;
 namespace AcademyApp.Business.Implementation
 {
-    class MentorService : IMentorService
+   public class MentorService : IMentorService
     {
+        private readonly IRepository<MentorService> _mentor;
+        public MentorService(IRepository<MentorService> mentor)
+        {
+            _mentor = mentor;
+        }
         public void Create(MentorViewModel model)
         {
-            throw new NotImplementedException();
+            var domain = model.ToDomain();
+            _mentor.Create(domain);
         }
 
         public List<MentorViewModel> FindAll()

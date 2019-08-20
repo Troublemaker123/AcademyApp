@@ -5,9 +5,9 @@ using System.Text;
 
 namespace AcademyApp.Business.ViewModel
 {
-    class StaffViewModel
+  public  class StaffViewModel
     {
-        [Key]
+   
         public int ID { get; set; }
         public string Name { get; set; }
     }

@@ -6,12 +6,14 @@ using AcademyApp.Data;
 using AcademyApp.Data.Model;
 using System.Collections.Generic;
 using AcademyApp.Business.ViewModel;
+using AcademyApp.Model;
+
 namespace AcademyApp.Business.Implementation
 {
    public class MentorService : IMentorService
     {
-        private readonly IRepository<MentorService> _mentor;
-        public MentorService(IRepository<MentorService> mentor)
+        private readonly IRepository<Mentor> _mentor;
+        public MentorService(IRepository<Mentor> mentor)
         {
             _mentor = mentor;
         }
@@ -32,11 +34,6 @@ namespace AcademyApp.Business.Implementation
         }
 
         public void Update(MentorViewModel model)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(StudentViewModel model)
         {
             throw new NotImplementedException();
         }

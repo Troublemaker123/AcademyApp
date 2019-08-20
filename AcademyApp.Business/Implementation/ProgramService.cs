@@ -1,16 +1,17 @@
 ﻿using AcademyApp.Business.Interfaces;
 using AcademyApp.Business.Mapper;
 using AcademyApp.Business.ViewModel;
-using AcademyApp.Business.ViewModel.AcademyApp.Business.Interfaces;
 using AcademyApp.Data;
+using AcademyApp.Model;
+using System;
 
 
 namespace AcademyApp.Business.Implementation
 {
     public class ProgramService : IProgramService
     {
-        private readonly IRepository<ProgramService> _program;
-        public ProgramService(IRepository<ProgramService> program)
+        private readonly IRepository<Program> _program;
+        public ProgramService(IRepository<Program> program)
         {
             _program = program;
         }

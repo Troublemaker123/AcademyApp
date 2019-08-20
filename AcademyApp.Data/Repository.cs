@@ -31,7 +31,7 @@ namespace AcademyApp.Data
         }
 
 
-        public T FindByCondition(object id)
+        public T FindById(object id)
         {
             return _dbContext.Set<T>().Find(id);
         }
@@ -40,6 +40,11 @@ namespace AcademyApp.Data
         {
             _dbContext.Set<T>().Update(entity);
             _dbContext.SaveChanges();
+        }
+
+        public void SetActivity(bool entity)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

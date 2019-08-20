@@ -116,5 +116,126 @@ namespace AcademyApp.Business.Mapper
                 Description = model.Description
             };
         }
+        public static Attendance ToDomain(this AttendanceViewModel model)
+        {
+            return new Attendance
+            {
+                ID = model.ID,
+                Attended = model.Attended,
+                Date = model.Date
+            };
+        }
+        public static AttendanceViewModel ToModel(this Attendance model)
+        {
+            return new AttendanceViewModel
+            {
+                ID = model.ID,
+                Attended = model.Attended,
+                Date = model.Date
+            };
+        }
+        public static Subject ToDomain(this SubjectViewModel model)
+        {
+            return new Subject
+            {
+                ID = model.ID,
+                Name = model.Name,
+                Description = model.Description,
+                
+            };
+        }
+        public static SubjectViewModel ToModel(this Subject model)
+        {
+            return new SubjectViewModel
+            {
+                ID = model.ID,
+                Name = model.Name,
+                Description = model.Description,
+            };
+        }
+        public static Role ToDomain(this RoleViewModel model)
+        {
+            return new Role
+            {
+                ID = model.ID,
+
+            };
+        }
+        public static RoleViewModel ToModel(this Role model)
+        {
+            return new RoleViewModel
+            {
+                ID = model.ID,
+
+            };
+        }
+        public static Staff ToDomain(this StaffViewModel model)
+        {
+            return new Staff
+            {
+                ID = model.ID,
+                Name = model.Name
+            };
+        }
+        public static StaffViewModel ToModel(this Staff model)
+        {
+            return new StaffViewModel
+            {
+                ID = model.ID,
+                Name = model.Name
+            };
+        }
+        public static Group ToDomain(this GroupViewModel model)
+        {
+            return new Group
+            {
+                ID = model.ID,
+ 
+            };
+        }
+        public static GroupViewModel ToModel(this Group model)
+        {
+            return new GroupViewModel
+            {
+                ID = model.ID,
+
+            };
+        }
+        public static Grade ToDomain(this GradeViewModel model)
+        {
+            return new Grade
+            {
+                ID = model.ID,
+                Name = model.Name
+            };
+        }
+        public static GradeViewModel ToModel(this Grade model)
+        {
+            return new GradeViewModel
+            {
+                ID = model.ID,
+                Name = model.Name
+            };
+        }
+        public static GradeCategory ToDomain(this GradeCategoryViewModel model)
+        {
+            return new GradeCategory
+            {
+                ID = model.ID,
+                Date = model.Date,
+                Attended = model.Attended
+
+            };
+        }
+        public static GradeCategoryViewModel ToModel(this GradeCategory model)
+        {
+            return new GradeCategoryViewModel
+            {
+                ID = model.ID,
+                Date = model.Date,
+                Attended = model.Attended
+            };
+        }
+
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AcademyApp.Business;
 using AcademyApp.Business.Implementation;
 using AcademyApp.Business.Interfaces;
+using AcademyApp.Business.ViewModel;
 using AcademyApp.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,6 +35,14 @@ namespace AcademyApp.Api
 
             services.AddTransient<IStudentService, StudentService>();
             services.AddTransient<IAcademyProgramService, AcademyProgramService>();
+            services.AddTransient<IAttendanceService, AttendanceService>();
+            services.AddTransient<IGradeService, GradeService>();
+            services.AddTransient<IGroupService, GroupService>();
+            services.AddTransient<IProgramService, ProgramService>();
+            services.AddTransient<IRoleService, RoleService>();
+            services.AddTransient<IStaffService, StaffService>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<ISubjectService, SubjectService>();
             services.AddTransient<IMentorService, MentorService>();
         }
 

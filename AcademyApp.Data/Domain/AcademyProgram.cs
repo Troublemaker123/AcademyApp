@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System;
 
 
+
 namespace AcademyApp.Data.Model
 {
     [Table("AcademyProgram")]

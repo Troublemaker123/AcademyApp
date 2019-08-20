@@ -7,9 +7,9 @@ using System.ComponentModel.DataAnnotations;
 namespace AcademyApp.Business.ViewModel
 {
 
-    class GroupViewModel
+  public  class GroupViewModel
     {
-        [Key]
+   
         public int ID { get; set; }
         public ICollection<Student> Students { get; set; }
         public ICollection<AcademyProgram> Mentors { get; set; }

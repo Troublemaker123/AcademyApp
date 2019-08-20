@@ -1,10 +1,21 @@
-﻿using System;
+﻿using AcademyApp.Business.ViewModel;
 using System.Collections.Generic;
-using System.Text;
 
 namespace AcademyApp.Business.Interfaces
 {
-    class IGradeService
+   public interface IGradeService
     {
+        void Create(GradeViewModel model);
+        void Update(GradeViewModel model);
+        GradeViewModel FindById(int apId);
+        List<GradeViewModel> FindAll();
+    }
+    public interface IGradeCategory
+    {
+        void Create(GradeCategoryViewModel model);
+        void Update(GradeCategoryViewModel model);
+        GradeCategoryViewModel FindById(int apId);
+        List<GradeCategoryViewModel> FindAll();
+
     }
 }

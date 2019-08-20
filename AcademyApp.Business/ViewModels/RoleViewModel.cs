@@ -6,9 +6,9 @@ using System.Text;
 
 namespace AcademyApp.Business.ViewModel
 {
-    class RoleViewModel
+   public class RoleViewModel
     {
-        [Key]
+
         public int ID { get; set; }
         public ICollection<User> Users { get; set; }
     }

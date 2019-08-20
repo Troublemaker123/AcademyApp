@@ -5,13 +5,13 @@ using System.Text;
 
 namespace AcademyApp.Business.ViewModel
 {
-    class UserViewModel
+  public  class UserViewModel
     {
-        [Key]
+
         public int ID { get; set; }
-        [Required, MaxLength(50)]
+
         public string Name { get; set; }
-        [Required, MaxLength(50)]
+
         public string Password { get; set; }
     }
 }

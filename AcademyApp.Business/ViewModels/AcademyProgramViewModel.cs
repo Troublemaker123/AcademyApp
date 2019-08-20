@@ -1,12 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using AcademyApp.Data.Model;
+
 
 namespace AcademyApp.Business.ViewModel
 {
     public class AcademyProgramViewModel
     {
-        [Key]
+ 
         public int ID { get; set; }
 
         public string CreatedBy { get; set; }

@@ -1,29 +1,33 @@
 ﻿using AcademyApp.Business.Interfaces;
 using AcademyApp.Business.ViewModel;
+using AcademyApp.Data;
+using AcademyApp.Model;
 using System;
 using System.Collections.Generic;
-using System.Text;
+
+
+
 
 namespace AcademyApp.Business.Implementation
 {
-    public class RoleService : IRoleService
+    public class SubjectService : ISubjectService
     {
-        public void Create(RoleViewModel model)
+        public void CreateStudent(SubjectViewModel model)
         {
             throw new NotImplementedException();
         }
 
-        public List<RoleViewModel> FindAll()
+        public List<SubjectViewModel> FindAll()
         {
             throw new NotImplementedException();
         }
 
-        public RoleViewModel FindById(int apId)
+        public SubjectViewModel FindById(int apId)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(RoleViewModel model)
+        public void Update(SubjectViewModel model)
         {
             throw new NotImplementedException();
         }

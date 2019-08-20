@@ -6,9 +6,9 @@ using System.Text;
 
 namespace AcademyApp.Business.ViewModel
 {
-    class SubjectViewModel
+   public class SubjectViewModel
     {
-        [Key]
+   
         public int ID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

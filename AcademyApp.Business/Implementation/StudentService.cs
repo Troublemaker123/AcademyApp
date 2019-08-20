@@ -1,4 +1,5 @@
-﻿using AcademyApp.Data;
+﻿using AcademyApp.Business.ViewModel;
+using AcademyApp.Data;
 using AcademyApp.Model;
 using System;
 using System.Collections.Generic;

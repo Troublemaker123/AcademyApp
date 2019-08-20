@@ -1,10 +1,9 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
-
+using AcademyApp.Business.ViewModel;
 using AcademyApp.Business.Interfaces;
-using AcademyApp.Business.ViewModels;
-using AcademyApp.Business;
-using AcademyApp.Data.Model;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace AcademyApp.Api.Controllers
 {
@@ -18,39 +17,47 @@ namespace AcademyApp.Api.Controllers
         {
             _apService = apService;
         }
-        /*
         [HttpGet]
-        public async Task<AcademyProgramViewModel> FindById(int? apId)
+        public ActionResult Create()
         {
-            if (apId == null)
+            return Create();
+        }
+       
+        public void List<AcademyProgramViewModel>()
+        {
+            _apService.GetAll();
+        }
+        [HttpPost]
+        public void Update(AcademyProgramViewModel model)
+        {
+            _apService.Update(model);
+        }
+        [HttpPost]
+        public void FindById(AcademyProgramViewModel model)
+        {
+            if(model == null)
             {
-                return BadRequest();
+                throw new ApplicationException("Object is null");
             }
-            try
-            {
-                var findid = await IAcademyProgramService.FindById(apId);
-                if (findid == null)
-                { return NotFound(); }
-                return Ok(apId);
-                
-            }
-            catch (Exception)
-            {
-
-                return BadRequest();
-            }
-        }*/
-
-
+            _apService.FindById(apId);
+        }
         // POST api/admin/ap
         [Route("ap")]
         [HttpPost]
-        public void Create(AcademyProgramViewController model)
+        public void Create(AcademyProgramViewModel model)
         {
             if (model == null)
                 throw new ApplicationException("Object is null");
 
             _apService.Create(model);
+        }
+        [HttpGet]
+        public IActionResult Create(int id = 0)
+        {
+            if (id == 0)
+                return Create(new model());
+            else
+                return Create(_apService.FindById(apId));
         }
     }
 }

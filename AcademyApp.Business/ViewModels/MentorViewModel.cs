@@ -8,13 +8,13 @@ namespace AcademyApp.Business.ViewModel
 {
     public class MentorViewModel
     {
-        [Key]
+
         public int ID { get; set; }
-        [Required, MaxLength(50)]
+
         public string Name { get; set; }
-        [Required, MaxLength(50)]
+
         public string LastName { get; set; }
-        [Required, MaxLength(50)]
+  
         public string Email { get; set; }
         public Gender Gender { get; set; }
         public string YearsOfService { get; set; }

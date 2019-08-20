@@ -6,14 +6,18 @@ using AcademyApp.Data;
 using AcademyApp.Data.Model;
 using System.Collections.Generic;
 using AcademyApp.Business.ViewModel;
+using AcademyApp.Business.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using System.Collections;
+using System.Linq;
 
 namespace AcademyApp.Business
 {
     public class AcademyProgramService : IAcademyProgramService
     {
-        private readonly IRepository<AcademyProgramService> _apRepository;
+        private readonly IRepository<AcademyProgram> _apRepository;
 
-        public AcademyProgramService(IRepository<AcademyProgramService> apRepository)
+        public AcademyProgramService(IRepository<AcademyProgram> apRepository)
         {
             _apRepository = apRepository;
         }
@@ -26,59 +30,46 @@ namespace AcademyApp.Business
 
             _apRepository.Create(domain);
         }
-       
 
-
-
-        public List<AcademyProgramViewModel> FindAll()
+      public IEnumerable<AcademyProgramViewModel> GetAll()
         {
-            throw new NotImplementedException();
+            return 
         }
+          
 
-        public AcademyProgramViewModel FindById(int apId)
+          public void SetActivity(bool active)
         {
-            throw new NotImplementedException();
+            var program = _apRepository.FindById(new AcademyProgram());
+            if (program == null)
+                throw new Exception();
+
+            program.IsCurrent = active;
+
+            _apRepository.SetActivity(active);
         }
 
         public void Update(AcademyProgramViewModel model)
         {
-            throw new NotImplementedException();
+            var program = _apRepository.FindById(new AcademyProgram());
+            if (program == null)
+                throw new Exception();
+
+            program.StartDate = model.StartDate;
+            program.EndDate = model.EndDate;
+            program.IsCurrent = model.IsCurrent;
+
+            _apRepository.Update(program);
         }
 
-
-        /*  public List<AcademyProgramViewModel> FindAll()
-          {
-              throw new NotImplementedException();
-              // return _apRepository.FindAll(new AcademyProgram())
-          }
-
-          public AcademyProgramViewModel FindById(int apId)
-          {
-              throw new NotImplementedException();
-          }
-
-          public void SetActivity(int apId, bool active)
-          {
-              var program = _apRepository.FindById(new AcademyProgram());
-              if (program == null)
-                  throw new Exception();
-
-              program.IsCurrent = active;
-
-              _apRepository.SetActivity(program);
-          }
-
-          public void Update(AcademyProgramViewModel model)
-          {
-              var program = _apRepository.FindById(new AcademyProgram());
-              if (program == null)
-                  throw new Exception();
-
-              program.StartDate = model.StartDate;
-              program.EndDate = model.EndDate;
-              program.IsCurrent = model.IsCurrent;
-
-              _apRepository.Update(program);
-          }*/
+        public AcademyProgramViewModel FindById(string apId)
+        {
+            // List<AcademyProgramViewModel> ap = new List<AcademyProgramViewModel>();
+            //  ap = (from ID in AcademyProgramViewModel select  ).FindById(apId);
+            //  return ap;
+          
+            
+            return _apRepository.FindById(apId);
+        }
     }
+
 }

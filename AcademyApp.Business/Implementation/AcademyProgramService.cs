@@ -33,7 +33,16 @@ namespace AcademyApp.Business
 
       public IEnumerable<AcademyProgramViewModel> GetAll()
         {
-            return 
+            return _apRepository.GetAll().Select(model => new AcademyProgramViewModel()
+            {
+                ID = model.ID,
+                CreatedBy = model.CreatedBy,
+                CreatedOn = model.CreatedOn,
+                StartDate = model.StartDate,
+                EndDate = model.EndDate,
+                IsCurrent = model.IsCurrent
+            }
+            ).ToList();
         }
           
 
@@ -66,9 +75,13 @@ namespace AcademyApp.Business
             // List<AcademyProgramViewModel> ap = new List<AcademyProgramViewModel>();
             //  ap = (from ID in AcademyProgramViewModel select  ).FindById(apId);
             //  return ap;
-          
-            
-            return _apRepository.FindById(apId);
+
+
+            return _apRepository.FindById(apId).Select(model => new AcademyProgramViewModel()
+            {
+                apId = model.apId
+            } 
+            ).ToList();
         }
     }
 

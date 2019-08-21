@@ -1,21 +1,34 @@
 ﻿using AcademyApp.Business.Interfaces;
+using AcademyApp.Business.Mapper;
 using AcademyApp.Business.ViewModel;
+using AcademyApp.Data;
+using AcademyApp.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace AcademyApp.Business.Implementation
 {
     public class GradeService : IGradeService
     {
+        private readonly IRepository<Grade> _gRepository;
+        public GradeService(IRepository<Grade> gRepository)
+        {
+            _gRepository = gRepository;
+        }
         public void Create(GradeViewModel model)
         {
-            throw new NotImplementedException();
+            var domain = model.ToDomain();
+            _gRepository.Create(domain);
         }
 
-        public List<GradeViewModel> FindAll()
+        public IEnumerable<GradeViewModel> FindAll()
         {
-            throw new NotImplementedException();
+           return _gRepository.GetAll().Select(model => new GradeViewModel(){
+                ID = model.ID,
+                Name = model.Name
+            }).ToList();
         }
 
         public GradeViewModel FindById(int apId)
@@ -25,7 +38,10 @@ namespace AcademyApp.Business.Implementation
 
         public void Update(GradeViewModel model)
         {
-            throw new NotImplementedException();
+            var program = _gRepository.FindById(new Grade());
+            if (program == null)
+                throw new Exception();
+            _gRepository.Update(program);
         }
     }
 }

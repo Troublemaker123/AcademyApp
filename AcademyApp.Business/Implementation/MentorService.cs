@@ -7,35 +7,47 @@ using AcademyApp.Data.Model;
 using System.Collections.Generic;
 using AcademyApp.Business.ViewModel;
 using AcademyApp.Model;
+using System.Linq;
 
 namespace AcademyApp.Business.Implementation
 {
    public class MentorService : IMentorService
     {
-        private readonly IRepository<Mentor> _mentor;
-        public MentorService(IRepository<Mentor> mentor)
+        private readonly IRepository<Mentor> _apRepository;
+
+        public MentorService(IRepository<Mentor> apRepository)
         {
-            _mentor = mentor;
+            _apRepository = apRepository;
         }
+
         public void Create(MentorViewModel model)
         {
             var domain = model.ToDomain();
-            _mentor.Create(domain);
+           _apRepository.Create(domain);
         }
 
-        public List<MentorViewModel> FindAll()
+        public IEnumerable<MentorViewModel> GetAll()
         {
-            throw new NotImplementedException();
+            return _apRepository.GetAll().Select(model => new MentorViewModel()
+            {
+                ID = model.ID,
+
+            }
+            ).ToList();
         }
 
         public MentorViewModel FindById(int apId)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void Update(MentorViewModel model)
         {
-            throw new NotImplementedException();
+            var program = _apRepository.FindById(new Mentor());
+            if (program == null)
+                throw new Exception();
+
+            _apRepository.Update(program);
         }
 
     }

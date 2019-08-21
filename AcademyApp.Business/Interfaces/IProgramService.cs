@@ -7,7 +7,7 @@ namespace AcademyApp.Business.Interfaces
     {
         void Create(ProgramViewModel model);
         void Update(ProgramViewModel model);
-        List<ProgramViewModel> FindAll();
+        IEnumerable<AttendanceViewModel> GetAll();
         ProgramViewModel FindById(int apId);
     }
 }

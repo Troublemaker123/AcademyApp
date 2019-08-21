@@ -8,14 +8,7 @@ namespace AcademyApp.Business.Interfaces
         void Create(GradeViewModel model);
         void Update(GradeViewModel model);
         GradeViewModel FindById(int apId);
-        List<GradeViewModel> FindAll();
+        IEnumerable<AttendanceViewModel> GetAll();
     }
-    public interface IGradeCategory
-    {
-        void Create(GradeCategoryViewModel model);
-        void Update(GradeCategoryViewModel model);
-        GradeCategoryViewModel FindById(int apId);
-        List<GradeCategoryViewModel> FindAll();
-
-    }
+   
 }

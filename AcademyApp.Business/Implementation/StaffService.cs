@@ -1,31 +1,52 @@
 ﻿using AcademyApp.Business.Interfaces;
+using AcademyApp.Business.Mapper;
 using AcademyApp.Business.ViewModel;
+using AcademyApp.Data;
+using AcademyApp.Model;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace AcademyApp.Business.Implementation
 {
     public class StaffService : IStaffService
     {
-        public void Create(StaffViewModel model)
+        private readonly IRepository<Staff> _apRepository;
+
+        public StaffService(IRepository<Staff> apRepository)
         {
-            throw new NotImplementedException();
+            _apRepository = apRepository;
         }
 
-        public List<StaffViewModel> FindAll()
-        {
-            throw new NotImplementedException();
+            public void Create(StaffViewModel model)
+            {
+            var domain = model.ToDomain();
+            _apRepository.Create(domain);
         }
 
-        public StaffViewModel FindById(int apId)
-        {
-            throw new NotImplementedException();
+            public IEnumerable<StaffViewModel> GetAll()
+            {
+            return _apRepository.GetAll().Select(model => new StaffViewModel()
+            {
+                ID = model.ID,
+
+            }
+           ).ToList();
         }
 
-        public void Update(StaffViewModel model)
-        {
-            throw new NotImplementedException();
+            public StaffViewModel FindById(int apId)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Update(StaffViewModel model)
+            {
+                var program = _apRepository.FindById(new Staff());
+                if (program == null)
+                    throw new Exception();
+
+                _apRepository.Update(program);
+            }
         }
     }
-}
+

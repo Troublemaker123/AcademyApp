@@ -1,21 +1,34 @@
 ﻿using AcademyApp.Business.Interfaces;
+using AcademyApp.Business.Mapper;
 using AcademyApp.Business.ViewModel;
+using AcademyApp.Data;
+using AcademyApp.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace AcademyApp.Business.Implementation
 {
     public class AttendanceService : IAttendanceService
     {
+        private readonly IRepository<Attendance> _aRepository;
+        public AttendanceService(IRepository<Attendance> aRepository)
+        {
+            _aRepository = aRepository;
+        }
         public void Create(AttendanceViewModel model)
         {
-            throw new NotImplementedException();
+            var domain = model.ToDomain();
+            _aRepository.Create(domain);
         }
 
-        public List<AttendanceViewModel> FindAll()
+        public IEnumerable<AttendanceViewModel> FindAll()
         {
-            throw new NotImplementedException();
+            return _aRepository.GetAll().Select(model => new AttendanceViewModel()
+            {
+                ID = model.ID,
+            }).ToList();
         }
 
         public AttendanceViewModel FindById(int apId)
@@ -25,7 +38,11 @@ namespace AcademyApp.Business.Implementation
 
         public void Update(AttendanceViewModel model)
         {
-            throw new NotImplementedException();
+            var program = _aRepository.FindById(new Attendance());
+
+            if (program == null)
+                throw new Exception();
+            _aRepository.Update(program);
         }
     }
 }

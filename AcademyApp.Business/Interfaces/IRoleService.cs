@@ -9,7 +9,7 @@ namespace AcademyApp.Business.Interfaces
     {
         void Create(RoleViewModel model);
         void Update(RoleViewModel model);
-        List<RoleViewModel> FindAll();
+        IEnumerable<AttendanceViewModel> GetAll();
         RoleViewModel FindById(int apId);
 
     }

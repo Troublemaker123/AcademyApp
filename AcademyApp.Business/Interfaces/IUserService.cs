@@ -7,9 +7,9 @@ namespace AcademyApp.Business.Interfaces
 {
     public interface IUserService
     {
-        void CreateStudent(UserViewModel model);
+        void Create(UserViewModel model);
         void Update(UserViewModel model);
-        List<UserViewModel> FindAll();
+        IEnumerable<UserViewModel> GetAll();
         UserViewModel FindById(int apId);
     }
 }

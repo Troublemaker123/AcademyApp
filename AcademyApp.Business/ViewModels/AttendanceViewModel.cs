@@ -9,7 +9,7 @@ namespace AcademyApp.Business.ViewModel
     {
 
         public int ID { get; set; }
-        public int Attended { get; set; }
+        public DateTime Attended { get; set; }
 
         public string Date { get; set; }
 

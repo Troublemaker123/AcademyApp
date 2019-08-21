@@ -11,7 +11,7 @@ namespace AcademyApp.Business.Interfaces
     {
         void Create(AcademyProgramViewModel model);
         void Update(AcademyProgramViewModel model);
-        List<AcademyProgramViewModel> GetAll();
+        IEnumerable<AttendanceViewModel> GetAll();
         AcademyProgramViewModel FindById(string apId);
         void SetActive(bool active);
     }

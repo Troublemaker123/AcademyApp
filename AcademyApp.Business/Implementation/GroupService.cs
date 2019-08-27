@@ -29,14 +29,9 @@ namespace AcademyApp.Business.Implementation
             throw new NotImplementedException();
         }
 
-        public IEnumerable<AttendanceViewModel> GetAll()
+        public IEnumerable<GroupViewModel> GetAll()
         {
-            return _apRepository.GetAll().Select(model => new AttendanceViewModel()
-            {
-                ID = model.ID,
-
-            }
-            ).ToList();
+            throw new NotImplementedException();
         }
 
         public void Update(GroupViewModel model)

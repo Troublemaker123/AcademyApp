@@ -1,8 +1,6 @@
 ﻿
 using System.Collections.Generic;
 using AcademyApp.Business.ViewModel;
-using AcademyApp.Data.Model;
-
 
 
 namespace AcademyApp.Business.Interfaces
@@ -11,8 +9,8 @@ namespace AcademyApp.Business.Interfaces
     {
         void Create(AcademyProgramViewModel model);
         void Update(AcademyProgramViewModel model);
-        IEnumerable<AttendanceViewModel> GetAll();
-        AcademyProgramViewModel FindById(string apId);
-        void SetActive(bool active);
+        IEnumerable<AcademyProgramViewModel> GetAll();
+        AcademyProgramViewModel FindById(int apId);
+        void SetActive(int apId, bool active);
     }
 }

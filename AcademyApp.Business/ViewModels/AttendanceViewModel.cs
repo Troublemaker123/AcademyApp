@@ -8,10 +8,10 @@ namespace AcademyApp.Business.ViewModel
    public class AttendanceViewModel
     {
 
-        public int ID { get; set; }
-        public DateTime Attended { get; set; }
+        //public int ID { get; set; }
+        //public DateTime Attended { get; set; }
 
-        public string Date { get; set; }
+        //public DateTime Date { get; set; }
 
     }
 }

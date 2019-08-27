@@ -116,24 +116,24 @@ namespace AcademyApp.Business.Mapper
                 Description = model.Description
             };
         }
-        public static Attendance ToDomain(this AttendanceViewModel model)
-        {
-            return new Attendance
-            {
-                ID = model.ID,
-                Attended = model.Attended,
-                Date = model.Date
-            };
-        }
-        public static AttendanceViewModel ToModel(this Attendance model)
-        {
-            return new AttendanceViewModel
-            {
-                ID = model.ID,
-                Attended = model.Attended,
-                Date = model.Date
-            };
-        }
+        //public static Attendance ToDomain(this AttendanceViewModel model)
+        //{
+        //    return new Attendance
+        //    {
+        //        ID = model.ID,
+        //        Attended = model.Attended,
+        //        Date = model.Date
+        //    };
+        //}
+        //public static AttendanceViewModel ToModel(this Attendance model)
+        //{
+        //    return new AttendanceViewModel
+        //    {
+        //        ID = model.ID,
+        //        Attended = model.Attended,
+        //        Date = model.Date
+        //    };
+        //}
         public static Subject ToDomain(this SubjectViewModel model)
         {
             return new Subject

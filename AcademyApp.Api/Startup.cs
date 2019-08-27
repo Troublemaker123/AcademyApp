@@ -1,7 +1,6 @@
 ﻿using AcademyApp.Business;
 using AcademyApp.Business.Implementation;
 using AcademyApp.Business.Interfaces;
-using AcademyApp.Business.ViewModel;
 using AcademyApp.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Data.SqlClient;
 
 namespace AcademyApp.Api
 {
@@ -25,13 +23,20 @@ namespace AcademyApp.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddDbContext<Context>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("AcademyAppDB")));
 
 
-                services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 
             services.AddTransient<IStudentService, StudentService>();
             services.AddTransient<IAcademyProgramService, AcademyProgramService>();
@@ -57,6 +62,7 @@ namespace AcademyApp.Api
             {
                 app.UseHsts();
             }
+            app.UseCors("MyPolicy");
 
             app.UseHttpsRedirection();
             app.UseMvc();

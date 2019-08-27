@@ -9,7 +9,7 @@ namespace AcademyApp.Business.Interfaces
     {
         void Create(GroupViewModel model);
         void Update(GroupViewModel model);
-        IEnumerable<AttendanceViewModel> GetAll();
+        IEnumerable<GroupViewModel> GetAll();
         GroupViewModel FindById(int apId);
     }
 }

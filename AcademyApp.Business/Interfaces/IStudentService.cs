@@ -9,7 +9,7 @@ namespace AcademyApp.Business
     {
         void CreateStudent(StudentViewModel model);
         void Update(StudentViewModel model);
-        IEnumerable<AttendanceViewModel> GetAll();
+        IEnumerable<StudentViewModel> GetAll();
         StudentViewModel FindById(int apId);
 
     }

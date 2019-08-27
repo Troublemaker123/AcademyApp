@@ -20,7 +20,7 @@ namespace AcademyApp.Business.Implementation
         }
         public void Create(UserViewModel model)
         {
-            var domain = model.ToDomain();
+            var domain = new User();
             _apRepository.Create(domain);
         }
 

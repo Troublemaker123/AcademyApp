@@ -26,7 +26,7 @@ namespace AcademyApp.Business.ViewModel
         public string DateOfBirth { get; set; }
 
         public DateTime DateOfEnrollment { get; set; }
-        public ICollection<Attendance> Attendance { get; set; }
+        //public ICollection<Attendance> Attendance { get; set; }
 
         public enum Gender
         {

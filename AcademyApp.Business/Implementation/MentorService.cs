@@ -36,9 +36,9 @@ namespace AcademyApp.Business.Implementation
             ).ToList();
         }
 
-        public MentorViewModel FindById(int apId)
+        public MentorViewModel FindById(int mentorId)
         {
-            
+            throw new NotImplementedException();
         }
 
         public void Update(MentorViewModel model)
@@ -49,6 +49,5 @@ namespace AcademyApp.Business.Implementation
 
             _apRepository.Update(program);
         }
-
     }
 }

@@ -7,8 +7,6 @@ using AcademyApp.Data.Model;
 using System.Collections.Generic;
 using AcademyApp.Business.ViewModel;
 using AcademyApp.Business.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using System.Collections;
 using System.Linq;
 
 namespace AcademyApp.Business
@@ -31,30 +29,9 @@ namespace AcademyApp.Business
             _apRepository.Create(domain);
         }
 
-      public IEnumerable<AcademyProgramViewModel> GetAll()
+        public IEnumerable<AcademyProgramViewModel> GetAll()
         {
-            return _apRepository.GetAll().Select(model => new AcademyProgramViewModel()
-            {
-                ID = model.ID,
-                CreatedBy = model.CreatedBy,
-                CreatedOn = model.CreatedOn,
-                StartDate = model.StartDate,
-                EndDate = model.EndDate,
-                IsCurrent = model.IsCurrent
-            }
-            ).ToList();
-        }
-          
-
-          public void SetActivity(bool active)
-        {
-            var program = _apRepository.FindById(new AcademyProgram());
-            if (program == null)
-                throw new Exception();
-
-            program.IsCurrent = active;
-
-            _apRepository.SetActivity(active);
+            return _apRepository.GetAll().Select(model => model.ToModel()).ToList();
         }
 
         public void Update(AcademyProgramViewModel model)
@@ -70,18 +47,24 @@ namespace AcademyApp.Business
             _apRepository.Update(program);
         }
 
-        public AcademyProgramViewModel FindById(string apId)
+        public AcademyProgramViewModel FindById(int apId)
         {
-            // List<AcademyProgramViewModel> ap = new List<AcademyProgramViewModel>();
-            //  ap = (from ID in AcademyProgramViewModel select  ).FindById(apId);
-            //  return ap;
+            var program = _apRepository.FindById(apId);
+            if (program == null)
+                throw new Exception("Object not found");
 
+            return program.ToModel();
+        }
 
-            return _apRepository.FindById(apId).Select(model => new AcademyProgramViewModel()
-            {
-                apId = model.apId
-            } 
-            ).ToList();
+        public void SetActive(int apId, bool active)
+        {
+            var program = _apRepository.FindById(apId);
+            if (program == null)
+                throw new Exception();
+
+            program.IsCurrent = active;
+
+            _apRepository.SetActivity(active);
         }
     }
 

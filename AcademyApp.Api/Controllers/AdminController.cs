@@ -2,8 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using AcademyApp.Business.ViewModel;
 using AcademyApp.Business.Interfaces;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Collections.Generic;
 
 namespace AcademyApp.Api.Controllers
 {
@@ -17,47 +16,45 @@ namespace AcademyApp.Api.Controllers
         {
             _apService = apService;
         }
-        [HttpGet]
-        public ActionResult Create()
-        {
-            return Create();
-        }
-       
-        public void List<AcademyProgramViewModel>()
-        {
-            _apService.GetAll();
-        }
-        [HttpPost]
-        public void Update(AcademyProgramViewModel model)
-        {
-            _apService.Update(model);
-        }
-        [HttpPost]
-        public void FindById(AcademyProgramViewModel model)
-        {
-            if(model == null)
-            {
-                throw new ApplicationException("Object is null");
-            }
-            _apService.FindById(apId);
-        }
-        // POST api/admin/ap
+
         [Route("ap")]
         [HttpPost]
-        public void Create(AcademyProgramViewModel model)
+        public ActionResult Create(AcademyProgramViewModel model)
         {
             if (model == null)
                 throw new ApplicationException("Object is null");
 
             _apService.Create(model);
+            return Ok();
         }
-        [HttpGet]
-        public IActionResult Create(int id = 0)
+
+        [Route("ap")]
+        [HttpPut]
+        public ActionResult Update(AcademyProgramViewModel model)
         {
-            if (id == 0)
-                return Create(new model());
-            else
-                return Create(_apService.FindById(apId));
+            if (model == null)
+                throw new ApplicationException("Object is null");
+
+            _apService.Update(model);
+            return Ok();
         }
+
+        [Route("ap/{apId}")]
+        [HttpGet]
+        public ActionResult<AcademyProgramViewModel> FindById(int apId)
+        {
+            var program = _apService.FindById(apId);
+            return Ok(program);
+        }
+
+        // POST api/admin/ap
+        [Route("ap")]
+        [HttpGet]
+        public ActionResult<List<AcademyProgramViewModel>> GetAll()
+        {
+            var programs = _apService.GetAll();
+            return Ok(programs);
+        }
+
     }
 }

@@ -8,7 +8,7 @@ namespace AcademyApp.Business.Interfaces
         void Create(GradeViewModel model);
         void Update(GradeViewModel model);
         GradeViewModel FindById(int apId);
-        IEnumerable<AttendanceViewModel> GetAll();
+        IEnumerable<GradeViewModel> GetAll();
     }
    
 }

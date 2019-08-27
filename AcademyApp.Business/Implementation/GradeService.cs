@@ -23,7 +23,7 @@ namespace AcademyApp.Business.Implementation
             _gRepository.Create(domain);
         }
 
-        public IEnumerable<GradeViewModel> FindAll()
+        public IEnumerable<GradeViewModel> GetAll()
         {
            return _gRepository.GetAll().Select(model => new GradeViewModel(){
                 ID = model.ID,

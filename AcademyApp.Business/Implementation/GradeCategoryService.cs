@@ -30,13 +30,10 @@ namespace AcademyApp.Business.Implementation
             throw new NotImplementedException();
         }
 
-        public IEnumerable<AttendanceViewModel> GetAll()
+        public IEnumerable<GradeCategoryViewModel> GetAll()
         {
-           
-            return _grRepository.GetAll().Select(model => new AttendanceViewModel()
-            {
-                ID = model.ID
-            }).ToList();
+
+            throw new NotImplementedException();
         }
 
         public void Update(GradeCategoryViewModel model)

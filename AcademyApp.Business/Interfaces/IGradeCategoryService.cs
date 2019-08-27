@@ -11,7 +11,7 @@ namespace AcademyApp.Business.Interfaces
             void Create(GradeCategoryViewModel model);
             void Update(GradeCategoryViewModel model);
             GradeCategoryViewModel FindById(int apId);
-            IEnumerable<AttendanceViewModel> GetAll();
+            IEnumerable<GradeCategoryViewModel> GetAll();
 
     }
 }

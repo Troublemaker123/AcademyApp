@@ -19,16 +19,12 @@ namespace AcademyApp.Business.Implementation
         }
         public void Create(AttendanceViewModel model)
         {
-            var domain = model.ToDomain();
-            _aRepository.Create(domain);
+            throw new NotImplementedException();
         }
 
-        public IEnumerable<AttendanceViewModel> FindAll()
+        public IEnumerable<AttendanceViewModel> GetAll()
         {
-            return _aRepository.GetAll().Select(model => new AttendanceViewModel()
-            {
-                ID = model.ID,
-            }).ToList();
+            throw new NotImplementedException();
         }
 
         public AttendanceViewModel FindById(int apId)
@@ -38,11 +34,7 @@ namespace AcademyApp.Business.Implementation
 
         public void Update(AttendanceViewModel model)
         {
-            var program = _aRepository.FindById(new Attendance());
-
-            if (program == null)
-                throw new Exception();
-            _aRepository.Update(program);
+            throw new NotImplementedException();
         }
     }
 }

@@ -14,9 +14,9 @@ namespace AcademyApp.Business.Implementation
 
     public class RoleService : IRoleService
     {
-        private readonly IRepository<RoleService> _apRepository;
+        private readonly IRepository<Role> _apRepository;
 
-        public RoleService(IRepository<RoleService> apRepository)
+        public RoleService(IRepository<Role> apRepository)
         {
             _apRepository = apRepository;
         }
@@ -28,7 +28,7 @@ namespace AcademyApp.Business.Implementation
 
         public IEnumerable<RoleViewModel> GetAll()
         {
-            return _apRepository.GetAll().Select(model => new ProgramViewModel()
+            return _apRepository.GetAll().Select(model => new RoleViewModel()
             {
                 ID = model.ID,
 

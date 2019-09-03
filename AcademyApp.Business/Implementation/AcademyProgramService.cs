@@ -36,7 +36,7 @@ namespace AcademyApp.Business
 
         public void Update(AcademyProgramViewModel model)
         {
-            var program = _apRepository.FindById(new AcademyProgram());
+            var program = _apRepository.FindById(model.ID);
             if (program == null)
                 throw new Exception();
 

@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>{{title}}</h1>
+
+<div mat-dialog-content>
+
+  <mat-form-field>
+    <input matInput [matDatepicker]="startDate" placeholder="Choose start date" [(ngModel)]="program.startDate">
+    <mat-datepicker-toggle matSuffix [for]="startDate">
+      <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+    </mat-datepicker-toggle>
+    <mat-datepicker #startDate></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput [matDatepicker]="endDate" placeholder="Choose end date" [(ngModel)]="program.endDate">
+    <mat-datepicker-toggle matSuffix [for]="endDate">
+      <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+    </mat-datepicker-toggle>
+    <mat-datepicker #endDate></mat-datepicker>
+  </mat-form-field>
+
+  <mat-checkbox [(ngModel)]="program.isCurrent" [checked]="program.isCurrent">Is Current</mat-checkbox>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button cdkFocusInitial color="primary" (click)="onSubmit()">Submit</button>
+</div>

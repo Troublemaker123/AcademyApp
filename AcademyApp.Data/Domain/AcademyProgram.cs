@@ -9,7 +9,8 @@ namespace AcademyApp.Data.Model
     [Table("AcademyProgram")]
     public class AcademyProgram
     {
-        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key, Column(Order = 0)]
         public int ID { get; set; }
 
         public DateTime StartDate { get; set; }

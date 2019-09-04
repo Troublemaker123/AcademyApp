@@ -1,20 +1,14 @@
-<h2 >Academy Year List</h2>
-<p style="color: grey; font-size: 13px;">List of all Academy Years</p>
 
-<button mat-raised-button color="primary" (click)="openDialog(null)"style="margin-left: 1400px"><i class="material-icons">
-  add
-  </i>Add</button>
-
- <div class="container">
+<!-- <div class="container">
   <table style="width: 100%">
     <thead>
-        <tr>
-          <th>Created By</th>
-          <th>Start Date</th>
-          <th>End Date</th>
-          <th>Active</th>
-          <th>Actions</th>
-        </tr>
+      <tr>
+        <th>Created By</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Active</th>
+        <th>Actions</th>
+      </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of programs">
@@ -23,19 +17,72 @@
         <td>{{item.endDate}}</td>
         <td>{{item.isCurrent}}</td>
         <td>
-          <button mat-raised-button color="primary" (click)="openDialog(item)"><i class="material-icons">
-            edit
-            </i>Edit</button>
-          <button mat-raised-button color="warn" (click)="openWarningDialog(item)" ><i class="material-icons">
-            clear
-            </i>Delete</button>
+          <button mat-raised-button color="primary" (click)="openDialog(item)" title="Edit"><i class="material-icons">
+              edit
+            </i></button>
+          <button mat-raised-button color="warn" (click)="openWarningDialog(item)" title="Delete"><i
+              class="material-icons">
+              clear
+            </i></button>
         </td>
       </tr>
     </tbody>
-  </table>
+  </table> 
+</div> -->
+<div class="container" style="max-width: 95%; margin: auto;" >
+    <div class="container" >
+        <h2>Academy Year List</h2>  
+        <p style="color: grey; font-size: 13px;">List of all Academy Years</p>
+        </div>
+        
+    <button mat-raised-button color="primary" title="Add" (click)="openDialog(null)" style="margin-left: 94%"><i
+        class="material-icons">
+        add
+      </i>Add</button>
+ 
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" title="Search">
+  </mat-form-field>
 
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="programs"  style="width: 100%" matSort>
 
-  <mat-divider></mat-divider>
+      <ng-container matColumnDef="created_by">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Created By </th>
+        <td mat-cell *matCellDef="let item"> {{item.created_by}} </td>
+      </ng-container>
 
+      <ng-container matColumnDef="startDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Date </th>
+        <td mat-cell *matCellDef="let item"> {{item.startDate | date}} </td>
+      </ng-container>
 
-</div> 
+      <ng-container matColumnDef="endDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> End Date </th>
+        <td mat-cell *matCellDef="let item"> {{item.endDate}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="isCurrent">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Is Active </th>
+        <td mat-cell *matCellDef="let item"> {{item.isCurrent}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let item">  <button mat-raised-button color="primary" (click)="openDialog(item)" title="Edit"><i class="material-icons">
+              edit
+            </i></button>
+          <button mat-raised-button color="warn" (click)="openWarningDialog()" title="Delete"><i
+              class="material-icons">
+              clear
+            </i></button> </td>
+        </ng-container>
+      
+
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnsToDisplay">
+      </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+</div>

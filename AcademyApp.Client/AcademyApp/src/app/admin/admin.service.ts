@@ -7,7 +7,6 @@ import { AcademyProgram } from '../shared/models/academyProgram';
 
 @Injectable()
 export class AdminService {
-
    
     public baseApiUrl: string = environment.apiUrl;
 
@@ -21,8 +20,8 @@ export class AdminService {
         return this.http.post<AcademyProgram>(this.baseApiUrl + 'admin/ap', academyProgram);
 
     }
-    public delete(apId: number): Observable<any> {
-        return this.http.delete(`${this.baseApiUrl}/admin/ap/${apId}`, { responseType: 'text' });
+    public delete(apId: number): Observable<object> {
+        return this.http.delete(`${this.baseApiUrl}admin/ap/${apId}`);
     }
     public update(value: any): Observable<object> {
         return this.http.put(`${this.baseApiUrl}/admin/ap`, value);

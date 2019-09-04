@@ -24,7 +24,7 @@ namespace AcademyApp.Business
         {
             var domain = model.ToDomain();
             domain.CreatedOn = DateTime.Now;
-            domain.CreatedBy = "Admistrator";
+            domain.CreatedBy = "Administrator";
 
             _apRepository.Create(domain);
         }
@@ -65,6 +65,15 @@ namespace AcademyApp.Business
             program.IsCurrent = active;
 
             _apRepository.SetActivity(active);
+        }
+
+        public void Delete(AcademyProgramViewModel model)
+        {
+            var program = _apRepository.FindById(model);
+            if (program == null)
+                throw new Exception("Object not found");
+
+             program.ToModel();
         }
     }
 

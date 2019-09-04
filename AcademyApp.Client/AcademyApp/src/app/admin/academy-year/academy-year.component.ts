@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatDialog } from '@angular/material';
+import { MatPaginator, MatDialog, MatTableDataSource } from '@angular/material';
 import { AdminService } from '../admin.service';
 import { AcademyProgram } from '../../shared/models/academyProgram';
 import { FormGroup, FormControl, NgForm } from '@angular/forms';
 import { AcademyYearDialogComponent } from './academy-year-dialog.component';
+import { AcademyYearWarnDialogComponent } from './academy-year-warn-dialog-component';
 
 @Component({
   selector: 'academy-year',
@@ -11,6 +12,7 @@ import { AcademyYearDialogComponent } from './academy-year-dialog.component';
 })
 export class AcademyYearComponent implements OnInit {
   public programs: AcademyProgram[] = [];
+  columnsToDisplay = ['startDate', 'endDate', 'isCurrent','Actions'];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   constructor(
@@ -25,7 +27,8 @@ export class AcademyYearComponent implements OnInit {
 
   public openDialog(program: AcademyProgram): void {
     const dialogRef = this.dialog.open(AcademyYearDialogComponent, {
-      width: '600px',
+      width: '500px',
+      disableClose: true,
       data: { program: program }
     });
 
@@ -37,8 +40,11 @@ export class AcademyYearComponent implements OnInit {
   }
 
   public openWarningDialog(program: AcademyProgram): void {
-    const dialogRef = this.dialog.open(AcademyYearDialogComponent, { // new Warning Dialog
-      width: '300px'
+    
+    const dialogRef = this.dialog.open(AcademyYearWarnDialogComponent, {
+       // new Warning Dialog
+      width: '300px',
+      disableClose: true,
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -60,6 +66,7 @@ export class AcademyYearComponent implements OnInit {
       .subscribe(result => {
         this.programs = result;
       });
+      
   }
 
 };

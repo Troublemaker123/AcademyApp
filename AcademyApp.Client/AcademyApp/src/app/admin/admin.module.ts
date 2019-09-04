@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 // modules
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminRoutingModule } from './admin-routing.module';
+import { SharedModule } from '../shared/shared.module';
 
 // services
 import { AdminService } from './admin.service';
@@ -14,7 +15,7 @@ import { AdminComponent } from './admin.component';
 import { AcademyYearComponent } from './academy-year/academy-year.component';
 import { AcademyYearDialogComponent } from './academy-year/academy-year-dialog.component';
 import { StudentsComponent } from './students/students.component';
-import { SharedModule } from '../shared/shared.module';
+import { AcademyYearWarnDialogComponent } from './academy-year/academy-year-warn-dialog-component';
 
 @NgModule({
   declarations: [
@@ -22,9 +23,13 @@ import { SharedModule } from '../shared/shared.module';
     AcademyYearComponent,
     StudentsComponent,
     AcademyYearDialogComponent,
+    AcademyYearWarnDialogComponent
+
   ],
   entryComponents:[
-    AcademyYearDialogComponent
+    AcademyYearDialogComponent,
+    AcademyYearWarnDialogComponent
+
   ],
   imports: [
     CommonModule,

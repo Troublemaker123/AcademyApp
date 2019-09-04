@@ -27,6 +27,17 @@ namespace AcademyApp.Api.Controllers
             _apService.Create(model);
             return Ok();
         }
+        [Route("ap/{apId}")]
+        [HttpPost]
+        public ActionResult Delete(AcademyProgramViewModel model)
+        {
+            if (model == null)
+                throw new ApplicationException("Object is null");
+
+            _apService.Delete(model);
+            return Ok();
+        }
+
 
         [Route("ap")]
         [HttpPut]

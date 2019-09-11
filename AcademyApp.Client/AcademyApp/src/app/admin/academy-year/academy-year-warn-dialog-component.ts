@@ -10,11 +10,7 @@ import { AdminService } from '../admin.service';
 })
 export class AcademyYearWarnDialogComponent implements OnInit {
 
-
   public program: AcademyProgram = new AcademyProgram();
-
-  public title: string;
-
 
   constructor(
     private adminService: AdminService,
@@ -22,15 +18,16 @@ export class AcademyYearWarnDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
-
   public ngOnInit() {
+    this.program = this.data.program;
   }
 
-public onDelete(id: number){
-     this.adminService.delete(id).subscribe(result => {
-         this.dialogRef.close('ok');
- });
-}
+  public onDelete() {
+    debugger;
+    this.adminService.delete(this.program.id).subscribe(result => {
+      this.dialogRef.close('ok');
+    });
+  }
   public onCancel(form: NgForm) {
     this.dialogRef.close('cancel');
   }

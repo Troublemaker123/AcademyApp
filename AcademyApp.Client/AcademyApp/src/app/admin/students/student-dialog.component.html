@@ -1,0 +1,46 @@
+<div>
+  <div class="container">
+    <mat-icon id="close-icon" (click)=onCancel()>close</mat-icon>
+    <h1 mat-dialog-title>{{title}}</h1>
+
+    <div mat-dialog-content>
+
+      <mat-form-field>
+        <input matInput placeholder="Name" [(ngModel)]="student.name">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Last Name" [(ngModel)]="student.lastName">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Place Of Birth" [(ngModel)]="student.placeOfBirth">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Gender" [(ngModel)]="student.gender">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Mobile" [(ngModel)]="student.mobile">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Country" [(ngModel)]="student.country">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Email Adress" [(ngModel)]="student.emailAdress">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [matDatepicker]="graduationYear" placeholder="graduationYear"
+          [(ngModel)]="student.graduationYear">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [matDatepicker]="dateOfBirth" placeholder="dateOfBirth" [(ngModel)]="student.dateOfBirth">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [matDatepicker]="dateOfEnrollment" placeholder="Date Of Enrollment"
+          [(ngModel)]="student.dateOfEnrollment">
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button (click)="onCancel()">Cancel</button>
+      <button mat-button cdkFocusInitial color="primary" (click)="onSubmit()">OK</button>
+    </div>
+  </div>
+</div>

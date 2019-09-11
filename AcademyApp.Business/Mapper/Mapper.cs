@@ -40,6 +40,7 @@ namespace AcademyApp.Business.Mapper
                 ID = model.ID,
                 Name = model.Name,
                 LastName = model.LastName,
+                Address = model.Address,
                 PlaceOfBirth = model.PlaceOfBirth,
                 Country = model.Country,
                 Mobile = model.Mobile,
@@ -57,6 +58,7 @@ namespace AcademyApp.Business.Mapper
                 Name = model.Name,
                 LastName = model.LastName,
                 PlaceOfBirth = model.PlaceOfBirth,
+                Address = model.Address,
                 Country = model.Country,
                 Mobile = model.Mobile,
                 EmailAdress = model.EmailAdress,
@@ -78,7 +80,7 @@ namespace AcademyApp.Business.Mapper
                 YearsOfService = model.YearsOfService,
                 Specialty = model.Specialty,
                 Telephone = model.Telephone,
-                Grades = model.Grades,
+               // Grades = model.Grades,
                 
             };
         }
@@ -93,7 +95,7 @@ namespace AcademyApp.Business.Mapper
                 YearsOfService = model.YearsOfService,
                 Specialty = model.Specialty,
                 Telephone = model.Telephone,
-                Grades = model.Grades,
+                //Grades = model.Grades,
 
             };
            

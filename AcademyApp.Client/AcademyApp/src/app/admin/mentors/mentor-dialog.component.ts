@@ -2,47 +2,47 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { NgForm, FormGroup, FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
-import { AcademyProgram } from 'src/app/shared/models/academyProgram';
-import { AdminService } from '../admin.service';
+import { Mentor } from 'src/app/shared/models/mentors';
+import { MentorService } from '../mentor.service';
 
 @Component({
-  templateUrl: 'academy-year-dialog.component.html'
+  templateUrl: 'mentor-dialog.component.html'
 })
-export class AcademyYearDialogComponent implements OnInit {
+export class MentorDialogComponent implements OnInit {
 
-  public program: AcademyProgram = new AcademyProgram();
+  public mentors: Mentor = new Mentor();
   
   public title: string;
 
   private isEditMode: boolean = false;
 
   constructor(
-    private adminService: AdminService,
-    private dialogRef: MatDialogRef<AcademyYearDialogComponent>,
+    private mentorService: MentorService,
+    private dialogRef: MatDialogRef<MentorDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
 
   public ngOnInit() {
-    if (this.data.program) {
+    if (this.data.mentors) {
       // edit
       this.isEditMode = true;
-      this.title = 'Edit academy program';
-      this.program = this.data.program;
+      this.title = 'Edit mentor';
+      this.mentors = this.data.mentors;
     }
     else {
       // create
-      this.title = 'Add new academy program';
+      this.title = 'Add new mentor';
     }
   }
 
   public onSubmit() {
     if (this.isEditMode) {
-      this.adminService.update(this.program).subscribe(result => {
+      this.mentorService.update(this.mentors).subscribe(result => {
         this.dialogRef.close('ok');
       });
     } else {
-      this.adminService.create(this.program).subscribe(result => {
+      this.mentorService.create(this.mentors).subscribe(result => {
         this.dialogRef.close('ok');
       });
     }

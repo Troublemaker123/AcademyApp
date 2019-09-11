@@ -28,7 +28,7 @@ namespace AcademyApp.Api.Controllers
             return Ok();
         }
         [Route("ap/{apId}")]
-        [HttpPost]
+        [HttpDelete]
         public ActionResult Delete(AcademyProgramViewModel model)
         {
             if (model == null)
@@ -58,7 +58,7 @@ namespace AcademyApp.Api.Controllers
             return Ok(program);
         }
 
-        // POST api/admin/ap
+        // api/admin/ap
         [Route("ap")]
         [HttpGet]
         public ActionResult<List<AcademyProgramViewModel>> GetAll()

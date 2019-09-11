@@ -9,6 +9,7 @@ import { SharedModule } from '../shared/shared.module';
 
 // services
 import { AdminService } from './admin.service';
+import { StudentService } from './student.service';
 
 // components
 import { AdminComponent } from './admin.component';
@@ -16,6 +17,13 @@ import { AcademyYearComponent } from './academy-year/academy-year.component';
 import { AcademyYearDialogComponent } from './academy-year/academy-year-dialog.component';
 import { StudentsComponent } from './students/students.component';
 import { AcademyYearWarnDialogComponent } from './academy-year/academy-year-warn-dialog-component';
+import { StudentDialogComponent } from './students/student-dialog.component';
+import { StudentWarnDialogComponent } from './students/student-warn-dialog';
+import { MentorService } from './mentor.service';
+import { MentorDialogComponent } from './mentors/mentor-dialog.component';
+import { MentorWarnDialogComponent } from './mentors/mentor-warn-dialog';
+import { MentorComponent } from './mentors/mentor.component';
+
 
 @NgModule({
   declarations: [
@@ -23,12 +31,20 @@ import { AcademyYearWarnDialogComponent } from './academy-year/academy-year-warn
     AcademyYearComponent,
     StudentsComponent,
     AcademyYearDialogComponent,
-    AcademyYearWarnDialogComponent
-
+    AcademyYearWarnDialogComponent,
+    StudentDialogComponent,
+    StudentWarnDialogComponent,
+    MentorDialogComponent,
+    MentorWarnDialogComponent,
+    MentorComponent,
   ],
   entryComponents:[
     AcademyYearDialogComponent,
-    AcademyYearWarnDialogComponent
+    AcademyYearWarnDialogComponent,
+    StudentDialogComponent,
+    StudentWarnDialogComponent,
+    MentorDialogComponent,
+    MentorWarnDialogComponent,
 
   ],
   imports: [
@@ -39,7 +55,7 @@ import { AcademyYearWarnDialogComponent } from './academy-year/academy-year-warn
     FormsModule,
     SharedModule
   ],
-  providers: [AdminService],
+  providers: [AdminService,StudentService,MentorService],
 
 })
 export class AdminModule { }

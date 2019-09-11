@@ -1,0 +1,33 @@
+<div>
+    <div class="container">
+      <mat-icon id="close-icon" (click)=onCancel()>close</mat-icon>
+      <h1 mat-dialog-title>{{title}}</h1>
+  
+      <div mat-dialog-content>
+  
+        <mat-form-field>
+            <input matInput placeholder="Name" [(ngModel)]="mentor.Name">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Last Name" [(ngModel)]="mentor.LastName">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Years Of Service" [(ngModel)]="mentor.YearsOfService">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Telephone" [(ngModel)]="mentor.Telephone">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Specialty" [(ngModel)]="mentor.Specialty">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Email" [(ngModel)]="mentor.Email">
+          </mat-form-field>
+  
+      </div>
+      <div mat-dialog-actions>
+        <button mat-button (click)="onCancel()">Cancel</button>
+        <button mat-button cdkFocusInitial color="primary" (click)="onSubmit()">OK</button>
+      </div>
+    </div>
+  </div>

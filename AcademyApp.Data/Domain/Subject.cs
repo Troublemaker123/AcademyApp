@@ -12,6 +12,6 @@ namespace AcademyApp.Model
         public string Name { get; set; }
         public string Description{ get; set; }
         public ICollection<Grade> grades { get; set; }
-        public ICollection<Student> Students { get; set; }
+       // public ICollection<Student> Students { get; set; }
     }
 }

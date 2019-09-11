@@ -1,34 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AcademyApp.Model
+namespace AcademyApp.Data.Model
 {
     [Table("Student")]
     public class Student
     {
-        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key, Column(Order = 0)]
         public int ID { get; set; }
-        [Required, MaxLength(50),RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$")]
+
         public string Name { get; set; }
-        [Required, MaxLength(50)]
+    
         public string LastName { get; set; }
-        [Required, MaxLength(50)]
+        public string Address { get; set; }
         public string PlaceOfBirth { get; set; }
-        public Gender gender { get; set; }
-        public string Mobile { get; set; }
+       // public Gender gender { get; set; }
+        public int Mobile { get; set; }
         public string Country { get; set; }
         public string EmailAdress { get; set; }
-        public string GraduationYear { get; set; }
+        public DateTime GraduationYear { get; set; }
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public string DateOfBirth { get; set; }
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString  = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime DateOfBirth { get; set; }
+
         public DateTime DateOfEnrollment { get; set; }
-        public ICollection<Attendance> Attendances { get; set; }
+   //     public ICollection<Attendance> Attendances { get; set; }
 
         public enum Gender
         {

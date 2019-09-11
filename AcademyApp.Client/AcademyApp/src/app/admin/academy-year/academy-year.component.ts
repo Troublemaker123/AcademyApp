@@ -12,7 +12,7 @@ import { AcademyYearWarnDialogComponent } from './academy-year-warn-dialog-compo
 })
 export class AcademyYearComponent implements OnInit {
   public programs: AcademyProgram[] = [];
-  columnsToDisplay = ['startDate', 'endDate', 'isCurrent','Actions'];
+  columnsToDisplay = ['startDate', 'endDate', 'isCurrent', 'Actions'];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   constructor(
@@ -40,11 +40,12 @@ export class AcademyYearComponent implements OnInit {
   }
 
   public openWarningDialog(program: AcademyProgram): void {
-    
+    debugger;
     const dialogRef = this.dialog.open(AcademyYearWarnDialogComponent, {
-       // new Warning Dialog
+      // new Warning Dialog
       width: '300px',
       disableClose: true,
+      data: { program: program }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -66,7 +67,7 @@ export class AcademyYearComponent implements OnInit {
       .subscribe(result => {
         this.programs = result;
       });
-      
+
   }
 
 };

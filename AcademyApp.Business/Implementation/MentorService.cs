@@ -6,10 +6,11 @@ using AcademyApp.Data;
 using AcademyApp.Data.Model;
 using System.Collections.Generic;
 using AcademyApp.Business.ViewModel;
-using AcademyApp.Model;
+using AcademyApp.Business.Interfaces;
 using System.Linq;
+using AcademyApp.Model;
 
-namespace AcademyApp.Business.Implementation
+namespace AcademyApp.Business
 {
    public class MentorService : IMentorService
     {
@@ -28,26 +29,42 @@ namespace AcademyApp.Business.Implementation
 
         public IEnumerable<MentorViewModel> GetAll()
         {
-            return _apRepository.GetAll().Select(model => new MentorViewModel()
-            {
-                ID = model.ID,
-
-            }
-            ).ToList();
+            return _apRepository.GetAll().Select(model => model.ToModel()).ToList();
         }
 
-        public MentorViewModel FindById(int mentorId)
+        public MentorViewModel FindById(int apId)
         {
-            throw new NotImplementedException();
+            var program = _apRepository.FindById(apId);
+            if (program == null)
+                throw new Exception("Object not found");
+
+            return program.ToModel();
         }
 
         public void Update(MentorViewModel model)
         {
-            var program = _apRepository.FindById(new Mentor());
+            var program = _apRepository.FindById(model.ID);
             if (program == null)
                 throw new Exception();
 
+            program.Name = model.Name;
+            program.LastName = model.LastName;
+            program.Specialty = model.Specialty;
+            program.Telephone = model.Telephone;
+            program.YearsOfService = model.YearsOfService;
+            program.Email = model.Email;
+
             _apRepository.Update(program);
+        }
+
+        public void Delete(MentorViewModel model)
+        {
+            var program = _apRepository.FindById(model.ID);
+            if (program == null)
+                throw new Exception("Object not found");
+
+            program.ToModel();
+            _apRepository.Delete(program);
         }
     }
 }

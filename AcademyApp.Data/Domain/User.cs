@@ -8,9 +8,7 @@ namespace AcademyApp.Model
     {
         [Key]
         public int ID { get; set; }
-        [Required,MaxLength(50)]
         public string Name { get; set; }
-        [Required, MaxLength(50)]
         public string Password { get; set; }
 
     }

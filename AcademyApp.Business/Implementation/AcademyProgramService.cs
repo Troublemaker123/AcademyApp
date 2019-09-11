@@ -69,11 +69,12 @@ namespace AcademyApp.Business
 
         public void Delete(AcademyProgramViewModel model)
         {
-            var program = _apRepository.FindById(model);
+            var program = _apRepository.FindById(model.ID);
             if (program == null)
                 throw new Exception("Object not found");
 
              program.ToModel();
+            _apRepository.Delete(program);
         }
     }
 

@@ -20,7 +20,7 @@ a {
 
 a:hover,
 a:active {
-  color: lightgray;
+  color: rgb(242, 255, 0);
 }
 
 .navigation-items {

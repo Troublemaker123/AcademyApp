@@ -19,7 +19,7 @@ namespace AcademyApp.Business.Implementation
         {
             _apRepository = apRepository;
         }
-        public void CreateStudent(SubjectViewModel model)
+        public void Create(SubjectViewModel model)
         {
             var domain = model.ToDomain();
             _apRepository.Create(domain);
@@ -27,27 +27,38 @@ namespace AcademyApp.Business.Implementation
 
         public IEnumerable<SubjectViewModel> GetAll()
         {
-            return _apRepository.GetAll().Select(model => new SubjectViewModel()
-            {
-                ID = model.ID,
-                Name = model.Name,
-                Description = model.Description,
-            }
-            ).ToList();
+            return _apRepository.GetAll().Select(model => model.ToModel()).ToList();
         }
 
         public SubjectViewModel FindById(int apId)
         {
-            throw new NotImplementedException();
+            var program = _apRepository.FindById(apId);
+            if (program == null)
+                throw new Exception("Object not found");
+
+            return program.ToModel();
         }
 
         public void Update(SubjectViewModel model)
         {
-            var program = _apRepository.FindById(new Subject());
+            var program = _apRepository.FindById(model.ID);
             if (program == null)
                 throw new Exception();
 
+            program.Name = model.Name;
+            program.Description = model.Description;    
+
             _apRepository.Update(program);
+        }
+
+        public void Delete(SubjectViewModel model)
+        {
+            var program = _apRepository.FindById(model.ID);
+            if (program == null)
+                throw new Exception("Object not found");
+
+            program.ToModel();
+            _apRepository.Delete(program);
         }
     }
 }

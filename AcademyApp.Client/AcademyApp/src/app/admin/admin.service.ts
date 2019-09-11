@@ -18,10 +18,9 @@ export class AdminService {
     }
     public create(academyProgram : AcademyProgram): Observable<AcademyProgram> {
         return this.http.post<AcademyProgram>(this.baseApiUrl + 'admin/ap', academyProgram);
-
     }
-    public delete(apId: number): Observable<object> {
-        return this.http.delete(`${this.baseApiUrl}admin/ap/${apId}`);
+    public delete(apId: number): Observable<any> {
+        return this.http.delete<AcademyProgram>(`${this.baseApiUrl}admin/ap/${apId}`);
     }
     public update(value: any): Observable<object> {
         return this.http.put(`${this.baseApiUrl}/admin/ap`, value);

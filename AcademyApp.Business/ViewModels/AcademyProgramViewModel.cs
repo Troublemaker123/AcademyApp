@@ -1,13 +1,11 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-
 
 namespace AcademyApp.Business.ViewModel
 {
     public class AcademyProgramViewModel
     {
  
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         public string CreatedBy { get; set; }
 
@@ -16,6 +14,7 @@ namespace AcademyApp.Business.ViewModel
         public DateTime EndDate { get; set; }
 
         public bool IsCurrent { get; set; }
+
         public DateTime CreatedOn { get; set; }
     }
 }

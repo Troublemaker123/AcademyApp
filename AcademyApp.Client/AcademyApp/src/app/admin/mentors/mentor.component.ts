@@ -55,8 +55,8 @@ export class MentorComponent implements OnInit {
     });
   }
 
-  private deleteMentor(programId: number) {
-    this.mentorService.delete(programId)
+  private deleteMentor(mentorId: number) {
+    this.mentorService.delete(mentorId)
       .subscribe(result => {
         this.GetAllMentors();
       });

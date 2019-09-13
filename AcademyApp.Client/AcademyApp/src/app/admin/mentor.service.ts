@@ -15,8 +15,8 @@ export class MentorService{
     public GetAllMentors(): Observable<Mentor[]> {
         return this.http.get<Mentor[]>(this.baseApiUrl + "mentor/me");
     }
-    public create(mentor : Mentor): Observable<Mentor> {
-        return this.http.post<Mentor>(this.baseApiUrl + 'mentor/me', mentor);
+    public create(mentors : Mentor): Observable<Mentor> {
+        return this.http.post<Mentor>(this.baseApiUrl + 'mentor/me', mentors);
     }
     public delete(apId: number): Observable<any> {
         return this.http.delete<Mentor>(`${this.baseApiUrl}mentor/me/${apId}`);

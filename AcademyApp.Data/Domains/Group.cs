@@ -9,8 +9,9 @@ namespace AcademyApp.Model
     {
         [Key]
         public int ID { get; set; }
+        public string Title { get; set; }
        // public ICollection<Student> Students { get; set; }
       //  public ICollection<Mentor> Mentors { get; set; }
-        public ICollection<Staff> Staffs { get; set; }
+       // public ICollection<Staff> Staffs { get; set; }
     }
 }

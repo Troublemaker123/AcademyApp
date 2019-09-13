@@ -7,11 +7,11 @@ namespace AcademyApp.Business.Interfaces
 {
     public interface IAcademyProgramService
     {
-        void Create(AcademyProgramViewModel model);
-        void Delete(AcademyProgramViewModel model);
-        void Update(AcademyProgramViewModel model);
+        void Create(AcademyProgramViewModel academyProgram);
+        void Delete(AcademyProgramViewModel academyProgram);
+        void Update(AcademyProgramViewModel academyProgram);
         IEnumerable<AcademyProgramViewModel> GetAll();
-        AcademyProgramViewModel FindById(int apId);
-        void SetActive(int apId, bool active);
+        AcademyProgramViewModel FindById(int academyProgramId);
+        void SetActive(int academyProgramId, bool active);
     }
 }

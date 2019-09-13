@@ -11,7 +11,7 @@ namespace AcademyApp.Data.Model
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key, Column(Order = 0)]
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         public DateTime StartDate { get; set; }
 

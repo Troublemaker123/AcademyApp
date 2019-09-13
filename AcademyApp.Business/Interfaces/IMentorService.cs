@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 
 
-namespace AcademyApp.Business
+namespace AcademyApp.Business.Interfaces
 {
     public interface IMentorService
     {

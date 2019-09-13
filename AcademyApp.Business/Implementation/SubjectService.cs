@@ -1,10 +1,12 @@
-﻿using AcademyApp.Business.Interfaces;
+﻿using System;
+
+
 using AcademyApp.Business.Mapper;
-using AcademyApp.Business.ViewModel;
 using AcademyApp.Data;
-using AcademyApp.Model;
-using System;
+using AcademyApp.Data.Model;
 using System.Collections.Generic;
+using AcademyApp.Business.ViewModel;
+using AcademyApp.Business.Interfaces;
 using System.Linq;
 
 namespace AcademyApp.Business.Implementation

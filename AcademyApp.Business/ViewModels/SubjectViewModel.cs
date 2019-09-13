@@ -1,7 +1,7 @@
 ﻿using AcademyApp.Data.Model;
 using AcademyApp.Model;
 using System.Collections.Generic;
-
+using System;
 
 namespace AcademyApp.Business.ViewModel
 {

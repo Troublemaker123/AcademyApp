@@ -5,6 +5,7 @@ import { AcademyYearComponent } from './academy-year/academy-year.component'
 import { AdminComponent } from './admin.component';
 import { StudentsComponent } from './students/students.component';
 import { MentorComponent } from './mentors/mentor.component';
+import { SubjectsComponent } from '../subjects/subject.component';
 
 const routes: Routes = [
   {
@@ -19,10 +20,10 @@ const routes: Routes = [
       },
       {
         path: 'mentors', component: MentorComponent
+      },
+      {
+        path: 'subjects', component: SubjectsComponent
       }
-      // {
-      //   path: 'subjects', component: SubjectsComponent
-      // }
     ]
   }
 ];

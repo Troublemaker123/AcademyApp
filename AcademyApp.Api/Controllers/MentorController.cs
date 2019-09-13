@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AcademyApp.Business;
+using AcademyApp.Business.Interfaces;
 using AcademyApp.Business.ViewModel;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AcademyApp.Api.Controllers
@@ -20,7 +17,7 @@ namespace AcademyApp.Api.Controllers
             _mentorService = mentorService;
         }
 
-        [Route("me")]
+        [Route("create")]
         [HttpPost]
         public ActionResult Create(MentorViewModel model)
         {
@@ -30,7 +27,7 @@ namespace AcademyApp.Api.Controllers
             _mentorService.Create(model);
             return Ok();
         }
-        [Route("me/{apId}")]
+        [Route("delete/{apId}")]
         [HttpDelete]
         public ActionResult Delete(MentorViewModel model)
         {
@@ -42,7 +39,7 @@ namespace AcademyApp.Api.Controllers
         }
 
 
-        [Route("me")]
+        [Route("update")]
         [HttpPut]
         public ActionResult Update(MentorViewModel model)
         {
@@ -53,7 +50,7 @@ namespace AcademyApp.Api.Controllers
             return Ok();
         }
 
-        [Route("me/{apId}")]
+        [Route("find-by-id/{apId}")]
         [HttpGet]
         public ActionResult<MentorViewModel> FindById(int apId)
         {
@@ -61,8 +58,8 @@ namespace AcademyApp.Api.Controllers
             return Ok(program);
         }
 
-        //  api/mentor/me
-        [Route("me")]
+        //  api/mentor/get-all
+        [Route("get-all")]
         [HttpGet]
         public ActionResult<List<MentorViewModel>> GetAll()
         {

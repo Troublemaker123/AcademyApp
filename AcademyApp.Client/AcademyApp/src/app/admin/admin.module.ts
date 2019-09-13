@@ -21,8 +21,14 @@ import { StudentDialogComponent } from './students/student-dialog.component';
 import { StudentWarnDialogComponent } from './students/student-warn-dialog';
 import { MentorService } from './mentor.service';
 import { MentorDialogComponent } from './mentors/mentor-dialog.component';
-import { MentorWarnDialogComponent } from './mentors/mentor-warn-dialog';
+
 import { MentorComponent } from './mentors/mentor.component';
+import { SubjectService } from './subject.service';
+import { SubjectDialogComponent } from '../subjects/subject-dialog.component';
+import { SubjectWarnDialogComponent } from '../subjects/subject-warn-dialog.component';
+import { SubjectsComponent } from '../subjects/subject.component';
+import { MentorWarnDialogComponent } from './mentors/mentor-warn-dialog';
+
 
 
 @NgModule({
@@ -37,6 +43,9 @@ import { MentorComponent } from './mentors/mentor.component';
     MentorDialogComponent,
     MentorWarnDialogComponent,
     MentorComponent,
+    SubjectDialogComponent,
+    SubjectWarnDialogComponent,
+    SubjectsComponent
   ],
   entryComponents:[
     AcademyYearDialogComponent,
@@ -45,6 +54,8 @@ import { MentorComponent } from './mentors/mentor.component';
     StudentWarnDialogComponent,
     MentorDialogComponent,
     MentorWarnDialogComponent,
+    SubjectDialogComponent,
+    SubjectWarnDialogComponent,
 
   ],
   imports: [
@@ -55,7 +66,12 @@ import { MentorComponent } from './mentors/mentor.component';
     FormsModule,
     SharedModule
   ],
-  providers: [AdminService,StudentService,MentorService],
+  providers: [
+    AdminService,
+    StudentService,
+    MentorService,
+    SubjectService,
+  ],
 
 })
 export class AdminModule { }

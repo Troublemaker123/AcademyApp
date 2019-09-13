@@ -11,22 +11,22 @@ export class AdminService {
     public baseApiUrl: string = environment.apiUrl;
 
     constructor(private http: HttpClient) { }
-   
+
 
     public GetAllAcademyPrograms(): Observable<AcademyProgram[]> {
-        return this.http.get<AcademyProgram[]>(this.baseApiUrl + "admin/ap");
+        return this.http.get<AcademyProgram[]>(this.baseApiUrl + "academyprogram/get-all");
     }
     public create(academyProgram : AcademyProgram): Observable<AcademyProgram> {
-        return this.http.post<AcademyProgram>(this.baseApiUrl + 'admin/ap', academyProgram);
+        return this.http.post<AcademyProgram>(this.baseApiUrl + 'academyprogram/create', academyProgram);
     }
-    public delete(apId: number): Observable<any> {
-        return this.http.delete<AcademyProgram>(`${this.baseApiUrl}admin/ap/${apId}`);
+    public delete(academyProgramId: number): Observable<any> {
+        return this.http.delete<AcademyProgram>(`${this.baseApiUrl}academyprogram/delete/${academyProgramId}`);
     }
     public update(value: any): Observable<object> {
-        return this.http.put(`${this.baseApiUrl}/admin/ap`, value);
+        return this.http.put(`${this.baseApiUrl}/academyprogram/update`, value);
     }
-    public findById(apId:number):Observable<AcademyProgram>{
-        return this.http.get<AcademyProgram>(`${this.baseApiUrl}/admin/ap/${apId}`);   
+    public findById(academyProgramId:number):Observable<AcademyProgram>{
+        return this.http.get<AcademyProgram>(`${this.baseApiUrl}/academyprogram/find-by-id/${academyProgramId}`);   
     }
 
 }

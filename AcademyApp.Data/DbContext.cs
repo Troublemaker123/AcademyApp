@@ -12,6 +12,9 @@ namespace AcademyApp.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AcademyProgram>().ToTable("AcademyProgram");
+            modelBuilder.Entity<Student>().ToTable("Student");
+            modelBuilder.Entity<Mentor>().ToTable("Mentor");
+            modelBuilder.Entity<Subject>().ToTable("Subject");
         }
 
         public DbSet<Student> Students { get; set; }

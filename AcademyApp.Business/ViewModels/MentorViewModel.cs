@@ -16,10 +16,15 @@ namespace AcademyApp.Business.ViewModel
         public string LastName { get; set; }
   
         public string Email { get; set; }
+
      //   public Gender Gender { get; set; }
+
         public int YearsOfService { get; set; }
+
         public string Specialty { get; set; }
+
         public int Telephone { get; set; }
+
    //     public ICollection<Grade> Grades { get; set; }
     //    public ICollection<Staff> Staffs { get; set; }
     }

@@ -1,10 +1,9 @@
-<div>
-  <div class="container">
-    <mat-icon id="close-icon" (click)=onCancel()>close</mat-icon>
+
+  <div>
+    <mat-icon id="close-icon" style="float:right" (click)=onCancel()>close</mat-icon>
     <h1 mat-dialog-title>{{title}}</h1>
-
-    <div mat-dialog-content>
-
+    <hr>
+    <div mat-dialog-content style="overflow-y: hidden;">
       <mat-form-field>
         <input matInput [matDatepicker]="startDate" placeholder="Choose start date" [(ngModel)]="program.startDate">
         <mat-datepicker-toggle matSuffix [for]="startDate">
@@ -22,11 +21,10 @@
       </mat-form-field>
 
       <mat-checkbox [(ngModel)]="program.isCurrent" [checked]="program.isCurrent">Is Current</mat-checkbox>
-
+      <hr>
     </div>
-    <div mat-dialog-actions>
-      <button mat-button (click)="onCancel()">Cancel</button>
-      <button mat-button cdkFocusInitial color="primary" (click)="onSubmit()">OK</button>
+    <div mat-dialog-actions style="float:right">
+      <button mat-flat-button (click)="onCancel()">Cancel</button>
+      <button mat-flat-button cdkFocusInitial color="primary" (click)="onSubmit()">OK</button>
     </div>
   </div>
-</div>

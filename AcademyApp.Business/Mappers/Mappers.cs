@@ -5,13 +5,13 @@ using AcademyApp.Model;
 
 namespace AcademyApp.Business.Mapper
 {
-    public static class Mapper
+    public static class Mappers
     {
         public static AcademyProgram ToDomain(this AcademyProgramViewModel model)
         {
             return new AcademyProgram
             {
-                ID = model.ID,
+                Id = model.Id,
                 CreatedOn = model.CreatedOn,
                 CreatedBy = model.CreatedBy,
                 StartDate = model.StartDate,
@@ -24,7 +24,7 @@ namespace AcademyApp.Business.Mapper
         {
             return new AcademyProgramViewModel
             {
-                ID = model.ID,
+                Id = model.Id,
                 CreatedBy= model.CreatedBy,
                 CreatedOn = model.CreatedOn,
                 StartDate = model.StartDate,

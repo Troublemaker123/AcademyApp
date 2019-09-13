@@ -67,7 +67,6 @@ export class AcademyYearComponent implements OnInit {
       .subscribe(result => {
         this.programs = result;
       });
-
   }
 
 };

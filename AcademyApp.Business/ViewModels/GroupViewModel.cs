@@ -11,7 +11,8 @@ namespace AcademyApp.Business.ViewModel
     {
    
         public int ID { get; set; }
-     //   public ICollection<Student> Students { get; set; }
+        public string Title { get; set; }
+        //   public ICollection<Student> Students { get; set; }
         public ICollection<AcademyProgram> Mentors { get; set; }
         public ICollection<Staff> Staffs { get; set; }
     }

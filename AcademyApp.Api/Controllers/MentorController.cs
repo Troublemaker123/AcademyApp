@@ -19,43 +19,71 @@ namespace AcademyApp.Api.Controllers
 
         [Route("create")]
         [HttpPost]
-        public ActionResult Create(MentorViewModel model)
+        public ActionResult Create(MentorViewModel mentor)
         {
-            if (model == null)
-                throw new ApplicationException("Object is null");
+            try
+            {
+                _mentorService.Create(mentor);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
 
-            _mentorService.Create(model);
-            return Ok();
+                return BadRequest(ex.Message);
+            }
+
         }
-        [Route("delete/{apId}")]
+        [Route("delete/{mentorId}")]
         [HttpDelete]
-        public ActionResult Delete(MentorViewModel model)
+        public ActionResult Delete(MentorViewModel mentor)
         {
-            if (model == null)
-                throw new ApplicationException("Object is null");
 
-            _mentorService.Delete(model);
-            return Ok();
+            try
+            {
+                _mentorService.Delete(mentor);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+
         }
 
 
         [Route("update")]
         [HttpPut]
-        public ActionResult Update(MentorViewModel model)
+        public ActionResult Update(MentorViewModel mentor)
         {
-            if (model == null)
-                throw new ApplicationException("Object is null");
+            try
+            {
+                _mentorService.Update(mentor);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
 
-            _mentorService.Update(model);
-            return Ok();
+                return BadRequest(ex.Message);
+            }
+
         }
 
-        [Route("find-by-id/{apId}")]
+        [Route("find-by-id/{mentorId}")]
         [HttpGet]
-        public ActionResult<MentorViewModel> FindById(int apId)
+        public ActionResult<MentorViewModel> FindById(int mentorId)
         {
-            var program = _mentorService.FindById(apId);
-            return Ok(program);
+            try
+            {
+                var mentors = _mentorService.FindById(mentorId);
+                return Ok(mentors);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+
         }
 
         //  api/mentor/get-all
@@ -63,8 +91,17 @@ namespace AcademyApp.Api.Controllers
         [HttpGet]
         public ActionResult<List<MentorViewModel>> GetAll()
         {
-            var programs = _mentorService.GetAll();
-            return Ok(programs);
+            try
+            {
+                var mentors = _mentorService.GetAll();
+                return Ok(mentors);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+
         }
 
     }

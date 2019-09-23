@@ -7,10 +7,10 @@ namespace AcademyApp.Business.Interfaces
 {
     public interface IMentorService
     {
-        void Create(MentorViewModel model);
-        void Update(MentorViewModel model);
+        void Create(MentorViewModel mentor);
+        void Update(MentorViewModel mentor);
         IEnumerable<MentorViewModel> GetAll();
-        MentorViewModel FindById(int apId);
-        void Delete(MentorViewModel model);
+        MentorViewModel FindById(int mentorId);
+        void Delete(MentorViewModel mentor);
     }
 }

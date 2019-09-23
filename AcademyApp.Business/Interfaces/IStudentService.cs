@@ -7,11 +7,11 @@ namespace AcademyApp.Business.Interfaces
 {
     public interface IStudentService
     {
-        void Create(StudentViewModel model);
-        void Delete(StudentViewModel model);
-        void Update(StudentViewModel model);
+        void Create(StudentViewModel student);
+        void Delete(StudentViewModel student);
+        void Update(StudentViewModel student);
         IEnumerable<StudentViewModel> GetAll();
-        StudentViewModel FindById(int apId);
+        StudentViewModel FindById(int studentId);
 
     }
 }

@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatDialog, MatTableDataSource } from '@angular/material';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { MatPaginator, MatDialog, MatTableDataSource, MatSort } from '@angular/material';
 import { FormGroup, FormControl, NgForm } from '@angular/forms';
 import { Mentor } from 'src/app/shared/models/mentors';
 import { MentorService } from '../mentor.service';
@@ -10,11 +10,13 @@ import { MentorWarnDialogComponent } from './mentor-warn-dialog';
   selector: 'mentor',
   templateUrl: 'mentor.component.html'
 })
-export class MentorComponent implements OnInit {
+
+export class MentorComponent implements OnInit, AfterViewInit {
+  public mentor = new MatTableDataSource<Mentor>();
   public mentors: Mentor[] = [];
   columnsToDisplay = ['name', 'lastName', 'specialty','telephone','email','yearsOfService','Actions'];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
   constructor(
     private mentorService: MentorService,
     public dialog: MatDialog
@@ -25,6 +27,10 @@ export class MentorComponent implements OnInit {
     this.GetAllMentors();
   }
 
+
+  ngAfterViewInit(): void {
+    this.mentor.sort = this.sort;
+  }
   public openDialog(mentor: Mentor): void {
     const dialogRef = this.dialog.open(MentorDialogComponent, {
       width: '500px',
@@ -40,7 +46,6 @@ export class MentorComponent implements OnInit {
   }
 
   public openWarningDialog(mentors: Mentor): void {
-    debugger;
     const dialogRef = this.dialog.open(MentorWarnDialogComponent, {
       // new Warning Dialog
       width: '300px',

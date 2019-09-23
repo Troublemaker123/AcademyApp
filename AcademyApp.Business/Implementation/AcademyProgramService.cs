@@ -23,7 +23,7 @@ namespace AcademyApp.Business
         public void Create(AcademyProgramViewModel academyProgram)
         {
             if (academyProgram == null)
-                throw new ApplicationException("Object is null");
+                throw new ApplicationException("academyProgram is null");
 
             var program = academyProgram.ToDomain();
             program.CreatedOn = DateTime.Now;
@@ -41,7 +41,7 @@ namespace AcademyApp.Business
         {
             var program = _academyProgramRepository.FindById(academyProgram.Id);
             if (program == null)
-                throw new Exception();
+                throw new Exception("academyProgram is null");
 
             program.StartDate = academyProgram.StartDate;
             program.EndDate = academyProgram.EndDate;
@@ -54,7 +54,7 @@ namespace AcademyApp.Business
         {
             var program = _academyProgramRepository.FindById(academyProgramId);
             if (program == null)
-                throw new Exception("Object not found");
+                throw new Exception("academyProgramId not found");
 
             return program.ToModel();
         }
@@ -63,7 +63,7 @@ namespace AcademyApp.Business
         {
             var program = _academyProgramRepository.FindById(academyProgramId);
             if (program == null)
-                throw new Exception();
+                throw new Exception("academyProgramId is null");
 
             program.IsCurrent = active;
 
@@ -72,12 +72,13 @@ namespace AcademyApp.Business
 
         public void Delete(AcademyProgramViewModel academyProgram)
         {
-            var program = _academyProgramRepository.FindById(academyProgram.Id);
+            var program = _academyProgramRepository.FindById(academyProgram);
             if (program == null)
-                throw new Exception("Object not found");
+                throw new Exception("academyProgram not found");
 
             _academyProgramRepository.Delete(program);
         }
+
     }
 
 }

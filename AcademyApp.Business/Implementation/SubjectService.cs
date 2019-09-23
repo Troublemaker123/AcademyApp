@@ -9,58 +9,61 @@ using AcademyApp.Business.ViewModel;
 using AcademyApp.Business.Interfaces;
 using System.Linq;
 
-namespace AcademyApp.Business.Implementation
+namespace AcademyApp.Business
 {
     public class SubjectService : ISubjectService
     {
+        private readonly IRepository<Subject> _subjectRepository;
 
-
-        private readonly IRepository<Subject> _apRepository;
-
-        public SubjectService(IRepository<Subject> apRepository)
+        public SubjectService(IRepository<Subject> subjectRepository)
         {
-            _apRepository = apRepository;
+            _subjectRepository = subjectRepository;
         }
-        public void Create(SubjectViewModel model)
+        public void Create(SubjectViewModel subject)
         {
-            var domain = model.ToDomain();
-            _apRepository.Create(domain);
+            if (subject == null)
+                throw new Exception("subject not found");
+
+            var subjects = subject.ToDomain();
+            subjects.Name = "Darko";
+            subjects.Description = "test";
+            _subjectRepository.Create(subjects);
         }
 
         public IEnumerable<SubjectViewModel> GetAll()
         {
-            return _apRepository.GetAll().Select(model => model.ToModel()).ToList();
+            return _subjectRepository.GetAll().Select(subject => subject.ToModel()).ToList();
         }
 
-        public SubjectViewModel FindById(int apId)
+        public SubjectViewModel FindById(int subjectId)
         {
-            var program = _apRepository.FindById(apId);
-            if (program == null)
-                throw new Exception("Object not found");
+            var subject = _subjectRepository.FindById(subjectId);
+            if (subject == null)
+                throw new Exception("subject not found");
 
-            return program.ToModel();
+            return subject.ToModel();
         }
 
-        public void Update(SubjectViewModel model)
+        public void Update(SubjectViewModel subject)
         {
-            var program = _apRepository.FindById(model.ID);
-            if (program == null)
-                throw new Exception();
+            var subjects = _subjectRepository.FindById(subject.ID);
+            if (subjects == null)
+                throw new Exception("subject not found");
 
-            program.Name = model.Name;
-            program.Description = model.Description;    
+            subjects.Name = subject.Name;
+            subjects.Description = subject.Description;    
 
-            _apRepository.Update(program);
+            _subjectRepository.Update(subjects);
         }
 
-        public void Delete(SubjectViewModel model)
+        public void Delete(SubjectViewModel subject)
         {
-            var program = _apRepository.FindById(model.ID);
-            if (program == null)
-                throw new Exception("Object not found");
+            var subjects = _subjectRepository.FindById(subject.ID);
+            if (subjects == null)
+                throw new Exception("subject not found");
 
-            program.ToModel();
-            _apRepository.Delete(program);
+     
+            _subjectRepository.Delete(subjects);
         }
     }
 }

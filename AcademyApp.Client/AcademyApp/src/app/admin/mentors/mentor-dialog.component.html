@@ -1,33 +1,110 @@
 <div>
-    <div class="container">
-      <mat-icon id="close-icon" (click)=onCancel()>close</mat-icon>
-      <h1 mat-dialog-title>{{title}}</h1>
-  
+  <div class="container">
+    <mat-icon id="close-icon" style="float:right; cursor: pointer" title="Close" (click)=onCancel()>close</mat-icon>
+    <mat-toolbar>
+      <span>{{title}}</span>
+    </mat-toolbar>
+
+    <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+
       <div mat-dialog-content>
-  
-        <mat-form-field>
-            <input matInput placeholder="Name"  [(ngModel)]="mentors.name">
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput placeholder="Last Name"  [(ngModel)]="mentors.lastName">
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput placeholder="Years Of Service"  [(ngModel)]="mentors.yearsOfService">
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput placeholder="Telephone"  [(ngModel)]="mentors.telephone">
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput placeholder="Specialty"  [(ngModel)]="mentors.specialty">
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput placeholder="Email"  [(ngModel)]="mentors.email">
-          </mat-form-field>
-  
+
+        <mat-form-field style="width: 100%">
+          <input matInput placeholder="Name" [(ngModel)]="mentors.name" class="form-control" #name="ngModel" id="name"
+            name="name" required maxlength="255" autocomplete="off">
+          <mat-error *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+            <div *ngIf="name.errors.required">
+              Name is mandatory.
+            </div>
+            <mat-error *ngIf="name.errors.maxlength">
+              Name limit is 255 characters long.
+            </mat-error>
+          </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field style="width: 100%">
+          <input matInput placeholder="Last Name" [(ngModel)]="mentors.lastName" [ngModelOptions]="{standalone: true}"
+            class="form-control" #lastName="ngModel" id="lastName" lastName="lastName" required maxlength="255"
+            autocomplete="off">
+          <mat-error *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger">
+            <div *ngIf="lastName.errors.required">
+              Last Name is mandatory.
+            </div>
+            <mat-error *ngIf="lastName.errors.maxlength">
+              Last Name limit is 255 characters long.
+            </mat-error>
+          </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field style="width: 100%">
+          <input matInput placeholder="Years Of Service" [(ngModel)]="mentors.yearsOfService"
+            [ngModelOptions]="{standalone: true}" class="form-control" #yearsOfService="ngModel" id="yearsOfService"
+            yearsOfService="yearsOfService" required maxlength="255" autocomplete="off">
+          <mat-error *ngIf="yearsOfService.invalid && (yearsOfService.dirty || yearsOfService.touched)"
+            class="alert alert-danger">
+            <div *ngIf="yearsOfService.errors.required">
+              Years Of Service is mandatory.
+            </div>
+            <mat-error *ngIf="yearsOfService.errors.maxlength">
+              Years Of Service limit is 255 characters long.
+            </mat-error>
+          </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field style="width: 100%">
+          <input matInput placeholder="Telephone" [(ngModel)]="mentors.telephone" [ngModelOptions]="{standalone: true}"
+            class="form-control" #telephone="ngModel" id="telephone" telephone="telephone" required maxlength="255"
+            autocomplete="off">
+          <mat-error *ngIf="telephone.invalid && (telephone.dirty || telephone.touched)" class="alert alert-danger">
+            <div *ngIf="telephone.errors.required">
+              Telephone is mandatory.
+            </div>
+            <mat-error *ngIf="telephone.errors.maxlength">
+              Telephone limit is 255 characters long.
+            </mat-error>
+          </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field style="width: 100%">
+          <input matInput placeholder="Specialty" [(ngModel)]="mentors.specialty" [ngModelOptions]="{standalone: true}"
+            class="form-control" #specialty="ngModel" id="specialty" specialty="specialty" required maxlength="255"
+            autocomplete="off">
+          <mat-error *ngIf="specialty.invalid && (specialty.dirty || specialty.touched)" class="alert alert-danger">
+            <div *ngIf="specialty.errors.required">
+              Specialty is mandatory.
+            </div>
+            <mat-error *ngIf="specialty.errors.maxlength">
+              Specialty limit is 255 characters long.
+            </mat-error>
+          </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field style="width: 100%">
+          <input matInput placeholder="Email" [(ngModel)]="mentors.email" [ngModelOptions]="{standalone: true}"
+            class="form-control" #email="ngModel" id="email" email="email" required maxlength="255" autocomplete="off">
+          <mat-error *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+            <div *ngIf="email.errors.required">
+              Email is mandatory.
+            </div>
+            <mat-error *ngIf="email.errors.maxlength">
+              Email limit is 255 characters long.
+            </mat-error>
+          </mat-error>
+        </mat-form-field>
+
+
       </div>
-      <div mat-dialog-actions>
-        <button mat-button (click)="onCancel()">Cancel</button>
-        <button mat-button cdkFocusInitial color="primary" (click)="onSubmit()">OK</button>
+      <div mat-dialog-actions style="float:right">
+        <button mat-button title="Cancel" (click)="onCancel()">Cancel</button>
+        <button mat-flat-button cdkFocusInitial color="primary" title="OK" (click)="onSubmit()">OK</button>
       </div>
-    </div>
+
+    </form>
+
   </div>
+</div>

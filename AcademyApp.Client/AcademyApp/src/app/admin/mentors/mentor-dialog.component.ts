@@ -24,7 +24,6 @@ export class MentorDialogComponent implements OnInit {
 
 
   public ngOnInit() {
-    debugger;
     if (this.data.mentor) {
       // edit
       this.isEditMode = true;
@@ -38,6 +37,7 @@ export class MentorDialogComponent implements OnInit {
   }
 
   public onSubmit() {
+    // this.mentors.academyProgramId = 1;
     if (this.isEditMode) {
       this.mentorService.update(this.mentors).subscribe(result => {
         this.dialogRef.close('ok');

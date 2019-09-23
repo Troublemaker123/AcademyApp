@@ -22,4 +22,6 @@ export class Student {
 
   public dateOfEnrollment: Date;
 
+  public academyProgramId: number;
+
 }

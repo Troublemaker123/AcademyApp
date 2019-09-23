@@ -1,5 +1,7 @@
-import {Component, OnInit, ViewChild, Inject} from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
+import { Component, OnInit } from '@angular/core';
+import { AcademyProgramService } from './academy-year/academy-program.service';
+import { AcademyProgram } from '../shared/models/academyProgram';
+import { AdminService } from './admin.service';
 
 
 
@@ -9,12 +11,27 @@ import {MatPaginator} from '@angular/material/paginator';
 })
 export class AdminComponent implements OnInit {
 
+  public programs: AcademyProgram[] = [];
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  constructor(private academyProgramService: AcademyProgramService,
+    private adminService: AdminService,) {
+  }
 
 
-  ngOnInit() {
-    
+  public ngOnInit() {
+    this.getAllAcademyPrograms();
+  }
+
+  public getAllAcademyPrograms() {
+    this.adminService.GetAllAcademyPrograms()
+    .subscribe(result => {
+      this.programs = result;
+    });
+
+  }
+
+  public onChangeAcademyProgram(academyProgram: AcademyProgram) {
+    this.academyProgramService.setAcademyProgram(academyProgram);
   }
 }
 

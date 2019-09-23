@@ -3,13 +3,17 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 // modules
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { AdminRoutingModule } from './admin-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { MatSortModule, MatTableModule } from '@angular/material';
 
 // services
 import { AdminService } from './admin.service';
 import { StudentService } from './student.service';
+import { MentorService } from './mentor.service';
+import { SubjectService } from './subject.service';
+import { AcademyProgramService } from './academy-year/academy-program.service';
 
 // components
 import { AdminComponent } from './admin.component';
@@ -19,16 +23,12 @@ import { StudentsComponent } from './students/students.component';
 import { AcademyYearWarnDialogComponent } from './academy-year/academy-year-warn-dialog-component';
 import { StudentDialogComponent } from './students/student-dialog.component';
 import { StudentWarnDialogComponent } from './students/student-warn-dialog';
-import { MentorService } from './mentor.service';
 import { MentorDialogComponent } from './mentors/mentor-dialog.component';
-
 import { MentorComponent } from './mentors/mentor.component';
-import { SubjectService } from './subject.service';
 import { SubjectDialogComponent } from '../subjects/subject-dialog.component';
 import { SubjectWarnDialogComponent } from '../subjects/subject-warn-dialog.component';
 import { SubjectsComponent } from '../subjects/subject.component';
 import { MentorWarnDialogComponent } from './mentors/mentor-warn-dialog';
-
 
 
 @NgModule({
@@ -47,7 +47,7 @@ import { MentorWarnDialogComponent } from './mentors/mentor-warn-dialog';
     SubjectWarnDialogComponent,
     SubjectsComponent
   ],
-  entryComponents:[
+  entryComponents: [
     AcademyYearDialogComponent,
     AcademyYearWarnDialogComponent,
     StudentDialogComponent,
@@ -64,13 +64,17 @@ import { MentorWarnDialogComponent } from './mentors/mentor-warn-dialog';
     AdminRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    MatSortModule,
+    MatTableModule,
+
   ],
   providers: [
     AdminService,
     StudentService,
     MentorService,
     SubjectService,
+    AcademyProgramService
   ],
 
 })

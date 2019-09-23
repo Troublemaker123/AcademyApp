@@ -16,52 +16,91 @@ namespace AcademyApp.Api.Controllers
         {
             _subService = subService;
         }
-        [Route("sub")]
+        [Route("create")]
         [HttpPost]
-        public ActionResult Create(SubjectViewModel model)
+        public ActionResult Create(SubjectViewModel subject)
         {
-            if (model == null)
-                throw new ApplicationException("Object is null");
+            try
+            {
+                _subService.Create(subject);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
 
-            _subService.Create(model);
-            return Ok();
+                return BadRequest(ex.Message);
+            }
+          
         }
-        [Route("sub/{apId}")]
+        [Route("delete/{subjectId}")]
         [HttpDelete]
-        public ActionResult Delete(SubjectViewModel model)
+        public ActionResult Delete(SubjectViewModel subject)
         {
-            if (model == null)
-                throw new ApplicationException("Object is null");
 
-            _subService.Delete(model);
-            return Ok();
+            try
+            {
+                _subService.Delete(subject);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+           
         }
 
-        [Route("sub")]
+        [Route("update")]
         [HttpPut]
-        public ActionResult Update(SubjectViewModel model)
+        public ActionResult Update(SubjectViewModel subject)
         {
-            if (model == null)
-                throw new ApplicationException("Object is null");
+            try
+            {
+                _subService.Update(subject);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
 
-            _subService.Update(model);
-            return Ok();
+                return BadRequest(ex.Message);
+            }
+
+
         }
-        [Route("sub/{apId}")]
+        [Route("find-by-id/{subjectId}")]
         [HttpGet]
-        public ActionResult<SubjectViewModel> FindById(int apId)
+        public ActionResult<SubjectViewModel> FindById(int subjectId)
         {
-            var program = _subService.FindById(apId);
-            return Ok(program);
+
+            try
+            {
+                var subject = _subService.FindById(subjectId);
+                return Ok(subject);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+           
         }
 
         // api/subject/sub
-        [Route("sub")]
+        [Route("get-all")]
         [HttpGet]
         public ActionResult<List<SubjectViewModel>> GetAll()
         {
-            var programs = _subService.GetAll();
-            return Ok(programs);
+            try
+            {
+                var subjects = _subService.GetAll();
+                return Ok(subjects);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+
         }
 
     }

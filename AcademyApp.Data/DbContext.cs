@@ -11,8 +11,12 @@ namespace AcademyApp.Data
         { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Student>(entity =>
+            {
+                entity.HasKey(x => new { x.ID, x.ApId });
+            });
+
             modelBuilder.Entity<AcademyProgram>().ToTable("AcademyProgram");
-            modelBuilder.Entity<Student>().ToTable("Student");
             modelBuilder.Entity<Mentor>().ToTable("Mentor");
             modelBuilder.Entity<Subject>().ToTable("Subject");
         }

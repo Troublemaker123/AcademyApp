@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import * as Material from "@angular/material";
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -21,7 +22,9 @@ import * as Material from "@angular/material";
     Material.MatSidenavModule,
     Material.MatCheckboxModule,
     Material.MatDatepickerModule,
-    Material.MatNativeDateModule
+    Material.MatNativeDateModule,
+    Material.MatSortModule,
+    FormsModule,
   ],
   exports: [
     Material.MatToolbarModule,
@@ -39,7 +42,9 @@ import * as Material from "@angular/material";
     Material.MatSidenavModule,
     Material.MatCheckboxModule,
     Material.MatDatepickerModule,
-    Material.MatNativeDateModule
+    Material.MatNativeDateModule,
+    Material.MatSortModule,
+    FormsModule
   ],
   declarations: []
 })

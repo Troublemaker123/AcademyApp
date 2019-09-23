@@ -1,9 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { NgForm, FormGroup, FormControl } from '@angular/forms';
+import { NgForm, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { StudentService } from '../student.service';
 import { Student } from 'src/app/shared/models/student';
+import { AcademyProgramService } from '../academy-year/academy-program.service';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class StudentDialogComponent implements OnInit {
 
     constructor(
         private studentService: StudentService,
+        private academyProgramService: AcademyProgramService,
         private dialogRef: MatDialogRef<StudentDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any
     ) { }
@@ -37,12 +39,19 @@ export class StudentDialogComponent implements OnInit {
         }
     }
 
+
     public onSubmit() {
+ 
         if (this.isEditMode) {
             this.studentService.update(this.student).subscribe(result => {
                 this.dialogRef.close('ok');
             });
         } else {
+            let academyProgram = this.academyProgramService.getAcademyProgram();
+            if(academyProgram != null)
+            {
+                this.student.academyProgramId = academyProgram.id;
+            }
             this.studentService.create(this.student).subscribe(result => {
                 this.dialogRef.close('ok');
             });

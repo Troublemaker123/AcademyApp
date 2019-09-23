@@ -4,6 +4,7 @@ using AcademyApp.Business.Interfaces;
 using AcademyApp.Business.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace AcademyApp.Api.Controllers
 {
     [Route("api/[controller]")]
@@ -21,17 +22,20 @@ namespace AcademyApp.Api.Controllers
         [HttpPost]
         public ActionResult Create(AcademyProgramViewModel academyProgram)
         {
+
             try
             {
+        
                 _academyProgramService.Create(academyProgram);
-                return Ok();
+                    return Ok();
+               
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
-        [Route("delete/{apId}")]
+        [Route("delete/{academyProgramId}")]
         [HttpDelete]
         public ActionResult Delete(AcademyProgramViewModel academyProgram)
         {
@@ -66,7 +70,7 @@ namespace AcademyApp.Api.Controllers
            
         }
 
-        [Route("find-by-id/{apId}")]
+        [Route("find-by-id/{academyProgramId}")]
         [HttpGet]
         public ActionResult<AcademyProgramViewModel> FindById(int academyProgramId)
         {

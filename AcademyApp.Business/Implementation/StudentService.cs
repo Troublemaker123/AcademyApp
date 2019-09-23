@@ -19,58 +19,61 @@ namespace AcademyApp.Business
             _apRepository = apRepository;
         }
 
-        public void Create(StudentViewModel model)
+        public void Create(StudentViewModel student)
         {
-            var domain = model.ToDomain();
-            domain.DateOfBirth = DateTime.Now;
-            domain.DateOfEnrollment = DateTime.Now;
-            domain.GraduationYear = DateTime.Now;
+            if (student == null)
+                throw new Exception("student not found");
+
+            var domain = student.ToDomain();
+            domain.ApId = 5;
+            domain.Address = "adasa";
             _apRepository.Create(domain);
 
         }
 
         public IEnumerable<StudentViewModel> GetAll()
         {
-            return _apRepository.GetAll().Select(model => model.ToModel()).ToList();
+
+            return _apRepository.GetAll().Select(student => student.ToModel()).ToList();
         }
 
-        public StudentViewModel FindById(int apId)
+        public StudentViewModel FindById(int studentId)
         {
-            var program = _apRepository.FindById(apId);
-            if (program == null)
-                throw new Exception("Object not found");
+            var student = _apRepository.FindById(studentId);
+            if (student == null)
+                throw new Exception("student not found");
 
-            return program.ToModel();
+            return student.ToModel();
         }
 
-        public void Update(StudentViewModel model)
+        public void Update(StudentViewModel student)
         {
-            var program = _apRepository.FindById(model.ID);
-            if (program == null)
-                throw new Exception();
+            var students = _apRepository.FindById(student.ID);
+            if (students == null)
+                throw new Exception("student not found");
 
-            program.Name = model.Name;
-            program.LastName = model.LastName;
-            program.Mobile = model.Mobile;
-            program.PlaceOfBirth = model.PlaceOfBirth;
-            program.EmailAdress = model.EmailAdress;
-            program.Address = model.Address;
-            program.DateOfBirth = model.DateOfBirth;
-            program.Country = model.Country;
-            program.DateOfEnrollment = model.DateOfEnrollment;
-            program.GraduationYear = model.GraduationYear;
+            students.Name = students.Name;
+            students.LastName = students.LastName;
+            students.Mobile = students.Mobile;
+            students.PlaceOfBirth = students.PlaceOfBirth;
+            students.EmailAdress = students.EmailAdress;
+            students.Address = students.Address;
+            students.DateOfBirth = students.DateOfBirth;
+            students.Country = students.Country;
+            students.DateOfEnrollment = students.DateOfEnrollment;
+            students.GraduationYear = students.GraduationYear;
 
-            _apRepository.Update(program);
+            _apRepository.Update(students);
         }
 
-        public void Delete(StudentViewModel model)
+        public void Delete(StudentViewModel student)
         {
-            var program = _apRepository.FindById(model);
-            if (program == null)
-                throw new Exception("Object not found");
+            var students = _apRepository.FindById(student);
+            if (students == null)
+                throw new Exception("student not found");
 
-            program.ToModel();
-            _apRepository.Delete(program);
+            students.ToModel();
+            _apRepository.Delete(students);
         }
     }
 }

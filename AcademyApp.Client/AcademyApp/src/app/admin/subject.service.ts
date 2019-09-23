@@ -17,19 +17,19 @@ export class SubjectService {
    
 
     public GetAllSubjects(): Observable<Subjects[]> {
-        return this.http.get<Subjects[]>(this.baseApiUrl + "subject/sub");
+        return this.http.get<Subjects[]>(this.baseApiUrl + "subject/get-all");
     }
-    public create(subject : Subjects): Observable<Subjects> {
-        return this.http.post<Subjects>(this.baseApiUrl + 'subject/sub', subject);
+    public create(subjectId : Subjects): Observable<Subjects> {
+        return this.http.post<Subjects>(this.baseApiUrl + 'subject/create', subjectId);
     }
-    public delete(apId: number): Observable<any> {
-        return this.http.delete<Subjects>(`${this.baseApiUrl}subject/sub/${apId}`);
+    public delete(subjectId: number): Observable<any> {
+        return this.http.delete<Subjects>(`${this.baseApiUrl}subject/delete/${subjectId}`);
     }
     public update(value: any): Observable<object> {
-        return this.http.put(`${this.baseApiUrl}/subject/sub`, value);
+        return this.http.put(`${this.baseApiUrl}/subject/update`, value);
     }
-    public findById(apId:number):Observable<Subjects>{
-        return this.http.get<Subjects>(`${this.baseApiUrl}/subject/sub/${apId}`);   
+    public findById(subjectId:number):Observable<Subjects>{
+        return this.http.get<Subjects>(`${this.baseApiUrl}/subject/find-by-id/${subjectId}`);   
     }
 
 }

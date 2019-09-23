@@ -18,54 +18,97 @@ namespace AcademyApp.Api.Controllers
             _studentService = studentService;
         }
 
-        [Route("st")]
+        [Route("create")]
         [HttpPost]
-        public ActionResult Create(StudentViewModel model)
+        public ActionResult Create(StudentViewModel student)
         {
-            if (model == null)
-                throw new ApplicationException("Object is null");
+            try
+            {
+                TryValidateModel(student);
 
-            _studentService.Create(model);
-            return Ok();
+                if (ModelState.IsValid)
+                    _studentService.Create(student);
+                    return Ok();
+                
+            }
+            catch (Exception ex) 
+            {
+
+                return BadRequest(ex.Message);
+            }
+
         }
 
-        [Route("st/{apId}")]
+        [Route("delete/{studentId}")]
         [HttpDelete]
-        public ActionResult Delete(StudentViewModel model)
+        public ActionResult Delete(StudentViewModel student)
         {
-            if (model == null)
-                throw new Exception("Object not found");
+            try
+            {
+                _studentService.Delete(student);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
 
-            _studentService.Delete(model);
-            return Ok();
+                return BadRequest(ex.Message);
+            }
+
+
         }
 
-        [Route("st")]
+        [Route("update")]
         [HttpPut]
-        public ActionResult Update(StudentViewModel model)
+        public ActionResult Update(StudentViewModel student)
         {
-            if (model == null)
-                throw new ApplicationException("Object is null");
+            try
+            {
+                _studentService.Update(student);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
 
-            _studentService.Update(model);
-            return Ok();
+                return BadRequest(ex.Message);
+            }
+
+           
         }
 
-        [Route("st/{apId}")]
+        [Route("find-by-id/{studentId}")]
         [HttpGet]
-        public ActionResult<StudentViewModel> FindById(int apId)
+        public ActionResult<StudentViewModel> FindById(int studentId)
         {
-            var program = _studentService.FindById(apId);
-            return Ok(program);
+            try
+            {
+                var students = _studentService.FindById(studentId);
+                return Ok(students);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+
         }
 
-        // POST api/student/st
-        [Route("st")]
+        // POST api/student/get-all
+        [Route("get-all")]
         [HttpGet]
         public ActionResult<List<StudentViewModel>> GetAll()
         {
-            var programs = _studentService.GetAll();
-            return Ok(programs);
+
+            try
+            {
+                var students = _studentService.GetAll();
+                return Ok(students);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+
         }
 
 

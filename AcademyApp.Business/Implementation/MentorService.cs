@@ -21,50 +21,51 @@ namespace AcademyApp.Business
             _apRepository = apRepository;
         }
 
-        public void Create(MentorViewModel model)
+        public void Create(MentorViewModel mentor)
         {
-            var domain = model.ToDomain();
+            
+            var domain = mentor.ToDomain();
            _apRepository.Create(domain);
         }
 
         public IEnumerable<MentorViewModel> GetAll()
         {
-            return _apRepository.GetAll().Select(model => model.ToModel()).ToList();
+            return _apRepository.GetAll().Select(mentor => mentor.ToModel()).ToList();
         }
 
-        public MentorViewModel FindById(int apId)
+        public MentorViewModel FindById(int mentorId)
         {
-            var program = _apRepository.FindById(apId);
-            if (program == null)
-                throw new Exception("Object not found");
+            var mentors = _apRepository.FindById(mentorId);
+            if (mentors == null)
+                throw new Exception("mentorid not found");
 
-            return program.ToModel();
+            return mentors.ToModel();
         }
 
-        public void Update(MentorViewModel model)
+        public void Update(MentorViewModel mentor)
         {
-            var program = _apRepository.FindById(model.ID);
-            if (program == null)
-                throw new Exception();
+            var mentors = _apRepository.FindById(mentor.ID);
+            if (mentors == null)
+                throw new Exception("mentor not found");
 
-            program.Name = model.Name;
-            program.LastName = model.LastName;
-            program.Specialty = model.Specialty;
-            program.Telephone = model.Telephone;
-            program.YearsOfService = model.YearsOfService;
-            program.Email = model.Email;
+            mentors.Name = mentor.Name;
+            mentors.LastName = mentor.LastName;
+            mentors.Specialty = mentor.Specialty;
+            mentors.Telephone = mentor.Telephone;
+            mentors.YearsOfService = mentor.YearsOfService;
+            mentors.Email = mentor.Email;
 
-            _apRepository.Update(program);
+            _apRepository.Update(mentors);
         }
 
-        public void Delete(MentorViewModel model)
+        public void Delete(MentorViewModel mentor)
         {
-            var program = _apRepository.FindById(model.ID);
-            if (program == null)
-                throw new Exception("Object not found");
+            var mentors = _apRepository.FindById(mentor.ID);
+            if (mentors == null)
+                throw new Exception("mentor not found");
 
-            program.ToModel();
-            _apRepository.Delete(program);
+            mentors.ToModel();
+            _apRepository.Delete(mentors);
         }
     }
 }

@@ -13,19 +13,19 @@ export class MentorService{
    
 
     public GetAllMentors(): Observable<Mentor[]> {
-        return this.http.get<Mentor[]>(this.baseApiUrl + "mentor/me");
+        return this.http.get<Mentor[]>(this.baseApiUrl + "mentor/get-all");
     }
     public create(mentors : Mentor): Observable<Mentor> {
-        return this.http.post<Mentor>(this.baseApiUrl + 'mentor/me', mentors);
+        return this.http.post<Mentor>(this.baseApiUrl + 'mentor/create', mentors);
     }
-    public delete(apId: number): Observable<any> {
-        return this.http.delete<Mentor>(`${this.baseApiUrl}mentor/me/${apId}`);
+    public delete(mentorId: number): Observable<any> {
+        return this.http.delete<Mentor>(`${this.baseApiUrl}mentor/delete/${mentorId}`);
     }
     public update(value: any): Observable<object> {
-        return this.http.put(`${this.baseApiUrl}/mentor/me`, value);
+        return this.http.put(`${this.baseApiUrl}/mentor/update`, value);
     }
-    public findById(apId:number):Observable<Mentor>{
-        return this.http.get<Mentor>(`${this.baseApiUrl}/mentor/me/${apId}`);   
+    public findById(mentorId:number):Observable<Mentor>{
+        return this.http.get<Mentor>(`${this.baseApiUrl}/mentor/find-by-id/${mentorId}`);   
     }
 
 

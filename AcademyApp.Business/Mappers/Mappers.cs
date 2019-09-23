@@ -1,6 +1,7 @@
 ﻿using AcademyApp.Business.ViewModel;
 using AcademyApp.Data.Model;
 using AcademyApp.Model;
+using AcademyApp.Business.Enums;
 
 
 namespace AcademyApp.Business.Mapper
@@ -25,13 +26,13 @@ namespace AcademyApp.Business.Mapper
             return new AcademyProgramViewModel
             {
                 Id = model.Id,
-                CreatedBy= model.CreatedBy,
+                CreatedBy = model.CreatedBy,
                 CreatedOn = model.CreatedOn,
                 StartDate = model.StartDate,
                 EndDate = model.EndDate,
                 IsCurrent = model.IsCurrent
             };
-           
+
         }
         public static Student ToDomain(this StudentViewModel model)
         {
@@ -48,6 +49,8 @@ namespace AcademyApp.Business.Mapper
                 GraduationYear = model.GraduationYear,
                 DateOfBirth = model.DateOfBirth,
                 DateOfEnrollment = model.DateOfEnrollment,
+                GenderId = model.Gender == Gender.None ? (int?)null : (int)model.Gender,
+                ApId = model.AcademyProgramId
             };
         }
         public static StudentViewModel ToModel(this Student model)
@@ -65,7 +68,8 @@ namespace AcademyApp.Business.Mapper
                 GraduationYear = model.GraduationYear,
                 DateOfBirth = model.DateOfBirth,
                 DateOfEnrollment = model.DateOfEnrollment,
-               
+                Gender = !model.GenderId.HasValue ? Gender.None : (Gender)model.GenderId.Value,
+                AcademyProgramId = model.ApId
             };
 
         }
@@ -80,8 +84,8 @@ namespace AcademyApp.Business.Mapper
                 YearsOfService = model.YearsOfService,
                 Specialty = model.Specialty,
                 Telephone = model.Telephone,
-               // Grades = model.Grades,
-                
+                // Grades = model.Grades,
+
             };
         }
         public static MentorViewModel ToModel(this Mentor model)
@@ -98,8 +102,8 @@ namespace AcademyApp.Business.Mapper
                 //Grades = model.Grades,
 
             };
-           
-            }
+
+        }
         public static Program ToDomain(this ProgramViewModel model)
         {
             return new Program
@@ -143,7 +147,7 @@ namespace AcademyApp.Business.Mapper
                 ID = model.ID,
                 Name = model.Name,
                 Description = model.Description,
-                
+
             };
         }
         public static SubjectViewModel ToModel(this Subject model)
@@ -192,7 +196,7 @@ namespace AcademyApp.Business.Mapper
             return new Group
             {
                 ID = model.ID,
- 
+
             };
         }
         public static GroupViewModel ToModel(this Group model)

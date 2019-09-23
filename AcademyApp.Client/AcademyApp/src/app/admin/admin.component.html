@@ -1,20 +1,29 @@
-<nav mat-tab-nav-bar>
-  <a mat-tab-link  [routerLink]="'academy-year'">
-    Academy Program
-  </a>
-  <a mat-tab-link  [routerLink]="'students'">
-    Students
-  </a>
-  <a mat-tab-link  [routerLink]="'mentors'">
-    Mentors
-  </a>
-  <a mat-tab-link  [routerLink]="'subjects'">
-    Subjects
-  </a>
-</nav> 
 
+<div class="academy-year-picker-container"> 
+<mat-form-field title="Academy Year" style="width: 220px">
+  <select matNativeControl (change)='onChangeAcademyProgram($event)'>
+    <option *ngFor="let item of programs" ng-selected="{{programs.isActive == true}}" [value]="item.startDate || item.endDate">{{item.startDate | date}} - {{item.endDate | date}}</option>
+  </select>
+</mat-form-field>
+</div>
+
+<div class="tab-container">
+  <nav mat-tab-nav-bar>
+    <a mat-tab-link [routerLink]="'academy-year'" routerLinkActive #ap="routerLinkActive" [active]="ap.isActive">
+      Academy Program
+    </a>
+    <a mat-tab-link [routerLink]="'students'" routerLinkActive #s="routerLinkActive" [active]="s.isActive">
+      Students
+    </a>
+    <a mat-tab-link [routerLink]="'mentors'" routerLinkActive #m="routerLinkActive" [active]="m.isActive">
+      Mentors
+    </a>
+    <a mat-tab-link [routerLink]="'subjects'" routerLinkActive #sb="routerLinkActive" [active]="sb.isActive">
+      Subjects
+    </a>
+  </nav>
+</div>
 
 <div class="content">
   <router-outlet></router-outlet>
 </div>
-

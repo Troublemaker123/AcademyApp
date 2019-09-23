@@ -1,30 +1,54 @@
+<mat-icon id="close-icon" style="float:right; cursor: pointer" title="Close" (click)=onCancel()>close</mat-icon>
+<mat-toolbar>
+  <span>{{title}}</span>
+</mat-toolbar>
 
-  <div>
-    <mat-icon id="close-icon" style="float:right" (click)=onCancel()>close</mat-icon>
-    <h1 mat-dialog-title>{{title}}</h1>
-    <hr>
-    <div mat-dialog-content style="overflow-y: hidden;">
-      <mat-form-field>
-        <input matInput [matDatepicker]="startDate" placeholder="Choose start date" [(ngModel)]="program.startDate">
-        <mat-datepicker-toggle matSuffix [for]="startDate">
-          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-        </mat-datepicker-toggle>
-        <mat-datepicker #startDate></mat-datepicker>
-      </mat-form-field>
 
-      <mat-form-field>
-        <input matInput [matDatepicker]="endDate" placeholder="Choose end date" [(ngModel)]="program.endDate">
-        <mat-datepicker-toggle matSuffix [for]="endDate">
-          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-        </mat-datepicker-toggle>
-        <mat-datepicker #endDate></mat-datepicker>
-      </mat-form-field>
+<form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+  <div mat-dialog-content style="overflow-y: hidden;"></div>
+  <mat-form-field style="width: 100%">
+    <input matInput [matDatepicker]="startDate" placeholder="Choose start date" [(ngModel)]="program.startDate"
+      [ngModelOptions]="{standalone: true}" class="form-control" #startDate="ngModel" id="startDate"
+      startDate="startDate" required maxlength="255" autocomplete="off">
+    <mat-error *ngIf="startDate.invalid && (startDate.dirty || startDate.touched)" class="alert alert-danger">
+      <div *ngIf="startDate.errors.required">
+        Name is mandatory.
+      </div>
+      <mat-error *ngIf="startDate.errors.maxlength">
+        Name limit is 255 characters long.
+      </mat-error>
+    </mat-error>
+    <mat-datepicker-toggle matSuffix [for]="startDate">
+      <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+    </mat-datepicker-toggle>
+    <mat-datepicker #startDate></mat-datepicker>
+  </mat-form-field>
 
-      <mat-checkbox [(ngModel)]="program.isCurrent" [checked]="program.isCurrent">Is Current</mat-checkbox>
-      <hr>
-    </div>
-    <div mat-dialog-actions style="float:right">
-      <button mat-flat-button (click)="onCancel()">Cancel</button>
-      <button mat-flat-button cdkFocusInitial color="primary" (click)="onSubmit()">OK</button>
-    </div>
+
+  <mat-form-field style="width: 100%">
+    <input matInput [matDatepicker]="endDate" placeholder="Choose end date" [(ngModel)]="program.endDate"
+      class="form-control" [ngModelOptions]="{standalone: true}" #endDate="ngModel" id="endDate" endDate="endDate"
+      required maxlength="255" autocomplete="off">
+    <mat-error *ngIf="endDate.invalid && (endDate.dirty || endDate.touched)" class="alert alert-danger">
+      <div *ngIf="endDate.errors.required">
+        Name is mandatory.
+      </div>
+      <mat-error *ngIf="endDate.errors.maxlength">
+        Name limit is 255 characters long.
+      </mat-error>
+    </mat-error>
+    <mat-datepicker-toggle matSuffix [for]="endDate">
+      <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+    </mat-datepicker-toggle>
+    <mat-datepicker #endDate></mat-datepicker>
+  </mat-form-field>
+
+  <mat-checkbox [(ngModel)]="program.isCurrent" [ngModelOptions]="{standalone: true}" [checked]="program.isCurrent"
+    required>Is Current</mat-checkbox>
+
+
+  <div mat-dialog-actions style="float:right">
+    <button mat-flat-button title="Cancel" (click)="onCancel()">Cancel</button>
+    <button mat-flat-button cdkFocusInitial color="primary" title="OK" (click)="onSubmit()">OK</button>
   </div>
+</form>

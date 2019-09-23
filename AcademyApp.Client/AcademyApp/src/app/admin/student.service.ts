@@ -14,19 +14,19 @@ export class StudentService{
    
 
     public GetAllStudents(): Observable<Student[]> {
-        return this.http.get<Student[]>(this.baseApiUrl + "student/st");
+        return this.http.get<Student[]>(this.baseApiUrl + "student/get-all");
     }
     public create(student : Student): Observable<Student> {
-        return this.http.post<Student>(this.baseApiUrl + 'student/st', student);
+        return this.http.post<Student>(this.baseApiUrl + 'student/create', student);
     }
-    public delete(apId: number): Observable<any> {
-        return this.http.delete<Student>(`${this.baseApiUrl}student/st/${apId}`);
+    public delete(studentId: number): Observable<any> {
+        return this.http.delete<Student>(`${this.baseApiUrl}student/delete/${studentId}`);
     }
     public update(value: any): Observable<object> {
-        return this.http.put(`${this.baseApiUrl}/student/st`, value);
+        return this.http.put(`${this.baseApiUrl}/student/update`, value);
     }
-    public findById(apId:number):Observable<Student>{
-        return this.http.get<Student>(`${this.baseApiUrl}/student/st/${apId}`);   
+    public findById(studentId:number):Observable<Student>{
+        return this.http.get<Student>(`${this.baseApiUrl}/student/find-by-id/${studentId}`);   
     }
 
 

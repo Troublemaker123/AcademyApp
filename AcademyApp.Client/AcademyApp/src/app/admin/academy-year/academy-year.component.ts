@@ -74,4 +74,8 @@ export class AcademyYearComponent implements OnInit, AfterViewInit{
       });
   }
 
+  toggle(isCurrent :boolean){
+    isCurrent = !isCurrent;
+  }
+
 };

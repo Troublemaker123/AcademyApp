@@ -9,7 +9,7 @@ namespace AcademyApp.Business.Interfaces
     {
         void Create(MentorViewModel mentor);
         void Update(MentorViewModel mentor);
-        IEnumerable<MentorViewModel> GetAll();
+        IEnumerable<MentorViewModel> GetAll(int academyProgramId);
         MentorViewModel FindById(int mentorId);
         void Delete(MentorViewModel mentor);
     }

@@ -1,16 +1,18 @@
 <div class="container">
   <div>
-
     <div>
-      <mat-icon id="close-icon" style="float:right; cursor: pointer" title="Close" (click)=onCancel()>close</mat-icon>
-      <mat-toolbar>
-        <span>{{title}}</span>
-      </mat-toolbar>
+    
+     <mat-icon id="close-icon" style="float:right; cursor: pointer" title="Close" (click)=onCancel()>close</mat-icon>
+  
+
+     <h1 mat-dialog-title>{{title}}</h1>
       <div mat-dialog-content>
       </div>
 
 
-      <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+      <form name="form" (ngSubmit)="f.form.valid && onSubmit() " #f="ngForm" novalidate>
+
+        
         <mat-form-field style="width: 100%">
           <input matInput placeholder="Name" [(ngModel)]="student.name" class="form-control" #name="ngModel" id="name"
             name="name" required maxlength="255" autocomplete="off">
@@ -53,6 +55,21 @@
               Email limit is 255 characters long.
             </mat-error>
             <mat-error *ngIf="emailAdress.errors.email">Email must be valid!</mat-error>
+          </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field style="width: 100%">
+          <input matInput placeholder="Adress" [(ngModel)]="student.address" id="address" #address="ngModel"
+            class="form-control" autocomplete="off" [ngModelOptions]="{standalone: true}" required maxlength="255">
+          <mat-error *ngIf="address.invalid && (address.dirty || address.touched)" class="alert alert-danger">
+            <div *ngIf="address.errors.required">
+              Address Adrdess is mandatory.
+            </div>
+            <mat-error *ngIf="address.errors.maxlength">
+              Address limit is 255 characters long.
+            </mat-error>
+            <mat-error *ngIf="address.errors.email">Email must be valid!</mat-error>
           </mat-error>
         </mat-form-field>
 
@@ -166,23 +183,17 @@
 
 
         <mat-form-field>
-          <input matInput placeholder="Gender" [(ngModel)]="student.gender" #gender="ngModel"
-            [ngModelOptions]="{standalone: true}" class="form-control" id="gender" gender="gender" required
-            maxlength="255" autocomplete="off">
-          <mat-error *ngIf="gender.invalid && (gender.dirty || gender.touched)" class="alert alert-danger">
-            <div *ngIf="gender.errors.required">
-              Gender is mandatory.
-            </div>
-            <mat-error *ngIf="gender.errors.maxlength">
-              Gender limit is 255 characters long.
-            </mat-error>
-          </mat-error>
+            <mat-select placeholder="Gender" required>
+                <mat-option value="option">Male</mat-option>
+                <mat-option value="option">Female</mat-option>
+                <mat-option value="option">Other</mat-option>
+              </mat-select>
         </mat-form-field>
 
 
         <div mat-dialog-actions style="float:right">
           <button mat-button title="Cancel" (click)="onCancel()">Cancel</button>
-          <button mat-flat-button cdkFocusInitial color="primary" title="OK" >OK</button>
+          <button mat-flat-button cdkFocusInitial color="primary" [disabled]="!f.valid" type="submit" title="OK">OK</button>
         </div>
       </form>
     </div>

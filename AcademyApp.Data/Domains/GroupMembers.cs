@@ -6,6 +6,5 @@ namespace AcademyApp.Data.Domains
 {
     class GroupMembers
     {
-
     }
 }

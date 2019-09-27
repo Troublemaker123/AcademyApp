@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-//using static AcademyApp.Data.Model.Student;
+
 
 namespace AcademyApp.Business.ViewModel
 {
@@ -19,13 +19,14 @@ namespace AcademyApp.Business.ViewModel
 
      //   public Gender Gender { get; set; }
 
-        public int YearsOfService { get; set; }
+        public string YearsOfService { get; set; }
 
         public string Specialty { get; set; }
 
-        public int Telephone { get; set; }
+        public string Telephone { get; set; }
 
-   //     public ICollection<Grade> Grades { get; set; }
-    //    public ICollection<Staff> Staffs { get; set; }
+        public int AcademyProgramId { get; set; }
+
+     
     }
 }

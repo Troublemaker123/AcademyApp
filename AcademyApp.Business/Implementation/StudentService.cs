@@ -25,16 +25,15 @@ namespace AcademyApp.Business
                 throw new Exception("student not found");
 
             var domain = student.ToDomain();
-            domain.ApId = 5;
-            domain.Address = "adasa";
             _apRepository.Create(domain);
 
         }
 
-        public IEnumerable<StudentViewModel> GetAll()
+        public IEnumerable<StudentViewModel> GetAll(int academyProgramId)
         {
 
-            return _apRepository.GetAll().Select(student => student.ToModel()).ToList();
+            return _apRepository.GetAll().Where(student => student.ApId == academyProgramId)
+                .Select(student => student.ToModel()).ToList();
         }
 
         public StudentViewModel FindById(int studentId)
@@ -52,16 +51,16 @@ namespace AcademyApp.Business
             if (students == null)
                 throw new Exception("student not found");
 
-            students.Name = students.Name;
-            students.LastName = students.LastName;
-            students.Mobile = students.Mobile;
-            students.PlaceOfBirth = students.PlaceOfBirth;
-            students.EmailAdress = students.EmailAdress;
-            students.Address = students.Address;
-            students.DateOfBirth = students.DateOfBirth;
-            students.Country = students.Country;
-            students.DateOfEnrollment = students.DateOfEnrollment;
-            students.GraduationYear = students.GraduationYear;
+            students.Name = student.Name;
+            students.LastName = student.LastName;
+            students.Mobile = student.Mobile;
+            students.PlaceOfBirth = student.PlaceOfBirth;
+            students.EmailAdress = student.EmailAdress;
+            students.Address = student.Address;
+            students.DateOfBirth = student.DateOfBirth;
+            students.Country = student.Country;
+            students.DateOfEnrollment = student.DateOfEnrollment;
+            students.GraduationYear = student.GraduationYear;
 
             _apRepository.Update(students);
         }

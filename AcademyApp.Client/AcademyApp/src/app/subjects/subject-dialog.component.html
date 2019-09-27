@@ -1,9 +1,9 @@
 <div>
   <div class="container">
-    <mat-icon id="close-icon" style="float:right; cursor: pointer" title="Close" (click)=onCancel()>close</mat-icon>
-    <mat-toolbar>
-      <span>{{title}}</span>
-    </mat-toolbar>
+      <mat-icon id="close-icon" style="float:right; cursor: pointer" title="Close" (click)=onCancel()>close</mat-icon>
+
+      <h1 mat-dialog-title>{{title}}</h1>
+      
     <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
       <div mat-dialog-content>
 
@@ -40,7 +40,7 @@
       </div>
       <div mat-dialog-actions style="float:right">
         <button mat-button title="Cancel" (click)="onCancel()">Cancel</button>
-        <button mat-flat-button cdkFocusInitial color="primary" title="OK" (click)="onSubmit()">OK</button>
+        <button mat-flat-button cdkFocusInitial color="primary" title="OK">OK</button>
       </div>
 
     </form>

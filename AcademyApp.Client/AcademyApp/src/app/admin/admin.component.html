@@ -1,8 +1,15 @@
 
-<div class="academy-year-picker-container"> 
+<div class="academy-year-picker-container">
 <mat-form-field title="Academy Year" style="width: 220px">
-  <select matNativeControl (change)='onChangeAcademyProgram($event)'>
-    <option *ngFor="let item of programs" ng-selected="{{programs.isActive == true}}" [value]="item.startDate || item.endDate">{{item.startDate | date}} - {{item.endDate | date}}</option>
+  <select matNativeControl (change)='onChangeAcademyProgram($event)' >
+    <ng-container *ngFor="let item of programs">
+        <ng-container *ngIf="item.isCurrent === true">
+            <option  [value]="item.id" selected>{{item.startDate | date}} - {{item.endDate | date}}</option>
+        </ng-container> 
+        <ng-container *ngIf="item.isCurrent !== true">
+            <option  [value]="item.id">{{item.startDate | date}} - {{item.endDate | date}}</option>
+        </ng-container>
+    </ng-container>
   </select>
 </mat-form-field>
 </div>

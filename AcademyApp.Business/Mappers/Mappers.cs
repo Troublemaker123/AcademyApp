@@ -80,11 +80,12 @@ namespace AcademyApp.Business.Mapper
                 ID = model.ID,
                 Name = model.Name,
                 LastName = model.LastName,
-                Email = model.LastName,
+                Email = model.Email,
                 YearsOfService = model.YearsOfService,
                 Specialty = model.Specialty,
                 Telephone = model.Telephone,
                 // Grades = model.Grades,
+                ApId = model.AcademyProgramId,
 
             };
         }
@@ -95,12 +96,12 @@ namespace AcademyApp.Business.Mapper
                 ID = model.ID,
                 Name = model.Name,
                 LastName = model.LastName,
-                Email = model.LastName,
+                Email = model.Email,
                 YearsOfService = model.YearsOfService,
                 Specialty = model.Specialty,
                 Telephone = model.Telephone,
                 //Grades = model.Grades,
-
+                AcademyProgramId = model.ApId,
             };
 
         }
@@ -147,6 +148,7 @@ namespace AcademyApp.Business.Mapper
                 ID = model.ID,
                 Name = model.Name,
                 Description = model.Description,
+                ApId = model.AcademyProgramId,
 
             };
         }
@@ -157,6 +159,7 @@ namespace AcademyApp.Business.Mapper
                 ID = model.ID,
                 Name = model.Name,
                 Description = model.Description,
+                AcademyProgramId = model.ApId,
             };
         }
         public static Role ToDomain(this RoleViewModel model)

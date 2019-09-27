@@ -86,13 +86,13 @@ namespace AcademyApp.Api.Controllers
         }
 
         // api/subject/sub
-        [Route("get-all")]
+        [Route("get-all/{academyProgramId}")]
         [HttpGet]
-        public ActionResult<List<SubjectViewModel>> GetAll()
+        public ActionResult<List<SubjectViewModel>> GetAll(int academyProgramId)
         {
             try
             {
-                var subjects = _subService.GetAll();
+                var subjects = _subService.GetAll(academyProgramId);
                 return Ok(subjects);
             }
             catch (Exception ex)

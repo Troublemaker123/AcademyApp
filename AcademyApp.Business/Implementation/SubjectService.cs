@@ -22,17 +22,16 @@ namespace AcademyApp.Business
         public void Create(SubjectViewModel subject)
         {
             if (subject == null)
-                throw new Exception("subject not found");
+                throw new Exception("student not found");
 
             var subjects = subject.ToDomain();
-            subjects.Name = "Darko";
-            subjects.Description = "test";
-            _subjectRepository.Create(subjects);
+              _subjectRepository.Create(subjects);
         }
 
-        public IEnumerable<SubjectViewModel> GetAll()
+        public IEnumerable<SubjectViewModel> GetAll(int academyProgramId)
         {
-            return _subjectRepository.GetAll().Select(subject => subject.ToModel()).ToList();
+            return _subjectRepository.GetAll().Where(subject => subject.ApId == academyProgramId)
+                .Select(subject => subject.ToModel()).ToList();
         }
 
         public SubjectViewModel FindById(int subjectId)

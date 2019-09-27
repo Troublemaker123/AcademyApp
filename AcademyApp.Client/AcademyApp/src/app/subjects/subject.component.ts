@@ -1,10 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatPaginator, MatDialog, MatTableDataSource } from '@angular/material';
-import { FormGroup, FormControl, NgForm } from '@angular/forms';
+import { Subscription } from 'rxjs/Subscription';
+
 import { SubjectService } from '../admin/subject.service';
 import { Subjects } from '../shared/models/subjects';
 import { SubjectDialogComponent } from './subject-dialog.component';
 import { SubjectWarnDialogComponent } from './subject-warn-dialog.component';
+import { AcademyProgramService } from '../admin/academy-year/academy-program.service';
 
 
 
@@ -12,19 +14,37 @@ import { SubjectWarnDialogComponent } from './subject-warn-dialog.component';
   selector: 'subject',
   templateUrl: 'subject.component.html'
 })
-export class SubjectsComponent implements OnInit {
+export class SubjectsComponent implements OnInit, OnDestroy {
+
+  public academyProgramId: number;
+  public subject: MatTableDataSource<any>;
   public subjects: Subjects[] = [];
   columnsToDisplay = ['name', 'description', 'Actions'];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
+  private subscription: Subscription;
+
   constructor(
+    private academyProgramService: AcademyProgramService,
     private subjectService: SubjectService,
     public dialog: MatDialog
-  ) { }
+  ) {
+    this.subscription = this.academyProgramService.getAcademyProgramIdEvent().subscribe(data => {
+      this.academyProgramId = data.academyProgramId;
+      this.getAllSubjects(this.academyProgramId)
+    });
+  }
 
 
   public ngOnInit() {
-    this.getAllSubjects();
+    this.academyProgramId = this.academyProgramService.getAcademyProgramId();
+    if (this.academyProgramId) {
+      this.getAllSubjects(this.academyProgramId);
+    }
+  }
+  public ngOnDestroy() {
+    // unsubscribe to ensure no memory leaks
+    this.subscription.unsubscribe();
   }
 
   public openDialog(subject: Subjects): void {
@@ -36,7 +56,7 @@ export class SubjectsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'ok') {
-        this.getAllSubjects();
+        this.getAllSubjects(this.academyProgramId);
       }
     });
   }
@@ -60,12 +80,12 @@ export class SubjectsComponent implements OnInit {
   private deleteSubject(subjectId: number) {
     this.subjectService.delete(subjectId)
       .subscribe(result => {
-        this.getAllSubjects();
+        this.getAllSubjects(this.academyProgramId);
       });
   }
 
-  private getAllSubjects() {
-    this.subjectService.GetAllSubjects()
+  private getAllSubjects(academyProgramId: number) {
+    this.subjectService.GetAllSubjects(academyProgramId)
       .subscribe(result => {
         this.subjects = result;
       });

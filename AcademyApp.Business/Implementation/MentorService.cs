@@ -23,14 +23,17 @@ namespace AcademyApp.Business
 
         public void Create(MentorViewModel mentor)
         {
+            if (mentor == null)
+                throw new Exception("student not found");
             
             var domain = mentor.ToDomain();
            _apRepository.Create(domain);
         }
 
-        public IEnumerable<MentorViewModel> GetAll()
+        public IEnumerable<MentorViewModel> GetAll(int academyProgramId)
         {
-            return _apRepository.GetAll().Select(mentor => mentor.ToModel()).ToList();
+            return _apRepository.GetAll().Where(mentor => mentor.ApId ==academyProgramId)
+                .Select(mentor => mentor.ToModel()).ToList();
         }
 
         public MentorViewModel FindById(int mentorId)

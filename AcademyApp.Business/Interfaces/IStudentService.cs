@@ -10,7 +10,7 @@ namespace AcademyApp.Business.Interfaces
         void Create(StudentViewModel student);
         void Delete(StudentViewModel student);
         void Update(StudentViewModel student);
-        IEnumerable<StudentViewModel> GetAll();
+        IEnumerable<StudentViewModel> GetAll(int academyProgramId);
         StudentViewModel FindById(int studentId);
 
     }

@@ -48,6 +48,17 @@ namespace AcademyApp.Business
             program.IsCurrent = academyProgram.IsCurrent;
 
             _academyProgramRepository.Update(program);
+
+            if (academyProgram.IsCurrent)
+            {
+                var academyPrograms = _academyProgramRepository.GetAll().Where(ap => ap.IsCurrent && ap.Id != program.Id).ToList();
+                foreach (var item in academyPrograms)
+                {
+                    item.IsCurrent = false;
+                    _academyProgramRepository.Update(item);
+                }
+            }
+
         }
 
         public AcademyProgramViewModel FindById(int academyProgramId)

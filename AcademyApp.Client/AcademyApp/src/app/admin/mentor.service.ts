@@ -12,8 +12,8 @@ export class MentorService{
     constructor(private http: HttpClient) { }
    
 
-    public GetAllMentors(): Observable<Mentor[]> {
-        return this.http.get<Mentor[]>(this.baseApiUrl + "mentor/get-all");
+    public GetAllMentors(academyProgramId : number): Observable<Mentor[]> {
+        return this.http.get<Mentor[]>(this.baseApiUrl + "mentor/get-all/" + academyProgramId);
     }
     public create(mentors : Mentor): Observable<Mentor> {
         return this.http.post<Mentor>(this.baseApiUrl + 'mentor/create', mentors);

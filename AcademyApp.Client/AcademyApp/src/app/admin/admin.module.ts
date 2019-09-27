@@ -31,6 +31,7 @@ import { SubjectsComponent } from '../subjects/subject.component';
 import { MentorWarnDialogComponent } from './mentors/mentor-warn-dialog';
 
 
+
 @NgModule({
   declarations: [
     AdminComponent,
@@ -74,7 +75,8 @@ import { MentorWarnDialogComponent } from './mentors/mentor-warn-dialog';
     StudentService,
     MentorService,
     SubjectService,
-    AcademyProgramService
+    AcademyProgramService,
+ 
   ],
 
 })

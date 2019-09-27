@@ -1,55 +1,56 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { Student } from 'src/app/shared/models/student';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatPaginator, MatDialog, MatSort, MatTableDataSource } from '@angular/material';
+import { Subscription } from 'rxjs/Subscription';
+
+import { Student } from 'src/app/shared/models/student';
 import { StudentService } from '../student.service';
 import { StudentDialogComponent } from './student-dialog.component';
 import { StudentWarnDialogComponent } from './student-warn-dialog';
+import { AcademyProgramService } from '../academy-year/academy-program.service';
 
 
 @Component({
     selector: 'student',
     templateUrl: './students.component.html'
 })
-export class StudentsComponent implements OnInit {
-  
+export class StudentsComponent implements OnInit, OnDestroy {
 
-   public student : MatTableDataSource<any>;
-
-
+    public academyProgramId: number;
+    public student: MatTableDataSource<any>;
     public students: Student[] = [];
-    columnsToDisplay = ['name', 'lastName', 'mobile', 'gender', 'country', 'graduationYear', 'emailAdress', 'dateOfBirth', 'dateOfEnrollment', 'placeOfBirth', 'Actions'];
+    columnsToDisplay = ['name', 'lastName', 'emailAdress', 'address', 'dateOfBirth', 'placeOfBirth', 'mobile', 'country', 'graduationYear', 'dateOfEnrollment', 'gender', 'Actions'];
     @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-    @ViewChild(MatSort, {static: true}) sort: MatSort;
+    @ViewChild(MatSort, { static: true }) sort: MatSort;
+
+    private subscription: Subscription;
+
     constructor(
         private studentService: StudentService,
+        public academyProgramService: AcademyProgramService,
         public dialog: MatDialog
-    ) { }
+    ) {
+        this.subscription = this.academyProgramService.getAcademyProgramIdEvent()
+            .subscribe(data => {
+                this.academyProgramId = data.academyProgramId;
+                this.GetAllStudents(this.academyProgramId)
+            });
+    }
 
 
     public ngOnInit() {
-        this.GetAllStudents();
-        // this.studentService.GetAllStudents().subscribe(
-        //     list =>{
-        //         let array = list.map(item =>{
-        //             return{
-        //                 $id :item.id,
-        //             ...item.name.
-        //             };
-        //         });
-        //         this.student = new MatTableDataSource(array);
-        //         this.student.sort = this.sort;
-        //     });
-    }
-    
-    // ngAfterViewInit(): void {
-    //     this.student.sort = this.sort;
-    //  }
+        this.academyProgramId = this.academyProgramService.getAcademyProgramId();
+        if (this.academyProgramId) {
+            this.GetAllStudents(this.academyProgramId);
+        }
 
-    //  public loadStudents() {
-    //     this.studentService.GetAllStudents().subscribe(result => {
-    //         this.student.data = result;
-    //     });
-    //  }
+    }
+
+    public ngOnDestroy() {
+        // unsubscribe to ensure no memory leaks
+        this.subscription.unsubscribe();
+    }
+
+
 
     public openDialog(student: Student): void {
         const dialogRef = this.dialog.open(StudentDialogComponent, {
@@ -60,7 +61,7 @@ export class StudentsComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(result => {
             if (result === 'ok') {
-                this.GetAllStudents();
+                this.GetAllStudents(this.academyProgramId);
             }
         });
     }
@@ -83,12 +84,12 @@ export class StudentsComponent implements OnInit {
     private deleteStudent(studentId: number) {
         this.studentService.delete(studentId)
             .subscribe(result => {
-                this.GetAllStudents();
+                this.GetAllStudents(this.academyProgramId);
             });
     }
 
-    private GetAllStudents() {
-        this.studentService.GetAllStudents()
+    private GetAllStudents(academyProgramId: number) {
+        this.studentService.GetAllStudents(academyProgramId)
             .subscribe(result => {
                 this.students = result;
             });

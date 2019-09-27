@@ -1,8 +1,6 @@
 <mat-icon id="close-icon" style="float:right; cursor: pointer" title="Close" (click)=onCancel()>close</mat-icon>
-<mat-toolbar>
-  <span>{{title}}</span>
-</mat-toolbar>
 
+  <h1 mat-dialog-title>{{title}}</h1>
 
 <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
   <div mat-dialog-content style="overflow-y: hidden;"></div>

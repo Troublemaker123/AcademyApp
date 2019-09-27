@@ -9,7 +9,7 @@ namespace AcademyApp.Data
         void Update(T entity);
         void Delete(T entity);
         IEnumerable<T> GetAll();
-        T FindById(object id);
+        T FindById( object id);
        void SetActivity(bool entity);
     }
 }

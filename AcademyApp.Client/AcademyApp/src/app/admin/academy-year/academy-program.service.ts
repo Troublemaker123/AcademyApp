@@ -1,16 +1,31 @@
 
 import { Injectable } from '@angular/core';
-import { AcademyProgram } from 'src/app/shared/models/academyProgram';
+import { Observable } from 'rxjs';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class AcademyProgramService {
-    private academyProgram: AcademyProgram;
+    private subject = new Subject<any>();
+    private academyProgramId: number;
 
-    public setAcademyProgram(academyProgram: AcademyProgram) {
-        this.academyProgram = academyProgram;
+    public setAcademyProgramId(academyProgramId: number) {
+        this.academyProgramId = academyProgramId;
     }
 
-    public getAcademyProgram() : AcademyProgram {
-        return this.academyProgram;
+    public getAcademyProgramId() : number {
+        return this.academyProgramId;
+    }
+
+    public setAcademyProgramIdEvent(academyProgramId: number) {
+        this.academyProgramId = academyProgramId;
+        this.subject.next({ academyProgramId: academyProgramId });
+    }
+
+    public clearAcademyProgramIdEvent() {
+        this.subject.next();
+    }
+
+    public getAcademyProgramIdEvent(): Observable<any> {
+        return this.subject.asObservable();
     }
 }

@@ -87,13 +87,13 @@ namespace AcademyApp.Api.Controllers
         }
 
         //  api/mentor/get-all
-        [Route("get-all")]
+        [Route("get-all/{academyProgramId}")]
         [HttpGet]
-        public ActionResult<List<MentorViewModel>> GetAll()
+        public ActionResult<List<MentorViewModel>> GetAll(int academyProgramId)
         {
             try
             {
-                var mentors = _mentorService.GetAll();
+                var mentors = _mentorService.GetAll(academyProgramId);
                 return Ok(mentors);
             }
             catch (Exception ex)

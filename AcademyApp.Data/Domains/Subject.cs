@@ -8,11 +8,15 @@ namespace AcademyApp.Data.Model
     public class Subject
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key, Column(Order = 0)]
+        
         public int ID { get; set; }
+        [Column("ApId")]
+        public int ApId { get; set; }
+
         [Required]
         [StringLength(255)]
         public string Name { get; set; }
+
         [Required]
         [StringLength(255)]
         public string Description{ get; set; }

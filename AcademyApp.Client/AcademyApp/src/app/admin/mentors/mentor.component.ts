@@ -1,36 +1,53 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { MatPaginator, MatDialog, MatTableDataSource, MatSort } from '@angular/material';
-import { FormGroup, FormControl, NgForm } from '@angular/forms';
+import { Subscription } from 'rxjs/Subscription';
+
 import { Mentor } from 'src/app/shared/models/mentors';
 import { MentorService } from '../mentor.service';
 import { MentorDialogComponent } from './mentor-dialog.component';
 import { MentorWarnDialogComponent } from './mentor-warn-dialog';
+import { AcademyProgramService } from '../academy-year/academy-program.service';
 
 @Component({
   selector: 'mentor',
   templateUrl: 'mentor.component.html'
 })
 
-export class MentorComponent implements OnInit, AfterViewInit {
+export class MentorComponent implements OnInit,OnDestroy {
+
+  public academyProgramId: number;
   public mentor = new MatTableDataSource<Mentor>();
   public mentors: Mentor[] = [];
-  columnsToDisplay = ['name', 'lastName', 'specialty','telephone','email','yearsOfService','Actions'];
+  columnsToDisplay = ['name', 'lastName', 'email', 'telephone', 'specialty', 'yearsOfService', 'Actions'];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+
+  private subscription: Subscription;
+
   constructor(
     private mentorService: MentorService,
+    public academyProgramService: AcademyProgramService,
     public dialog: MatDialog
-  ) { }
+  ) { 
+    this.subscription = this.academyProgramService.getAcademyProgramIdEvent()
+      .subscribe(data => {
+        this.academyProgramId = data.academyProgramId;
+        this.GetAllMentors(this.academyProgramId)
+      });
+  }
 
 
   public ngOnInit() {
-    this.GetAllMentors();
+    this.academyProgramId = this.academyProgramService.getAcademyProgramId();
+    if(this.academyProgramId) {
+        this.GetAllMentors(this.academyProgramId);
+  }
+  }
+  public ngOnDestroy() {
+    // unsubscribe to ensure no memory leaks
+    this.subscription.unsubscribe();
   }
 
-
-  ngAfterViewInit(): void {
-    this.mentor.sort = this.sort;
-  }
   public openDialog(mentor: Mentor): void {
     const dialogRef = this.dialog.open(MentorDialogComponent, {
       width: '500px',
@@ -40,7 +57,7 @@ export class MentorComponent implements OnInit, AfterViewInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'ok') {
-        this.GetAllMentors();
+        this.GetAllMentors(this.academyProgramId);
       }
     });
   }
@@ -50,7 +67,7 @@ export class MentorComponent implements OnInit, AfterViewInit {
       // new Warning Dialog
       width: '300px',
       disableClose: true,
-      data: { mentors : mentors }
+      data: { mentors: mentors }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -63,12 +80,12 @@ export class MentorComponent implements OnInit, AfterViewInit {
   private deleteMentor(mentorId: number) {
     this.mentorService.delete(mentorId)
       .subscribe(result => {
-        this.GetAllMentors();
+        this.GetAllMentors(this.academyProgramId);
       });
   }
 
-  private GetAllMentors() {
-    this.mentorService.GetAllMentors()
+  private GetAllMentors(academyProgramId : number) {
+    this.mentorService.GetAllMentors(academyProgramId)
       .subscribe(result => {
         this.mentors = result;
       });

@@ -16,8 +16,8 @@ export class SubjectService {
     constructor(private http: HttpClient) { }
    
 
-    public GetAllSubjects(): Observable<Subjects[]> {
-        return this.http.get<Subjects[]>(this.baseApiUrl + "subject/get-all");
+    public GetAllSubjects(academyProgramId:number): Observable<Subjects[]> {
+        return this.http.get<Subjects[]>(this.baseApiUrl + "subject/get-all/" + academyProgramId);
     }
     public create(subjectId : Subjects): Observable<Subjects> {
         return this.http.post<Subjects>(this.baseApiUrl + 'subject/create', subjectId);

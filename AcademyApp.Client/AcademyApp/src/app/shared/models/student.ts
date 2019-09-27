@@ -2,7 +2,11 @@ export class Student {
 
   public id: number;
 
+  public academyProgramId: number;
+
   public name: string;
+
+  public address: string;
 
   public lastName: string;
 
@@ -21,7 +25,5 @@ export class Student {
   public dateOfBirth: Date;
 
   public dateOfEnrollment: Date;
-
-  public academyProgramId: number;
 
 }

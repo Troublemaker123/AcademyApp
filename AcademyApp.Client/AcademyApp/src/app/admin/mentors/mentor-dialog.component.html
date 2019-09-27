@@ -1,9 +1,9 @@
 <div>
   <div class="container">
-    <mat-icon id="close-icon" style="float:right; cursor: pointer" title="Close" (click)=onCancel()>close</mat-icon>
-    <mat-toolbar>
-      <span>{{title}}</span>
-    </mat-toolbar>
+      <mat-icon id="close-icon" style="float:right; cursor: pointer" title="Close" (click)=onCancel()>close</mat-icon>
+  
+
+      <h1 mat-dialog-title>{{title}}</h1>
 
     <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
 
@@ -39,19 +39,19 @@
 
 
         <mat-form-field style="width: 100%">
-          <input matInput placeholder="Years Of Service" [(ngModel)]="mentors.yearsOfService"
-            [ngModelOptions]="{standalone: true}" class="form-control" #yearsOfService="ngModel" id="yearsOfService"
-            yearsOfService="yearsOfService" required maxlength="255" autocomplete="off">
-          <mat-error *ngIf="yearsOfService.invalid && (yearsOfService.dirty || yearsOfService.touched)"
-            class="alert alert-danger">
-            <div *ngIf="yearsOfService.errors.required">
-              Years Of Service is mandatory.
-            </div>
-            <mat-error *ngIf="yearsOfService.errors.maxlength">
-              Years Of Service limit is 255 characters long.
+            <input matInput placeholder="Email Address" [(ngModel)]="mentors.email" [ngModelOptions]="{standalone: true}"
+              class="form-control" #email="ngModel" id="email" email="email" required email maxlength="255" autocomplete="off">
+            <mat-error *ngIf="email.invalid && (email.dirty || email.touched)"
+             class="alert alert-danger">
+              <div *ngIf="email.errors.required">
+                Email is mandatory.
+              </div>
+              <mat-error *ngIf="email.errors.maxlength">
+                Email limit is 255 characters long.
+              </mat-error>
+              <mat-error *ngIf="email.errors.email">Email must be valid!</mat-error>
             </mat-error>
-          </mat-error>
-        </mat-form-field>
+          </mat-form-field>
 
 
         <mat-form-field style="width: 100%">
@@ -70,38 +70,40 @@
 
 
         <mat-form-field style="width: 100%">
-          <input matInput placeholder="Specialty" [(ngModel)]="mentors.specialty" [ngModelOptions]="{standalone: true}"
-            class="form-control" #specialty="ngModel" id="specialty" specialty="specialty" required maxlength="255"
-            autocomplete="off">
-          <mat-error *ngIf="specialty.invalid && (specialty.dirty || specialty.touched)" class="alert alert-danger">
-            <div *ngIf="specialty.errors.required">
-              Specialty is mandatory.
-            </div>
-            <mat-error *ngIf="specialty.errors.maxlength">
-              Specialty limit is 255 characters long.
+            <input matInput placeholder="Specialty" [(ngModel)]="mentors.specialty" [ngModelOptions]="{standalone: true}"
+              class="form-control" #specialty="ngModel" id="specialty" specialty="specialty" required maxlength="255"
+              autocomplete="off">
+            <mat-error *ngIf="specialty.invalid && (specialty.dirty || specialty.touched)" class="alert alert-danger">
+              <div *ngIf="specialty.errors.required">
+                Specialty is mandatory.
+              </div>
+              <mat-error *ngIf="specialty.errors.maxlength">
+                Specialty limit is 255 characters long.
+              </mat-error>
             </mat-error>
-          </mat-error>
-        </mat-form-field>
+          </mat-form-field>
 
 
         <mat-form-field style="width: 100%">
-          <input matInput placeholder="Email" [(ngModel)]="mentors.email" [ngModelOptions]="{standalone: true}"
-            class="form-control" #email="ngModel" id="email" email="email" required maxlength="255" autocomplete="off">
-          <mat-error *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
-            <div *ngIf="email.errors.required">
-              Email is mandatory.
-            </div>
-            <mat-error *ngIf="email.errors.maxlength">
-              Email limit is 255 characters long.
+            <input matInput placeholder="Years Of Service" [(ngModel)]="mentors.yearsOfService"
+              [ngModelOptions]="{standalone: true}" class="form-control" #yearsOfService="ngModel" id="yearsOfService"
+              yearsOfService="yearsOfService" required maxlength="255" autocomplete="off">
+            <mat-error *ngIf="yearsOfService.invalid && (yearsOfService.dirty || yearsOfService.touched)"
+              class="alert alert-danger">
+              <div *ngIf="yearsOfService.errors.required">
+                Years Of Service is mandatory.
+              </div>
+              <mat-error *ngIf="yearsOfService.errors.maxlength">
+                Years Of Service limit is 255 characters long.
+              </mat-error>
             </mat-error>
-          </mat-error>
-        </mat-form-field>
+          </mat-form-field>
 
 
       </div>
       <div mat-dialog-actions style="float:right">
         <button mat-button title="Cancel" (click)="onCancel()">Cancel</button>
-        <button mat-flat-button cdkFocusInitial color="primary" title="OK" (click)="onSubmit()">OK</button>
+        <button mat-flat-button cdkFocusInitial color="primary" title="OK">OK</button>
       </div>
 
     </form>

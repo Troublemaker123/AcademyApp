@@ -13,8 +13,8 @@ export class StudentService{
     constructor(private http: HttpClient) { }
    
 
-    public GetAllStudents(): Observable<Student[]> {
-        return this.http.get<Student[]>(this.baseApiUrl + "student/get-all");
+    public GetAllStudents(academyProgramId: number): Observable<Student[]> {
+        return this.http.get<Student[]>(this.baseApiUrl + "student/get-all/" + academyProgramId);
     }
     public create(student : Student): Observable<Student> {
         return this.http.post<Student>(this.baseApiUrl + 'student/create', student);

@@ -5,6 +5,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { StudentService } from '../student.service';
 import { Student } from 'src/app/shared/models/student';
 import { AcademyProgramService } from '../academy-year/academy-program.service';
+import { AcademyProgram } from 'src/app/shared/models/academyProgram';
+import { Subscriber } from 'rxjs';
 
 
 @Component({
@@ -16,6 +18,8 @@ export class StudentDialogComponent implements OnInit {
 
     public title: string;
 
+    public academyProgramObservable = Subscriber;
+
     private isEditMode: boolean = false;
 
     constructor(
@@ -26,7 +30,7 @@ export class StudentDialogComponent implements OnInit {
     ) { }
 
 
-    public ngOnInit() {
+    public ngOnInit() {       
         if (this.data.student) {
             // edit
             this.isEditMode = true;
@@ -47,11 +51,7 @@ export class StudentDialogComponent implements OnInit {
                 this.dialogRef.close('ok');
             });
         } else {
-            let academyProgram = this.academyProgramService.getAcademyProgram();
-            if(academyProgram != null)
-            {
-                this.student.academyProgramId = academyProgram.id;
-            }
+            this.student.academyProgramId = this.academyProgramService.getAcademyProgramId();
             this.studentService.create(this.student).subscribe(result => {
                 this.dialogRef.close('ok');
             });

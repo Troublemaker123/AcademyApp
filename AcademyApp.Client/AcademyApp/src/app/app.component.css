@@ -3,10 +3,12 @@
 
 body {
   margin: 0;
+  padding: 0%;
+  position: relative;
 }
 
 mat-sidenav-container, mat-sidenav-content, mat-sidenav {
-  height: 720px;
+  height: 2000px;
 }
 
 mat-sidenav {
@@ -19,7 +21,7 @@ a {
 
 a:hover,
 a:active {
-  color: rgb(242, 255, 0);
+  color: rgb(13, 160, 35);
 }
 
 .navigation-items {

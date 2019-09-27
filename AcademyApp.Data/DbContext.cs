@@ -17,8 +17,15 @@ namespace AcademyApp.Data
             });
 
             modelBuilder.Entity<AcademyProgram>().ToTable("AcademyProgram");
-            modelBuilder.Entity<Mentor>().ToTable("Mentor");
-            modelBuilder.Entity<Subject>().ToTable("Subject");
+
+            modelBuilder.Entity<Mentor>(entity =>
+            {
+                entity.HasKey(x => new { x.ID, x.ApId });
+            });
+            modelBuilder.Entity<Subject>(entity =>
+            {
+                entity.HasKey(x => new { x.ID, x.ApId });
+            });
         }
 
         public DbSet<Student> Students { get; set; }

@@ -24,9 +24,7 @@ namespace AcademyApp.Api.Controllers
         {
             try
             {
-                TryValidateModel(student);
-
-                if (ModelState.IsValid)
+                //if (modelstate.isvalid)
                     _studentService.Create(student);
                     return Ok();
                 
@@ -93,14 +91,14 @@ namespace AcademyApp.Api.Controllers
         }
 
         // POST api/student/get-all
-        [Route("get-all")]
+        [Route("get-all/{academyProgramId}")]
         [HttpGet]
-        public ActionResult<List<StudentViewModel>> GetAll()
+        public ActionResult<List<StudentViewModel>> GetAll(int academyProgramId)
         {
 
             try
             {
-                var students = _studentService.GetAll();
+                var students = _studentService.GetAll(academyProgramId);
                 return Ok(students);
             }
             catch (Exception ex)

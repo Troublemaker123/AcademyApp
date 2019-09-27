@@ -4,6 +4,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { Subjects } from '../shared/models/subjects';
 import { SubjectService } from '../admin/subject.service';
+import { AcademyProgramService } from '../admin/academy-year/academy-program.service';
+import { Subscriber } from 'rxjs';
+
 
 @Component({
   templateUrl: 'subject-dialog.component.html'
@@ -11,13 +14,16 @@ import { SubjectService } from '../admin/subject.service';
 export class SubjectDialogComponent implements OnInit {
 
   public subject: Subjects = new Subjects();
-  
+
   public title: string;
+
+public academyProgramObservable = Subscriber;
 
   private isEditMode: boolean = false;
 
   constructor(
     private subjectService: SubjectService,
+    private academyProgramService: AcademyProgramService,
     private dialogRef: MatDialogRef<SubjectDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
@@ -42,6 +48,7 @@ export class SubjectDialogComponent implements OnInit {
         this.dialogRef.close('ok');
       });
     } else {
+      this.subject.academyProgramId = this.academyProgramService.getAcademyProgramId();
       this.subjectService.create(this.subject).subscribe(result => {
         this.dialogRef.close('ok');
       });

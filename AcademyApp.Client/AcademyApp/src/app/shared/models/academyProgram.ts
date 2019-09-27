@@ -8,5 +8,4 @@ export class AcademyProgram {
 
     public  isCurrent :boolean
 
-
 }

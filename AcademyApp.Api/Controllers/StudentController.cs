@@ -37,13 +37,13 @@ namespace AcademyApp.Api.Controllers
 
         }
 
-        [Route("delete/{studentId}")]
+        [Route("delete/{studentId}/{academyProgramId}")]
         [HttpDelete]
-        public ActionResult Delete(StudentViewModel student)
+        public ActionResult Delete(int studentId, int academyProgramId)
         {
             try
             {
-                _studentService.Delete(student);
+                _studentService.Delete(studentId, academyProgramId);
                 return Ok();
             }
             catch (Exception ex)

@@ -20,15 +20,13 @@ import { AdminComponent } from './admin.component';
 import { AcademyYearComponent } from './academy-year/academy-year.component';
 import { AcademyYearDialogComponent } from './academy-year/academy-year-dialog.component';
 import { StudentsComponent } from './students/students.component';
-import { AcademyYearWarnDialogComponent } from './academy-year/academy-year-warn-dialog-component';
 import { StudentDialogComponent } from './students/student-dialog.component';
-import { StudentWarnDialogComponent } from './students/student-warn-dialog';
 import { MentorDialogComponent } from './mentors/mentor-dialog.component';
 import { MentorComponent } from './mentors/mentor.component';
 import { SubjectDialogComponent } from '../subjects/subject-dialog.component';
-import { SubjectWarnDialogComponent } from '../subjects/subject-warn-dialog.component';
 import { SubjectsComponent } from '../subjects/subject.component';
-import { MentorWarnDialogComponent } from './mentors/mentor-warn-dialog';
+
+import { WarnDialogComponent } from '../shared/warn-dialog/warn-dialog';
 
 
 
@@ -38,32 +36,25 @@ import { MentorWarnDialogComponent } from './mentors/mentor-warn-dialog';
     AcademyYearComponent,
     StudentsComponent,
     AcademyYearDialogComponent,
-    AcademyYearWarnDialogComponent,
     StudentDialogComponent,
-    StudentWarnDialogComponent,
     MentorDialogComponent,
-    MentorWarnDialogComponent,
     MentorComponent,
     SubjectDialogComponent,
-    SubjectWarnDialogComponent,
-    SubjectsComponent
+    SubjectsComponent,
+    WarnDialogComponent,
   ],
   entryComponents: [
     AcademyYearDialogComponent,
-    AcademyYearWarnDialogComponent,
     StudentDialogComponent,
-    StudentWarnDialogComponent,
     MentorDialogComponent,
-    MentorWarnDialogComponent,
     SubjectDialogComponent,
-    SubjectWarnDialogComponent,
+    WarnDialogComponent,
 
   ],
   imports: [
     CommonModule,
     HttpClientModule,
     AdminRoutingModule,
-    ReactiveFormsModule,
     FormsModule,
     SharedModule,
     MatSortModule,

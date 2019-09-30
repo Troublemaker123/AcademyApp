@@ -55,9 +55,9 @@ namespace AcademyApp.Business
             _subjectRepository.Update(subjects);
         }
 
-        public void Delete(SubjectViewModel subject)
+        public void Delete(int subjectId, int academyProgramId)
         {
-            var subjects = _subjectRepository.FindById(subject.ID);
+            var subjects = _subjectRepository.FindByMultipleId(subjectId, academyProgramId);
             if (subjects == null)
                 throw new Exception("subject not found");
 

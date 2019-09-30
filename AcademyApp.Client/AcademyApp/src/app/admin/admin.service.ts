@@ -21,7 +21,7 @@ export class AdminService {
         return this.http.post<AcademyProgram>(this.baseApiUrl + 'academyprogram/create', academyProgram);
     }
     public delete(academyProgramId: number): Observable<any> {
-        return this.http.delete<AcademyProgram>(`${this.baseApiUrl}academyprogram/delete/${academyProgramId}`);
+        return this.http.delete<any>(`${this.baseApiUrl}academyprogram/delete/${academyProgramId}`);
     }
     public update(value: any): Observable<object> {
         return this.http.put(`${this.baseApiUrl}/academyprogram/update`, value);

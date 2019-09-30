@@ -36,6 +36,11 @@ namespace AcademyApp.Data
             return _dbContext.Set<T>().Find(id);
         }
 
+        public T FindByMultipleId(object firstId, object secondId)
+        {
+            return _dbContext.Set<T>().Find(firstId, secondId);
+        }
+
         public void Update(T entity)
         {
             _dbContext.Set<T>().Update(entity);

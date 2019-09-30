@@ -22,8 +22,8 @@ export class SubjectService {
     public create(subjectId : Subjects): Observable<Subjects> {
         return this.http.post<Subjects>(this.baseApiUrl + 'subject/create', subjectId);
     }
-    public delete(subjectId: number): Observable<any> {
-        return this.http.delete<Subjects>(`${this.baseApiUrl}subject/delete/${subjectId}`);
+    public delete(subjectId: number,academyProgramId:number): Observable<any> {
+        return this.http.delete<any>(`${this.baseApiUrl}subject/delete/${subjectId}/${academyProgramId}`);
     }
     public update(value: any): Observable<object> {
         return this.http.put(`${this.baseApiUrl}/subject/update`, value);

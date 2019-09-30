@@ -1,11 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { NgForm, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { StudentService } from '../student.service';
 import { Student } from 'src/app/shared/models/student';
 import { AcademyProgramService } from '../academy-year/academy-program.service';
-import { AcademyProgram } from 'src/app/shared/models/academyProgram';
 import { Subscriber } from 'rxjs';
 
 

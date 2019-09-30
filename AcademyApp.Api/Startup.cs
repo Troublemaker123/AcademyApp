@@ -1,7 +1,9 @@
 ﻿using AcademyApp.Business;
 using AcademyApp.Business.Implementation;
 using AcademyApp.Business.Interfaces;
+using AcademyApp.Business.Validators;
 using AcademyApp.Data;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -31,6 +33,15 @@ namespace AcademyApp.Api
             }));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            //services.AddMvc()
+            //.AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<AcademyProgramValidators>());
+            //services.AddMvc()
+            //.AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<StudentValidators>());
+            // services.AddMvc()
+            // .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<MentorValidators>());
+            // services.AddMvc()
+            //.AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<SubjectValidators>());
 
             services.AddDbContext<Context>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("AcademyAppDB")));

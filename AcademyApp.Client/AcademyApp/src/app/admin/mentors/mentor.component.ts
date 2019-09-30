@@ -5,8 +5,8 @@ import { Subscription } from 'rxjs/Subscription';
 import { Mentor } from 'src/app/shared/models/mentors';
 import { MentorService } from '../mentor.service';
 import { MentorDialogComponent } from './mentor-dialog.component';
-import { MentorWarnDialogComponent } from './mentor-warn-dialog';
 import { AcademyProgramService } from '../academy-year/academy-program.service';
+import { WarnDialogComponent } from 'src/app/shared/warn-dialog/warn-dialog';
 
 @Component({
   selector: 'mentor',
@@ -62,23 +62,23 @@ export class MentorComponent implements OnInit,OnDestroy {
     });
   }
 
-  public openWarningDialog(mentors: Mentor): void {
-    const dialogRef = this.dialog.open(MentorWarnDialogComponent, {
+  public openWarningDialog(mentor: Mentor): void {
+    const dialogRef = this.dialog.open(WarnDialogComponent, {
       // new Warning Dialog
       width: '300px',
       disableClose: true,
-      data: { mentors: mentors }
+      data: { mentors: mentor }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'ok') {
-        this.deleteMentor(mentors.id);
+        this.deleteMentor(mentor);
       }
     });
   }
 
-  private deleteMentor(mentorId: number) {
-    this.mentorService.delete(mentorId)
+  private deleteMentor(mentor: Mentor) {
+    this.mentorService.delete(mentor.id,mentor.academyProgramId)
       .subscribe(result => {
         this.GetAllMentors(this.academyProgramId);
       });

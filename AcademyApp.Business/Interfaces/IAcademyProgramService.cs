@@ -8,7 +8,7 @@ namespace AcademyApp.Business.Interfaces
     public interface IAcademyProgramService
     {
         void Create(AcademyProgramViewModel academyProgram);
-        void Delete(AcademyProgramViewModel academyProgram);
+        void Delete(int academyProgramId);
         void Update(AcademyProgramViewModel academyProgram);
         IEnumerable<AcademyProgramViewModel> GetAll();
         AcademyProgramViewModel FindById(int academyProgramId);

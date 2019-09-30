@@ -10,11 +10,11 @@ namespace AcademyApp.Api.Controllers
     [ApiController]
     public class SubjectController : ControllerBase
     {
-        private readonly ISubjectService _subService;
+        private readonly ISubjectService _subjecService;
 
         public SubjectController(ISubjectService subService)
         {
-            _subService = subService;
+            _subjecService = subService;
         }
         [Route("create")]
         [HttpPost]
@@ -22,7 +22,7 @@ namespace AcademyApp.Api.Controllers
         {
             try
             {
-                _subService.Create(subject);
+                _subjecService.Create(subject);
                 return Ok();
             }
             catch (Exception ex)
@@ -32,14 +32,14 @@ namespace AcademyApp.Api.Controllers
             }
           
         }
-        [Route("delete/{subjectId}")]
+        [Route("delete/{subjectId}/{academyProgramId}")]
         [HttpDelete]
-        public ActionResult Delete(SubjectViewModel subject)
+        public ActionResult Delete(int subjectId, int academyProgramId)
         {
 
             try
             {
-                _subService.Delete(subject);
+                _subjecService.Delete(subjectId,academyProgramId);
                 return Ok();
             }
             catch (Exception ex)
@@ -56,7 +56,7 @@ namespace AcademyApp.Api.Controllers
         {
             try
             {
-                _subService.Update(subject);
+                _subjecService.Update(subject);
                 return Ok();
             }
             catch (Exception ex)
@@ -74,7 +74,7 @@ namespace AcademyApp.Api.Controllers
 
             try
             {
-                var subject = _subService.FindById(subjectId);
+                var subject = _subjecService.FindById(subjectId);
                 return Ok(subject);
             }
             catch (Exception ex)
@@ -92,7 +92,7 @@ namespace AcademyApp.Api.Controllers
         {
             try
             {
-                var subjects = _subService.GetAll(academyProgramId);
+                var subjects = _subjecService.GetAll(academyProgramId);
                 return Ok(subjects);
             }
             catch (Exception ex)

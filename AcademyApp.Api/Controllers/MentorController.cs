@@ -33,14 +33,14 @@ namespace AcademyApp.Api.Controllers
             }
 
         }
-        [Route("delete/{mentorId}")]
+        [Route("delete/{mentorId}/{academyProgramId}")]
         [HttpDelete]
-        public ActionResult Delete(MentorViewModel mentor)
+        public ActionResult Delete(int mentorId, int academyProgramId)
         {
 
             try
             {
-                _mentorService.Delete(mentor);
+                _mentorService.Delete(mentorId, academyProgramId);
                 return Ok();
             }
             catch (Exception ex)

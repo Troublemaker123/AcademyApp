@@ -10,6 +10,7 @@ namespace AcademyApp.Data
         void Delete(T entity);
         IEnumerable<T> GetAll();
         T FindById( object id);
-       void SetActivity(bool entity);
+        T FindByMultipleId(object firstId, object secondId);
+        void SetActivity(bool entity);
     }
 }

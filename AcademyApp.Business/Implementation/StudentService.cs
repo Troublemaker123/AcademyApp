@@ -47,7 +47,7 @@ namespace AcademyApp.Business
 
         public void Update(StudentViewModel student)
         {
-            var students = _apRepository.FindById(student.ID);
+            var students = _apRepository.FindByMultipleId(student.ID, student.AcademyProgramId);
             if (students == null)
                 throw new Exception("student not found");
 
@@ -65,13 +65,12 @@ namespace AcademyApp.Business
             _apRepository.Update(students);
         }
 
-        public void Delete(StudentViewModel student)
+        public void Delete(int studentId, int academyProgramId)
         {
-            var students = _apRepository.FindById(student);
+            var students = _apRepository.FindByMultipleId(studentId, academyProgramId);
             if (students == null)
                 throw new Exception("student not found");
 
-            students.ToModel();
             _apRepository.Delete(students);
         }
     }

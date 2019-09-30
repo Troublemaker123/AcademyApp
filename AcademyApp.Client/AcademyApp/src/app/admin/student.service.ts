@@ -19,8 +19,8 @@ export class StudentService{
     public create(student : Student): Observable<Student> {
         return this.http.post<Student>(this.baseApiUrl + 'student/create', student);
     }
-    public delete(studentId: number): Observable<any> {
-        return this.http.delete<Student>(`${this.baseApiUrl}student/delete/${studentId}`);
+    public delete(studentId: number, academyProgramId: number): Observable<any> {
+        return this.http.delete<any>(`${this.baseApiUrl}student/delete/${studentId}/${academyProgramId}`);
     }
     public update(value: any): Observable<object> {
         return this.http.put(`${this.baseApiUrl}/student/update`, value);

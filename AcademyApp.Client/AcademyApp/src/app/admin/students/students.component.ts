@@ -5,8 +5,8 @@ import { Subscription } from 'rxjs/Subscription';
 import { Student } from 'src/app/shared/models/student';
 import { StudentService } from '../student.service';
 import { StudentDialogComponent } from './student-dialog.component';
-import { StudentWarnDialogComponent } from './student-warn-dialog';
 import { AcademyProgramService } from '../academy-year/academy-program.service';
+import { WarnDialogComponent } from 'src/app/shared/warn-dialog/warn-dialog';
 
 
 @Component({
@@ -67,7 +67,7 @@ export class StudentsComponent implements OnInit, OnDestroy {
     }
 
     public openWarningDialog(student: Student): void {
-        const dialogRef = this.dialog.open(StudentWarnDialogComponent, {
+        const dialogRef = this.dialog.open(WarnDialogComponent, {
             // new Warning Dialog
             width: '300px',
             disableClose: true,
@@ -76,13 +76,13 @@ export class StudentsComponent implements OnInit, OnDestroy {
 
         dialogRef.afterClosed().subscribe(result => {
             if (result === 'ok') {
-                this.deleteStudent(student.id);
+                this.deleteStudent(student);
             }
         });
     }
 
-    private deleteStudent(studentId: number) {
-        this.studentService.delete(studentId)
+    private deleteStudent(student: Student) {
+        this.studentService.delete(student.id, student.academyProgramId)
             .subscribe(result => {
                 this.GetAllStudents(this.academyProgramId);
             });

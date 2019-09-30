@@ -61,13 +61,12 @@ namespace AcademyApp.Business
             _apRepository.Update(mentors);
         }
 
-        public void Delete(MentorViewModel mentor)
+        public void Delete(int mentorId, int academyProgramId)
         {
-            var mentors = _apRepository.FindById(mentor.ID);
+            var mentors = _apRepository.FindByMultipleId(mentorId, academyProgramId);
             if (mentors == null)
                 throw new Exception("mentor not found");
 
-            mentors.ToModel();
             _apRepository.Delete(mentors);
         }
     }

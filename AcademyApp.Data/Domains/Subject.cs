@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System;
 
 namespace AcademyApp.Data.Model
 {
@@ -20,10 +19,6 @@ namespace AcademyApp.Data.Model
         [Required]
         [StringLength(255)]
         public string Description{ get; set; }
-
-      //  public ICollection<Grade> grades { get; set; }
-
-       // public ICollection<Student> Students { get; set; }
 
     }
 }

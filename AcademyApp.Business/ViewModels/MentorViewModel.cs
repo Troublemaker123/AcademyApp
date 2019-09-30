@@ -11,6 +11,8 @@ namespace AcademyApp.Business.ViewModel
 
         public int ID { get; set; }
 
+        public int AcademyProgramId { get; set; }
+
         public string Name { get; set; }
 
         public string LastName { get; set; }
@@ -24,9 +26,6 @@ namespace AcademyApp.Business.ViewModel
         public string Specialty { get; set; }
 
         public string Telephone { get; set; }
-
-        public int AcademyProgramId { get; set; }
-
-     
+ 
     }
 }

@@ -18,8 +18,8 @@ export class MentorService{
     public create(mentors : Mentor): Observable<Mentor> {
         return this.http.post<Mentor>(this.baseApiUrl + 'mentor/create', mentors);
     }
-    public delete(mentorId: number): Observable<any> {
-        return this.http.delete<Mentor>(`${this.baseApiUrl}mentor/delete/${mentorId}`);
+    public delete(mentorId: number, academyProgramId: number): Observable<any> {
+        return this.http.delete<any>(`${this.baseApiUrl}mentor/delete/${mentorId}/${academyProgramId}`);
     }
     public update(value: any): Observable<object> {
         return this.http.put(`${this.baseApiUrl}/mentor/update`, value);

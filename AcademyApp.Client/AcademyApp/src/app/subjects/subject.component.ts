@@ -5,8 +5,8 @@ import { Subscription } from 'rxjs/Subscription';
 import { SubjectService } from '../admin/subject.service';
 import { Subjects } from '../shared/models/subjects';
 import { SubjectDialogComponent } from './subject-dialog.component';
-import { SubjectWarnDialogComponent } from './subject-warn-dialog.component';
 import { AcademyProgramService } from '../admin/academy-year/academy-program.service';
+import { WarnDialogComponent } from '../shared/warn-dialog/warn-dialog';
 
 
 
@@ -62,8 +62,7 @@ export class SubjectsComponent implements OnInit, OnDestroy {
   }
 
   public openWarningDialog(subject: Subjects): void {
-    debugger;
-    const dialogRef = this.dialog.open(SubjectWarnDialogComponent, {
+    const dialogRef = this.dialog.open(WarnDialogComponent, {
       // new Warning Dialog
       width: '300px',
       disableClose: true,
@@ -72,13 +71,13 @@ export class SubjectsComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'ok') {
-        this.deleteSubject(subject.id);
+        this.deleteSubject(subject);
       }
     });
   }
 
-  private deleteSubject(subjectId: number) {
-    this.subjectService.delete(subjectId)
+  private deleteSubject(subject: Subjects) {
+    this.subjectService.delete(subject.id,subject.academyProgramId)
       .subscribe(result => {
         this.getAllSubjects(this.academyProgramId);
       });

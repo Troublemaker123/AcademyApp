@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using AcademyApp.Business.Interfaces;
+﻿using AcademyApp.Business.Interfaces;
 using AcademyApp.Business.ViewModel;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
 
 
 namespace AcademyApp.Api.Controllers
@@ -22,13 +22,11 @@ namespace AcademyApp.Api.Controllers
         [HttpPost]
         public ActionResult Create(AcademyProgramViewModel academyProgram)
         {
-
+           
             try
             {
-        
-                _academyProgramService.Create(academyProgram);
+                    _academyProgramService.Create(academyProgram);
                     return Ok();
-               
             }
             catch (Exception ex)
             {
@@ -37,12 +35,11 @@ namespace AcademyApp.Api.Controllers
         }
         [Route("delete/{academyProgramId}")]
         [HttpDelete]
-        public ActionResult Delete(AcademyProgramViewModel academyProgram)
+        public ActionResult Delete(int academyProgramId)
         {
-           
             try
             {
-                _academyProgramService.Delete(academyProgram);
+                _academyProgramService.Delete(academyProgramId);
                 return Ok();
             }
             catch (Exception ex)

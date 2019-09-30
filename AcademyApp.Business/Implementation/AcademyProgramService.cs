@@ -81,9 +81,9 @@ namespace AcademyApp.Business
             _academyProgramRepository.SetActivity(active);
         }
 
-        public void Delete(AcademyProgramViewModel academyProgram)
+        public void Delete(int academyProgramId)
         {
-            var program = _academyProgramRepository.FindById(academyProgram);
+            var program = _academyProgramRepository.FindById(academyProgramId);
             if (program == null)
                 throw new Exception("academyProgram not found");
 

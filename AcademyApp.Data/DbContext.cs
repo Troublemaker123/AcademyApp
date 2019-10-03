@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using AcademyApp.Model;
 using AcademyApp.Data.Model;
+using AcademyApp.Data.Domains;
 
 namespace AcademyApp.Data
 {
@@ -11,6 +12,7 @@ namespace AcademyApp.Data
         { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             modelBuilder.Entity<Student>(entity =>
             {
                 entity.HasKey(x => new { x.ID, x.ApId });
@@ -26,8 +28,19 @@ namespace AcademyApp.Data
             {
                 entity.HasKey(x => new { x.ID, x.ApId });
             });
+
+            modelBuilder.Entity<Group>(entity =>
+            {
+                entity.HasKey(x => new { x.ID, x.ApId});
+            });
+
+            modelBuilder.Entity<GroupMembers>(entity =>
+            {
+                entity.HasKey(x => new { x.Id, x.ApId, x.UserId });
+            });
         }
 
+        public DbSet<GroupMembers> GroupMembers { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Mentor> Mentors { get; set; }
         public DbSet<Group> Groups { get; set; }

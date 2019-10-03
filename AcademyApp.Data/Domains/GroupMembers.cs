@@ -1,10 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AcademyApp.Data.Domains
 {
-    class GroupMembers
+   public class GroupMembers
     {
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+
+        [Column("Apid")]
+        public int ApId { get; set; }
+
+        [Column("GroupId")]
+        public int GroupId { get; set; }
+
+        [Column("UserId")]
+        public int UserId { get; set; }
+
+        [Required]
+        public string UserType { get; set; }
+
     }
 }

@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 import { NgForm } from '@angular/forms';
@@ -8,13 +7,13 @@ import { NgForm } from '@angular/forms';
 })
 
   export class WarnDialogComponent implements OnInit {
-    
-    constructor(private dialogRef: MatDialogRef<any>) { }
-  
-    public ngOnInit() {}
-  
-    public onDelete() {this.dialogRef.close('ok');}
 
-   public onCancel(form: NgForm) {this.dialogRef.close('cancel');}
+    constructor(private dialogRef: MatDialogRef<any>) { }
+
+    public ngOnInit() {}
+
+    public onDelete() {this.dialogRef.close('ok'); }
+
+   public onCancel(form: NgForm) {this.dialogRef.close('cancel'); }
 
 }

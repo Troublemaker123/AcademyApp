@@ -6,6 +6,7 @@ import { AdminComponent } from './admin.component';
 import { StudentsComponent } from './students/students.component';
 import { MentorComponent } from './mentors/mentor.component';
 import { SubjectsComponent } from '../subjects/subject.component';
+import { GroupComponent } from './groups/group.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,9 @@ const routes: Routes = [
       },
       {
         path: 'subjects', component: SubjectsComponent
+      },
+      {
+        path: 'groups', component: GroupComponent
       }
     ]
   }

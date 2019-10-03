@@ -8,18 +8,19 @@ namespace AcademyApp.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MentorController : ControllerBase
+    public class GroupController : ControllerBase
     {
-        private readonly IMentorService _mentorService;
+        private readonly IGroupService _groupService;
 
-        public MentorController(IMentorService mentorService)
+        public GroupController(IGroupService groupService)
         {
-            _mentorService = mentorService;
+            _groupService = groupService;
         }
+
 
         [Route("create")]
         [HttpPost]
-        public ActionResult Create(MentorViewModel mentor)
+        public ActionResult Create(GroupViewModel group)
         {
             try
             {
@@ -27,8 +28,9 @@ namespace AcademyApp.Api.Controllers
                 {
                     throw new Exception(ModelState.ToString());
                 }
-                _mentorService.Create(mentor);
+                _groupService.Create(group);
                 return Ok();
+
             }
             catch (Exception ex)
             {
@@ -37,18 +39,18 @@ namespace AcademyApp.Api.Controllers
             }
 
         }
-        [Route("delete/{mentorId}/{academyProgramId}")]
+
+        [Route("delete/{groupId}/{academyProgramId}")]
         [HttpDelete]
-        public ActionResult Delete(int mentorId, int academyProgramId)
+        public ActionResult Delete(int groupId, int academyProgramId)
         {
-
             try
             {
                 if (!ModelState.IsValid)
                 {
                     throw new Exception(ModelState.ToString());
                 }
-                _mentorService.Delete(mentorId, academyProgramId);
+                _groupService.Delete(groupId,academyProgramId);
                 return Ok();
             }
             catch (Exception ex)
@@ -57,12 +59,12 @@ namespace AcademyApp.Api.Controllers
                 return BadRequest(ex.Message);
             }
 
-        }
 
+        }
 
         [Route("update")]
         [HttpPut]
-        public ActionResult Update(MentorViewModel mentor)
+        public ActionResult Update(GroupViewModel group)
         {
             try
             {
@@ -70,7 +72,7 @@ namespace AcademyApp.Api.Controllers
                 {
                     throw new Exception(ModelState.ToString());
                 }
-                _mentorService.Update(mentor);
+                _groupService.Update(group);
                 return Ok();
             }
             catch (Exception ex)
@@ -79,11 +81,12 @@ namespace AcademyApp.Api.Controllers
                 return BadRequest(ex.Message);
             }
 
+
         }
 
-        [Route("find-by-id/{mentorId}")]
+        [Route("find-by-id/{studentId}")]
         [HttpGet]
-        public ActionResult<MentorViewModel> FindById(int mentorId)
+        public ActionResult<GroupViewModel> FindById(int groupId)
         {
             try
             {
@@ -91,8 +94,8 @@ namespace AcademyApp.Api.Controllers
                 {
                     throw new Exception(ModelState.ToString());
                 }
-                var mentors = _mentorService.FindById(mentorId);
-                return Ok(mentors);
+                var students = _groupService.FindById(groupId);
+                return Ok(students);
             }
             catch (Exception ex)
             {
@@ -102,19 +105,20 @@ namespace AcademyApp.Api.Controllers
 
         }
 
-        //  api/mentor/get-all
+        // POST api/group/get-all
         [Route("get-all/{academyProgramId}")]
         [HttpGet]
-        public ActionResult<List<MentorViewModel>> GetAll(int academyProgramId)
+        public ActionResult<List<GroupViewModel>> GetAll(int groupId, int academyProgramId)
         {
+
             try
             {
                 if (!ModelState.IsValid)
                 {
                     throw new Exception(ModelState.ToString());
                 }
-                var mentors = _mentorService.GetAll(academyProgramId);
-                return Ok(mentors);
+                var groups = _groupService.GetAll(academyProgramId);
+                return Ok(groups);
             }
             catch (Exception ex)
             {

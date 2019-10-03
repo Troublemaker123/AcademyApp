@@ -10,7 +10,7 @@ import { WarnDialogComponent } from 'src/app/shared/warn-dialog/warn-dialog';
 
 
 @Component({
-    selector: 'student',
+    selector: 'app-student',
     templateUrl: './students.component.html'
 })
 export class StudentsComponent implements OnInit, OnDestroy {
@@ -18,7 +18,8 @@ export class StudentsComponent implements OnInit, OnDestroy {
     public academyProgramId: number;
     public student: MatTableDataSource<any>;
     public students: Student[] = [];
-    columnsToDisplay = ['name', 'lastName', 'emailAdress', 'address', 'dateOfBirth', 'placeOfBirth', 'mobile', 'country', 'graduationYear', 'dateOfEnrollment', 'gender', 'Actions'];
+    columnsToDisplay = ['name', 'lastName', 'emailAdress', 'address', 'dateOfBirth',
+    'placeOfBirth', 'mobile', 'country', 'graduationYear', 'dateOfEnrollment', 'gender', 'Actions'];
     @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
     @ViewChild(MatSort, { static: true }) sort: MatSort;
 
@@ -32,7 +33,7 @@ export class StudentsComponent implements OnInit, OnDestroy {
         this.subscription = this.academyProgramService.getAcademyProgramIdEvent()
             .subscribe(data => {
                 this.academyProgramId = data.academyProgramId;
-                this.GetAllStudents(this.academyProgramId)
+                this.GetAllStudents(this.academyProgramId);
             });
     }
 
@@ -56,7 +57,7 @@ export class StudentsComponent implements OnInit, OnDestroy {
         const dialogRef = this.dialog.open(StudentDialogComponent, {
             width: '500px',
             disableClose: true,
-            data: { student: student }
+            data: { student }
         });
 
         dialogRef.afterClosed().subscribe(result => {
@@ -71,7 +72,7 @@ export class StudentsComponent implements OnInit, OnDestroy {
             // new Warning Dialog
             width: '300px',
             disableClose: true,
-            data: { student: student }
+            data: { student }
         });
 
         dialogRef.afterClosed().subscribe(result => {

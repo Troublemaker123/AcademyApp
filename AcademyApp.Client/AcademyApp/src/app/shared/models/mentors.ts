@@ -13,7 +13,7 @@ export class Mentor {
     public yearsOfService: number;
 
     public specialty: string;
-    
+
     public telephone: number;
-    
+
 }

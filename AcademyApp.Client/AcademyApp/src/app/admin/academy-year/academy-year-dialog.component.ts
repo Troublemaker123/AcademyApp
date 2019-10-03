@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { NgForm, FormGroup, FormControl } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { AcademyProgram } from 'src/app/shared/models/academyProgram';
@@ -11,10 +11,10 @@ import { AdminService } from '../admin.service';
 export class AcademyYearDialogComponent implements OnInit {
 
   public program: AcademyProgram = new AcademyProgram();
-  
+
   public title: string;
 
-  private isEditMode: boolean = false;
+  private isEditMode = false;
 
   constructor(
     private adminService: AdminService,
@@ -29,8 +29,7 @@ export class AcademyYearDialogComponent implements OnInit {
       this.isEditMode = true;
       this.title = 'Edit academy program';
       this.program = this.data.program;
-    }
-    else {
+    } else {
       // create
       this.title = 'Add new academy program';
     }

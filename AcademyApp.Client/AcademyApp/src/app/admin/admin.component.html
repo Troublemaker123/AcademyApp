@@ -1,6 +1,6 @@
 
 <div class="academy-year-picker-container">
-<mat-form-field title="Academy Year" style="width: 220px">
+<mat-form-field title="Academy Year" style="width: 240px">
   <select matNativeControl (change)='onChangeAcademyProgram($event)' >
     <ng-container *ngFor="let item of programs">
         <ng-container *ngIf="item.isCurrent === true">
@@ -27,6 +27,9 @@
     </a>
     <a mat-tab-link [routerLink]="'subjects'" routerLinkActive #sb="routerLinkActive" [active]="sb.isActive">
       Subjects
+    </a>
+    <a mat-tab-link [routerLink]="'groups'" routerLinkActive #gr="routerLinkActive" [active]="gr.isActive">
+      Groups
     </a>
   </nav>
 </div>

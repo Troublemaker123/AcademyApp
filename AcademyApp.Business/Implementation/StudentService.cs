@@ -3,7 +3,6 @@ using AcademyApp.Business.Mapper;
 using AcademyApp.Business.ViewModel;
 using AcademyApp.Data;
 using AcademyApp.Data.Model;
-using AcademyApp.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;

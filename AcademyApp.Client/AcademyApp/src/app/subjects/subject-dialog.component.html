@@ -12,10 +12,10 @@
             class="form-control" #name="ngModel" id="name" name="name" required maxlength="255" autocomplete="off">
           <mat-error *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
             <div *ngIf="name.errors.required">
-              name is mandatory.
+              Name is mandatory.
             </div>
             <mat-error *ngIf="name.errors.maxlength">
-              name limit is 255 characters long.
+              Name limit is 255 characters long.
             </mat-error>
           </mat-error>
         </mat-form-field>
@@ -28,10 +28,10 @@
           <mat-error *ngIf="description.invalid && (description.dirty || description.touched)"
             class="alert alert-danger">
             <div *ngIf="description.errors.required">
-              description is mandatory.
+              Description is mandatory.
             </div>
             <mat-error *ngIf="description.errors.maxlength">
-              description limit is 255 characters long.
+              Description limit is 255 characters long.
             </mat-error>
           </mat-error>
         </mat-form-field>

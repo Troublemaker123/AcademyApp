@@ -3,10 +3,10 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 // modules
-import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { AdminRoutingModule } from './admin-routing.module';
 import { SharedModule } from '../shared/shared.module';
-import { MatSortModule, MatTableModule } from '@angular/material';
+
 
 // services
 import { AdminService } from './admin.service';
@@ -14,6 +14,7 @@ import { StudentService } from './student.service';
 import { MentorService } from './mentor.service';
 import { SubjectService } from './subject.service';
 import { AcademyProgramService } from './academy-year/academy-program.service';
+import { GroupService } from './group.service';
 
 // components
 import { AdminComponent } from './admin.component';
@@ -25,8 +26,10 @@ import { MentorDialogComponent } from './mentors/mentor-dialog.component';
 import { MentorComponent } from './mentors/mentor.component';
 import { SubjectDialogComponent } from '../subjects/subject-dialog.component';
 import { SubjectsComponent } from '../subjects/subject.component';
-
 import { WarnDialogComponent } from '../shared/warn-dialog/warn-dialog';
+import { GroupComponent } from './groups/group.component';
+import { GroupDialogComponent } from './groups/group-dialog.component';
+import { GroupSortDialogComponent } from './groups/group-sort-dialog.component';
 
 
 
@@ -42,6 +45,9 @@ import { WarnDialogComponent } from '../shared/warn-dialog/warn-dialog';
     SubjectDialogComponent,
     SubjectsComponent,
     WarnDialogComponent,
+    GroupComponent,
+    GroupDialogComponent,
+    GroupSortDialogComponent,
   ],
   entryComponents: [
     AcademyYearDialogComponent,
@@ -49,7 +55,9 @@ import { WarnDialogComponent } from '../shared/warn-dialog/warn-dialog';
     MentorDialogComponent,
     SubjectDialogComponent,
     WarnDialogComponent,
-
+    GroupComponent,
+    GroupDialogComponent,
+    GroupSortDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -57,8 +65,7 @@ import { WarnDialogComponent } from '../shared/warn-dialog/warn-dialog';
     AdminRoutingModule,
     FormsModule,
     SharedModule,
-    MatSortModule,
-    MatTableModule,
+
 
   ],
   providers: [
@@ -67,7 +74,8 @@ import { WarnDialogComponent } from '../shared/warn-dialog/warn-dialog';
     MentorService,
     SubjectService,
     AcademyProgramService,
- 
+    GroupService,
+
   ],
 
 })

@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { NgForm, FormGroup, FormControl } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { Subjects } from '../shared/models/subjects';
@@ -17,9 +17,9 @@ export class SubjectDialogComponent implements OnInit {
 
   public title: string;
 
-public academyProgramObservable = Subscriber;
+  public academyProgramObservable = Subscriber;
 
-  private isEditMode: boolean = false;
+  private isEditMode = false;
 
   constructor(
     private subjectService: SubjectService,
@@ -35,8 +35,7 @@ public academyProgramObservable = Subscriber;
       this.isEditMode = true;
       this.title = 'Edit subject';
       this.subject = this.data.subject;
-    }
-    else {
+    } else {
       // create
       this.title = 'Add new subject';
     }

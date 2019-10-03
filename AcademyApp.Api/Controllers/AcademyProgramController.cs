@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 
-
 namespace AcademyApp.Api.Controllers
 {
     [Route("api/[controller]")]
@@ -22,11 +21,15 @@ namespace AcademyApp.Api.Controllers
         [HttpPost]
         public ActionResult Create(AcademyProgramViewModel academyProgram)
         {
-           
             try
             {
-                    _academyProgramService.Create(academyProgram);
-                    return Ok();
+                if (!ModelState.IsValid)
+                {
+                    throw new Exception(ModelState.ToString());
+                }
+
+                _academyProgramService.Create(academyProgram);
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -39,6 +42,10 @@ namespace AcademyApp.Api.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    throw new Exception(ModelState.ToString());
+                }
                 _academyProgramService.Delete(academyProgramId);
                 return Ok();
             }
@@ -46,7 +53,6 @@ namespace AcademyApp.Api.Controllers
             {
                 return BadRequest(ex.Message);
             }
-           
         }
 
 
@@ -56,6 +62,10 @@ namespace AcademyApp.Api.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    throw new Exception(ModelState.ToString());
+                }
                 _academyProgramService.Update(academyProgram);
                 return Ok();
             }
@@ -63,17 +73,18 @@ namespace AcademyApp.Api.Controllers
             {
                 return BadRequest(ex.Message);
             }
-
-           
         }
 
         [Route("find-by-id/{academyProgramId}")]
         [HttpGet]
         public ActionResult<AcademyProgramViewModel> FindById(int academyProgramId)
         {
-
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    throw new Exception(ModelState.ToString());
+                }
                 var program = _academyProgramService.FindById(academyProgramId);
                 return Ok(program);
             }
@@ -81,17 +92,19 @@ namespace AcademyApp.Api.Controllers
             {
                 return BadRequest(ex.Message);
             }
-           
         }
-
+   
         // api/academyprogram/get-all
         [Route("get-all")]
         [HttpGet]
         public ActionResult<List<AcademyProgramViewModel>> GetAll()
         {
-
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    throw new Exception(ModelState.ToString());
+                }
                 var programs = _academyProgramService.GetAll();
                 return Ok(programs);
             }

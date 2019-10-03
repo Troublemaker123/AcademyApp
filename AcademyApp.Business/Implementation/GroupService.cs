@@ -6,40 +6,64 @@ using AcademyApp.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace AcademyApp.Business.Implementation
 {
     public class GroupService : IGroupService
     {
-        private readonly IRepository<Group> _apRepository;
+        private readonly IRepository<Group> _groupRepository;
 
-        public GroupService(IRepository<Group> apRepository)
+
+        public GroupService(IRepository<Group> groupRepository)
         {
-            _apRepository = apRepository;
+            _groupRepository = groupRepository;
         }
+
+
         public void Create(GroupViewModel model)
         {
+            if(model == null)
+                throw new ApplicationException("group is null");
+
             var domain = model.ToDomain();
-            _apRepository.Create(domain);
+            _groupRepository.Create(domain);
         }
 
-        public GroupViewModel FindById(int apId)
+        public void Delete(int groupId, int academyProgramId)
         {
-            throw new NotImplementedException();
+            var group = _groupRepository.FindByMultipleId(groupId, academyProgramId);
+            if(group == null)
+                throw new Exception("groupId is null");
+            _groupRepository.Delete(group);
         }
 
-        public IEnumerable<GroupViewModel> GetAll()
+        public GroupViewModel FindById(int groupId)
         {
-            throw new NotImplementedException();
+            var group = _groupRepository.FindById(groupId);
+            if (group == null)
+                throw new Exception("GroupId not found");
+
+            return group.ToModel();
         }
+
+
+        public IEnumerable<GroupViewModel> GetAll(int academyProgramId)
+        {
+            return _groupRepository.GetAll().Where(model => model.ApId == academyProgramId)
+                .Select(model => model.ToModel()).ToList();
+        }
+
 
         public void Update(GroupViewModel model)
         {
-            var program = _apRepository.FindById(new Group());
-            if (program == null)
+            var group = _groupRepository.FindByMultipleId(model.ID,model.AcademyProgramId);
+            if (group == null)
                 throw new Exception();
-            _apRepository.Update(program);
+
+            group.ID = group.ID;
+            group.Title = group.Title;
+
+            _groupRepository.Update(group);
         }
     }
 }

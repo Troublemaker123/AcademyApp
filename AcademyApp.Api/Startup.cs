@@ -34,15 +34,8 @@ namespace AcademyApp.Api
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            //services.AddMvc()
-            //.AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<AcademyProgramValidators>());
-            //services.AddMvc()
-            //.AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<StudentValidators>());
-            // services.AddMvc()
-            // .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<MentorValidators>());
-            // services.AddMvc()
-            //.AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<SubjectValidators>());
-
+            services.AddMvc().AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<Startup>());
+           
             services.AddDbContext<Context>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("AcademyAppDB")));
 

@@ -45,7 +45,7 @@ namespace AcademyApp.Business
 
         public void Update(SubjectViewModel subject)
         {
-            var subjects = _subjectRepository.FindById(subject.ID);
+            var subjects = _subjectRepository.FindByMultipleId(subject.ID,subject.AcademyProgramId);
             if (subjects == null)
                 throw new Exception("subject not found");
 

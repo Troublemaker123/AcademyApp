@@ -1,15 +1,14 @@
 ﻿using AcademyApp.Business.ViewModel;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace AcademyApp.Business.Interfaces
 {
     public interface IGroupService
     {
-        void Create(GroupViewModel model);
-        void Update(GroupViewModel model);
-        IEnumerable<GroupViewModel> GetAll();
+        void Create(GroupViewModel group);
+        void Update(GroupViewModel group);
+        void Delete(int groupId, int academyProgramId);
+        IEnumerable<GroupViewModel> GetAll(int academyProgramId);
         GroupViewModel FindById(int apId);
     }
 }

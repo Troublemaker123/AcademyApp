@@ -22,6 +22,10 @@ namespace AcademyApp.Api.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    throw new Exception(ModelState.ToString());
+                }
                 _subjecService.Create(subject);
                 return Ok();
             }
@@ -39,6 +43,10 @@ namespace AcademyApp.Api.Controllers
 
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    throw new Exception(ModelState.ToString());
+                }
                 _subjecService.Delete(subjectId,academyProgramId);
                 return Ok();
             }
@@ -56,6 +64,10 @@ namespace AcademyApp.Api.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    throw new Exception(ModelState.ToString());
+                }
                 _subjecService.Update(subject);
                 return Ok();
             }
@@ -74,6 +86,10 @@ namespace AcademyApp.Api.Controllers
 
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    throw new Exception(ModelState.ToString());
+                }
                 var subject = _subjecService.FindById(subjectId);
                 return Ok(subject);
             }
@@ -92,6 +108,10 @@ namespace AcademyApp.Api.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    throw new Exception(ModelState.ToString());
+                }
                 var subjects = _subjecService.GetAll(academyProgramId);
                 return Ok(subjects);
             }

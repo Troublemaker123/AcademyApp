@@ -5,8 +5,7 @@ using AcademyApp.Data;
 using AcademyApp.Model;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+
 
 namespace AcademyApp.Business.Implementation
 {

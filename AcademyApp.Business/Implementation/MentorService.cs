@@ -47,7 +47,7 @@ namespace AcademyApp.Business
 
         public void Update(MentorViewModel mentor)
         {
-            var mentors = _apRepository.FindById(mentor.ID);
+            var mentors = _apRepository.FindByMultipleId(mentor.ID,mentor.AcademyProgramId);
             if (mentors == null)
                 throw new Exception("mentor not found");
 

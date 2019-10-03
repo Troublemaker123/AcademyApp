@@ -24,6 +24,8 @@ import { FormsModule } from '@angular/forms';
     Material.MatDatepickerModule,
     Material.MatNativeDateModule,
     Material.MatSortModule,
+    Material.MatSortModule,
+    Material.MatTableModule,
     FormsModule,
   ],
   exports: [
@@ -44,7 +46,9 @@ import { FormsModule } from '@angular/forms';
     Material.MatDatepickerModule,
     Material.MatNativeDateModule,
     Material.MatSortModule,
-    FormsModule
+    Material.MatSortModule,
+    Material.MatTableModule,
+    FormsModule,
   ],
   declarations: []
 })

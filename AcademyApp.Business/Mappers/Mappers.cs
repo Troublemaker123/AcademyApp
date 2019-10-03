@@ -2,7 +2,8 @@
 using AcademyApp.Data.Model;
 using AcademyApp.Model;
 using AcademyApp.Business.Enums;
-
+using AcademyApp.Business.ViewModels;
+using AcademyApp.Data.Domains;
 
 namespace AcademyApp.Business.Mapper
 {
@@ -199,6 +200,8 @@ namespace AcademyApp.Business.Mapper
             return new Group
             {
                 ID = model.ID,
+                Title = model.Title,
+                ApId = model.AcademyProgramId,
 
             };
         }
@@ -207,6 +210,8 @@ namespace AcademyApp.Business.Mapper
             return new GroupViewModel
             {
                 ID = model.ID,
+                Title = model.Title,
+                AcademyProgramId = model.ApId,
 
             };
         }
@@ -245,6 +250,31 @@ namespace AcademyApp.Business.Mapper
                 Attended = model.Attended
             };
         }
+        public static GroupMembers ToDomain(this GroupMembersViewModel model)
+        {
+            return new GroupMembers
+            {
+                Id = model.Id,
+                UserType = model.UserType,
+                ApId = model.AcademyProgramId,
+                UserId = model.UserId,
+                GroupId = model.GroupId,
+
+            };
+        }
+        public static GroupMembersViewModel ToModel(this GroupMembers model)
+        {
+            return new GroupMembersViewModel
+            {
+                Id=model.Id,
+                UserType = model.UserType,
+                AcademyProgramId = model.ApId,
+                GroupId = model.GroupId,
+                UserId = model.UserId,
+            };
+        }
+
+
 
     }
 }

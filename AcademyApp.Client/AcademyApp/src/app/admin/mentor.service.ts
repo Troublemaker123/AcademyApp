@@ -5,17 +5,16 @@ import { Observable } from 'rxjs';
 import { Mentor } from '../shared/models/mentors';
 
 @Injectable()
-export class MentorService{
+export class MentorService {
 
     public baseApiUrl: string = environment.apiUrl;
 
     constructor(private http: HttpClient) { }
-   
 
-    public GetAllMentors(academyProgramId : number): Observable<Mentor[]> {
-        return this.http.get<Mentor[]>(this.baseApiUrl + "mentor/get-all/" + academyProgramId);
+    public GetAllMentors(academyProgramId: number): Observable<Mentor[]> {
+        return this.http.get<Mentor[]>(this.baseApiUrl + 'mentor/get-all/' + academyProgramId);
     }
-    public create(mentors : Mentor): Observable<Mentor> {
+    public create(mentors: Mentor): Observable<Mentor> {
         return this.http.post<Mentor>(this.baseApiUrl + 'mentor/create', mentors);
     }
     public delete(mentorId: number, academyProgramId: number): Observable<any> {
@@ -24,9 +23,8 @@ export class MentorService{
     public update(value: any): Observable<object> {
         return this.http.put(`${this.baseApiUrl}/mentor/update`, value);
     }
-    public findById(mentorId:number):Observable<Mentor>{
-        return this.http.get<Mentor>(`${this.baseApiUrl}/mentor/find-by-id/${mentorId}`);   
+    public findById(mentorId: number): Observable<Mentor> {
+        return this.http.get<Mentor>(`${this.baseApiUrl}/mentor/find-by-id/${mentorId}`);
     }
-
 
 }

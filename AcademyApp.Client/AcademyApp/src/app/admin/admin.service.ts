@@ -26,7 +26,7 @@ export class AdminService {
     public update(value: any): Observable<object> {
         return this.http.put(`${this.baseApiUrl}/academyprogram/update`, value);
     }
-    public findById(academyProgramId: number): Observable<AcademyProgram>{
+    public findById(academyProgramId: number): Observable<AcademyProgram> {
         return this.http.get<AcademyProgram>(`${this.baseApiUrl}/academyprogram/find-by-id/${academyProgramId}`);
     }
 

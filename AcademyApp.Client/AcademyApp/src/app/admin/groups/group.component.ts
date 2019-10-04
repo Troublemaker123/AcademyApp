@@ -55,6 +55,7 @@ export class GroupComponent implements OnInit {
     public openGroupDialog(group: Groups): void {
          this.dialog.open(GroupSortDialogComponent, {
             width: '1000px',
+            disableClose: true,
             data: { group }
         });
     }

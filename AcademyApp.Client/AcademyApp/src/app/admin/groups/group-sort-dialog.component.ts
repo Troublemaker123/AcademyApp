@@ -4,7 +4,7 @@ import { Subscriber } from 'rxjs';
 import { GroupService } from '../group.service';
 import { AcademyProgramService } from '../academy-year/academy-program.service';
 import { GroupDialogComponent } from './group-dialog.component';
-import { MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource, MatPaginator, MatDialog } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatPaginator, MatDialog } from '@angular/material';
 import { NgForm } from '@angular/forms';
 import { WarnDialogComponent } from 'src/app/shared/warn-dialog/warn-dialog';
 

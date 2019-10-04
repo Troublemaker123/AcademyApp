@@ -28,7 +28,10 @@ namespace AcademyApp.Business.Implementation
 
         public void Delete(int groupMemberId, int academyProgramId)
         {
-            throw new System.NotImplementedException();
+            var group = _groupMembersRepository.FindByMultipleId(groupMemberId, academyProgramId);
+            if (group == null)
+                throw new Exception("group is null");
+            _groupMembersRepository.Delete(group);
         }
 
         public GroupMembersViewModel FindById(int apId)
@@ -45,9 +48,6 @@ namespace AcademyApp.Business.Implementation
                  .Select(groupMember => groupMember.ToModel()).ToList();
         }
 
-        public void Update(GroupMembersViewModel groupMember)
-        {
-            throw new System.NotImplementedException();
-        }
+       
     }
 }

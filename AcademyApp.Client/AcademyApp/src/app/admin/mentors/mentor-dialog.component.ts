@@ -18,7 +18,7 @@ export class MentorDialogComponent implements OnInit {
 
   public academyProgramObservable = Subscriber;
 
-  private isEditMode: boolean = false;
+  private isEditMode = false;
 
   constructor(
     private mentorService: MentorService,
@@ -34,8 +34,7 @@ export class MentorDialogComponent implements OnInit {
       this.isEditMode = true;
       this.title = 'Edit mentor';
       this.mentors = this.data.mentor;
-    }
-    else {
+    } else {
       // create
       this.title = 'Add new mentor';
     }

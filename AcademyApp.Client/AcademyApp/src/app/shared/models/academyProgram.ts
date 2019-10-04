@@ -1,11 +1,11 @@
 export class AcademyProgram {
-    
-    public  id : number
 
-    public  startDate : Date
+    public  id: number;
 
-    public  endDate :Date
+    public  startDate: Date;
 
-    public  isCurrent :boolean
+    public  endDate: Date;
+
+    public  isCurrent: boolean;
 
 }

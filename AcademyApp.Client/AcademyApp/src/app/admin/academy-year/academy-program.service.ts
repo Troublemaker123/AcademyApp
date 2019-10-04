@@ -12,13 +12,13 @@ export class AcademyProgramService {
         this.academyProgramId = academyProgramId;
     }
 
-    public getAcademyProgramId() : number {
+    public getAcademyProgramId(): number {
         return this.academyProgramId;
     }
 
     public setAcademyProgramIdEvent(academyProgramId: number) {
         this.academyProgramId = academyProgramId;
-        this.subject.next({ academyProgramId: academyProgramId });
+        this.subject.next({ academyProgramId });
     }
 
     public clearAcademyProgramIdEvent() {

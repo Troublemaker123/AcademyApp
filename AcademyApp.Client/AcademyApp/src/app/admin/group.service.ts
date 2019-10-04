@@ -24,9 +24,8 @@ export class GroupService {
     public update(value: any): Observable<object> {
         return this.http.put(`${this.baseApiUrl}/group/update`, value);
     }
-    public findById(groupId: number): Observable<Groups>{
+    public findById(groupId: number): Observable<Groups> {
         return this.http.get<Groups>(`${this.baseApiUrl}/group/find-by-id/${groupId}`);
     }
-
 
 }

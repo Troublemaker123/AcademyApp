@@ -19,7 +19,7 @@ export class StudentDialogComponent implements OnInit {
 
     public academyProgramObservable = Subscriber;
 
-    private isEditMode: boolean = false;
+    private isEditMode = false;
 
     constructor(
         private studentService: StudentService,
@@ -29,14 +29,13 @@ export class StudentDialogComponent implements OnInit {
     ) { }
 
 
-    public ngOnInit() {       
+    public ngOnInit() {
         if (this.data.student) {
             // edit
             this.isEditMode = true;
             this.title = 'Edit student';
             this.student = this.data.student;
-        }
-        else {
+        } else {
             // create
             this.title = 'Add new student';
         }
@@ -44,7 +43,7 @@ export class StudentDialogComponent implements OnInit {
 
 
     public onSubmit() {
- 
+
         if (this.isEditMode) {
             this.studentService.update(this.student).subscribe(result => {
                 this.dialogRef.close('ok');

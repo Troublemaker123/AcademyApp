@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AcademyYearComponent } from './academy-year/academy-year.component'
+import { AcademyYearComponent } from './academy-year/academy-year.component';
 import { AdminComponent } from './admin.component';
 import { StudentsComponent } from './students/students.component';
 import { MentorComponent } from './mentors/mentor.component';
@@ -11,7 +11,7 @@ import { GroupComponent } from './groups/group.component';
 const routes: Routes = [
   {
 
-    path: '', component: AdminComponent, 
+    path: '', component: AdminComponent,
     children: [
       {
         path: 'academy-year', component: AcademyYearComponent

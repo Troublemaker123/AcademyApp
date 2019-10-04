@@ -9,11 +9,11 @@ import { AcademyProgramService } from '../academy-year/academy-program.service';
 import { WarnDialogComponent } from 'src/app/shared/warn-dialog/warn-dialog';
 
 @Component({
-  selector: 'mentor',
+  selector: 'app-mentor',
   templateUrl: 'mentor.component.html'
 })
 
-export class MentorComponent implements OnInit,OnDestroy {
+export class MentorComponent implements OnInit, OnDestroy {
 
   public academyProgramId: number;
   public mentor = new MatTableDataSource<Mentor>();
@@ -28,18 +28,18 @@ export class MentorComponent implements OnInit,OnDestroy {
     private mentorService: MentorService,
     public academyProgramService: AcademyProgramService,
     public dialog: MatDialog
-  ) { 
+  ) {
     this.subscription = this.academyProgramService.getAcademyProgramIdEvent()
       .subscribe(data => {
         this.academyProgramId = data.academyProgramId;
-        this.GetAllMentors(this.academyProgramId)
+        this.GetAllMentors(this.academyProgramId);
       });
   }
 
 
   public ngOnInit() {
     this.academyProgramId = this.academyProgramService.getAcademyProgramId();
-    if(this.academyProgramId) {
+    if (this.academyProgramId) {
         this.GetAllMentors(this.academyProgramId);
   }
   }
@@ -52,7 +52,7 @@ export class MentorComponent implements OnInit,OnDestroy {
     const dialogRef = this.dialog.open(MentorDialogComponent, {
       width: '500px',
       disableClose: true,
-      data: { mentor: mentor }
+      data: { mentor }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -78,13 +78,13 @@ export class MentorComponent implements OnInit,OnDestroy {
   }
 
   private deleteMentor(mentor: Mentor) {
-    this.mentorService.delete(mentor.id,mentor.academyProgramId)
+    this.mentorService.delete(mentor.id, mentor.academyProgramId)
       .subscribe(result => {
         this.GetAllMentors(this.academyProgramId);
       });
   }
 
-  private GetAllMentors(academyProgramId : number) {
+  private GetAllMentors(academyProgramId: number) {
     this.mentorService.GetAllMentors(academyProgramId)
       .subscribe(result => {
         this.mentors = result;
@@ -92,4 +92,4 @@ export class MentorComponent implements OnInit,OnDestroy {
 
   }
 
-};
+}

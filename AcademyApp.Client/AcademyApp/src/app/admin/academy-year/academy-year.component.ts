@@ -7,15 +7,15 @@ import { WarnDialogComponent } from 'src/app/shared/warn-dialog/warn-dialog';
 
 
 @Component({
-  selector: 'academy-year',
+  selector: 'app-academy-year',
   templateUrl: 'academy-year.component.html'
 })
-export class AcademyYearComponent implements OnInit{
+export class AcademyYearComponent implements OnInit {
   public programs: AcademyProgram[] = [];
   columnsToDisplay = ['startDate', 'endDate', 'isCurrent', 'Actions'];
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator; 
-  @ViewChild(MatSort, {static:true}) sort:MatSort;
-   dataSource : MatTableDataSource<AcademyProgram>;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+   dataSource: MatTableDataSource<AcademyProgram>;
   constructor(
     private adminService: AdminService,
     public dialog: MatDialog
@@ -31,7 +31,7 @@ export class AcademyYearComponent implements OnInit{
     const dialogRef = this.dialog.open(AcademyYearDialogComponent, {
       width: '500px',
       disableClose: true,
-      data: { program: program }
+      data: { program }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -46,7 +46,7 @@ export class AcademyYearComponent implements OnInit{
       // new Warning Dialog
       width: '300px',
       disableClose: true,
-      data: { program: program }
+      data: { program }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -70,8 +70,8 @@ export class AcademyYearComponent implements OnInit{
       });
   }
 
-  toggle(isCurrent :boolean){
+  toggle(isCurrent: boolean) {
     isCurrent = !isCurrent;
   }
 
-};
+}

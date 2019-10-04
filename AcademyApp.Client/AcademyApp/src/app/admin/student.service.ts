@@ -6,17 +6,16 @@ import { Student } from '../shared/models/student';
 
 
 @Injectable()
-export class StudentService{
+export class StudentService {
 
     public baseApiUrl: string = environment.apiUrl;
 
     constructor(private http: HttpClient) { }
-   
 
     public GetAllStudents(academyProgramId: number): Observable<Student[]> {
-        return this.http.get<Student[]>(this.baseApiUrl + "student/get-all/" + academyProgramId);
+        return this.http.get<Student[]>(this.baseApiUrl + 'student/get-all/' + academyProgramId);
     }
-    public create(student : Student): Observable<Student> {
+    public create(student: Student): Observable<Student> {
         return this.http.post<Student>(this.baseApiUrl + 'student/create', student);
     }
     public delete(studentId: number, academyProgramId: number): Observable<any> {
@@ -25,9 +24,8 @@ export class StudentService{
     public update(value: any): Observable<object> {
         return this.http.put(`${this.baseApiUrl}/student/update`, value);
     }
-    public findById(studentId:number):Observable<Student>{
-        return this.http.get<Student>(`${this.baseApiUrl}/student/find-by-id/${studentId}`);   
+    public findById(studentId: number): Observable<Student> {
+        return this.http.get<Student>(`${this.baseApiUrl}/student/find-by-id/${studentId}`);
     }
-
 
 }

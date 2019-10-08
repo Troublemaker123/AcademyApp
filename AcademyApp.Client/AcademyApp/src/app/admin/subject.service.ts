@@ -14,19 +14,19 @@ export class SubjectService {
 
 
     public GetAllSubjects(academyProgramId: number): Observable<Subjects[]> {
-        return this.http.get<Subjects[]>(this.baseApiUrl + 'subject/get-all/' + academyProgramId);
+        return this.http.get<Subjects[]>(this.baseApiUrl + 'Admin/subject/get-all/' + academyProgramId);
     }
     public create(subjectId: Subjects): Observable<Subjects> {
-        return this.http.post<Subjects>(this.baseApiUrl + 'subject/create', subjectId);
+        return this.http.post<Subjects>(this.baseApiUrl + 'Admin/subject/create', subjectId);
     }
     public delete(subjectId: number, academyProgramId: number): Observable<any> {
-        return this.http.delete<any>(`${this.baseApiUrl}subject/delete/${subjectId}/${academyProgramId}`);
+        return this.http.delete<any>(`${this.baseApiUrl}Admin/subject/delete/${subjectId}/${academyProgramId}`);
     }
     public update(value: any): Observable<object> {
-        return this.http.put(`${this.baseApiUrl}/subject/update`, value);
+        return this.http.put(`${this.baseApiUrl}/Admin/subject/update`, value);
     }
     public findById(subjectId: number): Observable<Subjects> {
-        return this.http.get<Subjects>(`${this.baseApiUrl}/subject/find-by-id/${subjectId}`);
+        return this.http.get<Subjects>(`${this.baseApiUrl}/Admin/subject/find-by-id/${subjectId}`);
     }
 
 }

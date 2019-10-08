@@ -1,34 +1,48 @@
 <div>
-    <div class="container">
-        <mat-icon id="close-icon" style="float:right; cursor: pointer" title="Close" (click)=onCancel()>close</mat-icon>
-  
-        <h1 mat-dialog-title>{{title}}</h1>
-  
-      <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
-  
-        <div mat-dialog-content>
-  
-          <mat-form-field style="width: 100%">
-            <input matInput placeholder="User Type" [(ngModel)]="groupMember.userType" class="form-control" #name="ngModel" id="userType"
-              name="userType" required maxlength="255" autocomplete="off">
-            <mat-error *ngIf="userType.invalid && (userType.dirty || userType.touched)" class="alert alert-danger">
-              <div *ngIf="userType.errors.required">
-                User Type is mandatory.
-              </div>
-              <mat-error *ngIf="userType.errors.maxlength">
-                User Type limit is 255 characters long.
-              </mat-error>
-            </mat-error>
-          </mat-form-field>
-  
-  
-        </div>
-        <div mat-dialog-actions style="float:right">
-          <button mat-button title="Cancel" (click)="onCancel()">Cancel</button>
-          <button mat-flat-button cdkFocusInitial color="primary" title="OK">OK</button>
-        </div>
-  
-      </form>
-  
+  <div class="container">
+    <mat-icon id="close-icon" style="float:right; cursor: pointer" title="Close" (click)=onCancel()>close</mat-icon>
+
+    <h1 mat-dialog-title>Get Students and Mentors</h1>
+    <table mat-table [dataSource]="groupMembers" class="mat-elevation-z1" style="width: 100%">
+
+       <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()"
+                        [aria-label]="checkboxLabel()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)"
+                        [aria-label]="checkboxLabel(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container> 
+
+      
+      <ng-container matColumnDef="fullName">
+        <th mat-header-cell *matHeaderCellDef> Full Name </th>
+        <td mat-cell *matCellDef="let item"> {{item.fullName}} </td>
+      </ng-container>
+    
+
+      <ng-container matColumnDef="userType">
+        <th mat-header-cell *matHeaderCellDef> User Type </th>
+        <td mat-cell *matCellDef="let item"> {{item.userType}} </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+          (click)="selection.toggle(row)">
+      </tr>
+   </table>
+    <div mat-dialog-actions style="float:right">
+      <button mat-button title="Cancel" (click)="onCancel()">Cancel</button>
+      <button mat-flat-button cdkFocusInitial color="primary" title="OK">OK</button>
     </div>
   </div>
+</div>

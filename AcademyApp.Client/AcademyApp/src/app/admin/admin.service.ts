@@ -15,19 +15,19 @@ export class AdminService {
 
 
     public GetAllAcademyPrograms(): Observable<AcademyProgram[]> {
-        return this.http.get<AcademyProgram[]>(this.baseApiUrl + 'academyprogram/get-all');
+        return this.http.get<AcademyProgram[]>(this.baseApiUrl + 'Admin/academyProgram/get-all');
     }
     public create(academyProgram: AcademyProgram): Observable<AcademyProgram> {
-        return this.http.post<AcademyProgram>(this.baseApiUrl + 'academyprogram/create', academyProgram);
+        return this.http.post<AcademyProgram>(this.baseApiUrl + 'Admin/academyProgram/create', academyProgram);
     }
     public delete(academyProgramId: number): Observable<any> {
-        return this.http.delete<any>(`${this.baseApiUrl}academyprogram/delete/${academyProgramId}`);
+        return this.http.delete<any>(`${this.baseApiUrl}Admin/academyProgram/delete/${academyProgramId}`);
     }
     public update(value: any): Observable<object> {
-        return this.http.put(`${this.baseApiUrl}/academyprogram/update`, value);
+        return this.http.put(`${this.baseApiUrl}/Admin/academyProgram/update`, value);
     }
     public findById(academyProgramId: number): Observable<AcademyProgram> {
-        return this.http.get<AcademyProgram>(`${this.baseApiUrl}/academyprogram/find-by-id/${academyProgramId}`);
+        return this.http.get<AcademyProgram>(`${this.baseApiUrl}/Admin/academyProgram/find-by-id/${academyProgramId}`);
     }
 
 }

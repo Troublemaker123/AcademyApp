@@ -4,7 +4,7 @@ using System;
 
 
 
-namespace AcademyApp.Data.Model
+namespace AcademyApp.Data.Domains
 {
     [Table("AcademyProgram")]
     public class AcademyProgram

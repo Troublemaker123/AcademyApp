@@ -13,19 +13,19 @@ export class StudentService {
     constructor(private http: HttpClient) { }
 
     public GetAllStudents(academyProgramId: number): Observable<Student[]> {
-        return this.http.get<Student[]>(this.baseApiUrl + 'student/get-all/' + academyProgramId);
+        return this.http.get<Student[]>(this.baseApiUrl + 'Admin/student/get-all/' + academyProgramId);
     }
     public create(student: Student): Observable<Student> {
-        return this.http.post<Student>(this.baseApiUrl + 'student/create', student);
+        return this.http.post<Student>(this.baseApiUrl + 'Admin/student/create', student);
     }
     public delete(studentId: number, academyProgramId: number): Observable<any> {
-        return this.http.delete<any>(`${this.baseApiUrl}student/delete/${studentId}/${academyProgramId}`);
+        return this.http.delete<any>(`${this.baseApiUrl}Admin/student/delete/${studentId}/${academyProgramId}`);
     }
     public update(value: any): Observable<object> {
-        return this.http.put(`${this.baseApiUrl}/student/update`, value);
+        return this.http.put(`${this.baseApiUrl}Admin/student/update`, value);
     }
     public findById(studentId: number): Observable<Student> {
-        return this.http.get<Student>(`${this.baseApiUrl}/student/find-by-id/${studentId}`);
+        return this.http.get<Student>(`${this.baseApiUrl}Admin/student/find-by-id/${studentId}`);
     }
 
 }

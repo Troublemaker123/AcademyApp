@@ -2,7 +2,7 @@
 using AcademyApp.Business.Mapper;
 using AcademyApp.Business.ViewModel;
 using AcademyApp.Data;
-using AcademyApp.Data.Model;
+using AcademyApp.Data.Domains;
 using System;
 using System.Collections.Generic;
 using System.Linq;

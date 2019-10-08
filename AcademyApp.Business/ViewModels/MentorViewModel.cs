@@ -1,8 +1,4 @@
-﻿using AcademyApp.Model;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
+﻿
 
 namespace AcademyApp.Business.ViewModel
 {

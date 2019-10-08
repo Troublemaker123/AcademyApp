@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AcademyApp.Data.Model
+namespace AcademyApp.Data.Domains
 {
     [Table("Mentor")]
     public class Mentor

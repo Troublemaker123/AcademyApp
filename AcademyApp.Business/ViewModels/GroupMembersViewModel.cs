@@ -1,4 +1,4 @@
-﻿
+﻿using AcademyApp.Business.Enums;
 
 namespace AcademyApp.Business.ViewModels
 {
@@ -13,7 +13,11 @@ namespace AcademyApp.Business.ViewModels
 
         public int UserId { get; set; }
 
-        public string UserType { get; set; }
+        public UserType UserType { get; set; }
+
+        public string FullName { get; set; }
+
+        public bool AddGroupMember { get; set; }
 
     }
 }

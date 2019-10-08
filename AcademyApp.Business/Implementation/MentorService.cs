@@ -3,12 +3,11 @@
 
 using AcademyApp.Business.Mapper;
 using AcademyApp.Data;
-using AcademyApp.Data.Model;
+using AcademyApp.Data.Domains;
 using System.Collections.Generic;
 using AcademyApp.Business.ViewModel;
 using AcademyApp.Business.Interfaces;
 using System.Linq;
-using AcademyApp.Model;
 
 namespace AcademyApp.Business
 {

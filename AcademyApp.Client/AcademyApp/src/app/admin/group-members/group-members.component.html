@@ -1,3 +1,5 @@
+<mat-icon id="close-icon" style="float:right; cursor: pointer" title="Close" (click)=onCancel()>close</mat-icon>
+
 <div class="container" style="max-width: 95%; margin: auto;">
     <div class="container">
       <h2>Group Members List</h2>
@@ -16,7 +18,7 @@
     <div class="mat-elevation-z1">
       <table mat-table [dataSource]="groupMember" style="width: 100%" matSort matSortStart="desc">
   
-        <ng-container matColumnDef="name">
+        <ng-container matColumnDef="userType">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> User Type </th>
           <td mat-cell *matCellDef="let item"> {{item.userType}} </td>
         </ng-container>
@@ -43,4 +45,8 @@
   
       <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
     </div>
+  </div>
+  <div mat-dialog-actions style="float:right">
+    <button mat-flat-button title="Cancel" (click)="onCancel()">Cancel</button>
+    <button mat-flat-button cdkFocusInitial color="primary" title="OK" (click)="onSubmit()">OK</button>
   </div>

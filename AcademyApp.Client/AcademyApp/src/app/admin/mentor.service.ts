@@ -12,19 +12,19 @@ export class MentorService {
     constructor(private http: HttpClient) { }
 
     public GetAllMentors(academyProgramId: number): Observable<Mentor[]> {
-        return this.http.get<Mentor[]>(this.baseApiUrl + 'mentor/get-all/' + academyProgramId);
+        return this.http.get<Mentor[]>(this.baseApiUrl + 'Admin/mentor/get-all/' + academyProgramId);
     }
     public create(mentors: Mentor): Observable<Mentor> {
-        return this.http.post<Mentor>(this.baseApiUrl + 'mentor/create', mentors);
+        return this.http.post<Mentor>(this.baseApiUrl + 'Admin/mentor/create', mentors);
     }
     public delete(mentorId: number, academyProgramId: number): Observable<any> {
-        return this.http.delete<any>(`${this.baseApiUrl}mentor/delete/${mentorId}/${academyProgramId}`);
+        return this.http.delete<any>(`${this.baseApiUrl}Admin/mentor/delete/${mentorId}/${academyProgramId}`);
     }
     public update(value: any): Observable<object> {
-        return this.http.put(`${this.baseApiUrl}/mentor/update`, value);
+        return this.http.put(`${this.baseApiUrl}/Admin/mentor/update`, value);
     }
     public findById(mentorId: number): Observable<Mentor> {
-        return this.http.get<Mentor>(`${this.baseApiUrl}/mentor/find-by-id/${mentorId}`);
+        return this.http.get<Mentor>(`${this.baseApiUrl}/Admin/mentor/find-by-id/${mentorId}`);
     }
 
 }

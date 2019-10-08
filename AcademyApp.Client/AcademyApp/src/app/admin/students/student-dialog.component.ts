@@ -31,12 +31,6 @@ export class StudentDialogComponent implements OnInit {
 
     public ngOnInit() {
         if (this.data.student) {
-            // edit
-            this.isEditMode = true;
-            this.title = 'Edit student';
-            this.student = this.data.student;
-        } else {
-            // create
             this.title = 'Add new student';
         }
     }

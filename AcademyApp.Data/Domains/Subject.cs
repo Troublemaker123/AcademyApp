@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AcademyApp.Data.Model
+namespace AcademyApp.Data.Domains
 {
     [Table("Subject")]
     public class Subject

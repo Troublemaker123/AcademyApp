@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 import { AcademyProgramService } from '../academy-year/academy-program.service';
 import { WarnDialogComponent } from 'src/app/shared/warn-dialog/warn-dialog';
 import { GroupDialogComponent } from './group-dialog.component';
-import { GroupSortDialogComponent } from './group-sort-dialog.component';
+import { GroupMembersComponent } from '../group-members/group-members.component';
 
 
 @Component({
@@ -53,7 +53,7 @@ export class GroupComponent implements OnInit {
     }
 
     public openGroupDialog(group: Groups): void {
-         this.dialog.open(GroupSortDialogComponent, {
+         const dialogRef = this.dialog.open(GroupMembersComponent, {
             width: '1000px',
             disableClose: true,
             data: { group }

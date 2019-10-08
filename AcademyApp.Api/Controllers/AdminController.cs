@@ -36,6 +36,8 @@ namespace AcademyApp.Api.Controllers
         }
 
         //=========================================START OF CREATE========================================================
+        #region Student 
+        #endregion
 
         [Route("student/create")]
         [HttpPost]
@@ -647,7 +649,7 @@ namespace AcademyApp.Api.Controllers
 
         [Route("groupMember/get-all/{academyProgramId}")]
         [HttpGet]
-        public ActionResult<List<GroupViewModel>> GetAllGroupMembers(int groupMemberId, int academyProgramId)
+        public ActionResult<List<GroupMembersViewModel>> GetAll(int academyProgramId)
         {
 
             try
@@ -666,6 +668,27 @@ namespace AcademyApp.Api.Controllers
             }
 
         }
+        [Route("groupMember/getMentorsAndStudents/{academyProgramId}")]
+        [HttpGet]
+        public ActionResult<List<GroupMembersViewModel>> GetMentorsAndStudents(int academyProgramId)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    throw new Exception(ModelState.ToString());
+                }
+                var groupMembers = _groupMemberService.GetMentorsAndStudents(academyProgramId);
+                return Ok(groupMembers);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+
+        }
+
         //=========================================END OF GET-ALL=========================================================
 
 

@@ -6,7 +6,10 @@ export class GroupMembers {
 
     public groupId: number;
 
-    public UserId: number;
+    public userId: number;
 
     public userType: string;
+
+    public fullName: string;
+
 }

@@ -1,6 +1,4 @@
 ﻿using AcademyApp.Business.ViewModel;
-using AcademyApp.Data.Model;
-using AcademyApp.Model;
 using AcademyApp.Business.Enums;
 using AcademyApp.Business.ViewModels;
 using AcademyApp.Data.Domains;
@@ -255,11 +253,11 @@ namespace AcademyApp.Business.Mapper
             return new GroupMembers
             {
                 Id = model.Id,
-                UserType = model.UserType,
+                UserType = (int)model.UserType,
                 ApId = model.AcademyProgramId,
                 UserId = model.UserId,
                 GroupId = model.GroupId,
-
+                AddGroupMember = model.AddGroupMember
             };
         }
         public static GroupMembersViewModel ToModel(this GroupMembers model)
@@ -267,14 +265,35 @@ namespace AcademyApp.Business.Mapper
             return new GroupMembersViewModel
             {
                 Id=model.Id,
-                UserType = model.UserType,
+                UserType = (UserType)model.UserType,
                 AcademyProgramId = model.ApId,
                 GroupId = model.GroupId,
                 UserId = model.UserId,
+                AddGroupMember = model.AddGroupMember
             };
         }
+        public static GroupMembersViewModel ToGroupMemberModel(this Student model)
+        {
+            return new GroupMembersViewModel
+            {
+                Id = model.ID,
+                FullName = model.Name + " " + model.LastName,
+                UserId = model.ID,
+                UserType = UserType.Student,
 
 
+            };
+        }
+        public static GroupMembersViewModel ToGroupMemberModel(this Mentor model)
+        {
+            return new GroupMembersViewModel
+            {
+                Id = model.ID,
+                FullName = model.Name + " " + model.LastName,
+                UserId = model.ID,
+                UserType = UserType.Mentor
+            };
+        }
 
     }
 }

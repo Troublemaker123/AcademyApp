@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using AcademyApp.Model;
-using AcademyApp.Data.Model;
 using AcademyApp.Data.Domains;
 
 namespace AcademyApp.Data

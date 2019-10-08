@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource, MatDialog } from '@angular/material';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatTableDataSource, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { GroupMembers } from 'src/app/shared/models/groupMembers';
 import { Subscription } from 'rxjs';
 import { GroupMemberService } from '../group-member.service';
 import { AcademyProgramService } from '../academy-year/academy-program.service';
 import { WarnDialogComponent } from 'src/app/shared/warn-dialog/warn-dialog';
 import { GroupMemberDialogComponent } from './group-member-dialog.component';
+import { NgForm } from '@angular/forms';
+
 
 @Component({
     selector: 'app-group-members',
@@ -13,16 +15,22 @@ import { GroupMemberDialogComponent } from './group-member-dialog.component';
 })
 
 export class GroupMembersComponent implements OnInit {
+
+    public groupDialogMember: GroupMembers = new GroupMembers();
     public academyProgramId: number;
-    public groupMember: MatTableDataSource<any>;
+    public groupMember: MatTableDataSource<GroupMembers>;
     public groupMembers: GroupMembers[] = [];
-    columnsToDisplay = ['userType', 'actions'];
+    columnsToDisplay = ['userType', 'Actions'];
     private subscription: Subscription;
+
     constructor(
         private groupMemberService: GroupMemberService,
         public academyProgramService: AcademyProgramService,
-        public dialog: MatDialog
+        public dialog: MatDialog,
+        private dialogRef: MatDialogRef<GroupMemberDialogComponent>,
+        @Inject(MAT_DIALOG_DATA) public data: any
     ) {
+        // tslint:disable-next-line:no-shadowed-variable
         this.subscription = this.academyProgramService.getAcademyProgramIdEvent().subscribe(data => {
             this.academyProgramId = data.academyProgramId;
             this.GetAllGroupMembers(this.academyProgramId);
@@ -60,12 +68,12 @@ export class GroupMembersComponent implements OnInit {
 
        dialogRef.afterClosed().subscribe(result => {
            if (result === 'ok') {
-               this.deleteGroup(group);
+               this.deleteGroupMember(group);
            }
        });
    }
 
-   private deleteGroup(groupMembers: GroupMembers) {
+   private deleteGroupMember(groupMembers: GroupMembers) {
        this.groupMemberService.delete(groupMembers.id, groupMembers.academyProgramId)
            .subscribe(result => {
                this.GetAllGroupMembers(this.academyProgramId);
@@ -79,4 +87,16 @@ export class GroupMembersComponent implements OnInit {
            });
 
    }
+
+   public onSubmit() {
+        this.groupDialogMember.academyProgramId = this.academyProgramService.getAcademyProgramId();
+        this.groupMemberService.create(this.groupDialogMember).subscribe(result => {
+            this.dialogRef.close('ok');
+        });
+
+}
+
+public onCancel(form: NgForm) {
+    this.dialogRef.close('cancel');
+}
 }

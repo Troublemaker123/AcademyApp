@@ -29,7 +29,6 @@ import { SubjectsComponent } from '../subjects/subject.component';
 import { WarnDialogComponent } from '../shared/warn-dialog/warn-dialog';
 import { GroupComponent } from './groups/group.component';
 import { GroupDialogComponent } from './groups/group-dialog.component';
-import { GroupSortDialogComponent } from './groups/group-sort-dialog.component';
 import { GroupMemberService } from './group-member.service';
 import { GroupMembersComponent } from './group-members/group-members.component';
 import { GroupMemberDialogComponent } from './group-members/group-member-dialog.component';
@@ -50,7 +49,6 @@ import { GroupMemberDialogComponent } from './group-members/group-member-dialog.
     WarnDialogComponent,
     GroupComponent,
     GroupDialogComponent,
-    GroupSortDialogComponent,
     GroupMembersComponent,
     GroupMemberDialogComponent,
   ],
@@ -62,8 +60,8 @@ import { GroupMemberDialogComponent } from './group-members/group-member-dialog.
     WarnDialogComponent,
     GroupComponent,
     GroupDialogComponent,
-    GroupSortDialogComponent,
     GroupMemberDialogComponent,
+    GroupMembersComponent
   ],
   imports: [
     CommonModule,

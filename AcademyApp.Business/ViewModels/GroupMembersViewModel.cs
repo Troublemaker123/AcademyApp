@@ -17,7 +17,8 @@ namespace AcademyApp.Business.ViewModels
 
         public string FullName { get; set; }
 
-        public bool AddGroupMember { get; set; }
+        public int AddGroupMember { get; set; }
+
 
     }
 }

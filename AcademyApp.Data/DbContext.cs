@@ -34,7 +34,7 @@ namespace AcademyApp.Data
 
             modelBuilder.Entity<GroupMembers>(entity =>
             {
-                entity.HasKey(x => new { x.Id, x.ApId, x.UserId });
+                entity.HasKey(x => new { x.Id, x.ApId, x.UserId, x.GroupId });
             });
         }
 

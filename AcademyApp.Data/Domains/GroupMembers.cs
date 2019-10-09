@@ -21,7 +21,9 @@ namespace AcademyApp.Data.Domains
         [Required]
         public int UserType { get; set; }
 
-        public bool AddGroupMember { get; set; }
+        public int AddGroupMember { get; set; }
+
+        public string FullName { get; set; }
 
     }
 }

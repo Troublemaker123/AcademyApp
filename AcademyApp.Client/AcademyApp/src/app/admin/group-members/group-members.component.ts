@@ -7,6 +7,7 @@ import { AcademyProgramService } from '../academy-year/academy-program.service';
 import { WarnDialogComponent } from 'src/app/shared/warn-dialog/warn-dialog';
 import { GroupMemberDialogComponent } from './group-member-dialog.component';
 import { NgForm } from '@angular/forms';
+import { Groups } from 'src/app/shared/models/groups';
 
 
 @Component({
@@ -20,7 +21,9 @@ export class GroupMembersComponent implements OnInit {
     public academyProgramId: number;
     public groupMember: MatTableDataSource<GroupMembers>;
     public groupMembers: GroupMembers[] = [];
-    columnsToDisplay = ['userType', 'Actions'];
+    public selectedGroup: Groups;
+
+    columnsToDisplay = ['fullName', 'userType', 'Actions'];
     private subscription: Subscription;
 
     constructor(
@@ -30,12 +33,16 @@ export class GroupMembersComponent implements OnInit {
         private dialogRef: MatDialogRef<GroupMemberDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any
     ) {
-        // tslint:disable-next-line:no-shadowed-variable
-        this.subscription = this.academyProgramService.getAcademyProgramIdEvent().subscribe(data => {
-            this.academyProgramId = data.academyProgramId;
+        if (data) {
+            this.selectedGroup = data.group;
+        }
+
+        this.subscription = this.academyProgramService.getAcademyProgramIdEvent()
+        .subscribe(x => {
+            this.academyProgramId = x.academyProgramId;
             this.GetAllGroupMembers(this.academyProgramId);
         });
-     }
+    }
 
     ngOnInit() {
         this.academyProgramId = this.academyProgramService.getAcademyProgramId();
@@ -44,59 +51,55 @@ export class GroupMembersComponent implements OnInit {
         }
     }
 
-   public openDialog(group: GroupMembers): void {
-       const dialogRef = this.dialog.open(GroupMemberDialogComponent, {
-           width: '500px',
-           disableClose: true,
-           data: { group }
-       });
-
-       dialogRef.afterClosed().subscribe(result => {
-           if (result === 'ok') {
-               this.GetAllGroupMembers(this.academyProgramId);
-           }
-       });
-   }
-
-   public openWarningDialog(group: GroupMembers): void {
-       const dialogRef = this.dialog.open(WarnDialogComponent, {
-           // new Warning Dialog
-           width: '300px',
-           disableClose: true,
-           data: { group }
-       });
-
-       dialogRef.afterClosed().subscribe(result => {
-           if (result === 'ok') {
-               this.deleteGroupMember(group);
-           }
-       });
-   }
-
-   private deleteGroupMember(groupMembers: GroupMembers) {
-       this.groupMemberService.delete(groupMembers.id, groupMembers.academyProgramId)
-           .subscribe(result => {
-               this.GetAllGroupMembers(this.academyProgramId);
-           });
-   }
-
-   private GetAllGroupMembers(academyProgramId: number) {
-       this.groupMemberService.GetAllGroupMembers(academyProgramId)
-           .subscribe(result => {
-               this.groupMembers = result;
-           });
-
-   }
-
-   public onSubmit() {
-        this.groupDialogMember.academyProgramId = this.academyProgramService.getAcademyProgramId();
-        this.groupMemberService.create(this.groupDialogMember).subscribe(result => {
-            this.dialogRef.close('ok');
+    public openDialog(group: GroupMembers): void {
+        const dialogRef = this.dialog.open(GroupMemberDialogComponent, {
+            width: '500px',
+            disableClose: true,
+            data: { group: this.selectedGroup }
         });
 
-}
+        dialogRef.afterClosed().subscribe(result => {
+            if (result === 'ok') {
+                this.GetAllGroupMembers(this.academyProgramId);
+            }
+        });
+    }
 
-public onCancel(form: NgForm) {
-    this.dialogRef.close('cancel');
-}
+    public openWarningDialog(group: GroupMembers): void {
+        const dialogRef = this.dialog.open(WarnDialogComponent, {
+            // new Warning Dialog
+            width: '300px',
+            disableClose: true,
+            data: { groups: group }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result === 'ok') {
+                this.deleteGroupMember(group);
+            }
+        });
+    }
+
+    private deleteGroupMember(groupMembers: GroupMembers) {
+        this.groupMemberService.delete(groupMembers.id, groupMembers.academyProgramId)
+            .subscribe(result => {
+                this.GetAllGroupMembers(this.academyProgramId);
+            });
+    }
+
+    private GetAllGroupMembers(academyProgramId: number) {
+        this.groupMemberService.GetAllGroupMembers(academyProgramId)
+            .subscribe(result => {
+                this.groupMembers = result;
+            });
+
+    }
+
+    public onSubmit() {
+        this.dialogRef.close('ok');
+    }
+
+    public onCancel(form: NgForm) {
+        this.dialogRef.close('cancel');
+    }
 }

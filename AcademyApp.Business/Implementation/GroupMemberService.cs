@@ -25,31 +25,15 @@ namespace AcademyApp.Business.Implementation
             _mentorRepository = mentorRepository;
         }
 
-        public void Create(GroupMembersViewModel groupMember)
+        public void Create(List<GroupMembersViewModel> members)
         {
+            if (!members.Any()) return;
 
-            //List<GroupMembers> addGroupMembers = new List<GroupMembers>();
-            //addGroupMembers = (from addGroupMembers in _groupMembersRepository.)
-
-           // var selectedValue = groupMember.AddGroupMember.Where(x =>x.IsChecked ==true).ToList<AddGroupMember>
-
-
-            //var countChecked = 0; var countUnChecked = 0;
-            //for (int i = 0; i < groupMember.Count(); i++)
-            //{
-            //    if(groupMember[i].AddGroupMember == true)
-            //    {
-            //        countChecked = countChecked + 1;
-            //    }else
-            //    {
-            //        countUnChecked = countUnChecked + 1;
-            //    }
-            //}
-            if (groupMember == null)
-                throw new Exception("student not found");
-
-            var domain = groupMember.ToDomain();
-            _groupMembersRepository.Create(domain);
+            foreach (var member in members)
+            {
+                var domain = member.ToDomain();
+                _groupMembersRepository.Create(domain);
+            }
         }
 
         public void Delete(int groupMemberId, int academyProgramId)

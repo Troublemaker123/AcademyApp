@@ -147,7 +147,7 @@ namespace AcademyApp.Api.Controllers
 
         [Route("groupMember/create")]
         [HttpPost]
-        public ActionResult CreateGroupMember(GroupMembersViewModel group)
+        public ActionResult CreateGroupMember([FromBody] List<GroupMembersViewModel> members)
         {
             try
             {
@@ -155,7 +155,7 @@ namespace AcademyApp.Api.Controllers
                 {
                     throw new Exception(ModelState.ToString());
                 }
-                _groupMemberService.Create(group);
+                _groupMemberService.Create(members);
                 return Ok();
 
             }
@@ -649,7 +649,7 @@ namespace AcademyApp.Api.Controllers
 
         [Route("groupMember/get-all/{academyProgramId}")]
         [HttpGet]
-        public ActionResult<List<GroupMembersViewModel>> GetAll(int academyProgramId)
+        public ActionResult<List<GroupMembersViewModel>> GetAllGroupMembers(int academyProgramId)
         {
 
             try

@@ -6,6 +6,7 @@ import { AcademyProgramService } from '../academy-year/academy-program.service';
 import { MAT_DIALOG_DATA, MatDialogRef, MatTableDataSource } from '@angular/material';
 import { NgForm } from '@angular/forms';
 import { SelectionModel } from '@angular/cdk/collections';
+import { Groups } from 'src/app/shared/models/groups';
 
 @Component({
     templateUrl: 'group-member-dialog.component.html'
@@ -17,6 +18,7 @@ export class GroupMemberDialogComponent implements OnInit {
     public groupMember: GroupMembers = new GroupMembers();
     public groupMembers: GroupMembers[] = [];
     public groupMembersTableData = new MatTableDataSource<GroupMembers>();
+    public selectedGroup: Groups;
     displayedColumns = ['select', 'fullName', 'userType'];
     public academyProgramId: number;
     selection = new SelectionModel<GroupMembers>(true, []);
@@ -29,11 +31,15 @@ export class GroupMemberDialogComponent implements OnInit {
         public dialogRef: MatDialogRef<GroupMemberDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any
     ) {
+        if (data) {
+            this.selectedGroup = data.group;
+        }
+
         this.subscription = this.academyProgramService.getAcademyProgramIdEvent()
-        .subscribe(x => {
-            this.academyProgramId = x.academyProgramId;
-            this.GetAllStudentsandMentors(this.academyProgramId);
-        });
+            .subscribe(x => {
+                this.academyProgramId = x.academyProgramId;
+                this.GetAllStudentsandMentors(this.academyProgramId);
+            });
     }
 
     ngOnInit() {
@@ -66,14 +72,24 @@ export class GroupMemberDialogComponent implements OnInit {
         if (!row) {
             return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
         }
-        return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.fullName + 1}`;
+        return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.AddGroupMember}`;
     }
 
     public onSubmit() {
-        this.groupMember.academyProgramId = this.academyProgramService.getAcademyProgramId();
-        this.groupMemberService.create(this.groupMember).subscribe(result => {
-            this.dialogRef.close('ok');
-        });
+
+        if (this.selection.selected.length > 0) {
+            const apId = this.academyProgramService.getAcademyProgramId();
+            this.selection.selected.forEach((member: GroupMembers) => {
+                member.academyProgramId = apId;
+                if (this.selectedGroup) {
+                    member.groupId = this.selectedGroup.id;
+                }
+            });
+
+            this.groupMemberService.create(this.selection.selected).subscribe(result => {
+                this.dialogRef.close('ok');
+            });
+        }
     }
 
     public onCancel(form: NgForm) {

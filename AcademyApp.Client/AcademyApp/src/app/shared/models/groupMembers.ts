@@ -12,4 +12,6 @@ export class GroupMembers {
 
     public fullName: string;
 
+    public AddGroupMember: number;
+
 }

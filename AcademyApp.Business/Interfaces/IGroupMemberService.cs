@@ -6,7 +6,7 @@ namespace AcademyApp.Business.Interfaces
 {
    public interface IGroupMemberService
     {
-        void Create(GroupMembersViewModel groupMember);
+        void Create(List<GroupMembersViewModel> members);
         void Delete(int groupMemberId, int academyProgramId);
         IEnumerable<GroupMembersViewModel> GetAll(int academyProgramId);
         GroupMembersViewModel FindById(int apId);

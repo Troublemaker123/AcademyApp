@@ -257,7 +257,8 @@ namespace AcademyApp.Business.Mapper
                 ApId = model.AcademyProgramId,
                 UserId = model.UserId,
                 GroupId = model.GroupId,
-                AddGroupMember = model.AddGroupMember
+                AddGroupMember = model.AddGroupMember,
+                FullName = model.FullName
             };
         }
         public static GroupMembersViewModel ToModel(this GroupMembers model)
@@ -269,7 +270,8 @@ namespace AcademyApp.Business.Mapper
                 AcademyProgramId = model.ApId,
                 GroupId = model.GroupId,
                 UserId = model.UserId,
-                AddGroupMember = model.AddGroupMember
+                AddGroupMember = model.AddGroupMember,
+                FullName = model.FullName
             };
         }
         public static GroupMembersViewModel ToGroupMemberModel(this Student model)

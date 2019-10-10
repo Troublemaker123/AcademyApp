@@ -10,6 +10,6 @@ namespace AcademyApp.Business.Interfaces
         void Delete(int groupMemberId, int academyProgramId);
         IEnumerable<GroupMembersViewModel> GetAll(int academyProgramId);
         GroupMembersViewModel FindById(int apId);
-        IEnumerable<GroupMembersViewModel> GetMentorsAndStudents(int academyProgramId);
+        IEnumerable<GroupMembersViewModel> GetMentorsAndStudents(int groupId, int academyProgramId);
     }
 }

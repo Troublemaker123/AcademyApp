@@ -19,6 +19,5 @@ namespace AcademyApp.Business.ViewModels
 
         public int AddGroupMember { get; set; }
 
-
     }
 }

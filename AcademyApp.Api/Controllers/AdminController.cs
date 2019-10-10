@@ -272,8 +272,6 @@ namespace AcademyApp.Api.Controllers
 
                 return BadRequest(ex.Message);
             }
-
-
         }
 
         [Route("groupMember/delete/{groupMemberId}/{academyProgramId}")]
@@ -668,9 +666,9 @@ namespace AcademyApp.Api.Controllers
             }
 
         }
-        [Route("groupMember/getMentorsAndStudents/{academyProgramId}")]
+        [Route("groupMember/getMentorsAndStudents/{groupId}/{academyProgramId}")]
         [HttpGet]
-        public ActionResult<List<GroupMembersViewModel>> GetMentorsAndStudents(int academyProgramId)
+        public ActionResult<List<GroupMembersViewModel>> GetMentorsAndStudents(int groupId, int academyProgramId)
         {
             try
             {
@@ -678,7 +676,7 @@ namespace AcademyApp.Api.Controllers
                 {
                     throw new Exception(ModelState.ToString());
                 }
-                var groupMembers = _groupMemberService.GetMentorsAndStudents(academyProgramId);
+                var groupMembers = _groupMemberService.GetMentorsAndStudents(groupId, academyProgramId);
                 return Ok(groupMembers);
             }
             catch (Exception ex)

@@ -81,18 +81,17 @@ export class GroupMembersComponent implements OnInit {
     }
 
     private deleteGroupMember(groupMembers: GroupMembers) {
-        this.groupMemberService.delete(groupMembers.id, groupMembers.academyProgramId)
+        this.groupMemberService.delete(groupMembers.groupMemberId, groupMembers.academyProgramId)
             .subscribe(result => {
                 this.GetAllGroupMembers(this.academyProgramId);
             });
     }
 
     private GetAllGroupMembers(academyProgramId: number) {
-        this.groupMemberService.GetAllGroupMembers(academyProgramId)
+        this.groupMemberService.GetAllStudentsandMentors(academyProgramId, this.selectedGroup.id)
             .subscribe(result => {
                 this.groupMembers = result;
             });
-
     }
 
     public onSubmit() {

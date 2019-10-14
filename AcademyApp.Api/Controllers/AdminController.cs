@@ -647,7 +647,7 @@ namespace AcademyApp.Api.Controllers
 
         [Route("groupMember/get-all/{academyProgramId}")]
         [HttpGet]
-        public ActionResult<List<GroupMembersViewModel>> GetAllGroupMembers(int academyProgramId)
+        public ActionResult<List<GroupMembersViewModel>> GetAllGroupMembers(int groupId, int academyProgramId)
         {
 
             try
@@ -656,7 +656,7 @@ namespace AcademyApp.Api.Controllers
                 {
                     throw new Exception(ModelState.ToString());
                 }
-                var groupMembers = _groupMemberService.GetAll(academyProgramId);
+                var groupMembers = _groupMemberService.GetAll(groupId,academyProgramId);
                 return Ok(groupMembers);
             }
             catch (Exception ex)

@@ -8,7 +8,7 @@ namespace AcademyApp.Business.Interfaces
     {
         void Create(List<GroupMembersViewModel> members);
         void Delete(int groupMemberId, int academyProgramId);
-        IEnumerable<GroupMembersViewModel> GetAll(int academyProgramId);
+        IEnumerable<GroupMembersViewModel> GetAll(int groupId, int academyProgramId);
         GroupMembersViewModel FindById(int apId);
         IEnumerable<GroupMembersViewModel> GetMentorsAndStudents(int groupId, int academyProgramId);
     }

@@ -53,10 +53,10 @@ namespace AcademyApp.Business.Implementation
             return groupMember.ToModel();
         }
 
-        public IEnumerable<GroupMembersViewModel> GetAll(int academyProgramId)
+        public IEnumerable<GroupMembersViewModel> GetAll(int groupId, int academyProgramId)
         {
 
-            return _groupMembersRepository.GetAll().Where(groupMember => groupMember.ApId == academyProgramId)
+            return _groupMembersRepository.GetAll().Where(gm => gm.ApId == academyProgramId)
                  .Select(groupMember => groupMember.ToModel()).ToList();
         }
 
@@ -66,13 +66,13 @@ namespace AcademyApp.Business.Implementation
 
             var groupMembers = _groupMembersRepository.GetAll().Where(gm =>  gm.ApId == academyProgramId);
 
-            var groupMembersByGroup = groupMembers.Where(gm => gm.GroupId == groupId && gm.UserType == (int)UserType.Mentor);
+            // mentors
+            var mentorsByGroup = groupMembers.Where(gm => gm.GroupId == groupId && gm.UserType == (int)UserType.Mentor);
+            var mentors = _mentorRepository.GetAll().Where(m => m.ApId == academyProgramId && !mentorsByGroup.Any(gm => gm.UserId == m.ID)).Select(x => x.ToGroupMemberModel()).ToList();
 
+            // students
             var studentGroupMembers = groupMembers.Where(gm => gm.UserType == (int)UserType.Student);
-        
-            var mentors = _mentorRepository.GetAll().Where(m => m.ApId == academyProgramId && groupMembersByGroup.Any(mgm => mgm.UserId != m.ID)).Select(x => x.ToGroupMemberModel()).ToList();
-
-            var students = _studentRepository.GetAll().Where(s => s.ApId == academyProgramId && studentGroupMembers.Any(sgm => sgm.UserId != s.ID)).Select(x => x.ToGroupMemberModel()).ToList();
+            var students = _studentRepository.GetAll().Where(s => s.ApId == academyProgramId && !studentGroupMembers.Any(sgm => sgm.UserId == s.ID)).Select(x => x.ToGroupMemberModel()).ToList();
 
             members.AddRange(students);
             members.AddRange(mentors);

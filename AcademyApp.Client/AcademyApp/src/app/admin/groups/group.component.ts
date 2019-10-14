@@ -58,6 +58,11 @@ export class GroupComponent implements OnInit {
             disableClose: true,
             data: { group }
         });
+         dialogRef.afterClosed().subscribe(result => {
+            if (result === 'ok') {
+                this.GetAllGroups(this.academyProgramId);
+            }
+        });
     }
 
 

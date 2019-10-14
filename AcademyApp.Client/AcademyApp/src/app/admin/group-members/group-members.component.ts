@@ -19,6 +19,7 @@ export class GroupMembersComponent implements OnInit {
 
     public groupDialogMember: GroupMembers = new GroupMembers();
     public academyProgramId: number;
+    public groupId: number;
     public groupMember: MatTableDataSource<GroupMembers>;
     public groupMembers: GroupMembers[] = [];
     public selectedGroup: Groups;
@@ -33,11 +34,11 @@ export class GroupMembersComponent implements OnInit {
         private dialogRef: MatDialogRef<GroupMemberDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any
     ) {
-        if (data) {
-            this.selectedGroup = data.group;
-        }
+         if (data) {
+             this.groupId = data.group;
+         }
 
-        this.subscription = this.academyProgramService.getAcademyProgramIdEvent()
+         this.subscription = this.academyProgramService.getAcademyProgramIdEvent()
         .subscribe(x => {
             this.academyProgramId = x.academyProgramId;
             this.GetAllGroupMembers(this.academyProgramId);
@@ -47,7 +48,7 @@ export class GroupMembersComponent implements OnInit {
     ngOnInit() {
         this.academyProgramId = this.academyProgramService.getAcademyProgramId();
         if (this.academyProgramId) {
-            this.GetAllGroupMembers(this.academyProgramId);
+            this.GetAllGroupMembers( this.academyProgramId);
         }
     }
 
@@ -60,7 +61,7 @@ export class GroupMembersComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(result => {
             if (result === 'ok') {
-                this.GetAllGroupMembers(this.academyProgramId);
+                this.GetAllGroupMembers(this.selectedGroup.id);
             }
         });
     }
@@ -70,7 +71,7 @@ export class GroupMembersComponent implements OnInit {
             // new Warning Dialog
             width: '300px',
             disableClose: true,
-            data: { groups: group }
+            data: { group }
         });
 
         dialogRef.afterClosed().subscribe(result => {
@@ -81,14 +82,14 @@ export class GroupMembersComponent implements OnInit {
     }
 
     private deleteGroupMember(groupMembers: GroupMembers) {
-        this.groupMemberService.delete(groupMembers.groupMemberId, groupMembers.academyProgramId)
+        this.groupMemberService.delete(groupMembers.groupId, groupMembers.academyProgramId)
             .subscribe(result => {
                 this.GetAllGroupMembers(this.academyProgramId);
             });
     }
 
     private GetAllGroupMembers(academyProgramId: number) {
-        this.groupMemberService.GetAllStudentsandMentors(academyProgramId, this.selectedGroup.id)
+        this.groupMemberService.GetAllGroupMembers(this.groupId, academyProgramId)
             .subscribe(result => {
                 this.groupMembers = result;
             });

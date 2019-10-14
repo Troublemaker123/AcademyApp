@@ -4,7 +4,7 @@ export class GroupMembers {
 
     public academyProgramId: number;
 
-    public groupMemberId: number;
+    public groupId: number;
 
     public userId: number;
 

@@ -12,8 +12,8 @@ export class GroupMemberService {
 
     constructor(private http: HttpClient) { }
 
-    public GetAllGroupMembers(groupMemberId: number): Observable<GroupMembers[]> {
-        return this.http.get<GroupMembers[]>(this.baseApiUrl + `Admin/groupMember/get-all/${groupMemberId}`);
+    public GetAllGroupMembers(groupId: number, academyProgramId: number): Observable<GroupMembers[]> {
+        return this.http.get<GroupMembers[]>(this.baseApiUrl + `Admin/groupMember/get-all/${groupId}/${academyProgramId}`);
     }
     public GetAllStudentsandMentors(groupId: number, academyProgramId: number): Observable<GroupMembers[]> {
         return this.http.get<GroupMembers[]>

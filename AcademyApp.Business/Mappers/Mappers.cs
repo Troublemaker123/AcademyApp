@@ -278,7 +278,6 @@ namespace AcademyApp.Business.Mapper
         {
             return new GroupMembersViewModel
             {
-                Id = model.ID,
                 FullName = model.Name + " " + model.LastName,
                 UserId = model.ID,
                 UserType = UserType.Student,
@@ -290,7 +289,6 @@ namespace AcademyApp.Business.Mapper
         {
             return new GroupMembersViewModel
             {
-                Id = model.ID,
                 FullName = model.Name + " " + model.LastName,
                 UserId = model.ID,
                 UserType = UserType.Mentor

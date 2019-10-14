@@ -45,7 +45,7 @@ export class GroupMemberDialogComponent implements OnInit {
     ngOnInit() {
         this.academyProgramId = this.academyProgramService.getAcademyProgramId();
         if (this.academyProgramId) {
-            this.GetAllStudentsandMentors( this.academyProgramId);
+            this.GetAllStudentsandMentors(this.academyProgramId);
         }
     }
 
@@ -82,7 +82,7 @@ export class GroupMemberDialogComponent implements OnInit {
             this.selection.selected.forEach((member: GroupMembers) => {
                 member.academyProgramId = apId;
                 if (this.selectedGroup) {
-                    member.groupMemberId = this.selectedGroup.id;
+                    member.groupId = this.selectedGroup.id;
                 }
             });
 

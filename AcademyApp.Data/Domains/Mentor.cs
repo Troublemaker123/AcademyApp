@@ -26,8 +26,6 @@ namespace AcademyApp.Data.Domains
         [StringLength(255)]
         public string Email { get; set; }
 
-        //   public Gender gender { get; set; }
-
         [Required]
         public string YearsOfService { get; set; }
 

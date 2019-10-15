@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AcademyProgramService } from './academy-year/academy-program.service';
+import { AcademyProgramStateService } from './academy-program/academy-program-state.service';
 import { AcademyProgram } from '../shared/models/academyProgram';
-import { AdminService } from './admin.service';
+import { AcademyProgramService } from './academy-program.service';
 
 
 @Component({
@@ -12,8 +12,8 @@ export class AdminComponent implements OnInit {
 
   public programs: AcademyProgram[] = [];
 
-  constructor(private academyProgramService: AcademyProgramService,
-              private adminService: AdminService, ) {
+  constructor(private academyProgramStateService: AcademyProgramStateService,
+              private academyProgramService: AcademyProgramService, ) {
   }
 
   public ngOnInit() {
@@ -22,22 +22,22 @@ export class AdminComponent implements OnInit {
 
 
   public getAllAcademyPrograms() {
-    this.adminService.GetAllAcademyPrograms()
+    this.academyProgramService.GetAllAcademyPrograms()
       .subscribe(result => {
         this.programs = result;
         const academyPrograms = this.programs.filter((program: AcademyProgram) => program.isCurrent === true);
         if (academyPrograms.length > 0) {
           const academyProgram = academyPrograms[0];
-          this.academyProgramService.setAcademyProgramId(academyProgram.id);
-          this.academyProgramService.setAcademyProgramIdEvent(academyProgram.id);
+          this.academyProgramStateService.setAcademyProgramId(academyProgram.id);
+          this.academyProgramStateService.setAcademyProgramIdEvent(academyProgram.id);
         }
       });
   }
 
   public onChangeAcademyProgram(event: any) {
     if (event.target.value) {
-      this.academyProgramService.setAcademyProgramId(event.target.value);
-      this.academyProgramService.setAcademyProgramIdEvent(event.target.value);
+      this.academyProgramStateService.setAcademyProgramId(event.target.value);
+      this.academyProgramStateService.setAcademyProgramIdEvent(event.target.value);
     }
   }
 }

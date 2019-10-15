@@ -2,16 +2,16 @@ import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatPaginator, MatDialog, MatTableDataSource } from '@angular/material';
 import { Subscription } from 'rxjs/Subscription';
 
-import { SubjectService } from '../admin/subject.service';
-import { Subjects } from '../shared/models/subjects';
+import { SubjectService } from '../subject.service';
+import { Subjects } from '../../shared/models/subjects';
 import { SubjectDialogComponent } from './subject-dialog.component';
-import { AcademyProgramService } from '../admin/academy-year/academy-program.service';
-import { WarnDialogComponent } from '../shared/warn-dialog/warn-dialog';
+import { AcademyProgramStateService } from '../academy-program/academy-program-state.service';
+import { WarnDialogComponent } from '../../shared/warn-dialog/warn-dialog';
 
 
 
 @Component({
-  selector: 'subject',
+  selector: 'app-subject',
   templateUrl: 'subject.component.html'
 })
 export class SubjectsComponent implements OnInit, OnDestroy {
@@ -25,19 +25,19 @@ export class SubjectsComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   constructor(
-    private academyProgramService: AcademyProgramService,
+    private academyProgramStateService: AcademyProgramStateService,
     private subjectService: SubjectService,
     public dialog: MatDialog
   ) {
-    this.subscription = this.academyProgramService.getAcademyProgramIdEvent().subscribe(data => {
+    this.subscription = this.academyProgramStateService.getAcademyProgramIdEvent().subscribe(data => {
       this.academyProgramId = data.academyProgramId;
-      this.getAllSubjects(this.academyProgramId)
+      this.getAllSubjects(this.academyProgramId);
     });
   }
 
 
   public ngOnInit() {
-    this.academyProgramId = this.academyProgramService.getAcademyProgramId();
+    this.academyProgramId = this.academyProgramStateService.getAcademyProgramId();
     if (this.academyProgramId) {
       this.getAllSubjects(this.academyProgramId);
     }
@@ -51,7 +51,7 @@ export class SubjectsComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(SubjectDialogComponent, {
       width: '500px',
       disableClose: true,
-      data: { subject: subject }
+      data: { subject }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -66,7 +66,7 @@ export class SubjectsComponent implements OnInit, OnDestroy {
       // new Warning Dialog
       width: '300px',
       disableClose: true,
-      data: { subject: subject }
+      data: { subject }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -77,7 +77,7 @@ export class SubjectsComponent implements OnInit, OnDestroy {
   }
 
   private deleteSubject(subject: Subjects) {
-    this.subjectService.delete(subject.id,subject.academyProgramId)
+    this.subjectService.delete(subject.id, subject.academyProgramId)
       .subscribe(result => {
         this.getAllSubjects(this.academyProgramId);
       });
@@ -91,4 +91,4 @@ export class SubjectsComponent implements OnInit, OnDestroy {
 
   }
 
-};
+}

@@ -44,16 +44,13 @@ namespace AcademyApp.Api
 
             services.AddTransient<IStudentService, StudentService>();
             services.AddTransient<IAcademyProgramService, AcademyProgramService>();
-            services.AddTransient<IAttendanceService, AttendanceService>();
-            services.AddTransient<IGradeService, GradeService>();
             services.AddTransient<IGroupService, GroupService>();
-            services.AddTransient<IProgramService, ProgramService>();
             services.AddTransient<IRoleService, RoleService>();
-            services.AddTransient<IStaffService, StaffService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ISubjectService, SubjectService>();
             services.AddTransient<IMentorService, MentorService>();
             services.AddTransient<IGroupMemberService, GroupMemberService>();
+            services.AddTransient<IMentorSubjectService, MentorSubjectService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

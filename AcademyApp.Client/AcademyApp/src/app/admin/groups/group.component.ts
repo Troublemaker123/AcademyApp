@@ -3,7 +3,7 @@ import { GroupService } from '../group.service';
 import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 import { Groups } from 'src/app/shared/models/groups';
 import { Subscription } from 'rxjs';
-import { AcademyProgramService } from '../academy-year/academy-program.service';
+import { AcademyProgramStateService } from '../academy-program/academy-program-state.service';
 import { WarnDialogComponent } from 'src/app/shared/warn-dialog/warn-dialog';
 import { GroupDialogComponent } from './group-dialog.component';
 import { GroupMembersComponent } from '../group-members/group-members.component';
@@ -27,10 +27,10 @@ export class GroupComponent implements OnInit {
 
     constructor(
         private groupService: GroupService,
-        public academyProgramService: AcademyProgramService,
+        public academyProgramStateService: AcademyProgramStateService,
         public dialog: MatDialog
     ) {
-        this.subscription = this.academyProgramService.getAcademyProgramIdEvent()
+        this.subscription = this.academyProgramStateService.getAcademyProgramIdEvent()
             .subscribe(data => {
                 this.academyProgramId = data.academyProgramId;
                 this.GetAllGroups(this.academyProgramId);
@@ -39,17 +39,11 @@ export class GroupComponent implements OnInit {
 
 
     public ngOnInit() {
-        this.academyProgramId = this.academyProgramService.getAcademyProgramId();
+        this.academyProgramId = this.academyProgramStateService.getAcademyProgramId();
         if (this.academyProgramId) {
             this.GetAllGroups(this.academyProgramId);
         }
 
-    }
-
-    // tslint:disable-next-line:use-lifecycle-interface
-    public ngOnDestroy() {
-        // unsubscribe to ensure no memory leaks
-        this.subscription.unsubscribe();
     }
 
     public openGroupDialog(group: Groups): void {

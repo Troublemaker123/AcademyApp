@@ -9,23 +9,23 @@ import { SharedModule } from '../shared/shared.module';
 
 
 // services
-import { AdminService } from './admin.service';
+import { AcademyProgramService } from './academy-program.service';
+import { AcademyProgramStateService } from './academy-program/academy-program-state.service';
 import { StudentService } from './student.service';
 import { MentorService } from './mentor.service';
 import { SubjectService } from './subject.service';
-import { AcademyProgramService } from './academy-year/academy-program.service';
 import { GroupService } from './group.service';
 
 // components
 import { AdminComponent } from './admin.component';
-import { AcademyYearComponent } from './academy-year/academy-year.component';
-import { AcademyYearDialogComponent } from './academy-year/academy-year-dialog.component';
+import { AcademyProgramComponent } from './academy-program/academy-program.component';
+import { AcademyYearDialogComponent } from './academy-program/academy-program-dialog.component';
 import { StudentsComponent } from './students/students.component';
 import { StudentDialogComponent } from './students/student-dialog.component';
 import { MentorDialogComponent } from './mentors/mentor-dialog.component';
 import { MentorComponent } from './mentors/mentor.component';
-import { SubjectDialogComponent } from '../subjects/subject-dialog.component';
-import { SubjectsComponent } from '../subjects/subject.component';
+import { SubjectDialogComponent } from './subjects/subject-dialog.component';
+import { SubjectsComponent } from './subjects/subject.component';
 import { WarnDialogComponent } from '../shared/warn-dialog/warn-dialog';
 import { GroupComponent } from './groups/group.component';
 import { GroupDialogComponent } from './groups/group-dialog.component';
@@ -34,11 +34,10 @@ import { GroupMembersComponent } from './group-members/group-members.component';
 import { GroupMemberDialogComponent } from './group-members/group-member-dialog.component';
 
 
-
 @NgModule({
   declarations: [
     AdminComponent,
-    AcademyYearComponent,
+    AcademyProgramComponent,
     StudentsComponent,
     AcademyYearDialogComponent,
     StudentDialogComponent,
@@ -73,11 +72,11 @@ import { GroupMemberDialogComponent } from './group-members/group-member-dialog.
 
   ],
   providers: [
-    AdminService,
+    AcademyProgramService,
     StudentService,
     MentorService,
     SubjectService,
-    AcademyProgramService,
+    AcademyProgramStateService,
     GroupService,
     GroupMemberService,
 

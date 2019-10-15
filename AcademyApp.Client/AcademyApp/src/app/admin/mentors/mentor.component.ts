@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Mentor } from 'src/app/shared/models/mentors';
 import { MentorService } from '../mentor.service';
 import { MentorDialogComponent } from './mentor-dialog.component';
-import { AcademyProgramService } from '../academy-year/academy-program.service';
+import { AcademyProgramStateService } from '../academy-program/academy-program-state.service';
 import { WarnDialogComponent } from 'src/app/shared/warn-dialog/warn-dialog';
 
 @Component({
@@ -26,10 +26,10 @@ export class MentorComponent implements OnInit, OnDestroy {
 
   constructor(
     private mentorService: MentorService,
-    public academyProgramService: AcademyProgramService,
+    public academyProgramStateService: AcademyProgramStateService,
     public dialog: MatDialog
   ) {
-    this.subscription = this.academyProgramService.getAcademyProgramIdEvent()
+    this.subscription = this.academyProgramStateService.getAcademyProgramIdEvent()
       .subscribe(data => {
         this.academyProgramId = data.academyProgramId;
         this.GetAllMentors(this.academyProgramId);
@@ -38,7 +38,7 @@ export class MentorComponent implements OnInit, OnDestroy {
 
 
   public ngOnInit() {
-    this.academyProgramId = this.academyProgramService.getAcademyProgramId();
+    this.academyProgramId = this.academyProgramStateService.getAcademyProgramId();
     if (this.academyProgramId) {
         this.GetAllMentors(this.academyProgramId);
   }

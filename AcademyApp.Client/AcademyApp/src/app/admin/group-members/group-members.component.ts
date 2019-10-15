@@ -3,7 +3,7 @@ import { MatTableDataSource, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@a
 import { GroupMembers } from 'src/app/shared/models/groupMembers';
 import { Subscription } from 'rxjs';
 import { GroupMemberService } from '../group-member.service';
-import { AcademyProgramService } from '../academy-year/academy-program.service';
+import { AcademyProgramStateService } from '../academy-program/academy-program-state.service';
 import { WarnDialogComponent } from 'src/app/shared/warn-dialog/warn-dialog';
 import { GroupMemberDialogComponent } from './group-member-dialog.component';
 import { NgForm } from '@angular/forms';
@@ -19,7 +19,6 @@ export class GroupMembersComponent implements OnInit {
 
     public groupDialogMember: GroupMembers = new GroupMembers();
     public academyProgramId: number;
-    public groupId: number;
     public groupMember: MatTableDataSource<GroupMembers>;
     public groupMembers: GroupMembers[] = [];
     public selectedGroup: Groups;
@@ -29,16 +28,16 @@ export class GroupMembersComponent implements OnInit {
 
     constructor(
         private groupMemberService: GroupMemberService,
-        public academyProgramService: AcademyProgramService,
+        public academyProgramStateService: AcademyProgramStateService,
         public dialog: MatDialog,
         private dialogRef: MatDialogRef<GroupMemberDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any
     ) {
          if (data) {
-             this.groupId = data.group;
+             this.selectedGroup = data.group;
          }
 
-         this.subscription = this.academyProgramService.getAcademyProgramIdEvent()
+         this.subscription = this.academyProgramStateService.getAcademyProgramIdEvent()
         .subscribe(x => {
             this.academyProgramId = x.academyProgramId;
             this.GetAllGroupMembers(this.academyProgramId);
@@ -46,7 +45,7 @@ export class GroupMembersComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.academyProgramId = this.academyProgramService.getAcademyProgramId();
+        this.academyProgramId = this.academyProgramStateService.getAcademyProgramId();
         if (this.academyProgramId) {
             this.GetAllGroupMembers( this.academyProgramId);
         }
@@ -82,14 +81,14 @@ export class GroupMembersComponent implements OnInit {
     }
 
     private deleteGroupMember(groupMembers: GroupMembers) {
-        this.groupMemberService.delete(groupMembers.groupId, groupMembers.academyProgramId)
+        this.groupMemberService.delete(groupMembers.id, groupMembers.academyProgramId)
             .subscribe(result => {
                 this.GetAllGroupMembers(this.academyProgramId);
             });
     }
 
     private GetAllGroupMembers(academyProgramId: number) {
-        this.groupMemberService.GetAllGroupMembers(this.groupId, academyProgramId)
+        this.groupMemberService.GetAllGroupMembers(this.selectedGroup.id, academyProgramId)
             .subscribe(result => {
                 this.groupMembers = result;
             });

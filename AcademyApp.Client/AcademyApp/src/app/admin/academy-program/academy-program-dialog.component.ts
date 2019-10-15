@@ -3,10 +3,10 @@ import { NgForm } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { AcademyProgram } from 'src/app/shared/models/academyProgram';
-import { AdminService } from '../admin.service';
+import { AcademyProgramService } from '../academy-program.service';
 
 @Component({
-  templateUrl: 'academy-year-dialog.component.html'
+  templateUrl: 'academy-program-dialog.component.html'
 })
 export class AcademyYearDialogComponent implements OnInit {
 
@@ -17,7 +17,7 @@ export class AcademyYearDialogComponent implements OnInit {
   private isEditMode = false;
 
   constructor(
-    private adminService: AdminService,
+    private academyProgramService: AcademyProgramService,
     private dialogRef: MatDialogRef<AcademyYearDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
@@ -37,11 +37,11 @@ export class AcademyYearDialogComponent implements OnInit {
 
   public onSubmit() {
     if (this.isEditMode) {
-      this.adminService.update(this.program).subscribe(result => {
+      this.academyProgramService.update(this.program).subscribe(result => {
         this.dialogRef.close('ok');
       });
     } else {
-      this.adminService.create(this.program).subscribe(result => {
+      this.academyProgramService.create(this.program).subscribe(result => {
         this.dialogRef.close('ok');
       });
     }

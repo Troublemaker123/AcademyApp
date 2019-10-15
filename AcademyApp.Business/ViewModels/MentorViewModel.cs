@@ -15,8 +15,6 @@ namespace AcademyApp.Business.ViewModel
   
         public string Email { get; set; }
 
-     //   public Gender Gender { get; set; }
-
         public string YearsOfService { get; set; }
 
         public string Specialty { get; set; }

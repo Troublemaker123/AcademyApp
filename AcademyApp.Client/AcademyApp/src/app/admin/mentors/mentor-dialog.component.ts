@@ -1,11 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { NgForm, FormGroup, FormControl } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { Mentor } from 'src/app/shared/models/mentors';
 import { MentorService } from '../mentor.service';
-import { AcademyProgramService } from '../academy-year/academy-program.service';
+
 import { Subscriber } from 'rxjs';
+import { AcademyProgramStateService } from '../academy-program/academy-program-state.service';
 
 @Component({
   templateUrl: 'mentor-dialog.component.html'
@@ -22,7 +23,7 @@ export class MentorDialogComponent implements OnInit {
 
   constructor(
     private mentorService: MentorService,
-    private academyProgramService: AcademyProgramService,
+    private academyProgramStateService: AcademyProgramStateService,
     private dialogRef: MatDialogRef<MentorDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
@@ -47,7 +48,7 @@ export class MentorDialogComponent implements OnInit {
         this.dialogRef.close('ok');
       });
     } else {
-      this.mentors.academyProgramId = this.academyProgramService.getAcademyProgramId();
+      this.mentors.academyProgramId = this.academyProgramStateService.getAcademyProgramId();
       this.mentorService.create(this.mentors).subscribe(result => {
         this.dialogRef.close('ok');
       });

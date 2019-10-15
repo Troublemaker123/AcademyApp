@@ -34,23 +34,25 @@ namespace AcademyApp.Data
 
             modelBuilder.Entity<GroupMembers>(entity =>
             {
-                entity.HasKey(x => new { x.Id, x.ApId, x.UserId, x.GroupId });
+                entity.HasKey(x => new { x.Id, x.ApId, x.UserId, x.GroupId});
             });
+            modelBuilder.Entity<MentorSubject>(entity =>
+            {
+                entity.HasKey(x => new { x.Id, x.ApId, x.MentorId, x.SubjectId });
+            });
+
         }
+        
 
         public DbSet<GroupMembers> GroupMembers { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Mentor> Mentors { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<Staff> Staffs { get; set; }
         public DbSet<Subject> Subjects { get; set; }
-        public DbSet<Grade> Grades { get; set; }
-        public DbSet<Attendance> Attendances { get; set; }
-        public DbSet<GradeCategory> GradeCategories { get; set; }
-        public DbSet<Program> Programs { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<AcademyProgram> AcademyPrograms { get; set; }
+        public DbSet<MentorSubject> MentorSubjects { get; set; }
              
     }
 }

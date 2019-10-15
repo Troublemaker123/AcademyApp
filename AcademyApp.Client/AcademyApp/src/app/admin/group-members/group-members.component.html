@@ -34,10 +34,11 @@
         <ng-container matColumnDef="Actions">
           <th mat-header-cell *matHeaderCellDef> Actions </th>
           <td mat-cell *matCellDef="let item">
-            <button mat-raised-button color="warn" (click)="openWarningDialog(item)" title="Delete"><i
+             <i
+             (click)="openWarningDialog(item)" title="Delete"
                 class="material-icons">
                 clear
-              </i></button>
+              </i>
           </td>
         </ng-container>
   

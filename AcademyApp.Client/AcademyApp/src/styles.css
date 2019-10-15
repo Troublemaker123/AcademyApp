@@ -7,3 +7,28 @@ body {
 i{
   cursor: pointer;
 }
+#mat-form-field{
+  width: 100%;
+}
+.mat-dialog-actions {
+  float:right;
+}
+table {
+  width: 100%;
+}
+#close-icon{
+  float: right;
+  cursor: pointer;
+}
+
+.container{
+  max-width: 95%;
+   margin: auto;
+}
+mat-sidenav{
+  margin: 0;
+  padding:0%;
+  height:100%;
+  position: fixed;
+  overflow: auto
+}

@@ -1,23 +1,23 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatDialog, MatTableDataSource, MatSort } from '@angular/material';
-import { AdminService } from '../admin.service';
+import { AcademyProgramService } from '../academy-program.service';
 import { AcademyProgram } from '../../shared/models/academyProgram';
-import { AcademyYearDialogComponent } from './academy-year-dialog.component';
+import { AcademyYearDialogComponent } from './academy-program-dialog.component';
 import { WarnDialogComponent } from 'src/app/shared/warn-dialog/warn-dialog';
 
 
 @Component({
   selector: 'app-academy-year',
-  templateUrl: 'academy-year.component.html'
+  templateUrl: 'academy-program.component.html'
 })
-export class AcademyYearComponent implements OnInit {
+export class AcademyProgramComponent implements OnInit {
   public programs: AcademyProgram[] = [];
   columnsToDisplay = ['startDate', 'endDate', 'isCurrent', 'Actions'];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
    dataSource: MatTableDataSource<AcademyProgram>;
   constructor(
-    private adminService: AdminService,
+    private academyProgramService: AcademyProgramService,
     public dialog: MatDialog
   ) { }
 
@@ -57,14 +57,14 @@ export class AcademyYearComponent implements OnInit {
   }
 
   private deleteProgram(programId: number) {
-    this.adminService.delete(programId)
+    this.academyProgramService.delete(programId)
       .subscribe(result => {
         this.getAllPrograms();
       });
   }
 
   private getAllPrograms() {
-    this.adminService.GetAllAcademyPrograms()
+    this.academyProgramService.GetAllAcademyPrograms()
       .subscribe(result => {
         this.programs = result;
       });

@@ -6,7 +6,7 @@ import { NgForm } from '@angular/forms';
 import { Groups } from 'src/app/shared/models/groups';
 import { Subscriber } from 'rxjs';
 import { GroupService } from '../group.service';
-import { AcademyProgramService } from '../academy-year/academy-program.service';
+import { AcademyProgramStateService } from '../academy-program/academy-program-state.service';
 
 
 
@@ -26,7 +26,7 @@ export class GroupDialogComponent implements OnInit {
 
     constructor(
         private groupService: GroupService,
-        private academyProgramService: AcademyProgramService,
+        private academyProgramStateService: AcademyProgramStateService,
         private dialogRef: MatDialogRef<GroupDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any
     ) { }
@@ -52,7 +52,7 @@ export class GroupDialogComponent implements OnInit {
                 this.dialogRef.close('ok');
             });
         } else {
-            this.group.academyProgramId = this.academyProgramService.getAcademyProgramId();
+            this.group.academyProgramId = this.academyProgramStateService.getAcademyProgramId();
             this.groupService.create(this.group).subscribe(result => {
                 this.dialogRef.close('ok');
             });

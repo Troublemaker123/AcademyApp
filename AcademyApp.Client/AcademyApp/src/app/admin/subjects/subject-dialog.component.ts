@@ -2,9 +2,9 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
-import { Subjects } from '../shared/models/subjects';
-import { SubjectService } from '../admin/subject.service';
-import { AcademyProgramService } from '../admin/academy-year/academy-program.service';
+import { Subjects } from '../../shared/models/subjects';
+import { SubjectService } from '../subject.service';
+import { AcademyProgramStateService } from '../academy-program/academy-program-state.service';
 import { Subscriber } from 'rxjs';
 
 
@@ -23,7 +23,7 @@ export class SubjectDialogComponent implements OnInit {
 
   constructor(
     private subjectService: SubjectService,
-    private academyProgramService: AcademyProgramService,
+    private academyProgramStateService: AcademyProgramStateService,
     private dialogRef: MatDialogRef<SubjectDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
@@ -47,7 +47,7 @@ export class SubjectDialogComponent implements OnInit {
         this.dialogRef.close('ok');
       });
     } else {
-      this.subject.academyProgramId = this.academyProgramService.getAcademyProgramId();
+      this.subject.academyProgramId = this.academyProgramStateService.getAcademyProgramId();
       this.subjectService.create(this.subject).subscribe(result => {
         this.dialogRef.close('ok');
       });

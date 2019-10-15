@@ -83,7 +83,6 @@ namespace AcademyApp.Business.Mapper
                 YearsOfService = model.YearsOfService,
                 Specialty = model.Specialty,
                 Telephone = model.Telephone,
-                // Grades = model.Grades,
                 ApId = model.AcademyProgramId,
 
             };
@@ -99,47 +98,11 @@ namespace AcademyApp.Business.Mapper
                 YearsOfService = model.YearsOfService,
                 Specialty = model.Specialty,
                 Telephone = model.Telephone,
-                //Grades = model.Grades,
                 AcademyProgramId = model.ApId,
             };
 
         }
-        public static Program ToDomain(this ProgramViewModel model)
-        {
-            return new Program
-            {
-                ID = model.ID,
-                Name = model.Name,
-                Description = model.Description
-            };
-        }
-        public static ProgramViewModel ToModel(this Program model)
-        {
-            return new ProgramViewModel
-            {
-                ID = model.ID,
-                Name = model.Name,
-                Description = model.Description
-            };
-        }
-        //public static Attendance ToDomain(this AttendanceViewModel model)
-        //{
-        //    return new Attendance
-        //    {
-        //        ID = model.ID,
-        //        Attended = model.Attended,
-        //        Date = model.Date
-        //    };
-        //}
-        //public static AttendanceViewModel ToModel(this Attendance model)
-        //{
-        //    return new AttendanceViewModel
-        //    {
-        //        ID = model.ID,
-        //        Attended = model.Attended,
-        //        Date = model.Date
-        //    };
-        //}
+
         public static Subject ToDomain(this SubjectViewModel model)
         {
             return new Subject
@@ -177,22 +140,7 @@ namespace AcademyApp.Business.Mapper
 
             };
         }
-        public static Staff ToDomain(this StaffViewModel model)
-        {
-            return new Staff
-            {
-                ID = model.ID,
-                Name = model.Name
-            };
-        }
-        public static StaffViewModel ToModel(this Staff model)
-        {
-            return new StaffViewModel
-            {
-                ID = model.ID,
-                Name = model.Name
-            };
-        }
+
         public static Group ToDomain(this GroupViewModel model)
         {
             return new Group
@@ -213,41 +161,7 @@ namespace AcademyApp.Business.Mapper
 
             };
         }
-        public static Grade ToDomain(this GradeViewModel model)
-        {
-            return new Grade
-            {
-                ID = model.ID,
-                Name = model.Name
-            };
-        }
-        public static GradeViewModel ToModel(this Grade model)
-        {
-            return new GradeViewModel
-            {
-                ID = model.ID,
-                Name = model.Name
-            };
-        }
-        public static GradeCategory ToDomain(this GradeCategoryViewModel model)
-        {
-            return new GradeCategory
-            {
-                ID = model.ID,
-                Date = model.Date,
-                Attended = model.Attended
-
-            };
-        }
-        public static GradeCategoryViewModel ToModel(this GradeCategory model)
-        {
-            return new GradeCategoryViewModel
-            {
-                ID = model.ID,
-                Date = model.Date,
-                Attended = model.Attended
-            };
-        }
+       
         public static GroupMembers ToDomain(this GroupMembersViewModel model)
         {
             return new GroupMembers
@@ -281,8 +195,6 @@ namespace AcademyApp.Business.Mapper
                 FullName = model.Name + " " + model.LastName,
                 UserId = model.ID,
                 UserType = UserType.Student,
-
-
             };
         }
         public static GroupMembersViewModel ToGroupMemberModel(this Mentor model)
@@ -294,6 +206,42 @@ namespace AcademyApp.Business.Mapper
                 UserType = UserType.Mentor
             };
         }
+        public static MentorSubject ToDomain(this MentorSubjectsViewModel model)
+        {
+            return new MentorSubject
+            {
+                Id = model.Id,
+                ApId = model.AcademyProgramId,
+                MentorId = model.MentorId,
+                SubjectId = model.SubjectId
+            };
+        }
+        public static MentorSubjectsViewModel ToModel(this MentorSubject model)
+        {
+            return new MentorSubjectsViewModel
+            {
+                Id = model.Id,
+                AcademyProgramId = model.ApId,
+                MentorId = model.MentorId,
+                SubjectId = model.SubjectId
+            };
+        }
+        public static MentorSubjectsViewModel ToMentorSubjectModel(this Mentor model)
+        {
+            return new MentorSubjectsViewModel
+            {
+               MentorId = model.ApId
+            };
+        }
+        public static MentorSubjectsViewModel ToMentorSubjectModel(this Subject model)
+        {
+            return new MentorSubjectsViewModel
+            {
+                SubjectId = model.ID
+            };
+        }
+
+
 
     }
 }

@@ -7,7 +7,7 @@ import { AcademyProgram } from '../shared/models/academyProgram';
 
 
 @Injectable()
-export class AdminService {
+export class AcademyProgramService {
 
     public baseApiUrl: string = environment.apiUrl;
 

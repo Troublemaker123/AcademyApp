@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { StudentService } from '../student.service';
 import { Student } from 'src/app/shared/models/student';
-import { AcademyProgramService } from '../academy-year/academy-program.service';
+import { AcademyProgramStateService } from '../academy-program/academy-program-state.service';
 import { Subscriber } from 'rxjs';
 
 
@@ -23,7 +23,7 @@ export class StudentDialogComponent implements OnInit {
 
     constructor(
         private studentService: StudentService,
-        private academyProgramService: AcademyProgramService,
+        private academyProgramStateService: AcademyProgramStateService,
         private dialogRef: MatDialogRef<StudentDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any
     ) { }
@@ -43,7 +43,7 @@ export class StudentDialogComponent implements OnInit {
                 this.dialogRef.close('ok');
             });
         } else {
-            this.student.academyProgramId = this.academyProgramService.getAcademyProgramId();
+            this.student.academyProgramId = this.academyProgramStateService.getAcademyProgramId();
             this.studentService.create(this.student).subscribe(result => {
                 this.dialogRef.close('ok');
             });

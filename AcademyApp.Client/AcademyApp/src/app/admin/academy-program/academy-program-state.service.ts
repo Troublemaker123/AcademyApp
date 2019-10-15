@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
 
 @Injectable()
-export class AcademyProgramService {
+export class AcademyProgramStateService {
     private subject = new Subject<any>();
     private academyProgramId: number;
 

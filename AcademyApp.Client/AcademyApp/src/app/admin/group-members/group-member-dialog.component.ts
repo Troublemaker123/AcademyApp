@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { GroupMembers } from 'src/app/shared/models/groupMembers';
 import { Subscription } from 'rxjs';
 import { GroupMemberService } from '../group-member.service';
-import { AcademyProgramService } from '../academy-year/academy-program.service';
+import { AcademyProgramStateService } from '../academy-program/academy-program-state.service';
 import { MAT_DIALOG_DATA, MatDialogRef, MatTableDataSource } from '@angular/material';
 import { NgForm } from '@angular/forms';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -27,7 +27,7 @@ export class GroupMemberDialogComponent implements OnInit {
 
     constructor(
         public groupMemberService: GroupMemberService,
-        public academyProgramService: AcademyProgramService,
+        public academyProgramStateService: AcademyProgramStateService,
         public dialogRef: MatDialogRef<GroupMemberDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any
     ) {
@@ -35,7 +35,7 @@ export class GroupMemberDialogComponent implements OnInit {
             this.selectedGroup = data.group;
         }
 
-        this.subscription = this.academyProgramService.getAcademyProgramIdEvent()
+        this.subscription = this.academyProgramStateService.getAcademyProgramIdEvent()
             .subscribe(x => {
                 this.academyProgramId = x.academyProgramId;
                 this.GetAllStudentsandMentors(this.academyProgramId);
@@ -43,7 +43,7 @@ export class GroupMemberDialogComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.academyProgramId = this.academyProgramService.getAcademyProgramId();
+        this.academyProgramId = this.academyProgramStateService.getAcademyProgramId();
         if (this.academyProgramId) {
             this.GetAllStudentsandMentors(this.academyProgramId);
         }
@@ -78,7 +78,7 @@ export class GroupMemberDialogComponent implements OnInit {
     public onSubmit() {
 
         if (this.selection.selected.length > 0) {
-            const apId = this.academyProgramService.getAcademyProgramId();
+            const apId = this.academyProgramStateService.getAcademyProgramId();
             this.selection.selected.forEach((member: GroupMembers) => {
                 member.academyProgramId = apId;
                 if (this.selectedGroup) {

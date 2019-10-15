@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Student } from 'src/app/shared/models/student';
 import { StudentService } from '../student.service';
 import { StudentDialogComponent } from './student-dialog.component';
-import { AcademyProgramService } from '../academy-year/academy-program.service';
+import { AcademyProgramStateService } from '../academy-program/academy-program-state.service';
 import { WarnDialogComponent } from 'src/app/shared/warn-dialog/warn-dialog';
 
 
@@ -13,7 +13,7 @@ import { WarnDialogComponent } from 'src/app/shared/warn-dialog/warn-dialog';
     selector: 'app-student',
     templateUrl: './students.component.html'
 })
-export class StudentsComponent implements OnInit, OnDestroy {
+export class StudentsComponent implements OnInit {
 
     public academyProgramId: number;
     public student: MatTableDataSource<any>;
@@ -27,10 +27,10 @@ export class StudentsComponent implements OnInit, OnDestroy {
 
     constructor(
         private studentService: StudentService,
-        public academyProgramService: AcademyProgramService,
+        public academyProgramStateService: AcademyProgramStateService,
         public dialog: MatDialog
     ) {
-        this.subscription = this.academyProgramService.getAcademyProgramIdEvent()
+        this.subscription = this.academyProgramStateService.getAcademyProgramIdEvent()
             .subscribe(data => {
                 this.academyProgramId = data.academyProgramId;
                 this.GetAllStudents(this.academyProgramId);
@@ -39,19 +39,12 @@ export class StudentsComponent implements OnInit, OnDestroy {
 
 
     public ngOnInit() {
-        this.academyProgramId = this.academyProgramService.getAcademyProgramId();
+        this.academyProgramId = this.academyProgramStateService.getAcademyProgramId();
         if (this.academyProgramId) {
             this.GetAllStudents(this.academyProgramId);
         }
 
     }
-
-    public ngOnDestroy() {
-        // unsubscribe to ensure no memory leaks
-        this.subscription.unsubscribe();
-    }
-
-
 
     public openDialog(student: Student): void {
         const dialogRef = this.dialog.open(StudentDialogComponent, {

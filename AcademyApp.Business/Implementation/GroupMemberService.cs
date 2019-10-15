@@ -38,7 +38,6 @@ namespace AcademyApp.Business.Implementation
 
         public void Delete(int groupMemberId, int academyProgramId)
         {
-           // var group = _groupMembersRepository.FindByMultipleId(groupMemberId, academyProgramId);
             var group = _groupMembersRepository.GetAll().FirstOrDefault(gm => gm.Id == groupMemberId && gm.ApId == academyProgramId);
             if (group == null)
                 throw new Exception("group is null");
@@ -55,16 +54,53 @@ namespace AcademyApp.Business.Implementation
 
         public IEnumerable<GroupMembersViewModel> GetAll(int groupId, int academyProgramId)
         {
+            var members = new List<GroupMembersViewModel>();
 
-            return _groupMembersRepository.GetAll().Where(gm => gm.ApId == academyProgramId)
-                 .Select(groupMember => groupMember.ToModel()).ToList();
+            var groupMembers = _groupMembersRepository.GetAll().Where(gm => gm.GroupId == groupId && gm.ApId == academyProgramId);
+
+            var mentors =
+                from gm in groupMembers
+                join m in _mentorRepository.GetAll() on gm.UserId equals m.ID
+
+                where gm.UserType == (int)UserType.Mentor
+
+                select new GroupMembersViewModel
+                {
+                    Id = gm.Id,
+                    GroupId = gm.GroupId,
+                    UserId = gm.UserId,
+                    AcademyProgramId = gm.ApId,
+                    FullName = m.Name + " " + m.LastName,
+                    UserType = (UserType)gm.UserType
+                };
+
+            var students =
+              from gm in groupMembers
+              join s in _studentRepository.GetAll() on gm.UserId equals s.ID
+
+              where gm.UserType == (int)UserType.Student
+
+              select new GroupMembersViewModel
+              {
+                  Id = gm.Id,
+                  GroupId = gm.GroupId,
+                  UserId = gm.UserId,
+                  AcademyProgramId = gm.ApId,
+                  FullName = s.Name + " " + s.LastName,
+                  UserType = (UserType)gm.UserType
+              };
+
+            members.AddRange(students);
+            members.AddRange(mentors);
+
+            return members;
         }
 
         public IEnumerable<GroupMembersViewModel> GetMentorsAndStudents(int groupId, int academyProgramId)
         {
             var members = new List<GroupMembersViewModel>();
 
-            var groupMembers = _groupMembersRepository.GetAll().Where(gm =>  gm.ApId == academyProgramId);
+            var groupMembers = _groupMembersRepository.GetAll().Where(gm => gm.ApId == academyProgramId);
 
             // mentors
             var mentorsByGroup = groupMembers.Where(gm => gm.GroupId == groupId && gm.UserType == (int)UserType.Mentor);

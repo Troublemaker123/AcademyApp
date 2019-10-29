@@ -60,7 +60,7 @@ export class GroupMembersComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(result => {
             if (result === 'ok') {
-                this.GetAllGroupMembers(this.selectedGroup.id);
+                this.GetAllGroupMembers(this.academyProgramId);
             }
         });
     }

@@ -104,7 +104,7 @@ namespace AcademyApp.Business.Implementation
 
             // mentors
             var mentorsByGroup = groupMembers.Where(gm => gm.GroupId == groupId && gm.UserType == (int)UserType.Mentor);
-            var mentors = _mentorRepository.GetAll().Where(m => m.ApId == academyProgramId && !mentorsByGroup.Any(gm => gm.UserId == m.ID)).Select(x => x.ToGroupMemberModel()).ToList();
+            var mentors = _mentorRepository.GetAll().Where(m => m.ApId == academyProgramId && !mentorsByGroup.Any(gm => gm.UserId == m.ID)).Select(x => x.ToMentorViewModel()).ToList();
 
             // students
             var studentGroupMembers = groupMembers.Where(gm => gm.UserType == (int)UserType.Student);

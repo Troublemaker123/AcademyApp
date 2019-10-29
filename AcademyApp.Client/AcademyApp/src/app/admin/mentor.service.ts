@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Mentor } from '../shared/models/mentors';
+import { BasicMentor } from '../shared/models/basicMentor';
 
 @Injectable()
 export class MentorService {
@@ -13,6 +14,9 @@ export class MentorService {
 
     public GetAllMentors(academyProgramId: number): Observable<Mentor[]> {
         return this.http.get<Mentor[]>(this.baseApiUrl + 'Admin/mentor/get-all/' + academyProgramId);
+    }
+    public GetAllBasicMentors(academyProgramId: number): Observable<BasicMentor[]> {
+        return this.http.get<BasicMentor[]>(this.baseApiUrl + 'Admin/mentor/getBasicMentors/' + academyProgramId);
     }
     public create(mentors: Mentor): Observable<Mentor> {
         return this.http.post<Mentor>(this.baseApiUrl + 'Admin/mentor/create', mentors);

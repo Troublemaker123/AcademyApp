@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import * as Material from "@angular/material";
+import * as Material from '@angular/material';
 import { FormsModule } from '@angular/forms';
 
 
@@ -26,6 +26,9 @@ import { FormsModule } from '@angular/forms';
     Material.MatSortModule,
     Material.MatSortModule,
     Material.MatTableModule,
+    Material.MatOptionModule,
+    Material.MatSelectModule,
+    Material.MatAutocompleteModule,
     FormsModule,
   ],
   exports: [
@@ -48,7 +51,10 @@ import { FormsModule } from '@angular/forms';
     Material.MatSortModule,
     Material.MatSortModule,
     Material.MatTableModule,
+    Material.MatSelectModule,
+    Material.MatOptionModule,
     FormsModule,
+    Material.MatAutocompleteModule,
   ],
   declarations: []
 })

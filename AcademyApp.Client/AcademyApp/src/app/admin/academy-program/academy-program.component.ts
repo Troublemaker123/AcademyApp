@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatDialog, MatTableDataSource, MatSort } from '@angular/material';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatTableDataSource } from '@angular/material';
 import { AcademyProgramService } from '../academy-program.service';
 import { AcademyProgram } from '../../shared/models/academyProgram';
 import { AcademyYearDialogComponent } from './academy-program-dialog.component';
@@ -13,8 +13,6 @@ import { WarnDialogComponent } from 'src/app/shared/warn-dialog/warn-dialog';
 export class AcademyProgramComponent implements OnInit {
   public programs: AcademyProgram[] = [];
   columnsToDisplay = ['startDate', 'endDate', 'isCurrent', 'Actions'];
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
    dataSource: MatTableDataSource<AcademyProgram>;
   constructor(
     private academyProgramService: AcademyProgramService,

@@ -40,6 +40,11 @@ namespace AcademyApp.Data
             return _dbContext.Set<T>().Find(firstId, secondId);
         }
 
+        public T FindByThreeId(object firstId, object secondId, object thirdId)
+        {
+            return _dbContext.Set<T>().Find(firstId, secondId, thirdId);
+        }
+
         public void Update(T entity)
         {
             _dbContext.Set<T>().Update(entity);

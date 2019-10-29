@@ -21,10 +21,7 @@ table {
   cursor: pointer;
 }
 
-.container{
-  max-width: 95%;
-   margin: auto;
-}
+
 mat-sidenav{
   margin: 0;
   padding:0%;

@@ -12,11 +12,14 @@ namespace AcademyApp.Business.Implementation
     public class GroupService : IGroupService
     {
         private readonly IRepository<Group> _groupRepository;
+        private readonly IRepository<GroupMembers> _groupMembersRepository;
 
 
-        public GroupService(IRepository<Group> groupRepository)
+        public GroupService(IRepository<Group> groupRepository,
+            IRepository<GroupMembers> groupMembersRepository)
         {
             _groupRepository = groupRepository;
+            _groupMembersRepository = groupMembersRepository;
         }
 
 
@@ -31,9 +34,15 @@ namespace AcademyApp.Business.Implementation
 
         public void Delete(int groupId, int academyProgramId)
         {
-            var group = _groupRepository.FindByMultipleId(groupId, academyProgramId);
-            if(group == null)
-                throw new Exception("groupId is null");
+            var groupMembers = _groupMembersRepository.GetAll().Where(g => g.GroupId == groupId && g.ApId == academyProgramId).ToList();
+            foreach (var member in groupMembers)
+            {
+                _groupMembersRepository.Delete(member);
+            }
+            
+
+            var group = _groupRepository.GetAll().FirstOrDefault(g => g.ID == groupId && g.ApId == academyProgramId);
+
             _groupRepository.Delete(group);
         }
 
@@ -52,7 +61,6 @@ namespace AcademyApp.Business.Implementation
             return _groupRepository.GetAll().Where(model => model.ApId == academyProgramId)
                 .Select(model => model.ToModel()).ToList();
         }
-
 
         public void Update(GroupViewModel model)
         {

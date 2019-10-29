@@ -1,3 +1,6 @@
+
+import { BasicMentor } from './basicMentor';
+
 export class Subjects {
 
     public id: number;
@@ -8,4 +11,5 @@ export class Subjects {
 
     public description: string;
 
+    public mentorsList: Array<BasicMentor>;
 }

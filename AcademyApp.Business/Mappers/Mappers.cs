@@ -102,6 +102,15 @@ namespace AcademyApp.Business.Mapper
             };
 
         }
+        public static MentorBasicViewModel ToBasicModel(this Mentor model)
+        {
+            return new MentorBasicViewModel
+            {
+                FullName = model.Name + " " + model.LastName,
+                Id = model.ID
+            };
+
+        }
 
         public static Subject ToDomain(this SubjectViewModel model)
         {
@@ -110,8 +119,7 @@ namespace AcademyApp.Business.Mapper
                 ID = model.ID,
                 Name = model.Name,
                 Description = model.Description,
-                ApId = model.AcademyProgramId,
-
+                ApId = model.AcademyProgramId
             };
         }
         public static SubjectViewModel ToModel(this Subject model)
@@ -122,8 +130,28 @@ namespace AcademyApp.Business.Mapper
                 Name = model.Name,
                 Description = model.Description,
                 AcademyProgramId = model.ApId,
+
             };
         }
+
+        public static SubjectMentor ToMentorModel(this Mentor model)
+        {
+            return new SubjectMentor
+            {
+                AcademyProgramId = model.ApId,
+                MentorId = model.ID
+            };
+        }
+
+        public static SubjectMentor ToSubjectModel(this Subject model)
+        {
+            return new SubjectMentor
+            {
+                SubjectId = model.ID,
+                AcademyProgramId = model.ApId
+            };
+        }
+
         public static Role ToDomain(this RoleViewModel model)
         {
             return new Role
@@ -197,7 +225,7 @@ namespace AcademyApp.Business.Mapper
                 UserType = UserType.Student,
             };
         }
-        public static GroupMembersViewModel ToGroupMemberModel(this Mentor model)
+        public static GroupMembersViewModel ToMentorViewModel(this Mentor model)
         {
             return new GroupMembersViewModel
             {
@@ -206,41 +234,6 @@ namespace AcademyApp.Business.Mapper
                 UserType = UserType.Mentor
             };
         }
-        public static MentorSubject ToDomain(this MentorSubjectsViewModel model)
-        {
-            return new MentorSubject
-            {
-                Id = model.Id,
-                ApId = model.AcademyProgramId,
-                MentorId = model.MentorId,
-                SubjectId = model.SubjectId
-            };
-        }
-        public static MentorSubjectsViewModel ToModel(this MentorSubject model)
-        {
-            return new MentorSubjectsViewModel
-            {
-                Id = model.Id,
-                AcademyProgramId = model.ApId,
-                MentorId = model.MentorId,
-                SubjectId = model.SubjectId
-            };
-        }
-        public static MentorSubjectsViewModel ToMentorSubjectModel(this Mentor model)
-        {
-            return new MentorSubjectsViewModel
-            {
-               MentorId = model.ApId
-            };
-        }
-        public static MentorSubjectsViewModel ToMentorSubjectModel(this Subject model)
-        {
-            return new MentorSubjectsViewModel
-            {
-                SubjectId = model.ID
-            };
-        }
-
 
 
     }

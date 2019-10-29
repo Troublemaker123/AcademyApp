@@ -8,6 +8,7 @@ import { NgForm } from '@angular/forms';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Groups } from 'src/app/shared/models/groups';
 
+
 @Component({
     templateUrl: 'group-member-dialog.component.html'
 })
@@ -19,11 +20,11 @@ export class GroupMemberDialogComponent implements OnInit {
     public groupMembers: GroupMembers[] = [];
     public groupMembersTableData = new MatTableDataSource<GroupMembers>();
     public selectedGroup: Groups;
+    public groupId: number;
     displayedColumns = ['select', 'fullName', 'userType'];
     public academyProgramId: number;
     selection = new SelectionModel<GroupMembers>(true, []);
-
-    private subscription: Subscription;
+    public subscription: Subscription;
 
     constructor(
         public groupMemberService: GroupMemberService,

@@ -1,7 +1,5 @@
 ﻿using AcademyApp.Business.ViewModel;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace AcademyApp.Business.Interfaces
 {

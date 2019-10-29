@@ -14,7 +14,7 @@ namespace AcademyApp.Api.Controllers
         private readonly IAcademyProgramService _academyProgramService;
         private readonly IStudentService _studentService;
         private readonly IMentorService _mentorService;
-        private readonly ISubjectService _subjecService;
+        private readonly ISubjectService _subjectService;
         private readonly IGroupService _groupService;
         private readonly IGroupMemberService _groupMemberService;
 
@@ -29,10 +29,9 @@ namespace AcademyApp.Api.Controllers
             _academyProgramService = academyProgramService;
             _studentService = studentService;
             _mentorService = mentorService;
-            _subjecService = subService;
+            _subjectService = subService;
             _groupService = groupService;
             _groupMemberService = groupMemberService;
-
         }
 
       
@@ -336,6 +335,26 @@ namespace AcademyApp.Api.Controllers
             }
 
         }
+        [Route("mentor/getBasicMentors/{academyProgramId}")]
+        [HttpGet]
+        public ActionResult<List<MentorBasicViewModel>> GetBasicMentors(int academyProgramId)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    throw new Exception(ModelState.ToString());
+                }
+                var basicMentors = _mentorService.GetAllBasicMentors(academyProgramId);
+                return Ok(basicMentors);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+
+        }
         #endregion Mentor
 
         #region Subject
@@ -349,7 +368,7 @@ namespace AcademyApp.Api.Controllers
                 {
                     throw new Exception(ModelState.ToString());
                 }
-                _subjecService.Create(subject);
+                _subjectService.Create(subject);
                 return Ok();
             }
             catch (Exception ex)
@@ -370,7 +389,7 @@ namespace AcademyApp.Api.Controllers
                 {
                     throw new Exception(ModelState.ToString());
                 }
-                _subjecService.Delete(subjectId, academyProgramId);
+                _subjectService.Delete(subjectId, academyProgramId);
                 return Ok();
             }
             catch (Exception ex)
@@ -390,7 +409,7 @@ namespace AcademyApp.Api.Controllers
                 {
                     throw new Exception(ModelState.ToString());
                 }
-                _subjecService.Update(subject);
+                _subjectService.Update(subject);
                 return Ok();
             }
             catch (Exception ex)
@@ -412,7 +431,7 @@ namespace AcademyApp.Api.Controllers
                 {
                     throw new Exception(ModelState.ToString());
                 }
-                var subject = _subjecService.FindById(subjectId);
+                var subject = _subjectService.FindById(subjectId);
                 return Ok(subject);
             }
             catch (Exception ex)
@@ -432,7 +451,7 @@ namespace AcademyApp.Api.Controllers
                 {
                     throw new Exception(ModelState.ToString());
                 }
-                var subjects = _subjecService.GetAll(academyProgramId);
+                var subjects = _subjectService.GetAll(academyProgramId);
                 return Ok(subjects);
             }
             catch (Exception ex)
@@ -440,7 +459,6 @@ namespace AcademyApp.Api.Controllers
 
                 return BadRequest(ex.Message);
             }
-
         }
         #endregion Subject
 
@@ -653,8 +671,6 @@ namespace AcademyApp.Api.Controllers
         }
         #endregion GroupMember
 
-        #region MentorSubject
-
-        #endregion
+      
     }
 }

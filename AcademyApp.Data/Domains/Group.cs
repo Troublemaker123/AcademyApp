@@ -7,8 +7,10 @@ namespace AcademyApp.Data.Domains
     public class Group
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+
         public int ID { get; set; }
 
+        [Column("Apid")]
         public int ApId { get; set; }
 
         [StringLength(255)]

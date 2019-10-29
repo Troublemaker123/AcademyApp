@@ -11,6 +11,7 @@ namespace AcademyApp.Data
         IEnumerable<T> GetAll();
         T FindById( object id);
         T FindByMultipleId(object firstId, object secondId);
+        T FindByThreeId(object firstId, object secondId, object thirdId);
         void SetActivity(bool entity);
     }
 }

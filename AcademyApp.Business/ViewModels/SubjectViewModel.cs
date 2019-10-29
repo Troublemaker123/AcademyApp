@@ -1,4 +1,5 @@
-﻿
+﻿using System.Collections.Generic;
+
 namespace AcademyApp.Business.ViewModel
 {
    public class SubjectViewModel
@@ -10,5 +11,8 @@ namespace AcademyApp.Business.ViewModel
         public string Name { get; set; }
 
         public string Description { get; set; }
+        
+        public List<MentorBasicViewModel> MentorsList { get; set; }
+
     }
 }

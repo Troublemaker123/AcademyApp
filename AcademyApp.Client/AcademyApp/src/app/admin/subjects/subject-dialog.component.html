@@ -1,9 +1,9 @@
 <div>
   <div class="container">
-      <mat-icon id="close-icon" style="float:right; cursor: pointer" title="Close" (click)=onCancel()>close</mat-icon>
+    <mat-icon id="close-icon" style="float:right; cursor: pointer" title="Close" (click)=onCancel()>close</mat-icon>
 
-      <h1 mat-dialog-title>{{title}}</h1>
-      
+    <h1 mat-dialog-title>{{title}}</h1>
+
     <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
       <div mat-dialog-content>
 
@@ -34,6 +34,14 @@
               Description limit is 255 characters long.
             </mat-error>
           </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field style="width: 100%;">
+          <mat-label>Pick a mentor</mat-label>
+          <mat-select [(ngModel)]="selectedMentor" [ngModelOptions]="{standalone: true}" multiple>
+            <mat-option *ngFor="let mentor of mentors" [value]="mentor">{{mentor.fullName}}</mat-option>
+          </mat-select>
         </mat-form-field>
 
 

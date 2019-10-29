@@ -11,5 +11,6 @@ namespace AcademyApp.Business.Interfaces
         IEnumerable<MentorViewModel> GetAll(int academyProgramId);
         MentorViewModel FindById(int mentorId);
         void Delete(int mentorId, int academyProgramId);
+        IEnumerable<MentorBasicViewModel> GetAllBasicMentors(int academyProgramId);
     }
 }

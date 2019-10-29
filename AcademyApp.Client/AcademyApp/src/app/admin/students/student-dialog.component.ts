@@ -5,7 +5,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { StudentService } from '../student.service';
 import { Student } from 'src/app/shared/models/student';
 import { AcademyProgramStateService } from '../academy-program/academy-program-state.service';
-import { Subscriber } from 'rxjs';
 
 
 @Component({
@@ -16,8 +15,6 @@ export class StudentDialogComponent implements OnInit {
     public student: Student = new Student();
 
     public title: string;
-
-    public academyProgramObservable = Subscriber;
 
     private isEditMode = false;
 
@@ -31,8 +28,14 @@ export class StudentDialogComponent implements OnInit {
 
     public ngOnInit() {
         if (this.data.student) {
+            // edit
+            this.isEditMode = true;
+            this.title = 'Edit student';
+            this.student = this.data.student;
+          } else {
+            // create
             this.title = 'Add new student';
-        }
+          }
     }
 
 

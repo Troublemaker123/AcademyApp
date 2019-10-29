@@ -42,7 +42,6 @@ export class MentorDialogComponent implements OnInit {
   }
 
   public onSubmit() {
-    // this.mentors.academyProgramId = 1;
     if (this.isEditMode) {
       this.mentorService.update(this.mentors).subscribe(result => {
         this.dialogRef.close('ok');

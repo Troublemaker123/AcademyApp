@@ -24,7 +24,11 @@ namespace AcademyApp.Data
             });
             modelBuilder.Entity<Subject>(entity =>
             {
-                entity.HasKey(x => new { x.ID, x.ApId });
+                entity.HasKey(x => new { x.ID, x.ApId});
+            });
+            modelBuilder.Entity<SubjectMentor>(entity =>
+            {
+                entity.HasKey(x => new { x.Id, x.AcademyProgramId, x.MentorId, x.SubjectId });
             });
 
             modelBuilder.Entity<Group>(entity =>
@@ -36,10 +40,6 @@ namespace AcademyApp.Data
             {
                 entity.HasKey(x => new { x.Id, x.ApId, x.UserId, x.GroupId});
             });
-            modelBuilder.Entity<MentorSubject>(entity =>
-            {
-                entity.HasKey(x => new { x.Id, x.ApId, x.MentorId, x.SubjectId });
-            });
 
         }
         
@@ -50,9 +50,9 @@ namespace AcademyApp.Data
         public DbSet<Group> Groups { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Subject> Subjects { get; set; }
+        public DbSet<SubjectMentor> SubjectMentor { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<AcademyProgram> AcademyPrograms { get; set; }
-        public DbSet<MentorSubject> MentorSubjects { get; set; }
              
     }
 }

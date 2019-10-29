@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
-import { MatPaginator, MatDialog, MatTableDataSource, MatSort } from '@angular/material';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatTableDataSource } from '@angular/material';
 import { Subscription } from 'rxjs/Subscription';
 
 import { Mentor } from 'src/app/shared/models/mentors';
@@ -13,15 +13,12 @@ import { WarnDialogComponent } from 'src/app/shared/warn-dialog/warn-dialog';
   templateUrl: 'mentor.component.html'
 })
 
-export class MentorComponent implements OnInit, OnDestroy {
+export class MentorComponent implements OnInit {
 
   public academyProgramId: number;
   public mentor = new MatTableDataSource<Mentor>();
   public mentors: Mentor[] = [];
   columnsToDisplay = ['name', 'lastName', 'email', 'telephone', 'specialty', 'yearsOfService', 'Actions'];
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
-
   private subscription: Subscription;
 
   constructor(
@@ -42,10 +39,6 @@ export class MentorComponent implements OnInit, OnDestroy {
     if (this.academyProgramId) {
         this.GetAllMentors(this.academyProgramId);
   }
-  }
-  public ngOnDestroy() {
-    // unsubscribe to ensure no memory leaks
-    this.subscription.unsubscribe();
   }
 
   public openDialog(mentor: Mentor): void {

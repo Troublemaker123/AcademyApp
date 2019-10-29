@@ -9,20 +9,17 @@ import { AcademyProgramStateService } from '../academy-program/academy-program-s
 import { WarnDialogComponent } from '../../shared/warn-dialog/warn-dialog';
 
 
-
 @Component({
   selector: 'app-subject',
   templateUrl: 'subject.component.html'
 })
-export class SubjectsComponent implements OnInit, OnDestroy {
+export class SubjectsComponent implements OnInit {
 
   public academyProgramId: number;
   public subject: MatTableDataSource<any>;
   public subjects: Subjects[] = [];
-  columnsToDisplay = ['name', 'description', 'Actions'];
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-
-  private subscription: Subscription;
+  columnsToDisplay = ['name', 'description', 'mentorsList', 'Actions'];
+  public subscription: Subscription;
 
   constructor(
     private academyProgramStateService: AcademyProgramStateService,
@@ -35,16 +32,11 @@ export class SubjectsComponent implements OnInit, OnDestroy {
     });
   }
 
-
   public ngOnInit() {
     this.academyProgramId = this.academyProgramStateService.getAcademyProgramId();
     if (this.academyProgramId) {
       this.getAllSubjects(this.academyProgramId);
     }
-  }
-  public ngOnDestroy() {
-    // unsubscribe to ensure no memory leaks
-    this.subscription.unsubscribe();
   }
 
   public openDialog(subject: Subjects): void {
@@ -88,7 +80,6 @@ export class SubjectsComponent implements OnInit, OnDestroy {
       .subscribe(result => {
         this.subjects = result;
       });
-
   }
 
 }

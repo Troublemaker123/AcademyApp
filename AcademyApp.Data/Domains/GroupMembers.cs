@@ -7,6 +7,7 @@ namespace AcademyApp.Data.Domains
     {
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+
         public int Id { get; set; }
 
         [Column("Apid")]

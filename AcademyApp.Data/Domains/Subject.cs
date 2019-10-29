@@ -9,6 +9,7 @@ namespace AcademyApp.Data.Domains
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         
         public int ID { get; set; }
+
         [Column("ApId")]
         public int ApId { get; set; }
 

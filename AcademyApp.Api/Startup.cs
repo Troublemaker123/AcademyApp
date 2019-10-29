@@ -50,7 +50,6 @@ namespace AcademyApp.Api
             services.AddTransient<ISubjectService, SubjectService>();
             services.AddTransient<IMentorService, MentorService>();
             services.AddTransient<IGroupMemberService, GroupMemberService>();
-            services.AddTransient<IMentorSubjectService, MentorSubjectService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,7 +1,7 @@
 
 <div class="academy-year-picker-container">
 <mat-form-field title="Academy Year" style="width: 240px">
-  <select matNativeControl (change)='onChangeAcademyProgram($event)' >
+  <select matNativeControl (change)='onChangeAcademyProgram($event)'>
     <ng-container *ngFor="let item of programs">
         <ng-container *ngIf="item.isCurrent === true">
             <option  [value]="item.id" selected>{{item.startDate | date}} - {{item.endDate | date}}</option>

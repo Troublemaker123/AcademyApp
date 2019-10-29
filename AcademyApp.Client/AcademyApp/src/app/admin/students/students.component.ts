@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { MatPaginator, MatDialog, MatSort, MatTableDataSource } from '@angular/material';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatTableDataSource } from '@angular/material';
 import { Subscription } from 'rxjs/Subscription';
 
 import { Student } from 'src/app/shared/models/student';
@@ -20,8 +20,7 @@ export class StudentsComponent implements OnInit {
     public students: Student[] = [];
     columnsToDisplay = ['name', 'lastName', 'emailAdress', 'address', 'dateOfBirth',
     'placeOfBirth', 'mobile', 'country', 'graduationYear', 'dateOfEnrollment', 'gender', 'Actions'];
-    @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-    @ViewChild(MatSort, { static: true }) sort: MatSort;
+
 
     private subscription: Subscription;
 

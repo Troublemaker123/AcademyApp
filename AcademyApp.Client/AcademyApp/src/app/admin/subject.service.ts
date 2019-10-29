@@ -12,7 +12,6 @@ export class SubjectService {
 
     constructor(private http: HttpClient) { }
 
-
     public GetAllSubjects(academyProgramId: number): Observable<Subjects[]> {
         return this.http.get<Subjects[]>(this.baseApiUrl + 'Admin/subject/get-all/' + academyProgramId);
     }

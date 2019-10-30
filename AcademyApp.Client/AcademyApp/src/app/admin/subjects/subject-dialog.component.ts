@@ -78,6 +78,7 @@ export class SubjectDialogComponent implements OnInit {
 
   public onSubmit() {
     if (this.isEditMode) {
+      this.subject.mentorsList = this.selectedMentor;
       this.subjectService.update(this.subject).subscribe(() => {
         this.dialogRef.close('ok');
       });

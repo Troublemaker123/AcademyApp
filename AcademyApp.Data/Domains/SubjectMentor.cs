@@ -12,6 +12,7 @@ namespace AcademyApp.Data.Domains
 
         [Column("SubjectId")]
         public int SubjectId { get; set; }
+
         [Column("AcademyProgramId")]
         public int AcademyProgramId { get; set; }
 

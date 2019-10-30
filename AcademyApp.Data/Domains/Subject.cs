@@ -7,7 +7,6 @@ namespace AcademyApp.Data.Domains
     public class Subject
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        
         public int ID { get; set; }
 
         [Column("ApId")]

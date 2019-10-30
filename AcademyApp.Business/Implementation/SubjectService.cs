@@ -76,7 +76,7 @@ namespace AcademyApp.Business
 
             return subjects;
         }
-    
+
         public SubjectViewModel FindById(int subjectId)
         {
             var subject = _subjectRepository.FindById(subjectId);
@@ -86,8 +86,11 @@ namespace AcademyApp.Business
             return subject.ToModel();
         }
 
+
         public void Update(SubjectViewModel subject)
         {
+
+
             var subjects = _subjectRepository.FindByMultipleId(subject.ID,subject.AcademyProgramId);
             if (subjects == null)
                 throw new Exception("subject not found");
@@ -96,16 +99,42 @@ namespace AcademyApp.Business
             subjects.Description = subject.Description;
 
             _subjectRepository.Update(subjects);
+
+            var mentors = _subjectMentorRepository.GetAll().Where(m => m.SubjectId == subject.ID && m.AcademyProgramId == subject.AcademyProgramId).ToList();
+
+            foreach (var mentor in mentors)
+            {
+                _subjectMentorRepository.Delete(mentor);
+            }
+
+            var domain = subject.ToDomain();
+
+            foreach (var mentor in subject.MentorsList)
+            {
+                _subjectMentorRepository.Create(new SubjectMentor
+                {
+                    AcademyProgramId = domain.ApId,
+                    MentorId = mentor.Id,
+                    SubjectId = domain.ID,
+                });
+
+            }
         }
 
         public void Delete(int subjectId, int academyProgramId)
         {
+
+            var mentors = _subjectMentorRepository.GetAll().Where(m => m.AcademyProgramId == academyProgramId && m.SubjectId == subjectId).ToList();
+
+            foreach (var mentor in mentors)
+            {
+                _subjectMentorRepository.Delete(mentor);
+            }
                 
             var subjects = _subjectRepository.FindByMultipleId(subjectId, academyProgramId);
             if (subjects == null)
                 throw new Exception("subject not found");
 
-     
             _subjectRepository.Delete(subjects);
         }
     }

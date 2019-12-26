@@ -32,7 +32,7 @@ npm install typings -g
 ```
 - Make sure that you have .NetCore 2.1.0 installed on your machine
 
-** Install libraries **
+**Install libraries**
 * npm install
 
 * Visual Studio 2017 or above

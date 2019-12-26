@@ -17,7 +17,7 @@ There are also three different roles
 2. Academy employee
 3. Mentor
 
-Administrator would manage users in the app, academy employee would manage the academy program and mentor would manage details of current teaching program.
+The administrator would manage users in the app, the academy employee would manage the academy program and the mentor would manage details of the current teaching program.
 
 ## Getting Started
 

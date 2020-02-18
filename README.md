@@ -16,7 +16,7 @@ This project is intended for management of an academy consisting of the followin
    - Creating new user as:
       - username formatted as 'firstname.lastname'
       - e-mail provided by user
-      password is generated and credentials are sent to user's email with activation link
+      - password is generated and credentials are sent to user's email with activation link
 
 4. Roles of users
    - Administrator

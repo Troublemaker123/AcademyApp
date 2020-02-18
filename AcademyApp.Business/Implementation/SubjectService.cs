@@ -14,12 +14,12 @@ namespace AcademyApp.Business
     public class SubjectService : ISubjectService
     {
         private readonly IRepository<Subject> _subjectRepository;
-        private readonly IRepository<SubjectMentor> _subjectMentorRepository;
+        private readonly IRepository<GroupSubjects> _subjectMentorRepository;
         private readonly IRepository<Mentor> _mentorRepository;
 
         public SubjectService(
             IRepository<Subject> subjectRepository,
-            IRepository<SubjectMentor> subjectMentorRepository,
+            IRepository<GroupSubjects> subjectMentorRepository,
             IRepository<Mentor> mentorRepository)
         {
             _subjectRepository = subjectRepository;
@@ -28,53 +28,16 @@ namespace AcademyApp.Business
 
         }
 
-        public void Create(SubjectViewModel subjects)
+        public void Create(SubjectViewModel model)
         {
-            if (subjects == null)
-                throw new ApplicationException("group is null");
-
-            var domain = subjects.ToDomain();
-            _subjectRepository.Create(domain);
-
-            foreach (var mentor in subjects.MentorsList)
-            {
-                _subjectMentorRepository.Create(new SubjectMentor
-                {
-                    AcademyProgramId = domain.ApId,
-                    MentorId = mentor.Id,
-                    SubjectId = domain.ID,
-                });
-
-            }
+            _subjectRepository.Create(model.ToDomain());
         }
 
-        public IEnumerable<SubjectViewModel> GetAll(int academyProgramId)
+        public IEnumerable<SubjectViewModel> GetAll(int academyId)
         {
-
-            var subjects = _subjectRepository.GetAll().Where(s => s.ApId == academyProgramId).Select(s => s.ToModel()).ToList();
-
-            var subMentor = _subjectMentorRepository.GetAll().Where(sm => sm.AcademyProgramId == academyProgramId);
-
-            var concatSubs =
-                from sub in subMentor
-                join m in _mentorRepository.GetAll() on sub.MentorId equals m.ID
-
-                select new
-                {
-                    subMentor = sub,
-                    Mentor = m
-                };
-
-            foreach (var subject in subjects)
-            {
-                var mentors = concatSubs.Where(cs => cs.subMentor.SubjectId == subject.ID).Select(cs => cs.Mentor.ToBasicModel()).ToList();
-                if (mentors.Any())
-                {
-                    subject.MentorsList = mentors;
-                }
-            }
-
-            return subjects;
+            return _subjectRepository.GetAll().Where(s => s.AcademyId == academyId).Select(
+                           model => model.ToModel()
+                     ).ToList();
         }
 
         public SubjectViewModel FindById(int subjectId)
@@ -86,56 +49,26 @@ namespace AcademyApp.Business
             return subject.ToModel();
         }
 
-
-        public void Update(SubjectViewModel subject)
+        public void Update(SubjectViewModel model)
         {
+            var subject = _subjectRepository.FindById(model.ID);
+            if (subject == null)
+                throw new Exception();
 
+            subject.Name = model.Name;
+            subject.Description = model.Description;
+            subject.AcademyId = model.AcademyId;
 
-            var subjects = _subjectRepository.FindByMultipleId(subject.ID,subject.AcademyProgramId);
-            if (subjects == null)
-                throw new Exception("subject not found");
-
-            subjects.Name = subject.Name;
-            subjects.Description = subject.Description;
-
-            _subjectRepository.Update(subjects);
-
-            var mentors = _subjectMentorRepository.GetAll().Where(m => m.SubjectId == subject.ID && m.AcademyProgramId == subject.AcademyProgramId).ToList();
-
-            foreach (var mentor in mentors)
-            {
-                _subjectMentorRepository.Delete(mentor);
-            }
-
-            var domain = subject.ToDomain();
-
-            foreach (var mentor in subject.MentorsList)
-            {
-                _subjectMentorRepository.Create(new SubjectMentor
-                {
-                    AcademyProgramId = domain.ApId,
-                    MentorId = mentor.Id,
-                    SubjectId = domain.ID,
-                });
-
-            }
+            _subjectRepository.Update(subject);
         }
 
-        public void Delete(int subjectId, int academyProgramId)
-        {
-
-            var mentors = _subjectMentorRepository.GetAll().Where(m => m.AcademyProgramId == academyProgramId && m.SubjectId == subjectId).ToList();
-
-            foreach (var mentor in mentors)
-            {
-                _subjectMentorRepository.Delete(mentor);
-            }
-                
-            var subjects = _subjectRepository.FindByMultipleId(subjectId, academyProgramId);
-            if (subjects == null)
+        public void Delete(int subjectId)
+        {               
+            var subject = _subjectRepository.FindById(subjectId);
+            if (subject == null)
                 throw new Exception("subject not found");
 
-            _subjectRepository.Delete(subjects);
+            _subjectRepository.Delete(subject);
         }
     }
 }

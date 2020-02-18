@@ -1,0 +1,20 @@
+<div class="tab-container">
+    <nav mat-tab-nav-bar>
+      <a mat-tab-link [routerLink]="'academy'" routerLinkActive #ac="routerLinkActive" [active]="ac.isActive">
+        Academy
+      </a>
+      <a mat-tab-link [routerLink]="'academy-program'" routerLinkActive #ap="routerLinkActive" [active]="ap.isActive">
+        Academy Year Program 
+      </a>
+      <a mat-tab-link [routerLink]="'subjects'" routerLinkActive #sb="routerLinkActive" [active]="sb.isActive">
+        Subjects
+      </a>
+      <!-- <a mat-tab-link [routerLink]="" routerLinkActive #ys="routerLinkActive" [active]="ys.isActive">
+        Yearly Schedules
+      </a> -->
+    </nav>
+  </div>
+  
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>

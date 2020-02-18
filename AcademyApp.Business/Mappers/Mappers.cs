@@ -2,21 +2,48 @@
 using AcademyApp.Business.Enums;
 using AcademyApp.Business.ViewModels;
 using AcademyApp.Data.Domains;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AcademyApp.Business.Mapper
 {
     public static class Mappers
     {
+        #region Academy
+        public static Academy ToDomain(this AcademyViewModel model)
+        {
+            return new Academy
+            { 
+                ID = model.ID,
+                Name = model.Name,
+                Description = model.Description
+            };
+        }
+
+        public static AcademyViewModel ToModel(this Academy model)
+        {
+            return new AcademyViewModel
+            {
+                ID = model.ID,
+                Name = model.Name,
+                Description = model.Description
+            };
+        }
+        #endregion
+
+        #region AcademyProgram
         public static AcademyProgram ToDomain(this AcademyProgramViewModel model)
         {
             return new AcademyProgram
             {
-                Id = model.Id,
+                ID = model.ID,
                 CreatedOn = model.CreatedOn,
                 CreatedBy = model.CreatedBy,
                 StartDate = model.StartDate,
                 EndDate = model.EndDate,
-                IsCurrent = model.IsCurrent
+                IsCurrent = model.IsCurrent,
+                AcademyId = model.AcademyId
             };
         }
 
@@ -24,21 +51,63 @@ namespace AcademyApp.Business.Mapper
         {
             return new AcademyProgramViewModel
             {
-                Id = model.Id,
+                ID = model.ID,
                 CreatedBy = model.CreatedBy,
                 CreatedOn = model.CreatedOn,
                 StartDate = model.StartDate,
                 EndDate = model.EndDate,
-                IsCurrent = model.IsCurrent
+                IsCurrent = model.IsCurrent,
+                AcademyId = model.AcademyId,
+                AcademyName = model.Academy.Name
             };
 
         }
+
+        #endregion
+
+        #region User
+        public static User ToDomain(this UserViewModel model)
+        {
+            return new User
+            {
+                ID = model.ID,
+                UserName = model.UserName,
+                //Password = model.Password,
+                IsActive = model.IsActive,
+                RoleId = model.RoleId,
+                Token = model.Token,
+                EmailAddress = model.EmailAdress,
+                IsEmailVerified = model.IsEmailVerified,
+                IsPasswordChanged = model.IsPasswordChanged,
+                PasswordChangedDate = model.PasswordChangedDate
+            };
+        }
+        public static UserViewModel ToModel(this User model)
+        {
+            return new UserViewModel
+            {
+                ID = model.ID,
+                UserName = model.UserName,
+                //Password = model.Password,
+                IsActive = model.IsActive,
+                RoleId = model.RoleId,
+                UserRole = model.Role.Description,
+                Token = model.Token,
+                EmailAdress = model.EmailAddress,
+                IsEmailVerified = model.IsEmailVerified,
+                IsPasswordChanged = model.IsPasswordChanged,
+                PasswordChangedDate = model.PasswordChangedDate
+            };
+        }
+        #endregion
+
+        #region Student
         public static Student ToDomain(this StudentViewModel model)
         {
             return new Student
             {
                 ID = model.ID,
-                Name = model.Name,
+                FirstName = model.FirstName,
                 LastName = model.LastName,
                 Address = model.Address,
                 PlaceOfBirth = model.PlaceOfBirth,
@@ -48,8 +117,8 @@ namespace AcademyApp.Business.Mapper
                 GraduationYear = model.GraduationYear,
                 DateOfBirth = model.DateOfBirth,
                 DateOfEnrollment = model.DateOfEnrollment,
-                GenderId = model.Gender == Gender.None ? (int?)null : (int)model.Gender,
-                ApId = model.AcademyProgramId
+                GenderId = model.GenderId,
+                AcademyProgramId = model.AcademyProgramId
             };
         }
         public static StudentViewModel ToModel(this Student model)
@@ -57,7 +126,7 @@ namespace AcademyApp.Business.Mapper
             return new StudentViewModel
             {
                 ID = model.ID,
-                Name = model.Name,
+                FirstName = model.FirstName,
                 LastName = model.LastName,
                 PlaceOfBirth = model.PlaceOfBirth,
                 Address = model.Address,
@@ -67,24 +136,28 @@ namespace AcademyApp.Business.Mapper
                 GraduationYear = model.GraduationYear,
                 DateOfBirth = model.DateOfBirth,
                 DateOfEnrollment = model.DateOfEnrollment,
-                Gender = !model.GenderId.HasValue ? Gender.None : (Gender)model.GenderId.Value,
-                AcademyProgramId = model.ApId
-            };
+                GenderId = !model.GenderId.HasValue ? null : model.GenderId,
+                GenderName = !model.GenderId.HasValue ? "N/A" : (Enum.GetName(typeof(Gender), (int)model.GenderId)),
+                AcademyProgramId = !model.AcademyProgramId.HasValue ? null : model.AcademyProgramId
+               
+        };
 
         }
+        #endregion
+
+        #region Mentor
         public static Mentor ToDomain(this MentorViewModel model)
         {
             return new Mentor
             {
                 ID = model.ID,
-                Name = model.Name,
+                FirstName = model.FirstName,
                 LastName = model.LastName,
                 Email = model.Email,
                 YearsOfService = model.YearsOfService,
                 Specialty = model.Specialty,
                 Telephone = model.Telephone,
-                ApId = model.AcademyProgramId,
-
+                UserId = model.UserId
             };
         }
         public static MentorViewModel ToModel(this Mentor model)
@@ -92,13 +165,13 @@ namespace AcademyApp.Business.Mapper
             return new MentorViewModel
             {
                 ID = model.ID,
-                Name = model.Name,
+                FirstName = model.FirstName,
                 LastName = model.LastName,
                 Email = model.Email,
                 YearsOfService = model.YearsOfService,
                 Specialty = model.Specialty,
                 Telephone = model.Telephone,
-                AcademyProgramId = model.ApId,
+                UserId  = model.UserId
             };
 
         }
@@ -106,12 +179,14 @@ namespace AcademyApp.Business.Mapper
         {
             return new MentorBasicViewModel
             {
-                FullName = model.Name + " " + model.LastName,
+                FullName = $"{ model.FirstName } { model.LastName}",
                 Id = model.ID
             };
 
         }
+        #endregion
 
+        #region Subject
         public static Subject ToDomain(this SubjectViewModel model)
         {
             return new Subject
@@ -119,7 +194,7 @@ namespace AcademyApp.Business.Mapper
                 ID = model.ID,
                 Name = model.Name,
                 Description = model.Description,
-                ApId = model.AcademyProgramId
+                AcademyId = model.AcademyId
             };
         }
         public static SubjectViewModel ToModel(this Subject model)
@@ -129,35 +204,19 @@ namespace AcademyApp.Business.Mapper
                 ID = model.ID,
                 Name = model.Name,
                 Description = model.Description,
-                AcademyProgramId = model.ApId,
-
+                AcademyId = model.AcademyId
             };
         }
 
-        public static SubjectMentor ToMentorModel(this Mentor model)
-        {
-            return new SubjectMentor
-            {
-                AcademyProgramId = model.ApId,
-                MentorId = model.ID
-            };
-        }
+        #endregion
 
-        public static SubjectMentor ToSubjectModel(this Subject model)
-        {
-            return new SubjectMentor
-            {
-                SubjectId = model.ID,
-                AcademyProgramId = model.ApId
-            };
-        }
-
+        #region Role
         public static Role ToDomain(this RoleViewModel model)
         {
             return new Role
             {
                 ID = model.ID,
-
+                Description = model.Description
             };
         }
         public static RoleViewModel ToModel(this Role model)
@@ -165,18 +224,19 @@ namespace AcademyApp.Business.Mapper
             return new RoleViewModel
             {
                 ID = model.ID,
-
+                Description = model.Description
             };
         }
+        #endregion
 
+        #region Group
         public static Group ToDomain(this GroupViewModel model)
         {
             return new Group
             {
                 ID = model.ID,
-                Title = model.Title,
-                ApId = model.AcademyProgramId,
-
+                Name = model.Name,
+                AcademyProgramId = model.AcademyProgramId
             };
         }
         public static GroupViewModel ToModel(this Group model)
@@ -184,56 +244,225 @@ namespace AcademyApp.Business.Mapper
             return new GroupViewModel
             {
                 ID = model.ID,
-                Title = model.Title,
-                AcademyProgramId = model.ApId,
-
+                Name = model.Name,
+                AcademyProgramId = model.AcademyProgramId,
+                AcademyProgramName = $"{ model.AcademyProgram.Academy.Name }: {model.AcademyProgram.EndDate.ToString("yyyy")}"
             };
         }
-       
-        public static GroupMembers ToDomain(this GroupMembersViewModel model)
+        #endregion
+
+        #region GroupStudents
+        public static GroupStudents ToDomain(this GroupStudentsViewModel model)
         {
-            return new GroupMembers
+            return new GroupStudents
+            {
+                ID = model.Id,
+                StudentId = model.StudentId,
+                GroupId = model.GroupId
+            };
+        }
+        public static GroupStudentsViewModel ToModel(this GroupStudents model)
+        {
+            return new GroupStudentsViewModel
+            {
+                Id=model.ID,
+                GroupId = model.GroupId,
+                StudentId = model.StudentId
+            };
+        }
+        #endregion
+
+        #region GroupMentors
+        public static GroupMentors ToDomain(this GroupMentorsViewModel model)
+        {
+            return new GroupMentors
+            {
+                ID = model.Id,
+                GroupId = model.GroupId,
+                MentorId = model.MentorId,
+                MentorTypeId = model.MentorTypeId
+            };
+        }
+        public static GroupMentorsViewModel ToModel(this GroupMentors model)
+        {
+            return new GroupMentorsViewModel
+            {
+                Id = model.ID,
+                GroupId = model.GroupId,
+                MentorId = model.MentorId,
+                MentorTypeId = model.MentorTypeId
+            };
+        }
+        #endregion
+
+        #region GroupSubjects
+        public static GroupSubjects ToDomain(this GroupSubjectsViewModel model)
+        {
+            return new GroupSubjects
+            {
+                ID = model.Id,
+                GroupId = model.GroupId,
+                SubjectId = model.SubjectId
+            };
+        }
+        public static GroupSubjectsViewModel ToModel(this GroupSubjects model)
+        {
+            return new GroupSubjectsViewModel
+            {
+                Id = model.ID,
+                GroupId = model.GroupId,
+                SubjectId = model.SubjectId
+            };
+        }
+        #endregion
+
+        #region Category
+        public static Category ToDomain(this CategoryViewModel model)
+        {
+            return new Category
+            {
+                ID = model.ID,
+                Name = model.Name
+            };
+        }
+        public static CategoryViewModel ToModel(this Category model)
+        {
+            return new CategoryViewModel
+            {              
+                ID = model.ID,
+                Name = model.Name,
+                SubCategories = model.SubCategories.Select(x => x.ToModel()).ToList()
+            };
+        }
+        #endregion
+
+        #region SubCategory
+        public static SubCategory ToDomain(this SubCategoryViewModel model)
+        {
+            return new SubCategory
+            {
+                ID = model.ID,
+                Name = model.Name,
+                CategoryId = model.CategoryId
+            };
+        }
+        public static SubCategoryViewModel ToModel(this SubCategory model)
+        {
+            return new SubCategoryViewModel
+            {
+                ID = model.ID,
+                Name = model.Name,
+                CategoryId = model.CategoryId,
+                CategoryName = model.Category.Name
+            };
+        }
+        #endregion
+
+        #region Email
+        public static Email ToDomain(this EmailViewModel model)
+        {
+            return new Email
             {
                 Id = model.Id,
-                UserType = (int)model.UserType,
-                ApId = model.AcademyProgramId,
-                UserId = model.UserId,
-                GroupId = model.GroupId,
-                AddGroupMember = model.AddGroupMember,
-                FullName = model.FullName
+                ToMail = model.ToMail,
+                Subject = model.Subject,
+                Message = model.Message,
+                IsSent = model.IsSent,
+                UserId = model.UserId.HasValue ? model.UserId : null,
+                CreatedOn = model.CreatedOn
             };
         }
-        public static GroupMembersViewModel ToModel(this GroupMembers model)
+        public static EmailViewModel ToModel(this Email model)
         {
-            return new GroupMembersViewModel
+            return new EmailViewModel
             {
-                Id=model.Id,
-                UserType = (UserType)model.UserType,
-                AcademyProgramId = model.ApId,
-                GroupId = model.GroupId,
-                UserId = model.UserId,
-                AddGroupMember = model.AddGroupMember,
-                FullName = model.FullName
+                Id = model.Id,
+                ToMail = model.ToMail,
+                Subject = model.Subject,
+                Message = model.Message,
+                IsSent = model.IsSent,
+                UserId = model.UserId.HasValue ? model.UserId : null,
+                CreatedOn = model.CreatedOn
             };
         }
-        public static GroupMembersViewModel ToGroupMemberModel(this Student model)
+        #endregion
+
+        #region ClassRoom
+        public static Classroom ToDomain(this ClassRoomViewModel model)
         {
-            return new GroupMembersViewModel
+            return new Classroom
             {
-                FullName = model.Name + " " + model.LastName,
-                UserId = model.ID,
-                UserType = UserType.Student,
+                Id = model.Id,
+                Name = model.Name,
+                Location = model.Location
             };
         }
-        public static GroupMembersViewModel ToMentorViewModel(this Mentor model)
+        public static ClassRoomViewModel ToModel(this Classroom model)
         {
-            return new GroupMembersViewModel
+            return new ClassRoomViewModel
             {
-                FullName = model.Name + " " + model.LastName,
-                UserId = model.ID,
-                UserType = UserType.Mentor
+                Id = model.Id,
+                Name = model.Name,
+                Location = model.Location
             };
         }
+        #endregion
+
+        #region NonWorkingDay
+        public static NonWorkingDay ToDomain(this NonWorkingDayViewModel model)
+        {
+            return new NonWorkingDay
+            {
+                Id = model.Id,
+                AcademyProgramId = model.AcademyProgramId,
+                EventTypeId = model.EventTypeId,
+                EventDate = model.EventDate
+            };
+        }
+        public static NonWorkingDayViewModel ToModel(this NonWorkingDay model)
+        {
+            return new NonWorkingDayViewModel
+            {
+                Id = model.Id,
+                AcademyProgramId = model.AcademyProgramId,
+                EventTypeId = model.EventTypeId,
+                EventName = Enum.GetName(typeof(EventType), (int)model.EventTypeId),
+                EventDate = model.EventDate
+            };
+        }
+        #endregion
+
+        #region Rating
+        public static Rating ToDomain(this RatingViewModel model)
+        {
+            return new Rating
+            {
+                Id = model.Id,
+                MentorId = model.MentorId,
+                StudentId = model.StudentId,
+                SubjectId = model.SubjectId,
+                SubCategoryId = model.SubCategoryId,
+                AcademyProgramId = model.AcademyProgramId,
+                Grade = model.Grade,
+                Comment = model.Comment
+            };
+        }
+        public static RatingViewModel ToModel(this Rating model)
+        {
+            return new RatingViewModel
+            {
+                Id = model.Id,
+                MentorId = model.MentorId,
+                StudentId = model.StudentId,
+                SubjectId = model.SubjectId,
+                SubCategoryId = model.SubCategoryId,
+                AcademyProgramId = model.AcademyProgramId,
+                Grade = model.Grade,
+                Comment = model.Comment
+            };
+        }
+        #endregion
+
 
 
     }

@@ -8,7 +8,7 @@ namespace AcademyApp.Business.ViewModel
    
         public int ID { get; set; }
  
-        public string Name { get; set; }
+        public string FirstName { get; set; }
 
         public string LastName { get; set; }
 
@@ -16,7 +16,8 @@ namespace AcademyApp.Business.ViewModel
 
         public string PlaceOfBirth { get; set; }
 
-        public Gender Gender { get; set; }
+        public int? GenderId { get; set; }
+        public string GenderName { get; set; }
 
         public string Mobile { get; set; }
 
@@ -24,12 +25,11 @@ namespace AcademyApp.Business.ViewModel
 
         public string EmailAdress { get; set; }
 
-        public DateTime GraduationYear { get; set; }
+        public DateTime? GraduationYear { get; set; }
 
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
-        public DateTime DateOfEnrollment { get; set; }
-
-        public int AcademyProgramId { get; set; }
+        public DateTime? DateOfEnrollment { get; set; }
+        public int? AcademyProgramId { get; set; }
     }
 }

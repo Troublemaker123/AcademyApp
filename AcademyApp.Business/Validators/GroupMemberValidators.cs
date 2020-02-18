@@ -8,7 +8,7 @@ namespace AcademyApp.Business.Validators
     {
         public GroupMemberValidators()
         {
-            RuleFor(x => x.UserType)
+            RuleFor(x => x.UserTypeId)
                 .NotNull().WithMessage("Required field!");
         }
     }

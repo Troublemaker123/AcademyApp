@@ -1,0 +1,68 @@
+
+<mat-icon id="close-icon" title="Close" (click)=onCancel()>close</mat-icon>
+
+<h1 mat-dialog-title>{{title}}</h1>
+
+<form name="form" #f="ngForm" novalidate>
+<div mat-dialog-content style="overflow-y: hidden;"></div>
+
+<mat-form-field id="mat-form-field">
+  <mat-label>Choose a Role</mat-label>
+  <mat-select required [(ngModel)]="user.roleId" 
+  #roleId="ngModel" id="roleId" name="roleId" [disabled]="disableRoleChange">
+    <mat-option>--</mat-option>
+    <mat-option *ngFor="let role of roles" [value]="role.id">
+      {{ role.description }}
+    </mat-option>
+  </mat-select>
+  <mat-error *ngIf="roleId.invalid && (roleId.dirty || roleId.touched)" class="alert alert-danger">
+    <div *ngIf="roleId.errors.required">
+      Role is mandatory.
+    </div>
+  </mat-error>
+</mat-form-field>
+
+<mat-form-field id="mat-form-field">
+    <input matInput placeholder="firstname.lastname" [(ngModel)]="user.userName" pattern="^[a-z]{1,50}\.[a-z0-9]{1,50}$"
+      class="form-control" #userName="ngModel" id="userName" name="userName" required maxlength="100" autocomplete="off">
+    <mat-error *ngIf="userName.invalid && (userName.dirty || userName.touched)" class="alert alert-danger">
+      <div *ngIf="userName.errors.required">
+        Username is mandatory.
+      </div>
+      <mat-error *ngIf="userName.errors.maxlength">
+        Username limit is 100 characters long.
+      </mat-error>
+      <div *ngIf="userName.errors.pattern">
+        Format Username should be 'fName.sName'
+      </div>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field id="mat-form-field">
+    <input matInput placeholder="Primary Email" [(ngModel)]="user.emailAdress" 
+      class="form-control" #emailAdress="ngModel" id="emailAdress" name="emailAdress" email required maxlength="255" autocomplete="off">
+    <mat-error *ngIf="emailAdress.invalid && (emailAdress.dirty || emailAdress.touched)" class="alert alert-danger">
+      <div *ngIf="emailAdress.errors.required">
+        E-mail is mandatory.
+      </div>
+      <mat-error *ngIf="emailAdress.errors.maxlength">
+        E-mail limit is 255 characters long.
+      </mat-error>
+      <mat-error *ngIf="emailAdress.errors.email">Email must be valid!</mat-error>
+    </mat-error>
+  </mat-form-field>
+
+
+<mat-checkbox [(ngModel)]="user.isActive" id="isActive" name="isActive" #isActive="ngModel"
+[checked]="user.isActive">Is Active</mat-checkbox>
+
+
+<mat-error *ngIf="error" class="error">
+  {{ error }}
+</mat-error>
+
+<div mat-dialog-actions class="mat-dialog-actions">
+  <button mat-flat-button mat-dialog-close title="Cancel" (click)="onCancel()">Cancel</button>
+  <button mat-flat-button cdkFocusInitial color="primary" title="OK" (click)="onSubmit(f.form)"  [disabled]="!f.form.dirty">OK</button>
+</div>
+</form>

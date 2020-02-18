@@ -6,9 +6,9 @@ namespace AcademyApp.Business.Interfaces
     public interface ISubjectService
     {
         void Create(SubjectViewModel subject);
-        void Delete(int subjectId,int academyProgramId);
+        void Delete(int subjectId);
         void Update(SubjectViewModel subject);
-        IEnumerable<SubjectViewModel> GetAll(int academyProgramId);
+        IEnumerable<SubjectViewModel> GetAll(int academyId);
         SubjectViewModel FindById(int subjectId);
        
     }

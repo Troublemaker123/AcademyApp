@@ -1,0 +1,32 @@
+<mat-sidenav-container >
+    <mat-menu #sidenav="matMenu">
+      <button mat-menu-item *ngFor="let item of menuItems" [routerLink]=item.routerLink>
+        <mat-icon class="icon">{{item.icon}} </mat-icon>
+        {{item.title}}
+      </button>
+    </mat-menu>
+    <mat-sidenav-content>
+      <mat-toolbar color="primary">
+        <mat-toolbar-row rowspan="2">
+          <span fxHide.gt-xs>
+            <button mat-icon-button [matMenuTriggerFor]="sidenav">
+             <mat-icon>menu</mat-icon>
+           </button>
+          </span>
+          <span>Welcome to Learning Academy</span>
+          <span class="example-spacer"></span>
+          <span *ngIf="currentUser" > {{currentUser.userName}} </span>&nbsp; |
+          <button mat-icon-button (click)="changePassword()" title="Change Password">
+            <mat-icon  aria-hidden="false" >vpn_key</mat-icon>         
+          </button> |
+          <button mat-icon-button (click)="logout()" title="Logout">
+            <mat-icon class="example-icon" aria-hidden="false" >settings_power</mat-icon>         
+          </button>
+        </mat-toolbar-row>    
+      </mat-toolbar>    
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  <main ngxUiLoaderBlurred blur="10">
+    <router-outlet></router-outlet>
+  </main>
+

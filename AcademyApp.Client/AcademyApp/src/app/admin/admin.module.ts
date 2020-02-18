@@ -1,74 +1,69 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 // modules
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminRoutingModule } from './admin-routing.module';
 import { SharedModule } from '../shared/shared.module';
 
 
 // services
-import { AcademyProgramService } from './academy-program.service';
-import { AcademyProgramStateService } from './academy-program/academy-program-state.service';
-import { StudentService } from './student.service';
-import { MentorService } from './mentor.service';
-import { SubjectService } from './subject.service';
-import { GroupService } from './group.service';
+import { AcademyProgramService } from '../services/academy-program.service';
+import { AcademyProgramStateService } from '../academymgmt/academy-program/academy-program-state.service';
+import { StudentService } from '../services/student.service';
+import { MentorService } from '../services/mentor.service';
+import { SubjectService } from '../services/subject.service';
+import { GroupService } from '../services/group.service';
+import { GroupMemberService } from '../services/group-member.service';
+import { AcademyService } from '../services/academy.service';
+import { RoleService } from '../services/role.service';
 
 // components
 import { AdminComponent } from './admin.component';
-import { AcademyProgramComponent } from './academy-program/academy-program.component';
-import { AcademyYearDialogComponent } from './academy-program/academy-program-dialog.component';
-import { StudentsComponent } from './students/students.component';
-import { StudentDialogComponent } from './students/student-dialog.component';
-import { MentorDialogComponent } from './mentors/mentor-dialog.component';
-import { MentorComponent } from './mentors/mentor.component';
-import { SubjectDialogComponent } from './subjects/subject-dialog.component';
-import { SubjectsComponent } from './subjects/subject.component';
-import { WarnDialogComponent } from '../shared/warn-dialog/warn-dialog';
-import { GroupComponent } from './groups/group.component';
-import { GroupDialogComponent } from './groups/group-dialog.component';
-import { GroupMemberService } from './group-member.service';
-import { GroupMembersComponent } from './group-members/group-members.component';
-import { GroupMemberDialogComponent } from './group-members/group-member-dialog.component';
+import { RoleListComponent } from './roles/role-list.component';
+import { RoleDialogComponent } from './roles/role-dialog.component';
+import { UserListComponent } from './users/user-list.component';
+import { UserDialogComponent } from './users/user-dialog.component';
+import { CategoryComponent } from './category/category.component';
+import { CategoryDialogComponent } from './category/category-dialog.component';
+import { SubCategoryDialogComponent } from './category/sub-category-dialog.component';
+import { ClassroomComponent } from './classrooms/classroom.component';
+import { ClassroomDialogComponent } from './classrooms/classroom-dialog.component';
+import { CoreModule } from '../core.module';
+
 
 
 @NgModule({
   declarations: [
     AdminComponent,
-    AcademyProgramComponent,
-    StudentsComponent,
-    AcademyYearDialogComponent,
-    StudentDialogComponent,
-    MentorDialogComponent,
-    MentorComponent,
-    SubjectDialogComponent,
-    SubjectsComponent,
-    WarnDialogComponent,
-    GroupComponent,
-    GroupDialogComponent,
-    GroupMembersComponent,
-    GroupMemberDialogComponent,
+    RoleListComponent,
+    RoleDialogComponent,
+    UserListComponent,
+    UserDialogComponent,
+    CategoryComponent,
+    CategoryDialogComponent,
+    SubCategoryDialogComponent,
+    ClassroomComponent,
+    ClassroomDialogComponent
   ],
   entryComponents: [
-    AcademyYearDialogComponent,
-    StudentDialogComponent,
-    MentorDialogComponent,
-    SubjectDialogComponent,
-    WarnDialogComponent,
-    GroupComponent,
-    GroupDialogComponent,
-    GroupMemberDialogComponent,
-    GroupMembersComponent
+    RoleDialogComponent,
+    UserDialogComponent,
+    CategoryDialogComponent,
+    SubCategoryDialogComponent,
+    ClassroomDialogComponent
   ],
   imports: [
     CommonModule,
-    HttpClientModule,
+    CoreModule,
     AdminRoutingModule,
     FormsModule,
     SharedModule,
-
+    ReactiveFormsModule,
+    FlexLayoutModule
+  ],
+  exports: [
 
   ],
   providers: [
@@ -79,7 +74,8 @@ import { GroupMemberDialogComponent } from './group-members/group-member-dialog.
     AcademyProgramStateService,
     GroupService,
     GroupMemberService,
-
+    AcademyService,
+    RoleService
   ],
 
 })

@@ -1,44 +1,51 @@
-﻿using AcademyApp.Business.Interfaces;
+﻿using AcademyApp.Api.Utility;
+using AcademyApp.Business.Interfaces;
 using AcademyApp.Business.ViewModel;
 using AcademyApp.Business.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AcademyApp.Api.Controllers
 {
+
     [Route("api/[controller]")]
+    [ValidateModel]
     [ApiController]
     public class AdminController : ControllerBase
     {
-        private readonly IAcademyProgramService _academyProgramService;
-        private readonly IStudentService _studentService;
-        private readonly IMentorService _mentorService;
-        private readonly ISubjectService _subjectService;
-        private readonly IGroupService _groupService;
-        private readonly IGroupMemberService _groupMemberService;
 
-        public AdminController(
-            IAcademyProgramService academyProgramService,
-            IStudentService studentService,
-            IMentorService mentorService,
-            ISubjectService subService,
-            IGroupService groupService,
-            IGroupMemberService groupMemberService)
-        {
-            _academyProgramService = academyProgramService;
-            _studentService = studentService;
-            _mentorService = mentorService;
-            _subjectService = subService;
-            _groupService = groupService;
-            _groupMemberService = groupMemberService;
+        private readonly IRoleService _roleService;
+        private readonly IUserService _userService;
+        private readonly IClassRoomService _classRoomService;
+        private readonly INonWorkingDayService _nonWorkingDayService;
+
+        public AdminController(           
+            IRoleService roleService,
+            IUserService userService,
+            IClassRoomService classRoomService,
+            INonWorkingDayService nonWorkingDayService
+            )
+        {            
+            _roleService = roleService;
+            _userService = userService;
+            _classRoomService = classRoomService;
+            _nonWorkingDayService = nonWorkingDayService;
         }
 
+        public IActionResult Start()
+        {
+            return Ok("web api started..");
+        }
       
-        #region AcademyProgram
-        [Route("academyProgram/create")]
+
+        #region Roles
+        [Route("role/create")]
         [HttpPost]
-        public ActionResult CreateAcademyProgram(AcademyProgramViewModel academyProgram)
+        public ActionResult CreateRole(RoleViewModel role)
         {
             try
             {
@@ -47,7 +54,7 @@ namespace AcademyApp.Api.Controllers
                     throw new Exception(ModelState.ToString());
                 }
 
-                _academyProgramService.Create(academyProgram);
+                _roleService.Create(role);
                 return Ok();
             }
             catch (Exception ex)
@@ -55,17 +62,14 @@ namespace AcademyApp.Api.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [Route("academyProgram/delete/{academyProgramId}")]
+
+        [Route("role/delete/{roleId}")]
         [HttpDelete]
-        public ActionResult DeleteAcademyProgram(int academyProgramId)
+        public ActionResult DeleteRole(int roleId)
         {
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    throw new Exception(ModelState.ToString());
-                }
-                _academyProgramService.Delete(academyProgramId);
+                _roleService.Delete(roleId);
                 return Ok();
             }
             catch (Exception ex)
@@ -73,9 +77,38 @@ namespace AcademyApp.Api.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [Route("academyProgram/update")]
+
+        [Route("role/find-by-id/{roleId}")]
+        public ActionResult FindRoleById(int roleId)
+        {
+            try
+            {
+                var role = _roleService.FindById(roleId);
+                return Ok(role);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Route("role/get-all")]
+        public IActionResult GetAllRoles()
+        {
+            try
+            {
+                var roles = _roleService.GetAll();
+                return Ok(roles);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Route("role/update")]
         [HttpPut]
-        public ActionResult UpdateAcademyProgram(AcademyProgramViewModel academyProgram)
+        public IActionResult UpdateRole(RoleViewModel role)
         {
             try
             {
@@ -83,7 +116,7 @@ namespace AcademyApp.Api.Controllers
                 {
                     throw new Exception(ModelState.ToString());
                 }
-                _academyProgramService.Update(academyProgram);
+                _roleService.Update(role);
                 return Ok();
             }
             catch (Exception ex)
@@ -91,152 +124,102 @@ namespace AcademyApp.Api.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [Route("academyProgram/find-by-id/{academyProgramId}")]
-        [HttpGet]
-        public ActionResult<AcademyProgramViewModel> AcademyProgramFindById(int academyProgramId)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    throw new Exception(ModelState.ToString());
-                }
-                var program = _academyProgramService.FindById(academyProgramId);
-                return Ok(program);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-        [Route("academyProgram/get-all")]
-        [HttpGet]
-        public ActionResult<List<AcademyProgramViewModel>> GetAllAcademyPrograms()
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    throw new Exception(ModelState.ToString());
-                }
-                var programs = _academyProgramService.GetAll();
-                return Ok(programs);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+        #endregion
 
-        }
-        #endregion AcademyProgram
-
-        #region Student
-        [Route("student/create")]
+        #region Users
+        [Route("user/create")]
         [HttpPost]
-        public ActionResult CreateStudent(StudentViewModel student)
+        public ActionResult CreateUser(UserViewModel user)
         {
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    throw new Exception(ModelState.ToString());
-                }
-                _studentService.Create(student);
+                _userService.Create(user);
                 return Ok();
-
             }
             catch (Exception ex)
             {
-
                 return BadRequest(ex.Message);
             }
-
         }
-        [Route("student/delete/{studentId}/{academyProgramId}")]
+
+        [Route("user/delete/{userId}")]
         [HttpDelete]
-        public ActionResult DeleteStudent(int studentId, int academyProgramId)
+        public ActionResult DeleteUser(int userId)
         {
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    throw new Exception(ModelState.ToString());
-                }
-                _studentService.Delete(studentId, academyProgramId);
+                _userService.Delete(userId);
                 return Ok();
             }
             catch (Exception ex)
             {
-
                 return BadRequest(ex.Message);
             }
         }
-        [Route("student/update")]
+
+        [Route("user/find-by-id/{userId}")]
+        public ActionResult FindUserById(int userId)
+        {
+            try
+            {
+                var user = _userService.FindById(userId);
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [Authorize]
+        [Route("user/get-all")]
+        public ActionResult GetAllUsers()
+        {
+            try
+            {
+                var users = _userService.GetAll();
+                return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Route("user/update")]
         [HttpPut]
-        public ActionResult UpdateStudent(StudentViewModel student)
+        public ActionResult UpdateUser(UserViewModel user)
         {
             try
-            {
-                if (!ModelState.IsValid)
-                {
-                    throw new Exception(ModelState.ToString());
-                }
-                _studentService.Update(student);
+            {             
+                _userService.Update(user);
                 return Ok();
             }
             catch (Exception ex)
             {
-
                 return BadRequest(ex.Message);
             }
         }
-        [Route("student/find-by-id/{studentId}")]
+
+        [Route("user/print/{userId}")]
         [HttpGet]
-        public ActionResult<StudentViewModel> StudentFindById(int studentId)
+        public ActionResult PrintCredntials(int userId)
         {
             try
-            {
-                if (!ModelState.IsValid)
-                {
-                    throw new Exception(ModelState.ToString());
-                }
-                var students = _studentService.FindById(studentId);
-                return Ok(students);
+            {             
+                _userService.PrintLoginCredentials(userId);
+                return Ok();
             }
             catch (Exception ex)
             {
-
                 return BadRequest(ex.Message);
             }
-
         }
-        [Route("student/get-all/{academyProgramId}")]
-        [HttpGet]
-        public ActionResult<List<StudentViewModel>> GetAllStudents(int academyProgramId)
-        {
+        #endregion
 
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    throw new Exception(ModelState.ToString());
-                }
-                var students = _studentService.GetAll(academyProgramId);
-                return Ok(students);
-            }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex.Message);
-            }
-
-        }
-        #endregion Student
-
-        #region Mentor
-        [Route("mentor/create")]
+        #region ClassRooms
+        [Route("classroom/create")]
         [HttpPost]
-        public ActionResult CreateMentor(MentorViewModel mentor)
+        public ActionResult CreateClassRoom(ClassRoomViewModel classRoom)
         {
             try
             {
@@ -244,40 +227,62 @@ namespace AcademyApp.Api.Controllers
                 {
                     throw new Exception(ModelState.ToString());
                 }
-                _mentorService.Create(mentor);
+
+                _classRoomService.Create(classRoom);
                 return Ok();
             }
             catch (Exception ex)
             {
-
                 return BadRequest(ex.Message);
             }
-
         }
-        [Route("mentor/delete/{mentorId}/{academyProgramId}")]
+
+        [Route("classroom/delete/{classroomId}")]
         [HttpDelete]
-        public ActionResult DeleteMentor(int mentorId, int academyProgramId)
+        public ActionResult DeleteClassRoom(int classroomId)
         {
-
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    throw new Exception(ModelState.ToString());
-                }
-                _mentorService.Delete(mentorId, academyProgramId);
+                _classRoomService.Delete(classroomId);
                 return Ok();
             }
             catch (Exception ex)
             {
-
                 return BadRequest(ex.Message);
             }
-
         }
-        [Route("mentor/update")]
+
+        [Route("classroom/find-by-id/{classroomId}")]
+        public ActionResult FindClassRoomById(int classroomId)
+        {
+            try
+            {
+                var classRoom = _classRoomService.FindById(classroomId);
+                return Ok(classRoom);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Route("classroom/get-all")]
+        public IActionResult GetAllClassRooms()
+        {
+            try
+            {
+                var roles = _classRoomService.GetAll();
+                return Ok(roles);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Route("classroom/update")]
         [HttpPut]
-        public ActionResult UpdateMentor(MentorViewModel mentor)
+        public IActionResult UpdateClassRoom(ClassRoomViewModel classRoom)
         {
             try
             {
@@ -285,82 +290,20 @@ namespace AcademyApp.Api.Controllers
                 {
                     throw new Exception(ModelState.ToString());
                 }
-                _mentorService.Update(mentor);
+                _classRoomService.Update(classRoom);
                 return Ok();
             }
             catch (Exception ex)
             {
-
                 return BadRequest(ex.Message);
             }
-
         }
-        [Route("mentor/find-by-id/{mentorId}")]
-        [HttpGet]
-        public ActionResult<MentorViewModel> MentorFindById(int mentorId)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    throw new Exception(ModelState.ToString());
-                }
-                var mentors = _mentorService.FindById(mentorId);
-                return Ok(mentors);
-            }
-            catch (Exception ex)
-            {
+        #endregion
 
-                return BadRequest(ex.Message);
-            }
-
-        }
-        [Route("mentor/get-all/{academyProgramId}")]
-        [HttpGet]
-        public ActionResult<List<MentorViewModel>> GetAllMentors(int academyProgramId)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    throw new Exception(ModelState.ToString());
-                }
-                var mentors = _mentorService.GetAll(academyProgramId);
-                return Ok(mentors);
-            }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex.Message);
-            }
-
-        }
-        [Route("mentor/getBasicMentors/{academyProgramId}")]
-        [HttpGet]
-        public ActionResult<List<MentorBasicViewModel>> GetBasicMentors(int academyProgramId)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    throw new Exception(ModelState.ToString());
-                }
-                var basicMentors = _mentorService.GetAllBasicMentors(academyProgramId);
-                return Ok(basicMentors);
-            }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex.Message);
-            }
-
-        }
-        #endregion Mentor
-
-        #region Subject
-        [Route("subject/create")]
+        #region Non Working Days
+        [Route("nonworkingday/create")]
         [HttpPost]
-        public ActionResult CreateSubject(SubjectViewModel subject)
+        public ActionResult CreateNonWorkingDay(NonWorkingDayViewModel day)
         {
             try
             {
@@ -368,40 +311,62 @@ namespace AcademyApp.Api.Controllers
                 {
                     throw new Exception(ModelState.ToString());
                 }
-                _subjectService.Create(subject);
+
+                _nonWorkingDayService.Create(day);
                 return Ok();
             }
             catch (Exception ex)
             {
-
                 return BadRequest(ex.Message);
             }
-
         }
-        [Route("subject/delete/{subjectId}/{academyProgramId}")]
+
+        [Route("nonworkingday/delete/{nonworkingdayId}")]
         [HttpDelete]
-        public ActionResult DeleteSubject(int subjectId, int academyProgramId)
+        public ActionResult DeleteNonWorkingDay(int nonworkingday)
         {
-
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    throw new Exception(ModelState.ToString());
-                }
-                _subjectService.Delete(subjectId, academyProgramId);
+                _nonWorkingDayService.Delete(nonworkingday);
                 return Ok();
             }
             catch (Exception ex)
             {
-
                 return BadRequest(ex.Message);
             }
-
         }
-        [Route("subject/update")]
+
+        [Route("nonworkingday/find-by-id/{nonworkingdayId}")]
+        public ActionResult FindNonWorkingDayById(int nonworkingdayId)
+        {
+            try
+            {
+                var day = _nonWorkingDayService.FindById(nonworkingdayId);
+                return Ok(day);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Route("nonworkingday/get-all/{academyProgramId}")]
+        public IActionResult GetAllNonWorkingDays(int academyProgramId)
+        {
+            try
+            {
+                var roles = _nonWorkingDayService.GetAll(academyProgramId);
+                return Ok(roles);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Route("nonworkingday/update")]
         [HttpPut]
-        public ActionResult UpdateSubject(SubjectViewModel subject)
+        public IActionResult UpdateNonWorkingDay(NonWorkingDayViewModel day)
         {
             try
             {
@@ -409,268 +374,15 @@ namespace AcademyApp.Api.Controllers
                 {
                     throw new Exception(ModelState.ToString());
                 }
-                _subjectService.Update(subject);
+                _nonWorkingDayService.Update(day);
                 return Ok();
             }
             catch (Exception ex)
             {
-
-                return BadRequest(ex.Message);
-            }
-
-
-        }
-        [Route("subject/find-by-id/{subjectId}")]
-        [HttpGet]
-        public ActionResult<SubjectViewModel> SubjectFindById(int subjectId)
-        {
-
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    throw new Exception(ModelState.ToString());
-                }
-                var subject = _subjectService.FindById(subjectId);
-                return Ok(subject);
-            }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex.Message);
-            }
-
-        }
-        [Route("subject/get-all/{academyProgramId}")]
-        [HttpGet]
-        public ActionResult<List<SubjectViewModel>> GetAllSubjects(int academyProgramId)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    throw new Exception(ModelState.ToString());
-                }
-                var subjects = _subjectService.GetAll(academyProgramId);
-                return Ok(subjects);
-            }
-            catch (Exception ex)
-            {
-
                 return BadRequest(ex.Message);
             }
         }
-        #endregion Subject
+        #endregion
 
-        #region Group
-        [Route("group/create")]
-        [HttpPost]
-        public ActionResult CreateGroup(GroupViewModel group)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    throw new Exception(ModelState.ToString());
-                }
-                _groupService.Create(group);
-                return Ok();
-
-            }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex.Message);
-            }
-
-        }
-        [Route("group/delete/{groupId}/{academyProgramId}")]
-        [HttpDelete]
-        public ActionResult DeleteGroup(int groupId, int academyProgramId)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    throw new Exception(ModelState.ToString());
-                }
-                _groupService.Delete(groupId, academyProgramId);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex.Message);
-            }
-        }
-        [Route("group/update")]
-        [HttpPut]
-        public ActionResult UpdateGroup(GroupViewModel group)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    throw new Exception(ModelState.ToString());
-                }
-                _groupService.Update(group);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex.Message);
-            }
-
-
-        }
-        [Route("group/find-by-id/{groupId}")]
-        [HttpGet]
-        public ActionResult<GroupViewModel> GroupFindById(int groupId)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    throw new Exception(ModelState.ToString());
-                }
-                var students = _groupService.FindById(groupId);
-                return Ok(students);
-            }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex.Message);
-            }
-
-        }
-        [Route("group/get-all/{academyProgramId}")]
-        [HttpGet]
-        public ActionResult<List<GroupViewModel>> GetAllGroups(int groupId, int academyProgramId)
-        {
-
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    throw new Exception(ModelState.ToString());
-                }
-                var groups = _groupService.GetAll(academyProgramId);
-                return Ok(groups);
-            }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex.Message);
-            }
-
-        }
-        #endregion Group
-
-        #region GroupMember
-        [Route("groupMember/create")]
-        [HttpPost]
-        public ActionResult CreateGroupMember([FromBody] List<GroupMembersViewModel> members)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    throw new Exception(ModelState.ToString());
-                }
-                _groupMemberService.Create(members);
-                return Ok();
-
-            }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex.Message);
-            }
-
-        }
-        [Route("groupMember/delete/{groupMemberId}/{academyProgramId}")]
-        [HttpDelete]
-        public ActionResult DeleteGroupMember(int groupMemberId, int academyProgramId)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    throw new Exception(ModelState.ToString());
-                }
-                _groupMemberService.Delete(groupMemberId, academyProgramId);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex.Message);
-            }
-        }
-        [Route("groupMember/find-by-id/{groupMemberId}")]
-        [HttpGet]
-        public ActionResult<GroupMembersViewModel> GroupMemberFindById(int groupMemberId)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    throw new Exception(ModelState.ToString());
-                }
-                var groupMembers = _groupMemberService.FindById(groupMemberId);
-                return Ok(groupMembers);
-            }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex.Message);
-            }
-
-        }
-        [Route("groupMember/get-all/{groupId}/{academyProgramId}")]
-        [HttpGet]
-        public ActionResult<List<GroupMembersViewModel>> GetAllGroupMembers(int groupId, int academyProgramId)
-        {
-
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    throw new Exception(ModelState.ToString());
-                }
-                var groupMembers = _groupMemberService.GetAll(groupId,academyProgramId);
-                return Ok(groupMembers);
-            }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex.Message);
-            }
-
-        }
-        [Route("groupMember/getMentorsAndStudents/{groupId}/{academyProgramId}")]
-        [HttpGet]
-        public ActionResult<List<GroupMembersViewModel>> GetMentorsAndStudents(int groupId, int academyProgramId)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    throw new Exception(ModelState.ToString());
-                }
-                var groupMembers = _groupMemberService.GetMentorsAndStudents(groupId, academyProgramId);
-                return Ok(groupMembers);
-            }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex.Message);
-            }
-
-        }
-        #endregion GroupMember
-
-      
     }
 }

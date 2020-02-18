@@ -23,15 +23,14 @@ namespace AcademyApp.Business
         public void Create(MentorViewModel mentor)
         {
             if (mentor == null)
-                throw new Exception("student not found");
-            
-            var domain = mentor.ToDomain();
-           _mentorRepository.Create(domain);
+                throw new Exception("mentor not found");
+
+           _mentorRepository.Create(mentor.ToDomain());
         }
 
-        public IEnumerable<MentorViewModel> GetAll(int academyProgramId)
+        public IEnumerable<MentorViewModel> GetAll()
         {
-            return _mentorRepository.GetAll().Where(mentor => mentor.ApId == academyProgramId)
+            return _mentorRepository.GetAll()
                 .Select(mentor => mentor.ToModel()).ToList();
         }
        
@@ -44,25 +43,25 @@ namespace AcademyApp.Business
             return mentors.ToModel();
         }
 
-        public void Update(MentorViewModel mentor)
+        public void Update(MentorViewModel model)
         {
-            var mentors = _mentorRepository.FindByMultipleId(mentor.ID,mentor.AcademyProgramId);
-            if (mentors == null)
+            var mentor = _mentorRepository.FindById(model.ID);
+            if (mentor == null)
                 throw new Exception("mentor not found");
 
-            mentors.Name = mentor.Name;
-            mentors.LastName = mentor.LastName;
-            mentors.Specialty = mentor.Specialty;
-            mentors.Telephone = mentor.Telephone;
-            mentors.YearsOfService = mentor.YearsOfService;
-            mentors.Email = mentor.Email;
+            mentor.FirstName = model.FirstName;
+            mentor.LastName = model.LastName;
+            mentor.Specialty = model.Specialty;
+            mentor.Telephone = model.Telephone;
+            mentor.YearsOfService = model.YearsOfService;
+            mentor.Email = model.Email;
 
-            _mentorRepository.Update(mentors);
+            _mentorRepository.Update(mentor);
         }
 
-        public void Delete(int mentorId, int academyProgramId)
+        public void Delete(int mentorId)
         {
-            var mentors = _mentorRepository.FindByMultipleId(mentorId, academyProgramId);
+            var mentors = _mentorRepository.FindById(mentorId);
             if (mentors == null)
                 throw new Exception("mentor not found");
 
@@ -71,7 +70,7 @@ namespace AcademyApp.Business
         public IEnumerable<MentorBasicViewModel> GetAllBasicMentors(int academyProgramId)
         {
 
-            return _mentorRepository.GetAll().Where(mentor => mentor.ApId == academyProgramId)
+            return _mentorRepository.GetAll()//.Where(mentor => mentor.AcademyProgramId == academyProgramId)
             .Select(mentor => mentor.ToBasicModel()).ToList();
         }
     }

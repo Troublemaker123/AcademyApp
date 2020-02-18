@@ -1,6 +1,7 @@
 ﻿using AcademyApp.Business.Interfaces;
 using AcademyApp.Business.Mapper;
 using AcademyApp.Business.ViewModel;
+using AcademyApp.Business.ViewModels;
 using AcademyApp.Data;
 using AcademyApp.Data.Domains;
 using System;
@@ -14,40 +15,51 @@ namespace AcademyApp.Business.Implementation
 
     public class RoleService : IRoleService
     {
-        private readonly IRepository<Role> _apRepository;
+        private readonly IRepository<Role> _roleRepository;
 
-        public RoleService(IRepository<Role> apRepository)
+        public RoleService(IRepository<Role> roleRepository)
         {
-            _apRepository = apRepository;
+            _roleRepository = roleRepository;
         }
         public void Create(RoleViewModel model)
         {
             var domain = model.ToDomain();
-            _apRepository.Create(domain);
+            _roleRepository.Create(domain);
         }
 
         public IEnumerable<RoleViewModel> GetAll()
         {
-            return _apRepository.GetAll().Select(model => new RoleViewModel()
-            {
-                ID = model.ID,
-
-            }
+            return _roleRepository.GetAll().Select(
+                model => model.ToModel()
           ).ToList();
         }
 
-        public RoleViewModel FindById(int apId)
+        public RoleViewModel FindById(int roleId)
         {
-            throw new NotImplementedException();
+            var role = _roleRepository.FindById(roleId);
+            if (role == null)
+                throw new ApplicationException("Role not found.");
+
+            return role.ToModel();
         }
 
         public void Update(RoleViewModel model)
         {
-            var program = _apRepository.FindById(new Role());
-            if (program == null)
+            var role = _roleRepository.FindById(model.ID);
+            if (role == null)
                 throw new Exception();
+            role.Description = model.Description;
 
-            _apRepository.Update(program);
+            _roleRepository.Update(role);
+        }
+
+        public void Delete(int roleId)
+        {
+            var role = _roleRepository.FindById(roleId);
+            if (role == null)
+                throw new Exception("Role not found");
+
+            _roleRepository.Delete(role);
         }
     }
 }

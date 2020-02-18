@@ -4,18 +4,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AcademyApp.Data.Domains
 {
-    [Table("Mentor")]
     public class Mentor
     {
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
-        [Column("apId")]
-        public int ApId { get; set; }
-
         [Required]
         [StringLength(255)]
-        public string Name { get; set; }
+        public string FirstName { get; set; }
 
         [Required]
         [StringLength(255)]
@@ -26,17 +23,19 @@ namespace AcademyApp.Data.Domains
         [StringLength(255)]
         public string Email { get; set; }
 
-        [Required]
         public string YearsOfService { get; set; }
 
-        [Required]
         [StringLength(255)]
         public string Specialty { get; set; }
 
-        [Required]
         [StringLength(255)]
         public string Telephone { get; set; }
 
+        public int UserId { get; set; }
+        [ForeignKey("UserId")]
+        public User User { get; set; }
+
+        public ICollection<Rating> Ratings { get; set; }
     }
     
 }

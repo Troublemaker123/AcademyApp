@@ -1,0 +1,57 @@
+  <div class="dialog">
+    <mat-icon id="close-icon" style="float:right; cursor: pointer" title="Close" (click)=onCancel()>close</mat-icon>
+
+    <h1 mat-dialog-title>{{title}}</h1>
+
+    <form name="form" #f="ngForm" novalidate>
+      <div mat-dialog-content></div>
+      <mat-form-field id="mat-form-field">
+        <mat-label>Choose an Academy</mat-label>
+        <mat-select required [(ngModel)]="subject.academyId"
+        #academyId="ngModel" id="academyId" name="academyId">
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let academy of academies" [value]="academy.id">
+            {{academy.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="academyId.invalid && (academyId.dirty || academyId.touched)" class="alert alert-danger">
+          <div *ngIf="academyId.errors.required">
+            Academy is mandatory.
+          </div>
+        </mat-error>
+      </mat-form-field>
+
+        <mat-form-field id="mat-form-field">
+          <input matInput placeholder="Choose Name" [(ngModel)]="subject.name" 
+            class="form-control" #name="ngModel" id="name" name="name" required maxlength="100" autocomplete="off" >
+          <mat-error *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+            <div *ngIf="name.errors.required">
+              Name is mandatory.
+            </div>
+            <mat-error *ngIf="name.errors.maxlength">
+              Name limit is 100 characters long.
+            </mat-error>
+          </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field id="mat-form-field">
+          <input matInput placeholder="Choose Description" [(ngModel)]="subject.description"
+            class="form-control" #description="ngModel" id="description"
+            name="description" maxlength="255" autocomplete="off" >
+          <mat-error *ngIf="description.invalid && (description.dirty || description.touched)"
+            class="alert alert-danger">
+            <mat-error *ngIf="description.errors.maxlength">
+              Description limit is 255 characters long.
+            </mat-error>
+          </mat-error>
+        </mat-form-field>
+
+      
+      <div mat-dialog-actions style="float:right">
+        <button mat-button title="Cancel" (click)="onCancel()">Cancel</button>
+        <button mat-flat-button cdkFocusInitial color="primary" title="OK" (click)="onSubmit(f.form)">OK</button>
+      </div>
+
+    </form>
+  </div>

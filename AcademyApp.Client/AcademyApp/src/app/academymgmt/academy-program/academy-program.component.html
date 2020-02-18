@@ -1,0 +1,69 @@
+
+<div class="container">
+  <button mat-flat-button color="primary" title="Add" (click)="openDialog(null)" style="margin-left: 94%">
+    <mat-icon>add</mat-icon>
+    Add</button>
+
+    <div class="mat-elevation-z1">
+      <table mat-table [dataSource]="programs" style="width: 100%" matSort>
+        <ng-container matColumnDef="academyName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Academy Name </th>
+          <td mat-cell *matCellDef="let item"> {{item.academyName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="created_by">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Created By </th>
+          <td mat-cell *matCellDef="let item"> {{item.created_by}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="startDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Date </th>
+          <td mat-cell *matCellDef="let item"> {{item.startDate | date}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="endDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> End Date </th>
+          <td mat-cell *matCellDef="let item"> {{item.endDate | date}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="isCurrent">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+          <td mat-cell *matCellDef="let item" >
+              <i class="material-icons" *ngIf="item.isCurrent" style="color: greenyellow;" title="Current">
+                wifi
+              </i>
+              <i class="material-icons" *ngIf="!item.isCurrent" style="color:darkslategray;" title="Non Active">
+                wifi_off
+              </i>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="Actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let item"> 
+              <i (click)="openDialog(item)" title="Edit" class="material-icons">
+                edit
+              </i>
+
+             <i (click)="openWarningDialog(item)" class="material-icons"  title="Delete" style="color: firebrick;">
+                clear
+              </i> </td>
+        </ng-container>
+        <ng-container matColumnDef="Events">
+          <th mat-header-cell *matHeaderCellDef> Events </th>
+          <td mat-cell *matCellDef="let item"> 
+              <i (click)="openEventsDialog(item)" title="Calendar Events" class="material-icons">
+                calendar_today
+              </i>
+          </td>
+        </ng-container>
+        
+  
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let row; columns: columnsToDisplay">
+  </tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons></mat-paginator>
+</div>
+</div>

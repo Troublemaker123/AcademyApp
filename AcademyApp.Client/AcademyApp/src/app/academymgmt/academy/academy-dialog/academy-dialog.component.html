@@ -1,0 +1,41 @@
+<div class="dialog">
+    <div >
+        <mat-icon id="close-icon" style="float:right; cursor: pointer" title="Close" (click)=onCancel()>close</mat-icon>
+  
+        <h1 mat-dialog-title>{{title}}</h1>
+        <div mat-dialog-content></div>
+
+        
+      <form name="form" #f="ngForm" novalidate>
+        
+        <mat-form-field style="width: 100%">
+          <input matInput placeholder="Name" [(ngModel)]="academy.name" class="form-control" 
+          #name="ngModel" id="name"  name="name" required maxlength="100" autocomplete="off" >
+          <mat-error *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+            <div *ngIf="name.errors.required">
+              Name is mandatory.
+            </div>
+            <mat-error *ngIf="name.errors.maxlength">
+              Name limit is 100 characters long.
+            </mat-error>
+          </mat-error>
+        </mat-form-field>
+  
+          <mat-form-field style="width: 100%">
+            <input matInput placeholder="Description" [(ngModel)]="academy.description" 
+            #description="ngModel" id="description" name="description"  class="form-control"  maxlength="255" autocomplete="off">
+              <mat-error *ngIf="description.invalid && (description.dirty || description.touched)" class="alert alert-danger">
+                <mat-error *ngIf="description.errors.maxlength">
+                  Description limit is 255 characters long.
+                </mat-error>
+              </mat-error>
+          </mat-form-field>
+  
+        <div mat-dialog-actions style="float:right">
+          <button mat-button mat-dialog-close title="Cancel" (click)="onCancel()">Cancel</button>
+          <button mat-flat-button cdkFocusInitial color="primary" title="OK" (click)="onSubmit(f.form)">OK</button>
+        </div>
+  
+      </form>
+    </div>
+  </div>

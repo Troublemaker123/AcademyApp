@@ -7,7 +7,7 @@ namespace AcademyApp.Business.Interfaces
     {
         void Create(GroupViewModel group);
         void Update(GroupViewModel group);
-        void Delete(int groupId, int academyProgramId);
+        void Delete(int groupId);
         IEnumerable<GroupViewModel> GetAll(int academyProgramId);
         GroupViewModel FindById(int apId);
     }

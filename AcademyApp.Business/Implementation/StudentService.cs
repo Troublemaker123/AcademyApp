@@ -12,10 +12,12 @@ namespace AcademyApp.Business
     public class StudentService : IStudentService
     {
         private readonly IRepository<Student> _apRepository;
+        private readonly IRepository<User> _userRepository;
 
-        public StudentService(IRepository<Student> apRepository)
+        public StudentService(IRepository<Student> apRepository, IRepository<User> userRepository)
         {
             _apRepository = apRepository;
+            _userRepository = userRepository;
         }
 
         public void Create(StudentViewModel student)
@@ -31,7 +33,7 @@ namespace AcademyApp.Business
         public IEnumerable<StudentViewModel> GetAll(int academyProgramId)
         {
 
-            return _apRepository.GetAll().Where(student => student.ApId == academyProgramId)
+            return _apRepository.GetAll().Where(student => !student.AcademyProgramId.HasValue || (student.AcademyProgramId.HasValue && student.AcademyProgramId == academyProgramId))
                 .Select(student => student.ToModel()).ToList();
         }
 
@@ -44,33 +46,37 @@ namespace AcademyApp.Business
             return student.ToModel();
         }
 
-        public void Update(StudentViewModel student)
+        public void Update(StudentViewModel model)
         {
-            var students = _apRepository.FindByMultipleId(student.ID, student.AcademyProgramId);
-            if (students == null)
+            var student = _apRepository.FindById(model.ID);
+            if (student == null)
                 throw new Exception("student not found");
 
-            students.Name = student.Name;
-            students.LastName = student.LastName;
-            students.Mobile = student.Mobile;
-            students.PlaceOfBirth = student.PlaceOfBirth;
-            students.EmailAdress = student.EmailAdress;
-            students.Address = student.Address;
-            students.DateOfBirth = student.DateOfBirth;
-            students.Country = student.Country;
-            students.DateOfEnrollment = student.DateOfEnrollment;
-            students.GraduationYear = student.GraduationYear;
-
-            _apRepository.Update(students);
+            student.FirstName = model.FirstName;
+            student.LastName = model.LastName;
+            student.Mobile = model.Mobile;
+            student.PlaceOfBirth = model.PlaceOfBirth;
+            student.EmailAdress = model.EmailAdress;
+            student.Address = model.Address;
+            student.DateOfBirth = model.DateOfBirth;
+            student.Country = model.Country;
+            student.DateOfEnrollment = model.DateOfEnrollment;
+            student.GraduationYear = model.GraduationYear;
+            student.GenderId = model.GenderId;
+            student.AcademyProgramId = model.AcademyProgramId;
+            _apRepository.Update(student);
         }
 
-        public void Delete(int studentId, int academyProgramId)
+        public void Delete(int studentId)
         {
-            var students = _apRepository.FindByMultipleId(studentId, academyProgramId);
-            if (students == null)
+            var student = _apRepository.FindById(studentId);
+            if (student == null)
                 throw new Exception("student not found");
+            var user = _userRepository.FindById(student.UserId);          
 
-            _apRepository.Delete(students);
+            _apRepository.Delete(student);
+            if (user != null)
+                _userRepository.Delete(user);
         }
     }
 }

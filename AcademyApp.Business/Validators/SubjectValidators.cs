@@ -10,10 +10,6 @@ namespace AcademyApp.Business.Validators
             RuleFor(x => x.Name)
                 .NotNull().WithMessage("Required field!")
                 .MaximumLength(255).WithMessage("Maximum 255 characters!");
-
-            RuleFor(x => x.Description)
-                .NotNull().WithMessage("Required field!")
-                .MaximumLength(255).WithMessage("Maximum 255 characters!");
         }
     }
 }

@@ -1,0 +1,47 @@
+
+    <div class="dialog">
+        <mat-icon id="close-icon" style="float:right; cursor: pointer" title="Close" (click)=onCancel()>close</mat-icon>
+  
+        <h1 mat-dialog-title>{{title}}</h1>
+        
+      <form name="form" #f="ngForm" novalidate>
+        <div mat-dialog-content> </div>
+        
+          <mat-form-field id="mat-form-field">
+            <mat-label>Choose an Academy Program Year</mat-label>
+            <mat-select required [(ngModel)]="group.academyProgramId" 
+            #academyProgramId="ngModel" id="academyProgramId" name="academyProgramId">
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let program of academyprograms" [value]="program.id">
+              {{ program.academyName }}: {{program.endDate | date:'yyyy'}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="academyProgramId.invalid && (academyProgramId.dirty || academyProgramId.touched)" class="alert alert-danger">
+              <div *ngIf="academyProgramId.errors.required">
+                Academy is mandatory.
+              </div>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field id="mat-form-field">
+            <input matInput placeholder="Group Name" [(ngModel)]="group.name" 
+            #name="ngModel" id="name" name="name"  required maxlength="100" autocomplete="off">
+            <mat-error *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+              <div *ngIf="name.errors.required">
+                Group Name is mandatory.
+              </div>
+              <mat-error *ngIf="name.errors.maxlength">
+                Group Name limit is 100 characters long.
+              </mat-error>
+            </mat-error>
+          </mat-form-field>
+  
+  
+       
+        <div mat-dialog-actions class="mat-dialog-actions">
+          <button mat-flat-button title="Cancel" (click)="onCancel()">Cancel</button>
+          <button mat-flat-button cdkFocusInitial color="primary" title="OK" (click)="onSubmit(f.form)">OK</button>
+        </div>
+  
+      </form>
+    </div>

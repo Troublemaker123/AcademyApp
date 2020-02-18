@@ -6,12 +6,11 @@ using System;
 
 namespace AcademyApp.Data.Domains
 {
-    [Table("AcademyProgram")]
     public class AcademyProgram
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key, Column(Order = 0)]
-        public int Id { get; set; }
+        public int ID { get; set; }
 
         [Required]
         public DateTime StartDate { get; set; }
@@ -19,17 +18,18 @@ namespace AcademyApp.Data.Domains
         [Required]
         public DateTime EndDate { get; set; }
 
-        [Required]
-        public bool IsCurrent { get; set; }
+        public bool IsCurrent { get; set; } = false;
 
-        [Required]
         public DateTime CreatedOn { get; set; }
 
-        [Required]
-        [StringLength(255)]
-        public string CreatedBy { get; set; }
+        public int CreatedBy { get; set; }
+
        
- 
+        public int AcademyId { get; set; }
+
+        [ForeignKey("AcademyId")]
+        public Academy Academy { get; set; }
+
     }
    
 }

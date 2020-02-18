@@ -1,0 +1,22 @@
+  <div class="login-container">
+    <div class="login-content">
+        <app-login-toolbar class="login-toolbar" ></app-login-toolbar>
+        <mat-card *ngIf="!emailConfirmed && error.length === 0">
+            <mat-card-header> Please activate your account by clicking the relevant link in your Email </mat-card-header>
+        </mat-card>
+        <mat-card *ngIf="emailConfirmed">
+            <mat-card-header>
+                <mat-card-subtitle>Your Email is now confirmed, please click the below button to Log-In.</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content >       
+                    <button (click)="goToLogin()" mat-flat-button color="primary">Go to Login Page</button>
+            </mat-card-content>
+        </mat-card>
+        <mat-card *ngIf="error.length > 0">
+            <mat-card-header style="color: firebrick;">
+                <mat-icon matSufix>info</mat-icon>
+                <mat-card-title>{{error}} </mat-card-title> 
+            </mat-card-header>
+        </mat-card> 
+    </div>
+</div>

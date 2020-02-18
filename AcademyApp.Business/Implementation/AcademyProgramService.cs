@@ -14,10 +14,12 @@ namespace AcademyApp.Business
     public class AcademyProgramService : IAcademyProgramService
     {
         private readonly IRepository<AcademyProgram> _academyProgramRepository;
+        private readonly IRepository<Academy> _academyrepository;
 
-        public AcademyProgramService(IRepository<AcademyProgram> academyProgramRepository)
+        public AcademyProgramService(IRepository<AcademyProgram> academyProgramRepository, IRepository<Academy> academyrepository)
         {
             _academyProgramRepository = academyProgramRepository;
+            _academyrepository = academyrepository;
         }
 
         public void Create(AcademyProgramViewModel academyProgram)
@@ -26,39 +28,55 @@ namespace AcademyApp.Business
                 throw new ApplicationException("academyProgram is null");
 
             var program = academyProgram.ToDomain();
-            program.CreatedOn = DateTime.Now;
-            program.CreatedBy = "Administrator";
+            //program.CreatedBy = 1;
+            program.Academy = _academyrepository.FindById(academyProgram.AcademyId);
 
             _academyProgramRepository.Create(program);
         }
 
         public IEnumerable<AcademyProgramViewModel> GetAll()
         {
-            return _academyProgramRepository.GetAll().Select(model => model.ToModel()).ToList();
+            /*  var apList = _academyProgramRepository.GetAll().Select(
+                   model =>
+                   {
+                       model.Academy = _academyrepository.FindById(model.AcademyId);
+                       return model.ToModel();
+                   }).ToList();*/
+
+            var apList = _academyProgramRepository.GetAll().ToList();
+            var resultList = apList.Select(
+                    model =>
+                    {
+                        model.Academy = _academyrepository.FindById(model.AcademyId);
+                        return model.ToModel();
+                    }
+                );
+            return resultList;
         }
 
         public void Update(AcademyProgramViewModel academyProgram)
         {
-            var program = _academyProgramRepository.FindById(academyProgram.Id);
+            var program = _academyProgramRepository.FindById(academyProgram.ID);
             if (program == null)
                 throw new Exception("academyProgram is null");
 
             program.StartDate = academyProgram.StartDate;
             program.EndDate = academyProgram.EndDate;
             program.IsCurrent = academyProgram.IsCurrent;
+            program.AcademyId = academyProgram.AcademyId;
+            program.Academy = _academyrepository.FindById(academyProgram.AcademyId);
 
             _academyProgramRepository.Update(program);
-
-            if (academyProgram.IsCurrent)
+            // if this AP is set to Current, update the latest current AP to IsCurrent=false
+            /*if (academyProgram.IsCurrent)
             {
-                var academyPrograms = _academyProgramRepository.GetAll().Where(ap => ap.IsCurrent && ap.Id != program.Id).ToList();
+                var academyPrograms = _academyProgramRepository.GetAll().Where(ap => ap.IsCurrent && ap.ID != program.ID).ToList();
                 foreach (var item in academyPrograms)
                 {
                     item.IsCurrent = false;
                     _academyProgramRepository.Update(item);
                 }
-            }
-
+            }*/
         }
 
         public AcademyProgramViewModel FindById(int academyProgramId)
@@ -66,6 +84,7 @@ namespace AcademyApp.Business
             var program = _academyProgramRepository.FindById(academyProgramId);
             if (program == null)
                 throw new Exception("academyProgramId not found");
+            program.Academy = _academyrepository.FindById(program.AcademyId);
 
             return program.ToModel();
         }

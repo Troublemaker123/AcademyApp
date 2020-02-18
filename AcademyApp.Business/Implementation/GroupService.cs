@@ -12,14 +12,20 @@ namespace AcademyApp.Business.Implementation
     public class GroupService : IGroupService
     {
         private readonly IRepository<Group> _groupRepository;
-        private readonly IRepository<GroupMembers> _groupMembersRepository;
+        private readonly IRepository<GroupStudents> _groupMembersRepository;
+        private readonly IRepository<AcademyProgram> _academyProgramrepository;
+        private readonly IRepository<Academy> _academyRepository;
 
 
         public GroupService(IRepository<Group> groupRepository,
-            IRepository<GroupMembers> groupMembersRepository)
+            IRepository<GroupStudents> groupMembersRepository,
+            IRepository<AcademyProgram> academyProgramrepository,
+            IRepository<Academy> academyRepository)
         {
             _groupRepository = groupRepository;
             _groupMembersRepository = groupMembersRepository;
+            _academyProgramrepository = academyProgramrepository;
+            _academyRepository = academyRepository;
         }
 
 
@@ -27,21 +33,14 @@ namespace AcademyApp.Business.Implementation
         {
             if(model == null)
                 throw new ApplicationException("group is null");
-
-            var domain = model.ToDomain();
-            _groupRepository.Create(domain);
+            _groupRepository.Create(model.ToDomain());
         }
 
-        public void Delete(int groupId, int academyProgramId)
+        public void Delete(int groupId)
         {
-            var groupMembers = _groupMembersRepository.GetAll().Where(g => g.GroupId == groupId && g.ApId == academyProgramId).ToList();
-            foreach (var member in groupMembers)
-            {
-                _groupMembersRepository.Delete(member);
-            }
-            
-
-            var group = _groupRepository.GetAll().FirstOrDefault(g => g.ID == groupId && g.ApId == academyProgramId);
+            var group = _groupRepository.FindById(groupId);
+            if (group == null)
+                throw new Exception("Role not found");
 
             _groupRepository.Delete(group);
         }
@@ -49,6 +48,7 @@ namespace AcademyApp.Business.Implementation
         public GroupViewModel FindById(int groupId)
         {
             var group = _groupRepository.FindById(groupId);
+            group.AcademyProgram = _academyProgramrepository.FindById(group.AcademyProgramId);
             if (group == null)
                 throw new Exception("GroupId not found");
 
@@ -58,18 +58,27 @@ namespace AcademyApp.Business.Implementation
 
         public IEnumerable<GroupViewModel> GetAll(int academyProgramId)
         {
-            return _groupRepository.GetAll().Where(model => model.ApId == academyProgramId)
-                .Select(model => model.ToModel()).ToList();
+            var apList = _groupRepository.GetAll().Where(ap => ap.AcademyProgramId == academyProgramId).ToList();
+            var resultList = apList.Select(
+                    model =>
+                    {
+                        model.AcademyProgram = _academyProgramrepository.FindById(model.AcademyProgramId);
+                        model.AcademyProgram.Academy = _academyRepository.FindById(model.AcademyProgram.AcademyId);
+                        return model.ToModel();
+                    }
+                );
+            return resultList;
         }
 
         public void Update(GroupViewModel model)
         {
-            var group = _groupRepository.FindByMultipleId(model.ID,model.AcademyProgramId);
+            var group = _groupRepository.FindById(model.ID); //_groupRepository.FindByMultipleId(model.ID, model.AcademyProgramId);
             if (group == null)
                 throw new Exception();
 
-            group.ID = group.ID;
-            group.Title = group.Title;
+            group.Name = model.Name;
+            group.AcademyProgramId = model.AcademyProgramId;
+            group.AcademyProgram = _academyProgramrepository.FindById(model.AcademyProgramId);
 
             _groupRepository.Update(group);
         }

@@ -8,9 +8,9 @@ namespace AcademyApp.Business.Interfaces
     {
         void Create(MentorViewModel mentor);
         void Update(MentorViewModel mentor);
-        IEnumerable<MentorViewModel> GetAll(int academyProgramId);
+        IEnumerable<MentorViewModel> GetAll();
         MentorViewModel FindById(int mentorId);
-        void Delete(int mentorId, int academyProgramId);
+        void Delete(int mentorId);
         IEnumerable<MentorBasicViewModel> GetAllBasicMentors(int academyProgramId);
     }
 }

@@ -1,32 +1,30 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AcademyProgramComponent } from './academy-program/academy-program.component';
+
 import { AdminComponent } from './admin.component';
-import { StudentsComponent } from './students/students.component';
-import { MentorComponent } from './mentors/mentor.component';
-import { GroupComponent } from './groups/group.component';
-import { SubjectsComponent } from './subjects/subject.component';
+import { RoleListComponent } from './roles/role-list.component';
+import { UserListComponent } from './users/user-list.component';
+import { CategoryComponent } from './category/category.component';
+import { ClassroomComponent } from './classrooms/classroom.component';
 
 const routes: Routes = [
   {
 
     path: '', component: AdminComponent,
     children: [
+      { path: '', redirectTo: 'roles', pathMatch: 'full' },
       {
-        path: 'academy-program', component: AcademyProgramComponent
+        path: 'roles', component: RoleListComponent
       },
       {
-        path: 'students', component: StudentsComponent
+        path: 'users', component: UserListComponent
       },
       {
-        path: 'mentors', component: MentorComponent
+        path: 'categories', component: CategoryComponent
       },
       {
-        path: 'subjects', component: SubjectsComponent
-      },
-      {
-        path: 'groups', component: GroupComponent
+        path: 'classrooms', component: ClassroomComponent
       }
     ]
   }

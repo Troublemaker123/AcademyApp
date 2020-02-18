@@ -9,7 +9,7 @@ namespace AcademyApp.Business.ViewModel
 
         public int AcademyProgramId { get; set; }
 
-        public string Name { get; set; }
+        public string FirstName { get; set; }
 
         public string LastName { get; set; }
   
@@ -20,6 +20,8 @@ namespace AcademyApp.Business.ViewModel
         public string Specialty { get; set; }
 
         public string Telephone { get; set; }
- 
+
+        public int UserId { get; set; }
+
     }
 }

@@ -1,0 +1,29 @@
+<div class="ng-container" style="margin-left: 10px;">
+    <mat-form-field title="Academy Year Program" style="width: 240px">
+      <mat-label> {{ currentAcademyName }}</mat-label>
+        <mat-select [(ngModel)]="selectedProgramId" [value]="selectedProgramId" (ngModelChange)="onChangeAcademyProgram()">
+           <mat-option *ngFor="let item of programs" [value]="item.id" > 
+             {{item.startDate | date}} - {{item.endDate | date}}
+          </mat-option>
+        </mat-select>
+        <mat-hint>Time period</mat-hint>
+    </mat-form-field>
+</div>
+
+<div class="tab-container">
+    <nav mat-tab-nav-bar>
+      <a mat-tab-link [routerLink]="'groups'" routerLinkActive #gr="routerLinkActive" [active]="gr.isActive">
+        Groups
+      </a>
+      <a mat-tab-link [routerLink]="'students'" routerLinkActive #s="routerLinkActive" [active]="s.isActive">
+        Students
+      </a>
+      <a mat-tab-link [routerLink]="'mentors'" routerLinkActive #m="routerLinkActive" [active]="m.isActive">
+        Mentors
+      </a>   
+    </nav>
+</div>
+  
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>

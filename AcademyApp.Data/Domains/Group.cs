@@ -1,19 +1,25 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AcademyApp.Data.Domains
 {
-    [Table("Groups")]
     public class Group
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
-        [Column("Apid")]
-        public int ApId { get; set; }
+        [ForeignKey("APID")]
+        public int AcademyProgramId { get; set; }
+        public AcademyProgram AcademyProgram { get; set; }
 
+        [Required]
         [StringLength(255)]
-        public string Title { get; set; }
+        public string Name { get; set; }
+
+        public ICollection<GroupStudents> GroupStudents { get; set; }
+        public ICollection<GroupMentors> GroupMentors { get; set; }
 
     }
 }

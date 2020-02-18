@@ -5,9 +5,7 @@ namespace AcademyApp.Business.ViewModel
     public class AcademyProgramViewModel
     {
  
-        public int Id { get; set; }
-
-        public string CreatedBy { get; set; }
+        public int ID { get; set; }
 
         public DateTime StartDate { get; set; }
 
@@ -15,6 +13,11 @@ namespace AcademyApp.Business.ViewModel
 
         public bool IsCurrent { get; set; }
 
-        public DateTime CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; } = DateTime.Now;
+
+        public int CreatedBy { get; set; }
+
+        public int AcademyId { get; set; }
+        public string AcademyName { get; set; }
     }
 }

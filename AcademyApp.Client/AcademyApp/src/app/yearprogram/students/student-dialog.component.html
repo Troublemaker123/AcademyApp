@@ -1,0 +1,191 @@
+<div class="dialog">
+      <mat-icon id="close-icon" style="float:right; cursor: pointer" title="Close" (click)=onCancel()>close</mat-icon>
+      <h1 mat-dialog-title>{{title}}</h1>
+      <form name="form" #f="ngForm" novalidate>
+        <div mat-dialog-content flex layout layout-align="center">
+
+          <table>
+            <tr>
+              <td>
+                <mat-form-field>
+                  <input matInput placeholder="First Name" [(ngModel)]="student.firstName" class="form-control"
+                    #firstName="ngModel" id="firstName" name="firstName" required maxlength="255" autocomplete="off">
+                  <mat-error *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="firstName.errors.required">
+                      Name is mandatory.
+                    </div>
+                    <mat-error *ngIf="firstName.errors.maxlength">
+                      Name limit is 255 characters long.
+                    </mat-error>
+                  </mat-error>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field>
+                  <input matInput placeholder="Last Name" [(ngModel)]="student.lastName" class="form-control"
+                    #lastName="ngModel" id="lastName" name="lastName" required maxlength="255" autocomplete="off">
+                  <mat-error *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="lastName.errors.required">
+                      Last Name is mandatory.
+                    </div>
+                    <mat-error *ngIf="lastName.errors.maxlength">
+                      Last Name limit is 255 characters long.
+                    </mat-error>
+                  </mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+          </table>
+
+          <mat-form-field>
+            <input matInput placeholder="Email Adress" [(ngModel)]="student.emailAdress" id="emailAdress"
+              #emailAdress="ngModel" class="form-control" autocomplete="off" name="emailAdress" email maxlength="255">
+            <mat-error *ngIf="emailAdress.invalid && (emailAdress.dirty || emailAdress.touched)"
+              class="alert alert-danger">
+              <mat-error *ngIf="emailAdress.errors.maxlength">
+                Email limit is 255 characters long.
+              </mat-error>
+              <mat-error *ngIf="emailAdress.errors.email">Email must be valid!</mat-error>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Adress" [(ngModel)]="student.address" id="address" #address="ngModel"
+              class="form-control" autocomplete="off" maxlength="255" name="address">
+            <mat-error *ngIf="address.invalid && (address.dirty || address.touched)" class="alert alert-danger">
+              <mat-error *ngIf="address.errors.maxlength">
+                Address limit is 255 characters long.
+              </mat-error>
+              <mat-error *ngIf="address.errors.email">Email must be valid!</mat-error>
+            </mat-error>
+          </mat-form-field>
+
+          <table class="example-full-width" cellspacing="0">
+            <tr>
+              <td>
+                <mat-form-field>
+                  <mat-label>Choose Gender</mat-label>
+                  <mat-select [(ngModel)]="student.genderId" #genderId="ngModel" id="genderId" name="genderId">
+                    <mat-option>--</mat-option>
+                    <mat-option [value]="1">Male</mat-option>
+                    <mat-option [value]="2">Female</mat-option>
+                    <mat-option [value]="0">Other</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field>
+                  <input matInput placeholder="Mobile" [(ngModel)]="student.mobile" #mobile="ngModel"
+                    class="form-control" id="mobile" name="mobile" maxlength="9" pattern="[0-9]+">
+                  <!-- <mat-hint align="end">{{mobile.value.length}} / 9</mat-hint> -->
+                  <mat-error *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)" class="alert alert-danger">
+                    <mat-error *ngIf="mobile.errors.maxlength">
+                      Mobile limit is 9 characters long.
+                    </mat-error>
+                    <mat-error *ngIf="mobile.invalid">
+                      Only numbers are allowed.
+                    </mat-error>
+                  </mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <mat-form-field>
+                  <input matInput [matDatepicker]="dateOfBirth" placeholder="Date Of Birth"
+                    [(ngModel)]="student.dateOfBirth" #dateOfBirth="ngModel" class="form-control" id="dateOfBirth"
+                    name="dateOfBirth" maxlength="255" autocomplete="off">
+                  <mat-error *ngIf="dateOfBirth.invalid && (dateOfBirth.dirty || dateOfBirth.touched)"
+                    class="alert alert-danger">
+                    <mat-error *ngIf="dateOfBirth.errors.maxlength">
+                      Date of birth limit is 255 characters long.
+                    </mat-error>
+                  </mat-error>
+                  <mat-datepicker-toggle matSuffix [for]="dateOfBirth">
+                  </mat-datepicker-toggle>
+                  <mat-datepicker #dateOfBirth></mat-datepicker>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field style="padding-right: 20px;">
+                  <input matInput placeholder="Place Of Birth" [(ngModel)]="student.placeOfBirth" class="form-control"
+                    #placeOfBirth="ngModel" id="placeOfBirth" name="placeOfBirth" maxlength="255" autocomplete="off">
+                  <mat-error *ngIf="placeOfBirth.invalid && (placeOfBirth.dirty || placeOfBirth.touched)"
+                    class="alert alert-danger">
+                    <mat-error *ngIf="placeOfBirth.errors.maxlength">
+                      Place of Birth limit is 255 characters long.
+                    </mat-error>
+                  </mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <mat-form-field style="padding-right: 20px">
+                  <input matInput [matDatepicker]="graduationYear" placeholder="Graduation Year"
+                    [(ngModel)]="student.graduationYear" #graduationYear="ngModel" class="form-control" id="graduationYear"
+                    name="graduationYear" maxlength="255" autocomplete="off">
+                  <mat-error *ngIf="graduationYear.invalid && (graduationYear.dirty || graduationYear.touched)"
+                    class="alert alert-danger">
+                    <mat-error *ngIf="graduationYear.errors.maxlength">
+                      Graduation Year limit is 255 characters long.
+                    </mat-error>
+                  </mat-error>
+                  <mat-datepicker-toggle matSuffix [for]="graduationYear">
+                  </mat-datepicker-toggle>
+                  <mat-datepicker #graduationYear></mat-datepicker>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field>
+                  <input matInput placeholder="Country" [(ngModel)]="student.country" #country="ngModel"
+                    class="form-control" id="country" name="country" maxlength="255" autocomplete="off">
+                  <mat-error *ngIf="country.invalid && (country.dirty || country.touched)" class="alert alert-danger">
+                    <mat-error *ngIf="country.errors.maxlength">
+                      Country limit is 255 characters long.
+                    </mat-error>
+                  </mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+          </table>        
+
+          <mat-form-field>
+            <input matInput [matDatepicker]="dateOfEnrollment" placeholder="Date Of Enrollment"
+              [(ngModel)]="student.dateOfEnrollment" #dateOfEnrollment="ngModel" class="form-control"
+              id="dateOfEnrollment" name="dateOfEnrollment" maxlength="255" autocomplete="off"
+              [required]="student.academyProgramId !== null">
+            <mat-error
+              *ngIf="dateOfEnrollment.invalid && (dateOfEnrollment.dirty || dateOfEnrollment.touched) && student.academyProgramId"
+              class="alert alert-danger">
+              <mat-error *ngIf="dateOfEnrollment.errors.maxlength">
+                Date of enrollment limit is 255 characters long.
+              </mat-error>
+            </mat-error>
+            <mat-error *ngIf="student.academyProgramId !== null">This field is required</mat-error>
+            <mat-datepicker-toggle matSuffix [for]="dateOfEnrollment">
+            </mat-datepicker-toggle>
+            <mat-datepicker #dateOfEnrollment></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Choose an Academy Program Year</mat-label>
+            <mat-select [(ngModel)]="student.academyProgramId" #academyProgramId="ngModel" id="academyProgramId"
+              name="academyProgramId">
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let program of academyPrograms" [value]="program.id">
+                {{ program.academyName }}: {{program.endDate | date:'yyyy'}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </div>
+        <div mat-dialog-actions style="float:right">
+          <button mat-button title="Cancel" (click)="onCancel()">Cancel</button>
+          <button mat-flat-button cdkFocusInitial color="primary" type="submit" title="OK"
+            (click)="onSubmit(f.form)">OK</button>
+        </div>
+      </form>
+</div>

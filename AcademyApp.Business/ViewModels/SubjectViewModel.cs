@@ -6,13 +6,10 @@ namespace AcademyApp.Business.ViewModel
     {
         public int ID { get; set; }
 
-        public int AcademyProgramId { get; set; }
-
         public string Name { get; set; }
 
         public string Description { get; set; }
-        
-        public List<MentorBasicViewModel> MentorsList { get; set; }
+        public int AcademyId { get; set; }
 
     }
 }

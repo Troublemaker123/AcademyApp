@@ -2,9 +2,7 @@ export class Student {
 
   public id: number;
 
-  public academyProgramId: number;
-
-  public name: string;
+  public firstName: string;
 
   public address: string;
 
@@ -12,9 +10,11 @@ export class Student {
 
   public placeOfBirth: string;
 
-  public gender: string;
+  public genderId?: number;
 
-  public mobile: number;
+  public genderName?: string;
+
+  public mobile: string;
 
   public country: string;
 
@@ -22,8 +22,10 @@ export class Student {
 
   public graduationYear: Date;
 
-  public dateOfBirth: Date;
+  public dateOfBirth?: Date;
 
-  public dateOfEnrollment: Date;
+  public dateOfEnrollment?: Date;
+
+  public academyProgramId?: number;
 
 }

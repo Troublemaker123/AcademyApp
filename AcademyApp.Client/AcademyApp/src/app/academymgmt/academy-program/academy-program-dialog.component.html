@@ -1,0 +1,65 @@
+
+<mat-icon id="close-icon" title="Close" (click)=onCancel()>close</mat-icon>
+
+  <h1 mat-dialog-title>{{title}}</h1>
+
+<form name="form"  #f="ngForm"  novalidate>
+  <div mat-dialog-content style="overflow-y: hidden;"></div>
+
+  <mat-form-field id="mat-form-field">
+    <mat-label>Choose an Academy</mat-label>
+    <mat-select required [(ngModel)]="program.academyId"
+    #academyId="ngModel" id="academyId" name="academyId">
+      <mat-option>--</mat-option>
+      <mat-option *ngFor="let academy of academies" [value]="academy.id">
+        {{academy.name}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="academyId.invalid && (academyId.dirty || academyId.touched)" class="alert alert-danger">
+      <div *ngIf="academyId.errors.required">
+        Academy is mandatory.
+      </div>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field id="mat-form-field">
+    <input matInput [matDatepicker]="startDate" placeholder="Choose Start date" [(ngModel)]="program.startDate"
+      class="form-control" #startDate="ngModel" id="startDate" [matDatepickerFilter]="SundayDisabled" 
+      name="startDate" required autocomplete="off" >
+    <mat-error *ngIf="startDate.invalid && (startDate.dirty || startDate.touched)" class="alert alert-danger">
+      <div *ngIf="startDate.errors.required">
+        Start Date is mandatory.
+      </div>
+    </mat-error>
+    <mat-datepicker-toggle matSuffix [for]="startDate">
+    </mat-datepicker-toggle>
+    <mat-datepicker #startDate></mat-datepicker>
+  </mat-form-field>
+
+
+  <mat-form-field id="mat-form-field">
+    <input matInput [matDatepicker]="endDate" placeholder="Choose End date" [(ngModel)]="program.endDate"
+      class="form-control" #endDate="ngModel" id="endDate" name="endDate"
+      required autocomplete="off"  [matDatepickerFilter]="SundayDisabled">
+    <mat-error *ngIf="endDate.invalid && (endDate.dirty || endDate.touched)" class="alert alert-danger">
+      <div *ngIf="endDate.errors.required">
+        End Date is mandatory.
+      </div>
+    </mat-error>
+    <mat-datepicker-toggle matSuffix [for]="endDate">
+    </mat-datepicker-toggle>
+    <mat-datepicker #endDate></mat-datepicker>
+  </mat-form-field>
+
+  <mat-checkbox [(ngModel)]="program.isCurrent" #isCurrent="ngModel" id="isCurrent" name="isCurrent" 
+  [checked]="program.isCurrent" >Is Current</mat-checkbox>
+
+  <mat-error *ngIf="error" class="error">
+    {{ error }}
+  </mat-error>
+
+  <div mat-dialog-actions class="mat-dialog-actions">
+    <button mat-flat-button mat-dialog-close title="Cancel" (click)="onCancel()">Cancel</button>
+    <button mat-flat-button cdkFocusInitial color="primary" title="OK"  (click)="onSubmit(f.form)">OK</button>
+  </div>
+</form>

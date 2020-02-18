@@ -1,35 +1,17 @@
 
-<div class="academy-year-picker-container">
-<mat-form-field title="Academy Year" style="width: 240px">
-  <select matNativeControl (change)='onChangeAcademyProgram($event)'>
-    <ng-container *ngFor="let item of programs">
-        <ng-container *ngIf="item.isCurrent === true">
-            <option  [value]="item.id" selected>{{item.startDate | date}} - {{item.endDate | date}}</option>
-        </ng-container> 
-        <ng-container *ngIf="item.isCurrent !== true">
-            <option  [value]="item.id">{{item.startDate | date}} - {{item.endDate | date}}</option>
-        </ng-container>
-    </ng-container>
-  </select>
-</mat-form-field>
-</div>
-
 <div class="tab-container">
   <nav mat-tab-nav-bar>
-    <a mat-tab-link [routerLink]="'academy-program'" routerLinkActive #ap="routerLinkActive" [active]="ap.isActive">
-      Academy Program
+    <a mat-tab-link [routerLink]="'roles'" routerLinkActive #r="routerLinkActive" [active]="r.isActive">
+      Roles
     </a>
-    <a mat-tab-link [routerLink]="'students'" routerLinkActive #s="routerLinkActive" [active]="s.isActive">
-      Students
+    <a mat-tab-link [routerLink]="'users'" routerLinkActive #us="routerLinkActive" [active]="us.isActive">
+      Users
     </a>
-    <a mat-tab-link [routerLink]="'mentors'" routerLinkActive #m="routerLinkActive" [active]="m.isActive">
-      Mentors
+    <a mat-tab-link [routerLink]="'categories'" routerLinkActive #ct="routerLinkActive" [active]="ct.isActive">
+      Categories
     </a>
-    <a mat-tab-link [routerLink]="'subjects'" routerLinkActive #sb="routerLinkActive" [active]="sb.isActive">
-      Subjects
-    </a>
-    <a mat-tab-link [routerLink]="'groups'" routerLinkActive #gr="routerLinkActive" [active]="gr.isActive">
-      Groups
+    <a mat-tab-link [routerLink]="'classrooms'" routerLinkActive #cl="routerLinkActive" [active]="cl.isActive">
+      Classrooms
     </a>
   </nav>
 </div>

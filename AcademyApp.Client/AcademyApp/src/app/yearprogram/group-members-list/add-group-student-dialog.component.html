@@ -1,0 +1,49 @@
+
+    <div class="dialog">
+        <mat-icon id="close-icon" style="float:right; cursor: pointer" title="Close" (click)=onCancel()>close</mat-icon>
+  
+        <h2 mat-dialog-title></h2>
+        <mat-card style="background-color: lightseagreen;">
+            <mat-card-content title="Student" style="color: whitesmoke; font-size: larger;">
+                <mat-icon class="icon">face</mat-icon>
+                {{ student.firstName }} {{ student.lastName }}
+            </mat-card-content>            
+        </mat-card>
+        <div>&nbsp;</div>
+        <div *ngIf="memberGroups.length!==0" fxLayout="row wrap">
+            <p  mat-dialog-title>Groups enrolled</p>
+            <!-- <mat-divider></mat-divider> -->
+            <div (ngModel)="memberGroups">
+              <mat-card  *ngFor="let item of memberGroups" style="background-color: lightgray; display:inline-block; margin-right: 5px;">
+                  <mat-card-content>{{ item.name }}</mat-card-content>
+              </mat-card>
+             </div>
+                   
+
+        </div>
+      <form name="form" #f="ngForm" novalidate>       
+          <div mat-dialog-content> </div>
+
+          <mat-form-field id="mat-form-field">
+            <mat-label *ngIf="filteredGroups.length!==0">Choose Group</mat-label>
+            <mat-select  required [(ngModel)]="studentMember.groupId"
+            #groupId="ngModel" id="groupId" name="groupId" [disabled]="filteredGroups.length===0">
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let group of filteredGroups" [value]="group.id">
+              {{ group.name }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="groupId.invalid && (groupId.dirty || groupId.touched)" class="alert alert-danger">
+              <div *ngIf="groupId.errors.required">
+                Group is mandatory.
+              </div>
+            </mat-error>
+          </mat-form-field>
+
+        <div mat-dialog-actions class="mat-dialog-actions">
+          <button mat-flat-button title="Cancel" (click)="onCancel()">Cancel</button>
+          <button mat-flat-button cdkFocusInitial color="primary" title="OK" (click)="onSubmit(f.form)">OK</button>
+        </div>
+  
+      </form>
+    </div>

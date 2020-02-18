@@ -19,9 +19,15 @@ a {
   color: white;
 }
 
+.mat-toolbar.mat-primary {
+  background: teal;
+  color: #fff;
+}
+
+
 a:hover,
 a:active {
-  color: rgb(13, 160, 35);
+  color:gray;
 }
 
 .navigation-items {

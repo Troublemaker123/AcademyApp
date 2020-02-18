@@ -1,12 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import * as Material from '@angular/material';
-import { FormsModule } from '@angular/forms';
-
+import { SnackBarComponent } from './snack-bar/snack-bar.component';
 
 @NgModule({
   imports: [
-    CommonModule,
     Material.MatToolbarModule,
     Material.MatFormFieldModule,
     Material.MatInputModule,
@@ -15,7 +12,6 @@ import { FormsModule } from '@angular/forms';
     Material.MatTableModule,
     Material.MatIconModule,
     Material.MatPaginatorModule,
-    Material.MatSortModule,
     Material.MatDialogModule,
     Material.MatTabsModule,
     Material.MatListModule,
@@ -24,12 +20,10 @@ import { FormsModule } from '@angular/forms';
     Material.MatDatepickerModule,
     Material.MatNativeDateModule,
     Material.MatSortModule,
-    Material.MatSortModule,
     Material.MatTableModule,
     Material.MatOptionModule,
     Material.MatSelectModule,
-    Material.MatAutocompleteModule,
-    FormsModule,
+    Material.MatAutocompleteModule
   ],
   exports: [
     Material.MatToolbarModule,
@@ -40,7 +34,6 @@ import { FormsModule } from '@angular/forms';
     Material.MatTableModule,
     Material.MatIconModule,
     Material.MatPaginatorModule,
-    Material.MatSortModule,
     Material.MatDialogModule,
     Material.MatTabsModule,
     Material.MatListModule,
@@ -49,13 +42,11 @@ import { FormsModule } from '@angular/forms';
     Material.MatDatepickerModule,
     Material.MatNativeDateModule,
     Material.MatSortModule,
-    Material.MatSortModule,
     Material.MatTableModule,
     Material.MatSelectModule,
     Material.MatOptionModule,
-    FormsModule,
     Material.MatAutocompleteModule,
   ],
-  declarations: []
+  declarations: [ SnackBarComponent]
 })
 export class SharedModule { }

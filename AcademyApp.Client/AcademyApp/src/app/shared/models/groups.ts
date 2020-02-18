@@ -1,8 +1,7 @@
 export class Groups {
 
-    public id: number;
-
-    public academyProgramId: number;
-
-    public title: string;
+id: number;
+name: string;
+academyProgramId: number;
+academyProgramName: string;
 }

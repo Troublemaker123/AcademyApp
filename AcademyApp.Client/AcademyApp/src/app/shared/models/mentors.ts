@@ -1,19 +1,19 @@
 export class Mentor {
 
-    public id: number;
+   id: number;
 
-    public academyProgramId: number;
+   academyProgramId: number;
 
-    public name: string;
+   firstName: string;
 
-    public lastName: string;
+   lastName: string;
 
-    public email: string;
+   email: string;
 
-    public yearsOfService: number;
+   yearsOfService: number;
 
-    public specialty: string;
+   specialty: string;
 
-    public telephone: number;
+   telephone: string;
 
 }
